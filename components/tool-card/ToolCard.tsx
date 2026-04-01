@@ -133,10 +133,17 @@ export default function ToolCard({ tool }: { tool: FeedTool }) {
           {tool.creator.isPro && <ProBadge />}
         </div>
 
+        {/* Fork attribution */}
+        {tool.remixedFrom && tool.remixedFromTitle && (
+          <p className="text-[10px] text-gray-600 truncate">
+            Forked from <span className="text-gray-500">{tool.remixedFromTitle}</span>
+          </p>
+        )}
+
         {/* Stats Row */}
         <div className="flex items-center gap-4 text-[11px] text-gray-500">
           <span>{formatCount(tool.viewsCount)} views</span>
-          <span>{formatCount(tool.remixesCount)} remixes</span>
+          <span>{formatCount(tool.remixesCount)} forks</span>
           <span>{formatCount(tool.likesCount)} likes</span>
         </div>
 
