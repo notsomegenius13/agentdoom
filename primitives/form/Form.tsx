@@ -36,7 +36,7 @@ export default function Form({ config }: { config: FormConfig }) {
     e.preventDefault()
     const newErrors: Record<string, string> = {}
     for (const field of config.fields) {
-      if (field.required && !values[field.name] && values[field.name] !== 0) {
+      if (field.required && !values[field.name] && values[field.name] !== false) {
         newErrors[field.name] = `${field.label} is required`
       }
     }
