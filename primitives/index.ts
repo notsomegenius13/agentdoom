@@ -21,6 +21,33 @@ export { default as Modal } from './modal/Modal'
 export { default as Toast } from './toast/Toast'
 export { default as FileUpload } from './file-upload/FileUpload'
 export { default as KanbanBoard } from './kanban-board/KanbanBoard'
+export { default as Calendar } from './calendar/Calendar'
+export { default as ProgressBar } from './progress-bar/ProgressBar'
+export { default as Search } from './search/Search'
+export { default as Accordion } from './accordion/Accordion'
+
+// Animation primitives
+export { default as Confetti } from './confetti/Confetti'
+export { default as CounterUp } from './counter-up/CounterUp'
+export { default as ProgressFill } from './progress-fill/ProgressFill'
+export { default as TypingEffect } from './typing-effect/TypingEffect'
+export { default as SlideReveal } from './slide-reveal/SlideReveal'
+
+// Theme & Responsive
+export { ThemeProvider, useTheme, useBreakpoint, useIsMobile, BREAKPOINTS } from './theme'
+
+// Commerce primitives
+export { default as StripeCheckout } from './stripe-checkout/StripeCheckout'
+
+// Composite primitives
+export { default as DashboardLayout } from './dashboard-layout/DashboardLayout'
+export { default as WizardForm } from './wizard-form/WizardForm'
+export { default as DataExplorer } from './data-explorer/DataExplorer'
+export { default as LandingHero } from './landing-hero/LandingHero'
+export { default as PricingTable } from './pricing-table/PricingTable'
+export { default as SettingsPanel } from './settings-panel/SettingsPanel'
+export { default as InteractiveDemo } from './interactive-demo/InteractiveDemo'
+export { default as ProjectBoard } from './project-board/ProjectBoard'
 
 // Config type exports
 export type { CalculatorConfig, CalcInput } from './calculator/Calculator'
@@ -46,3 +73,26 @@ export type { ModalConfig } from './modal/Modal'
 export type { ToastConfig, ToastItem } from './toast/Toast'
 export type { FileUploadConfig } from './file-upload/FileUpload'
 export type { KanbanBoardConfig, KanbanColumn, KanbanCard } from './kanban-board/KanbanBoard'
+export type { CalendarConfig } from './calendar/Calendar'
+export type { ProgressBarConfig } from './progress-bar/ProgressBar'
+export type { SearchConfig, SearchItem } from './search/Search'
+export type { AccordionConfig, AccordionSection } from './accordion/Accordion'
+export type { ConfettiConfig } from './confetti/Confetti'
+export type { CounterUpConfig } from './counter-up/CounterUp'
+export type { ProgressFillConfig } from './progress-fill/ProgressFill'
+export type { TypingEffectConfig } from './typing-effect/TypingEffect'
+export type { SlideRevealConfig } from './slide-reveal/SlideReveal'
+export type { ThemeProviderProps, Breakpoint } from './theme'
+
+// Commerce config type exports
+export type { StripeCheckoutConfig } from './stripe-checkout/StripeCheckout'
+
+// Composite config type exports
+export type { DashboardLayoutConfig, DashboardStatCard, DashboardChartConfig, DashboardTableRow } from './dashboard-layout/DashboardLayout'
+export type { WizardFormConfig, WizardStep, WizardField } from './wizard-form/WizardForm'
+export type { DataExplorerConfig, DataExplorerColumn } from './data-explorer/DataExplorer'
+export type { LandingHeroConfig, LandingFeature } from './landing-hero/LandingHero'
+export type { PricingTableConfig, PricingTier, PricingFeature } from './pricing-table/PricingTable'
+export type { SettingsPanelConfig, SettingsTab, SettingsSection, SettingsField } from './settings-panel/SettingsPanel'
+export type { InteractiveDemoConfig, DemoExample } from './interactive-demo/InteractiveDemo'
+export type { ProjectBoardConfig, BoardColumn, BoardTask } from './project-board/ProjectBoard'

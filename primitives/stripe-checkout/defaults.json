@@ -1,0 +1,10 @@
+{
+  "productName": "Pro Plan",
+  "priceCents": 1400,
+  "currency": "$",
+  "mode": "payment",
+  "checkoutApiUrl": "/api/stripe/checkout",
+  "buttonLabel": "Buy Now",
+  "description": "One-time purchase with instant access",
+  "variant": "default"
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StripeCheckoutConfig",
+  "description": "Configuration for the Stripe Checkout button primitive",
+  "type": "object",
+  "required": ["productName", "priceCents"],
+  "properties": {
+    "productName": {
+      "type": "string",
+      "description": "Display name of the product"
+    },
+    "priceCents": {
+      "type": "integer",
+      "minimum": 100,
+      "description": "Price in cents (e.g. 1499 = $14.99)"
+    },
+    "stripePriceId": {
+      "type": "string",
+      "description": "Stripe Price ID for pre-configured products"
+    },
+    "currency": {
+      "type": "string",
+      "default": "$",
+      "description": "Currency symbol"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["payment", "subscription"],
+      "default": "payment",
+      "description": "'payment' for one-time, 'subscription' for recurring"
+    },
+    "checkoutApiUrl": {
+      "type": "string",
+      "default": "/api/stripe/checkout",
+      "description": "API endpoint that creates the checkout session"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "description": "Custom button label (defaults to 'Buy Now' or 'Subscribe')"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description shown below the product name"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Additional metadata passed to the checkout session"
+    },
+    "successUrl": {
+      "type": "string",
+      "description": "Redirect URL after successful checkout"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "description": "Redirect URL if checkout is cancelled"
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["default", "compact", "card"],
+      "default": "default",
+      "description": "Visual style variant"
+    }
+  }
+}
