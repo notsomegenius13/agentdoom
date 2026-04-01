@@ -86,7 +86,6 @@ async function runClerkMiddleware(request: NextRequest) {
     '/t/(.*)',
     '/marketplace(.*)',
     '/api/feed(.*)',
-    '/api/tools/(.*)',
     '/api/generate(.*)',
     '/api/deploy(.*)',
     '/api/cron/(.*)',
@@ -106,7 +105,11 @@ async function runClerkMiddleware(request: NextRequest) {
 
   const handler = clerkMiddleware(async (auth, req) => {
     if (!isPublicRoute(req)) {
-      await auth.protect();
+      // Allow unauthenticated GET requests to /api/tools (public reads)
+      const isToolsRead = req.method === 'GET' && /^\/api\/tools(\/|$)/.test(req.nextUrl.pathname);
+      if (!isToolsRead) {
+        await auth.protect();
+      }
     }
   });
 

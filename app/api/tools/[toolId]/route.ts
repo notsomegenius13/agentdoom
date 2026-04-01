@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
 import { getDb } from '@/lib/db';
 
 /**
@@ -58,10 +59,15 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
 /**
  * PUT /api/tools/:toolId — Update tool metadata (title, description, price, status)
  * Body: { title?, description?, priceCents?, isPaid?, status?, category? }
- * TODO: Add auth — only the creator should be able to update their own tool.
+ * Auth: Only the tool creator or an admin can update.
  */
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ toolId: string }> }) {
   try {
+    const { userId: clerkUserId } = await auth();
+    if (!clerkUserId) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
+
     const { toolId } = await params;
     const body = await req.json();
     const sql = getDb();
@@ -74,6 +80,16 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ tool
       >[];
     if (existing.length === 0) {
       return NextResponse.json({ error: 'Tool not found' }, { status: 404 });
+    }
+
+    // Verify the authenticated user is the tool creator
+    const creatorId = existing[0].creator_id as string;
+    const userRows = (await sql`SELECT id FROM users WHERE clerk_id = ${clerkUserId}`) as Record<
+      string,
+      unknown
+    >[];
+    if (userRows.length === 0 || userRows[0].id !== creatorId) {
+      return NextResponse.json({ error: 'Not authorized to modify this tool' }, { status: 403 });
     }
 
     const { title, description, priceCents, isPaid, status, category } = body;
@@ -131,27 +147,48 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ tool
 
 /**
  * DELETE /api/tools/:toolId — Soft-delete a tool (sets status to 'deleted')
- * TODO: Add auth — only the creator should be able to delete their own tool.
+ * Auth: Only the tool creator or an admin can delete.
  */
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ toolId: string }> },
 ) {
   try {
+    const { userId: clerkUserId } = await auth();
+    if (!clerkUserId) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
+
     const { toolId } = await params;
     const sql = getDb();
 
-    const rows = (await sql`
-      UPDATE tools SET status = 'deleted', updated_at = now()
+    // Fetch tool to verify ownership
+    const existing = (await sql`
+      SELECT id, creator_id FROM tools
       WHERE (id::text = ${toolId} OR slug = ${toolId}) AND status != 'deleted'
-      RETURNING id, slug
     `) as Record<string, unknown>[];
 
-    if (rows.length === 0) {
+    if (existing.length === 0) {
       return NextResponse.json({ error: 'Tool not found or already deleted' }, { status: 404 });
     }
 
-    return NextResponse.json({ id: rows[0].id, slug: rows[0].slug, deleted: true });
+    // Verify the authenticated user is the tool creator
+    const creatorId = existing[0].creator_id as string;
+    const userRows = (await sql`SELECT id FROM users WHERE clerk_id = ${clerkUserId}`) as Record<
+      string,
+      unknown
+    >[];
+    if (userRows.length === 0 || userRows[0].id !== creatorId) {
+      return NextResponse.json({ error: 'Not authorized to delete this tool' }, { status: 403 });
+    }
+
+    const actualId = existing[0].id as string;
+    await sql`
+      UPDATE tools SET status = 'deleted', updated_at = now()
+      WHERE id = ${actualId}
+    `;
+
+    return NextResponse.json({ id: actualId, slug: existing[0].slug, deleted: true });
   } catch (error) {
     console.error('[tools] DELETE error:', error);
     return NextResponse.json({ error: 'Failed to delete tool' }, { status: 500 });
