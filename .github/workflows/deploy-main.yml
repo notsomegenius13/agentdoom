@@ -1,0 +1,54 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: landing/package-lock.json
+      - run: cd landing && npm ci
+      - run: cd landing && npm run lint
+
+  build:
+    name: Build & Test
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: landing/package-lock.json
+      - run: cd landing && npm ci
+      - run: cd landing && npm run build
+      # - run: cd landing && npm test  # uncomment when tests exist
+
+  deploy:
+    name: Deploy to Vercel
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Deploy to Vercel
+        run: |
+          npm i -g vercel
+          cd landing && vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

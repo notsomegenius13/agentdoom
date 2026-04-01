@@ -1,0 +1,27 @@
+# AgentDoom — Cloudflare Worker Configuration
+# Template for hosting generated tools as static bundles
+
+name = "agentdoom-tools"
+main = "src/index.ts"
+compatibility_date = "2026-03-31"
+
+# Routes: agentdoom.ai/t/* serves generated tools
+# Uncomment and configure once DNS is set up:
+# routes = [
+#   { pattern = "agentdoom.ai/t/*", zone_name = "agentdoom.ai" }
+# ]
+
+# Fallback for initial dev: tools.agentdoom.ai/*
+# [env.production]
+# routes = [
+#   { pattern = "tools.agentdoom.ai/*", zone_name = "agentdoom.ai" }
+# ]
+
+[vars]
+ENVIRONMENT = "production"
+
+# KV Namespace for storing tool bundles
+# Create with: wrangler kv:namespace create "TOOL_BUNDLES"
+# [[kv_namespaces]]
+# binding = "TOOL_BUNDLES"
+# id = "<KV_NAMESPACE_ID>"
