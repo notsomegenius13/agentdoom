@@ -1,249 +1,242 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 
-// ─── STATS HOOK ──────────────────────────────────────────────────────
-function usePlatformStats() {
-  const [stats, setStats] = useState<{
-    totalTools: number;
-    uniqueCreators: number;
-    totalViews: number;
-  } | null>(null);
+// ─── COUNTDOWN ─────────────────────────────────────────────────────
+function useCountdown(targetDate: Date) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    fetch('/api/stats')
-      .then((r) => r.json())
-      .then((d) => setStats(d.overview))
-      .catch(() => setStats({ totalTools: 130, uniqueCreators: 40, totalViews: 12000 }));
-  }, []);
+    const tick = () => {
+      const now = new Date().getTime();
+      const diff = targetDate.getTime() - now;
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [targetDate]);
 
-  return stats;
+  return timeLeft;
 }
 
-// ─── STAT DISPLAY ────────────────────────────────────────────────────
-function StatBadge({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="text-center px-4 sm:px-6">
-      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white tabular-nums">
-        {value}
+// ─── AMBIENT GRID ──────────────────────────────────────────────────
+function AmbientGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let raf: number;
+    let time = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const draw = () => {
+      time += 0.003;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const spacing = 80;
+      const cols = Math.ceil(canvas.width / spacing) + 1;
+      const rows = Math.ceil(canvas.height / spacing) + 1;
+
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const x = i * spacing;
+          const y = j * spacing;
+          const dist = Math.sqrt(
+            Math.pow(x - canvas.width / 2, 2) + Math.pow(y - canvas.height / 2, 2),
+          );
+          const wave = Math.sin(dist * 0.005 - time) * 0.5 + 0.5;
+          const alpha = wave * 0.04;
+
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+          ctx.fill();
+        }
+      }
+
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
+}
+
+// ─── WAITLIST FORM ─────────────────────────────────────────────────
+function WaitlistForm() {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || submitting) return;
+
+    setSubmitting(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Something went wrong');
+      }
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to join. Try again.';
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="text-center" style={{ animation: 'fade-in-up 0.5s ease-out both' }}>
+        <div className="text-sm font-mono text-white/60 tracking-wide">
+          You&apos;re on the list.
+        </div>
+        <div className="text-xs text-white/25 mt-2 font-mono">
+          Check your inbox for a confirmation.
+        </div>
       </div>
-      <div className="text-xs sm:text-sm text-gray-500 mt-1">{label}</div>
-    </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="w-full max-w-xs mx-auto">
+      <div className="flex flex-col gap-3">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="email"
+          required
+          className="w-full px-4 py-3 bg-transparent border border-white/[0.08] text-white/80 placeholder:text-white/15 font-mono text-sm focus:outline-none focus:border-white/20 transition-all tracking-wider text-center"
+        />
+        <button
+          type="submit"
+          disabled={submitting}
+          className="w-full px-4 py-3 font-mono text-sm tracking-[0.2em] uppercase text-white/70 border border-white/[0.08] hover:border-white/20 hover:text-white/90 transition-all duration-500 disabled:opacity-30 cursor-pointer"
+        >
+          {submitting ? '...' : 'Request Access'}
+        </button>
+      </div>
+      {error && <div className="text-xs text-red-400/60 mt-3 text-center font-mono">{error}</div>}
+    </form>
   );
 }
 
-// ─── EXAMPLE PROMPTS ─────────────────────────────────────────────────
-const EXAMPLE_PROMPTS = [
-  { emoji: '💰', title: 'Freelance rate calculator', category: 'Productivity' },
-  { emoji: '🚀', title: 'Startup cost estimator', category: 'Business' },
-  { emoji: '📅', title: 'Content calendar planner', category: 'Marketing' },
-  { emoji: '🏋️', title: 'Workout plan generator', category: 'Health' },
-  { emoji: '📊', title: 'Invoice PDF creator', category: 'Finance' },
-  { emoji: '🎨', title: 'Color palette generator', category: 'Design' },
-];
-
-// ─── FORMAT NUMBER ───────────────────────────────────────────────────
-function formatNum(n: number): string {
-  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`;
-  return n.toLocaleString();
-}
-
-// ─── MAIN PAGE ───────────────────────────────────────────────────────
-export default function HomePage() {
-  const stats = usePlatformStats();
-
-  const fadeUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-  };
+// ─── MAIN PAGE ─────────────────────────────────────────────────────
+export default function TeaserPage() {
+  const launchDate = new Date('2026-04-07T12:00:00-05:00');
+  const countdown = useCountdown(launchDate);
 
   return (
-    <main className="min-h-screen bg-doom-black relative overflow-hidden">
-      {/* Gradient orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-doom-accent/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
+    <main className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-[#050505]">
+      <AmbientGrid />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 py-12 md:py-20">
-        {/* ─── HERO ─────────────────────────────────────────── */}
-        <motion.section {...fadeUp} className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-doom-accent/10 border border-doom-accent/20 px-4 py-1.5 text-xs font-medium text-doom-accent-light mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-doom-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-doom-accent" />
-            </span>
-            Now Live
+      {/* Scan line */}
+      <div
+        className="fixed inset-0 pointer-events-none z-[1]"
+        style={{
+          background:
+            'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.008) 3px, rgba(255,255,255,0.008) 4px)',
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center gap-16 py-24">
+        {/* Logo mark */}
+        <div style={{ animation: 'fade-in 1.5s ease-out both' }}>
+          <div className="w-12 h-12 border border-white/[0.08] flex items-center justify-center">
+            <div className="w-3 h-3 bg-white/20" />
           </div>
+        </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-            Describe a tool. <span className="text-doom-accent">Ship it in seconds.</span>
+        {/* Title */}
+        <div className="text-center" style={{ animation: 'fade-in 2s ease-out 0.3s both' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-[0.15em] text-white/90 uppercase leading-none">
+            AgentDoom
           </h1>
+        </div>
 
-          <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            AgentDoom turns a single sentence into a working, deployed web tool — no code, no
-            config, no waiting.
+        {/* Cryptic tagline */}
+        <div className="text-center" style={{ animation: 'fade-in 2s ease-out 0.8s both' }}>
+          <p className="font-mono text-xs text-white/25 tracking-[0.3em] uppercase">
+            Something is being built
           </p>
+        </div>
 
-          {/* CTA Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link
-              href="/create-tool"
-              className="w-full sm:w-auto rounded-xl bg-doom-accent px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-doom-accent-light active:scale-[0.98] shadow-lg shadow-doom-accent/25"
-            >
-              Build Something
-            </Link>
-            <Link
-              href="/feed"
-              className="w-full sm:w-auto rounded-xl border border-gray-700 px-8 py-3.5 text-base font-semibold text-gray-300 transition-all hover:border-gray-500 hover:text-white active:scale-[0.98]"
-            >
-              Explore Tools
-            </Link>
-          </div>
-        </motion.section>
-
-        {/* ─── SOCIAL PROOF STATS ──────────────────────────── */}
-        {stats && (
-          <motion.section {...fadeUp} transition={{ delay: 0.1 }} className="mb-12 md:mb-16">
-            <div className="flex items-center justify-center divide-x divide-gray-800">
-              <StatBadge value={`${formatNum(stats.totalTools)}+`} label="Tools built" />
-              <StatBadge value={formatNum(stats.uniqueCreators)} label="Creators" />
-              <StatBadge value={`${formatNum(stats.totalViews)}+`} label="Views" />
-            </div>
-          </motion.section>
-        )}
-
-        {/* ─── DEMO SECTION ────────────────────────────────── */}
-        <motion.section {...fadeUp} transition={{ delay: 0.15 }} className="mb-12 md:mb-16">
-          <div className="rounded-2xl border border-gray-800 overflow-hidden bg-doom-dark">
-            {/* Fake browser chrome */}
-            <div className="bg-doom-gray px-4 py-2.5 flex items-center gap-2 border-b border-gray-800">
-              <div className="flex gap-1.5">
-                <div className="h-3 w-3 rounded-full bg-red-500/60" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500/60" />
-                <div className="h-3 w-3 rounded-full bg-green-500/60" />
-              </div>
-              <span className="text-xs text-gray-500 ml-2 font-mono">agentdoom.ai/create-tool</span>
-            </div>
-            <div className="relative">
-              <img
-                src="/agentdoom-demo.gif"
-                alt="Watch AgentDoom build a tool from a single prompt in seconds"
-                className="w-full"
-                loading="eager"
-              />
-              {/* Overlay CTA */}
-              <div className="absolute inset-0 bg-gradient-to-t from-doom-dark/90 via-transparent to-transparent flex items-end justify-center pb-6 pointer-events-none">
-                <Link
-                  href="/create-tool"
-                  className="pointer-events-auto rounded-xl bg-doom-accent/90 backdrop-blur px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-doom-accent active:scale-95"
-                >
-                  Try it yourself →
-                </Link>
-              </div>
-            </div>
-          </div>
-          <p className="text-center text-sm text-gray-500 mt-3">
-            From prompt to deployed tool in under 30 seconds
-          </p>
-        </motion.section>
-
-        {/* ─── WHAT YOU CAN BUILD ──────────────────────────── */}
-        <motion.section {...fadeUp} transition={{ delay: 0.2 }} className="mb-12 md:mb-16">
-          <h2 className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider mb-6">
-            What people are building
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {EXAMPLE_PROMPTS.map((tool) => (
-              <div
-                key={tool.title}
-                className="rounded-xl border border-gray-800 bg-doom-dark/50 p-4 transition-all hover:border-gray-700"
-              >
-                <div className="text-2xl mb-2">{tool.emoji}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">
-                  {tool.category}
-                </div>
-                <p className="text-sm font-medium text-white leading-snug">{tool.title}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-4">
-            <Link
-              href="/feed"
-              className="text-sm text-doom-accent-light hover:text-doom-accent transition-colors"
-            >
-              Browse all tools →
-            </Link>
-          </div>
-        </motion.section>
-
-        {/* ─── HOW IT WORKS ────────────────────────────────── */}
-        <motion.section {...fadeUp} transition={{ delay: 0.25 }} className="mb-12 md:mb-16">
-          <h2 className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider mb-8">
-            How it works
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* Countdown */}
+        <div style={{ animation: 'fade-in 2s ease-out 1.2s both' }}>
+          <div className="flex items-center gap-6 font-mono">
             {[
-              {
-                step: '01',
-                title: 'Describe it',
-                desc: 'Type what you want in plain English. "A tip calculator that splits the bill."',
-              },
-              {
-                step: '02',
-                title: 'Watch it build',
-                desc: 'AI generates, assembles, and tests your tool in real time. Takes seconds.',
-              },
-              {
-                step: '03',
-                title: 'Ship it',
-                desc: 'Your tool deploys instantly with a shareable link. Done.',
-              },
+              { val: countdown.days, label: 'd' },
+              { val: countdown.hours, label: 'h' },
+              { val: countdown.minutes, label: 'm' },
+              { val: countdown.seconds, label: 's' },
             ].map((item) => (
-              <div key={item.step} className="text-center md:text-left">
-                <div className="text-xs font-bold text-doom-accent tracking-wider mb-2">
-                  {item.step}
+              <div key={item.label} className="text-center">
+                <div className="text-2xl sm:text-3xl font-light text-white/60 tabular-nums tracking-wider">
+                  {String(item.val).padStart(2, '0')}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                <div className="text-[10px] text-white/15 mt-1 tracking-[0.2em]">{item.label}</div>
               </div>
             ))}
           </div>
-        </motion.section>
+        </div>
 
-        {/* ─── META STORY ──────────────────────────────────── */}
-        <motion.section
-          {...fadeUp}
-          transition={{ delay: 0.3 }}
-          className="mb-12 md:mb-16 text-center"
-        >
-          <div className="inline-block rounded-2xl border border-gray-800 bg-doom-dark/30 px-6 sm:px-8 py-5 sm:py-6">
-            <p className="text-lg font-semibold text-white">
-              Built by <span className="text-doom-accent">12 AI agents</span> in{' '}
-              <span className="text-doom-accent">72 hours</span>
-            </p>
-            <p className="text-sm text-gray-500 mt-2">
-              AgentDoom is software that builds software — and it built itself.
-            </p>
-          </div>
-        </motion.section>
+        {/* Divider */}
+        <div
+          className="w-px h-16 bg-gradient-to-b from-transparent via-white/10 to-transparent"
+          style={{ animation: 'fade-in 2s ease-out 1.5s both' }}
+        />
 
-        {/* ─── BOTTOM CTA ──────────────────────────────────── */}
-        <motion.section {...fadeUp} transition={{ delay: 0.35 }} className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to build?</h2>
-          <p className="text-gray-400 mb-6 text-sm sm:text-base">
-            Go from idea to deployed tool in under a minute.
-          </p>
-          <Link
-            href="/create-tool"
-            className="inline-block rounded-xl bg-doom-accent px-10 py-4 text-base font-semibold text-white transition-all hover:bg-doom-accent-light active:scale-[0.98] shadow-lg shadow-doom-accent/25"
+        {/* Waitlist */}
+        <div style={{ animation: 'fade-in 2s ease-out 1.8s both' }}>
+          <WaitlistForm />
+        </div>
+
+        {/* Date */}
+        <div style={{ animation: 'fade-in 2s ease-out 2.2s both' }}>
+          <a
+            href="/admin/login"
+            className="font-mono text-[10px] text-white/10 tracking-[0.4em] uppercase hover:text-white/20 transition-colors cursor-pointer"
           >
-            Build Something
-          </Link>
-        </motion.section>
-
-        {/* ─── FOOTER ──────────────────────────────────────── */}
-        <div className="mt-12 text-center text-xs text-gray-700">agentdoom.ai</div>
+            04.07.2026
+          </a>
+        </div>
       </div>
     </main>
   );
