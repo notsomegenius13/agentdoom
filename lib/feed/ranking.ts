@@ -66,16 +66,16 @@ export async function recomputeRankings(weights: RankingWeights = V1_WEIGHTS): P
         e.tool_id,
         LEAST(1.0,
           COALESCE(COUNT(*) FILTER (
-            WHERE e.created_at > now() - INTERVAL '${TRENDING_WINDOW_HOURS} hours'
+            WHERE e.created_at > now() - ${TRENDING_WINDOW_HOURS} * INTERVAL '1 hour'
           ), 0)::REAL
           / GREATEST(1.0,
             COUNT(*) FILTER (
-              WHERE e.created_at > now() - INTERVAL '${TRENDING_BASELINE_HOURS} hours'
+              WHERE e.created_at > now() - ${TRENDING_BASELINE_HOURS} * INTERVAL '1 hour'
             )::REAL * (${TRENDING_WINDOW_HOURS}::REAL / ${TRENDING_BASELINE_HOURS}::REAL)
           )
         ) AS trending_score
       FROM feed_events e
-      WHERE e.created_at > now() - INTERVAL '${TRENDING_BASELINE_HOURS} hours'
+      WHERE e.created_at > now() - ${TRENDING_BASELINE_HOURS} * INTERVAL '1 hour'
       GROUP BY e.tool_id
     ),
     scored AS (
