@@ -1,0 +1,9 @@
+{
+  "title": "Project Launch Checklist",
+  "categories": [
+    { "name": "Pre-Launch", "items": ["Set up hosting", "Configure DNS", "Test payment flow", "Review copy"] },
+    { "name": "Launch Day", "items": ["Deploy to production", "Send announcement email", "Post on social media"] },
+    { "name": "Post-Launch", "items": ["Monitor error rates", "Collect feedback", "Plan iteration"] }
+  ],
+  "showProgress": true
+}

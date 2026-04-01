@@ -1,0 +1,11 @@
+{
+  "title": "Daily Habits",
+  "items": [
+    { "name": "Drink 8 glasses of water", "icon": "💧", "target": 8 },
+    { "name": "Exercise 30 minutes", "icon": "🏃", "target": 1 },
+    { "name": "Read 20 pages", "icon": "📚", "target": 20 },
+    { "name": "Meditate", "icon": "🧘" }
+  ],
+  "period": "daily",
+  "showStreak": true
+}

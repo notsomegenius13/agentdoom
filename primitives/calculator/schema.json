@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "CalculatorConfig",
+  "description": "A calculator with labeled inputs, a formula, and a result display",
+  "required": ["title", "inputs", "formula", "resultLabel"],
+  "properties": {
+    "title": { "type": "string" },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "label", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string", "enum": ["number", "select"] },
+          "defaultValue": { "type": "number" },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "step": { "type": "number" },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["label", "value"],
+              "properties": {
+                "label": { "type": "string" },
+                "value": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "formula": { "type": "string", "description": "JavaScript expression using input names as variables" },
+    "resultLabel": { "type": "string" },
+    "resultPrefix": { "type": "string" },
+    "resultSuffix": { "type": "string" }
+  }
+}

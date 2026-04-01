@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "FormConfig",
+  "description": "A form with labeled fields, validation, and a submit handler",
+  "required": ["title", "fields", "submitLabel", "successMessage"],
+  "properties": {
+    "title": { "type": "string", "description": "Form heading" },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "label", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string", "enum": ["text", "number", "email", "textarea", "select", "checkbox"] },
+          "placeholder": { "type": "string" },
+          "options": { "type": "array", "items": { "type": "string" } },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "submitLabel": { "type": "string", "description": "Button text" },
+    "successMessage": { "type": "string", "description": "Shown after submit" }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Email Subject Line Generator",
+  "inputLabel": "What is your email about?",
+  "inputPlaceholder": "e.g., announcing a product launch...",
+  "buttonLabel": "Generate Subject Lines",
+  "templates": [
+    "🚀 Big News: {{input}}",
+    "You won't believe this: {{input}}",
+    "Introducing: {{input}} — and why it matters",
+    "[Action Required] {{input}}",
+    "{{input}} — Here's what you need to know"
+  ],
+  "outputLabel": "Generated Subject Line"
+}

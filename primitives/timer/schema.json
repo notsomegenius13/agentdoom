@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TimerConfig",
+  "description": "A countdown/pomodoro timer with configurable durations",
+  "required": ["title", "mode"],
+  "properties": {
+    "title": { "type": "string" },
+    "mode": { "type": "string", "enum": ["countdown", "pomodoro", "stopwatch"] },
+    "durations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "seconds"],
+        "properties": {
+          "label": { "type": "string" },
+          "seconds": { "type": "number" }
+        }
+      }
+    },
+    "alertSound": { "type": "boolean" }
+  }
+}

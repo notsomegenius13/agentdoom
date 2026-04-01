@@ -1,0 +1,9 @@
+{
+  "title": "Media Player",
+  "type": "video",
+  "src": "https://www.example.com/sample-video.mp4",
+  "poster": "https://www.example.com/sample-poster.jpg",
+  "autoplay": false,
+  "loop": false,
+  "showControls": true
+}

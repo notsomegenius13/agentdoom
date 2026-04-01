@@ -1,0 +1,32 @@
+{
+  "title": "Project Board",
+  "columns": [
+    {
+      "id": "todo",
+      "title": "To Do",
+      "cards": [
+        { "id": "card-1", "title": "Design homepage mockup", "description": "Create wireframes and high-fidelity designs", "color": "#3b82f6", "assignee": "Alice" },
+        { "id": "card-2", "title": "Set up CI/CD pipeline", "color": "#f59e0b", "assignee": "Bob" },
+        { "id": "card-3", "title": "Write API documentation", "description": "Document all REST endpoints", "color": "#8b5cf6" }
+      ]
+    },
+    {
+      "id": "in-progress",
+      "title": "In Progress",
+      "cards": [
+        { "id": "card-4", "title": "Implement auth flow", "description": "OAuth2 with Google and GitHub", "color": "#ef4444", "assignee": "Charlie" },
+        { "id": "card-5", "title": "Database schema migration", "color": "#10b981", "assignee": "Alice" }
+      ]
+    },
+    {
+      "id": "done",
+      "title": "Done",
+      "cards": [
+        { "id": "card-6", "title": "Project scaffolding", "description": "Initial repo setup with Next.js", "color": "#6b7280" },
+        { "id": "card-7", "title": "Define requirements", "color": "#3b82f6", "assignee": "Bob" }
+      ]
+    }
+  ],
+  "allowAdd": true,
+  "allowMove": true
+}

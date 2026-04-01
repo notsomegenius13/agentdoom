@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "PriceListConfig",
+  "description": "A product/service pricing display",
+  "required": ["title", "items"],
+  "properties": {
+    "title": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "price"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "price": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+          "unit": { "type": "string" },
+          "featured": { "type": "boolean" }
+        }
+      }
+    },
+    "currency": { "type": "string" }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "ModalConfig",
+  "description": "A modal dialog component with trigger button",
+  "required": ["title", "triggerLabel", "content"],
+  "properties": {
+    "title": { "type": "string" },
+    "triggerLabel": { "type": "string" },
+    "content": { "type": "string" },
+    "showCloseButton": { "type": "boolean" },
+    "size": { "type": "string", "enum": ["sm", "md", "lg"] },
+    "overlayDismiss": { "type": "boolean" }
+  }
+}

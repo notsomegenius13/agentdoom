@@ -1,0 +1,10 @@
+{
+  "title": "Product Information",
+  "items": [
+    { "id": "features", "label": "Features", "content": "Our platform includes real-time collaboration, advanced analytics, and seamless integrations with your favorite tools." },
+    { "id": "pricing", "label": "Pricing", "content": "We offer flexible plans starting at $9/month for individuals, $29/month for teams, and custom enterprise pricing." },
+    { "id": "faq", "label": "FAQ", "content": "Have questions? Our product supports all major browsers, offers 99.9% uptime, and includes 24/7 customer support." }
+  ],
+  "mode": "tabs",
+  "defaultActiveId": "features"
+}

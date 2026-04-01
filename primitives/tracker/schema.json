@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TrackerConfig",
+  "description": "A habit/goal tracker with checkable items and streaks",
+  "required": ["title", "items", "period"],
+  "properties": {
+    "title": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "icon": { "type": "string", "description": "Emoji icon" },
+          "target": { "type": "number", "description": "Target count per period" }
+        }
+      }
+    },
+    "period": { "type": "string", "enum": ["daily", "weekly", "monthly"] },
+    "showStreak": { "type": "boolean" }
+  }
+}

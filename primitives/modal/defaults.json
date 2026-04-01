@@ -1,0 +1,8 @@
+{
+  "title": "Terms & Conditions",
+  "triggerLabel": "View Terms & Conditions",
+  "content": "By using this service, you agree to our terms of use. We reserve the right to modify these terms at any time. Your continued use of the platform constitutes acceptance of any changes. Please review our privacy policy for information on how we handle your data.",
+  "showCloseButton": true,
+  "size": "md",
+  "overlayDismiss": true
+}

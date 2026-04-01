@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TextGeneratorConfig",
+  "description": "A text/content generator with input, generate button, and output display",
+  "required": ["title", "inputLabel", "buttonLabel", "templates", "outputLabel"],
+  "properties": {
+    "title": { "type": "string" },
+    "inputLabel": { "type": "string" },
+    "inputPlaceholder": { "type": "string" },
+    "buttonLabel": { "type": "string" },
+    "templates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Template patterns with {{input}} placeholder"
+    },
+    "outputLabel": { "type": "string" }
+  }
+}

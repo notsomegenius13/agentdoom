@@ -1,0 +1,8 @@
+{
+  "title": "Upload Images",
+  "acceptedTypes": [".jpg", ".png", ".gif"],
+  "maxFileSizeMB": 5,
+  "maxFiles": 3,
+  "uploadLabel": "Click to browse",
+  "dragDropLabel": "Drag and drop images here"
+}

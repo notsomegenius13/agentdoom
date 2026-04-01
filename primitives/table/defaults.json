@@ -1,0 +1,14 @@
+{
+  "title": "Team Members",
+  "columns": [
+    { "key": "name", "label": "Name" },
+    { "key": "role", "label": "Role" },
+    { "key": "salary", "label": "Salary", "type": "currency" }
+  ],
+  "rows": [
+    { "name": "Alice", "role": "Engineer", "salary": 120000 },
+    { "name": "Bob", "role": "Designer", "salary": 105000 },
+    { "name": "Carol", "role": "PM", "salary": 115000 }
+  ],
+  "searchable": true
+}

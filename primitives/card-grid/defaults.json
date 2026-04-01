@@ -1,0 +1,9 @@
+{
+  "title": "Features",
+  "cards": [
+    { "title": "Fast", "description": "Built for speed with optimized rendering", "icon": "⚡" },
+    { "title": "Secure", "description": "Enterprise-grade security built in", "icon": "🔒" },
+    { "title": "Scalable", "description": "Grows with your needs effortlessly", "icon": "📈" }
+  ],
+  "columns": 3
+}

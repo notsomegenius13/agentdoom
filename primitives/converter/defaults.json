@@ -1,0 +1,24 @@
+{
+  "title": "Unit Converter",
+  "categories": [
+    {
+      "name": "Length",
+      "units": [
+        { "name": "Meters", "factor": 1 },
+        { "name": "Feet", "factor": 0.3048 },
+        { "name": "Inches", "factor": 0.0254 },
+        { "name": "Kilometers", "factor": 1000 },
+        { "name": "Miles", "factor": 1609.34 }
+      ]
+    },
+    {
+      "name": "Weight",
+      "units": [
+        { "name": "Kilograms", "factor": 1 },
+        { "name": "Pounds", "factor": 0.453592 },
+        { "name": "Ounces", "factor": 0.0283495 },
+        { "name": "Grams", "factor": 0.001 }
+      ]
+    }
+  ]
+}

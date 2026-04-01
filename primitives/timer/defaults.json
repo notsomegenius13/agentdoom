@@ -1,0 +1,10 @@
+{
+  "title": "Pomodoro Timer",
+  "mode": "pomodoro",
+  "durations": [
+    { "label": "Focus (25m)", "seconds": 1500 },
+    { "label": "Short Break (5m)", "seconds": 300 },
+    { "label": "Long Break (15m)", "seconds": 900 }
+  ],
+  "alertSound": true
+}

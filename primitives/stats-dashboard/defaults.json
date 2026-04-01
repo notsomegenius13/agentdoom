@@ -1,0 +1,17 @@
+{
+  "title": "Sales Dashboard",
+  "stats": [
+    { "label": "Revenue", "value": "$12.4k", "change": "+14%", "changeType": "positive", "icon": "💰" },
+    { "label": "Users", "value": 1234, "change": "+8%", "changeType": "positive", "icon": "👥" },
+    { "label": "Orders", "value": 89, "change": "-3%", "changeType": "negative", "icon": "📦" },
+    { "label": "Conversion", "value": "3.2%", "change": "0%", "changeType": "neutral", "icon": "📊" }
+  ],
+  "chartTitle": "Revenue by Month",
+  "chartType": "bar",
+  "chartData": [
+    { "label": "Jan", "value": 4200 },
+    { "label": "Feb", "value": 5100 },
+    { "label": "Mar", "value": 6800 },
+    { "label": "Apr", "value": 5900 }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TabsConfig",
+  "description": "A tabs and accordion layout component",
+  "required": ["title", "items", "mode"],
+  "properties": {
+    "title": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "content"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      }
+    },
+    "mode": { "type": "string", "enum": ["tabs", "accordion"] },
+    "defaultActiveId": { "type": "string" }
+  }
+}

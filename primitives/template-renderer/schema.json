@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TemplateRendererConfig",
+  "description": "A fill-in-the-blanks template with copy-to-clipboard",
+  "required": ["title", "fields", "template"],
+  "properties": {
+    "title": { "type": "string" },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "label", "placeholder"],
+        "properties": {
+          "name": { "type": "string" },
+          "label": { "type": "string" },
+          "placeholder": { "type": "string" },
+          "type": { "type": "string", "enum": ["text", "textarea", "select"] },
+          "options": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "template": { "type": "string", "description": "Template text with {{fieldName}} placeholders" },
+    "copyButton": { "type": "boolean" }
+  }
+}

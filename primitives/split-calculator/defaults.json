@@ -1,0 +1,7 @@
+{
+  "title": "Bill Splitter",
+  "currency": "$",
+  "defaultTipPercent": 18,
+  "defaultPeople": 2,
+  "tipOptions": [15, 18, 20, 25]
+}

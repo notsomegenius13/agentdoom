@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "CardGridConfig",
+  "description": "A responsive grid of content cards",
+  "required": ["title", "cards"],
+  "properties": {
+    "title": { "type": "string" },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "description"],
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "icon": { "type": "string" },
+          "tag": { "type": "string" },
+          "link": { "type": "string" }
+        }
+      }
+    },
+    "columns": { "type": "number", "minimum": 1, "maximum": 4 }
+  }
+}

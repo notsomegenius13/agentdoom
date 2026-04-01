@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "PollConfig",
+  "description": "A single-question poll with live results",
+  "required": ["title", "question", "options"],
+  "properties": {
+    "title": { "type": "string" },
+    "question": { "type": "string" },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string" },
+          "votes": { "type": "number" }
+        }
+      }
+    },
+    "showResults": { "type": "boolean", "description": "Show results before voting" }
+  }
+}
