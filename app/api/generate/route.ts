@@ -1,4 +1,7 @@
 import { NextRequest } from 'next/server'
+import { runPipeline } from '@/lib/forge/pipeline'
+
+export const maxDuration = 30
 
 export async function POST(req: NextRequest) {
   const { prompt } = await req.json()
@@ -10,7 +13,6 @@ export async function POST(req: NextRequest) {
     })
   }
 
-  // SSE streaming response
   const encoder = new TextEncoder()
   const stream = new ReadableStream({
     async start(controller) {
@@ -19,61 +21,55 @@ export async function POST(req: NextRequest) {
       }
 
       try {
-        // Stage 1: Classification (Haiku)
-        send({ stage: 'classifying', line: `Analyzing: "${prompt}"` })
-        // TODO: Call Haiku for intent classification
-        await new Promise(r => setTimeout(r, 500))
-        send({ line: 'Intent classified: utility tool' })
-        send({ line: 'Primitives selected: [form, calculator, display]' })
-
-        // Stage 2: Generation (Sonnet)
-        send({ stage: 'generating', line: 'Generating tool configuration...' })
-        // TODO: Call Sonnet with primitive schemas + prompt
-        await new Promise(r => setTimeout(r, 1500))
-        send({ line: 'Configuration generated' })
-        send({ line: 'Wiring components...' })
-
-        // Stage 3: Assembly
-        send({ stage: 'assembling', line: 'Assembling React components...' })
-        // TODO: Assemble primitives from config
-        await new Promise(r => setTimeout(r, 800))
-        send({ line: 'Components assembled' })
-        send({ line: 'Running validation pipeline...' })
-
-        // Stage 4: Deploy
-        send({ stage: 'deploying', line: 'Deploying to edge...' })
-        // TODO: Deploy to Cloudflare Workers
-        await new Promise(r => setTimeout(r, 600))
-
-        // Return preview HTML (placeholder)
-        send({
-          preview: `<!DOCTYPE html>
-<html>
-<head><meta name="viewport" content="width=device-width, initial-scale=1"><style>
-body{font-family:system-ui,sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#fafafa;}
-h1{font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:16px;}
-p{color:#666;font-size:14px;}
-.card{background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);margin-top:16px;}
-input{width:100%;padding:12px;border:1px solid #e5e5e5;border-radius:8px;font-size:16px;box-sizing:border-box;margin-top:8px;}
-button{width:100%;padding:12px;background:#7c3aed;color:white;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;}
-</style></head>
-<body>
-<h1>Your Tool</h1>
-<p>Generated from: "${prompt.replace(/"/g, '&quot;')}"</p>
-<div class="card">
-  <label>Input</label>
-  <input type="text" placeholder="Enter value..." />
-  <button onclick="alert('Tool action!')">Calculate</button>
-</div>
-<p style="margin-top:24px;text-align:center;font-size:12px;color:#aaa;">Built with AgentDoom</p>
-</body>
-</html>`,
-          line: 'Tool deployed successfully!',
+        const result = await runPipeline({
+          prompt,
+          fastMode: true, // skip Playwright in API context for speed
+          retryOnFailure: true,
+          onProgress: (event) => {
+            const stageMap: Record<string, string> = {
+              classify: 'classifying',
+              generate: 'generating',
+              assemble: 'assembling',
+              validate: 'validating',
+              deploy: 'deploying',
+              done: 'done',
+              error: 'error',
+            }
+            const data: Record<string, unknown> = {
+              stage: stageMap[event.stage] || event.stage,
+              line: event.message,
+            }
+            // Send preview HTML when assembly completes
+            if (event.stage === 'assemble' && event.data?.html) {
+              data.preview = event.data.html
+            }
+            send(data)
+          },
         })
 
-        send({ stage: 'done', url: '#' })
+        // Send preview HTML
+        send({ preview: result.html, line: 'Preview ready' })
+
+        // Send validation summary
+        if (result.validation.overallVerdict === 'fail') {
+          send({
+            stage: 'validating',
+            line: `Warning: validation failed at ${result.validation.retryContext?.failedStage || 'unknown'} stage`,
+            validationWarning: true,
+          })
+        }
+
+        // Final result
+        send({
+          stage: 'done',
+          url: result.url,
+          timing: result.timing,
+          validation: result.validation.overallVerdict,
+        })
       } catch (err) {
-        send({ stage: 'error', line: `Error: ${err instanceof Error ? err.message : 'Unknown error'}` })
+        const message = err instanceof Error ? err.message : 'Unknown error'
+        console.error('Generation error:', err)
+        send({ stage: 'error', line: `Error: ${message}` })
       } finally {
         controller.enqueue(encoder.encode('data: [DONE]\n\n'))
         controller.close()
