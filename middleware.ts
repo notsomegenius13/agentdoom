@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 const clerkConfigured =
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
   process.env.CLERK_SECRET_KEY &&
   !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('placeholder') &&
   !process.env.CLERK_SECRET_KEY.startsWith('placeholder');
+
+const nextAuthConfigured =
+  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.NEXTAUTH_SECRET;
 
 /**
  * Simple in-memory sliding window for Edge middleware.
@@ -57,19 +61,14 @@ function checkApiIpLimit(ip: string): { allowed: boolean; retryAfter: number } {
 }
 
 // ─── TEASER MODE ──────────────────────────────────────────────────
-// While in teaser/waitlist mode, redirect all routes to / except:
-// - / (the teaser page itself)
-// - /api/waitlist (signup endpoint)
-// - /admin/login (admin sign-in page)
-// - /sign-in, /sign-up (Clerk auth routes)
-// - Authenticated admin users (by email) bypass the teaser gate entirely
-const TEASER_MODE = true;
+const TEASER_MODE = process.env.TEASER_MODE !== 'false';
 
 function isTeaserAllowedPath(pathname: string): boolean {
   return (
     pathname === '/' ||
     pathname === '/api/waitlist' ||
     pathname === '/admin/login' ||
+    pathname.startsWith('/api/auth/') ||
     pathname.startsWith('/sign-in') ||
     pathname.startsWith('/sign-up')
   );
@@ -119,6 +118,20 @@ function applyApiRateLimit(request: NextRequest): NextResponse | null {
   return null;
 }
 
+async function checkNextAuthAdmin(request: NextRequest): Promise<boolean> {
+  if (!nextAuthConfigured) return false;
+  try {
+    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    if (!token?.email) return false;
+    const adminEmails = getAdminEmails();
+    // If no admin emails configured, any authenticated Google user is admin
+    if (adminEmails.size === 0) return true;
+    return adminEmails.has((token.email as string).toLowerCase());
+  } catch {
+    return false;
+  }
+}
+
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -128,11 +141,16 @@ export default async function middleware(request: NextRequest) {
     if (rateLimitResponse) return rateLimitResponse;
   }
 
-  // If Clerk is not configured, apply simple teaser gate and pass through
-  if (!clerkConfigured) {
-    if (TEASER_MODE && !isTeaserAllowedPath(pathname)) {
+  // ─── NextAuth admin bypass (when Clerk is not configured) ───────
+  if (!clerkConfigured && TEASER_MODE && !isTeaserAllowedPath(pathname)) {
+    const isAdmin = await checkNextAuthAdmin(request);
+    if (!isAdmin) {
       return NextResponse.redirect(new URL('/', request.url));
     }
+    return NextResponse.next();
+  }
+
+  if (!clerkConfigured) {
     return NextResponse.next();
   }
 
@@ -153,6 +171,7 @@ export default async function middleware(request: NextRequest) {
     '/api/og(.*)',
     '/api/waitlist(.*)',
     '/api/health(.*)',
+    '/api/auth/(.*)',
     '/pricing(.*)',
     '/launch(.*)',
     '/creators(.*)',
@@ -169,10 +188,7 @@ export default async function middleware(request: NextRequest) {
     if (TEASER_MODE && !isTeaserAllowedPath(req.nextUrl.pathname)) {
       const session = await auth();
 
-      // Any authenticated Clerk user bypasses the teaser gate.
-      // Only authorized users have Clerk credentials, so this is secure.
-      // For extra restriction, set ADMIN_USER_IDS (comma-separated Clerk user IDs).
-      const adminUserIds = getAdminEmails(); // reuses same env-parsing logic
+      const adminUserIds = getAdminEmails();
       const isAdmin =
         session.userId != null && (adminUserIds.size === 0 || adminUserIds.has(session.userId));
 
