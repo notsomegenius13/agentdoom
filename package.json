@@ -13,6 +13,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:validate": "vitest run lib/forge/__tests__/validate.test.ts",
+    "db:migrate": "npx tsx scripts/db-migrate.ts",
+    "db:seed": "npx tsx scripts/seed-tools.ts",
     "prepare": "husky"
   },
   "lint-staged": {

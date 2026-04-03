@@ -1,19 +1,23 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run db:migrate && npm run db:seed && npm run build",
   "installCommand": "npm install --legacy-peer-deps",
   "outputDirectory": ".next",
   "regions": ["iad1"],
   "crons": [
     {
       "path": "/api/cron/recompute-rankings",
-      "schedule": "*/10 * * * *"
+      "schedule": "0 0 * * *"
     }
   ],
   "headers": [
     {
       "source": "/api/cron/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+    },
+    {
+      "source": "/:path*.:ext(jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf|eot)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ]
 }
