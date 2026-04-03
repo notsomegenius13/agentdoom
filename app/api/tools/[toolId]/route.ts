@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { getDb } from '@/lib/db';
+import { getSeedToolBySlugOrId } from '@/lib/seed-tools';
 
 /**
  * GET /api/tools/:toolId — Fetch a single tool with its config
@@ -14,10 +15,12 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
       SELECT t.id, t.slug, t.title, t.description, t.category,
              t.preview_html, t.deploy_url, t.is_paid, t.price_cents,
              t.remixed_from, t.remixes_count,
+             t.creator_id,
              u.username AS creator_username,
              u.display_name AS creator_display_name,
              u.avatar_url AS creator_avatar_url,
              u.is_verified AS creator_is_verified,
+             u.is_pro AS creator_is_pro,
              tc.config
       FROM tools t
       LEFT JOIN users u ON u.id = t.creator_id
@@ -27,29 +30,79 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
 
     const row = rows[0];
     if (!row) {
-      return NextResponse.json({ error: 'Tool not found' }, { status: 404 });
+      let seedTool = null;
+      try {
+        seedTool = getSeedToolBySlugOrId(toolId);
+      } catch (seedError) {
+        console.warn('[tools] seed fallback lookup failed:', seedError);
+      }
+
+      if (!seedTool) {
+        return NextResponse.json({ error: 'Tool not found' }, { status: 404 });
+      }
+
+      return NextResponse.json(
+        {
+          id: `seed:${seedTool.slug}`,
+          slug: seedTool.slug,
+          title: seedTool.title,
+          description: seedTool.description,
+          category: seedTool.category,
+          previewHtml: seedTool.previewHtml,
+          deployUrl: null,
+          isPaid: false,
+          priceCents: 0,
+          remixedFrom: null,
+          remixesCount: 0,
+          creatorId: 'seed-creator',
+          creator: {
+            username: 'agentdoom',
+            displayName: 'AgentDoom',
+            avatarUrl: null,
+            isVerified: true,
+            stripeAccountId: null,
+            isPro: false,
+          },
+          config: seedTool.config,
+        },
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+          },
+        },
+      );
     }
 
-    return NextResponse.json({
-      id: row.id,
-      slug: row.slug,
-      title: row.title,
-      description: row.description,
-      category: row.category,
-      previewHtml: row.preview_html,
-      deployUrl: row.deploy_url,
-      isPaid: row.is_paid,
-      priceCents: row.price_cents,
-      remixedFrom: row.remixed_from,
-      remixesCount: row.remixes_count,
-      creator: {
-        username: row.creator_username,
-        displayName: row.creator_display_name,
-        avatarUrl: row.creator_avatar_url,
-        isVerified: row.creator_is_verified,
+    return NextResponse.json(
+      {
+        id: row.id,
+        slug: row.slug,
+        title: row.title,
+        description: row.description,
+        category: row.category,
+        previewHtml: row.preview_html,
+        deployUrl: row.deploy_url,
+        isPaid: row.is_paid,
+        priceCents: row.price_cents,
+        remixedFrom: row.remixed_from,
+        remixesCount: row.remixes_count,
+        creatorId: row.creator_id,
+        creator: {
+          username: row.creator_username ?? 'agentdoom',
+          displayName: row.creator_display_name,
+          avatarUrl: row.creator_avatar_url,
+          isVerified: row.creator_is_verified,
+          stripeAccountId: null,
+          isPro: row.creator_is_pro ?? false,
+        },
+        config: row.config,
       },
-      config: row.config,
-    });
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+        },
+      },
+    );
   } catch (error) {
     console.error('[tools] GET error:', error);
     return NextResponse.json({ error: 'Failed to fetch tool' }, { status: 500 });
