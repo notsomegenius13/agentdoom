@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { getDb } from '@/lib/db';
 import { getSeedToolBySlugOrId } from '@/lib/seed-tools';
 
@@ -116,8 +117,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
  */
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ toolId: string }> }) {
   try {
-    const { userId: clerkUserId } = await auth();
-    if (!clerkUserId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
@@ -137,10 +138,11 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ tool
 
     // Verify the authenticated user is the tool creator
     const creatorId = existing[0].creator_id as string;
-    const userRows = (await sql`SELECT id FROM users WHERE clerk_id = ${clerkUserId}`) as Record<
-      string,
-      unknown
-    >[];
+    const userRows =
+      (await sql`SELECT id FROM users WHERE email = ${session.user.email}`) as Record<
+        string,
+        unknown
+      >[];
     if (userRows.length === 0 || userRows[0].id !== creatorId) {
       return NextResponse.json({ error: 'Not authorized to modify this tool' }, { status: 403 });
     }
@@ -207,8 +209,8 @@ export async function DELETE(
   { params }: { params: Promise<{ toolId: string }> },
 ) {
   try {
-    const { userId: clerkUserId } = await auth();
-    if (!clerkUserId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
@@ -227,10 +229,11 @@ export async function DELETE(
 
     // Verify the authenticated user is the tool creator
     const creatorId = existing[0].creator_id as string;
-    const userRows = (await sql`SELECT id FROM users WHERE clerk_id = ${clerkUserId}`) as Record<
-      string,
-      unknown
-    >[];
+    const userRows =
+      (await sql`SELECT id FROM users WHERE email = ${session.user.email}`) as Record<
+        string,
+        unknown
+      >[];
     if (userRows.length === 0 || userRows[0].id !== creatorId) {
       return NextResponse.json({ error: 'Not authorized to delete this tool' }, { status: 403 });
     }

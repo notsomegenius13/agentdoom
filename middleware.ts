@@ -2,15 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const clerkConfigured =
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-  process.env.CLERK_SECRET_KEY &&
-  !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('placeholder') &&
-  !process.env.CLERK_SECRET_KEY.startsWith('placeholder');
-
-const nextAuthConfigured =
-  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.NEXTAUTH_SECRET;
-
 /**
  * Simple in-memory sliding window for Edge middleware.
  * Upstash Redis is used for per-user limits in route handlers;
@@ -30,7 +21,6 @@ function evictExpiredEntries() {
   for (const [ip, entry] of ipHits) {
     if (now >= entry.resetAt) ipHits.delete(ip);
   }
-  // Hard cap: if still over limit, drop oldest entries
   if (ipHits.size > MAX_IP_ENTRIES) {
     const excess = ipHits.size - MAX_IP_ENTRIES;
     const keys = ipHits.keys();
@@ -66,6 +56,12 @@ const TEASER_MODE = process.env.TEASER_MODE !== 'false';
 function isTeaserAllowedPath(pathname: string): boolean {
   return (
     pathname === '/' ||
+    pathname === '/feed' ||
+    pathname.startsWith('/feed/') ||
+    pathname === '/marketplace' ||
+    pathname.startsWith('/marketplace/') ||
+    pathname === '/create-tool' ||
+    pathname.startsWith('/create-tool/') ||
     pathname === '/api/waitlist' ||
     pathname === '/admin/login' ||
     pathname.startsWith('/api/auth/') ||
@@ -74,7 +70,6 @@ function isTeaserAllowedPath(pathname: string): boolean {
   );
 }
 
-// Admin emails allowed to bypass teaser (comma-separated env var)
 function getAdminEmails(): Set<string> {
   const raw = process.env.ADMIN_EMAILS || '';
   return new Set(
@@ -86,12 +81,11 @@ function getAdminEmails(): Set<string> {
 }
 
 function applyApiRateLimit(request: NextRequest): NextResponse | null {
-  // Admin API key bypass
   const authHeader = request.headers.get('authorization');
   const adminKey = process.env.ADMIN_API_KEY;
   if (adminKey && authHeader) {
     const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
-    if (token === adminKey) return null; // skip rate limiting
+    if (token === adminKey) return null;
   }
 
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
@@ -118,18 +112,15 @@ function applyApiRateLimit(request: NextRequest): NextResponse | null {
   return null;
 }
 
-async function checkNextAuthAdmin(request: NextRequest): Promise<boolean> {
-  if (!nextAuthConfigured) return false;
-  try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token?.email) return false;
-    const adminEmails = getAdminEmails();
-    // If no admin emails configured, any authenticated Google user is admin
-    if (adminEmails.size === 0) return true;
-    return adminEmails.has((token.email as string).toLowerCase());
-  } catch {
-    return false;
-  }
+// Protected routes requiring authentication
+const PROTECTED_PREFIXES = ['/dashboard', '/admin'];
+const PROTECTED_EXACT = ['/create-tool'];
+
+function isProtectedRoute(pathname: string): boolean {
+  if (PROTECTED_EXACT.includes(pathname)) return true;
+  return PROTECTED_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(prefix + '/'),
+  );
 }
 
 export default async function middleware(request: NextRequest) {
@@ -141,72 +132,33 @@ export default async function middleware(request: NextRequest) {
     if (rateLimitResponse) return rateLimitResponse;
   }
 
-  // ─── NextAuth admin bypass (when Clerk is not configured) ───────
-  if (!clerkConfigured && TEASER_MODE && !isTeaserAllowedPath(pathname)) {
-    const isAdmin = await checkNextAuthAdmin(request);
-    if (!isAdmin) {
+  // Teaser mode: only allowed paths are accessible to unauthenticated users
+  if (TEASER_MODE && !pathname.startsWith('/api/') && !isTeaserAllowedPath(pathname)) {
+    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    if (!token?.email) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    // If admin emails are configured, enforce admin-only access to non-teaser paths
+    const adminEmails = getAdminEmails();
+    if (adminEmails.size > 0 && !adminEmails.has((token.email as string).toLowerCase())) {
       return NextResponse.redirect(new URL('/', request.url));
     }
     return NextResponse.next();
   }
 
-  if (!clerkConfigured) {
-    return NextResponse.next();
+  // Protect specific routes (require any authenticated user)
+  if (!TEASER_MODE && isProtectedRoute(pathname)) {
+    // Skip /admin/login itself
+    if (pathname === '/admin/login') return NextResponse.next();
+    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    if (!token) {
+      const url = new URL('/sign-in', request.url);
+      url.searchParams.set('callbackUrl', pathname);
+      return NextResponse.redirect(url);
+    }
   }
 
-  // Clerk is configured — run Clerk middleware with teaser + admin logic
-  const { clerkMiddleware, createRouteMatcher } = await import('@clerk/nextjs/server');
-
-  const isPublicRoute = createRouteMatcher([
-    '/',
-    '/feed(.*)',
-    '/t/(.*)',
-    '/marketplace(.*)',
-    '/api/feed(.*)',
-    '/api/generate(.*)',
-    '/api/deploy(.*)',
-    '/api/cron/(.*)',
-    '/api/moderate/(.*)',
-    '/api/stripe/webhook(.*)',
-    '/api/og(.*)',
-    '/api/waitlist(.*)',
-    '/api/health(.*)',
-    '/api/auth/(.*)',
-    '/pricing(.*)',
-    '/launch(.*)',
-    '/creators(.*)',
-    '/tools/(.*)',
-    '/create-tool(.*)',
-    '/checkout(.*)',
-    '/sign-in(.*)',
-    '/sign-up(.*)',
-    '/admin/login(.*)',
-  ]);
-
-  const handler = clerkMiddleware(async (auth, req) => {
-    // Teaser gate with admin bypass
-    if (TEASER_MODE && !isTeaserAllowedPath(req.nextUrl.pathname)) {
-      const session = await auth();
-
-      const adminUserIds = getAdminEmails();
-      const isAdmin =
-        session.userId != null && (adminUserIds.size === 0 || adminUserIds.has(session.userId));
-
-      if (!isAdmin) {
-        return NextResponse.redirect(new URL('/', req.url));
-      }
-    }
-
-    // Standard Clerk auth protection for non-public routes
-    if (!isPublicRoute(req)) {
-      const isToolsRead = req.method === 'GET' && /^\/api\/tools(\/|$)/.test(req.nextUrl.pathname);
-      if (!isToolsRead) {
-        await auth.protect();
-      }
-    }
-  });
-
-  return handler(request, {} as never);
+  return NextResponse.next();
 }
 
 export const config = {

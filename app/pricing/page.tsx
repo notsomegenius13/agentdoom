@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useUser } from '@clerk/nextjs';
+import { useSession } from 'next-auth/react';
 
 const FREE_FEATURES = [
   { name: '5 tools per day', included: true },
@@ -35,7 +35,9 @@ export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { user, isSignedIn } = useUser();
+  const { data: session } = useSession();
+  const isSignedIn = !!session;
+  const user = session?.user;
 
   const monthlyPrice = 14;
   const annualMonthlyPrice = 10;
@@ -56,8 +58,7 @@ export default function PricingPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: 'pro',
-          userId: user?.id,
-          email: user?.primaryEmailAddress?.emailAddress,
+          email: user?.email,
           priceId: annual
             ? process.env.NEXT_PUBLIC_STRIPE_PRO_ANNUAL_PRICE_ID
             : process.env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID,

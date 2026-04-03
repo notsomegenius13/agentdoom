@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
+import Providers from './providers';
 import './globals.css';
 
 const inter = Inter({
@@ -52,37 +52,25 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: '#7c3aed',
-          colorBackground: '#111111',
-          colorText: '#ffffff',
-          colorInputBackground: '#1a1a1a',
-          colorInputText: '#ffffff',
-        },
-      }}
-    >
-      <html lang="en" className={`dark ${inter.variable}`}>
-        <head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'WebSite',
-                name: 'AgentDoom',
-                url: 'https://agentdoom.ai',
-                description:
-                  'The TikTok of AI-built software. Describe any tool, watch it build itself, deploy in seconds.',
-              }),
-            }}
-          />
-        </head>
-        <body className={`min-h-screen bg-doom-black text-white antialiased ${inter.className}`}>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={`dark ${inter.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'AgentDoom',
+              url: 'https://agentdoom.ai',
+              description:
+                'The TikTok of AI-built software. Describe any tool, watch it build itself, deploy in seconds.',
+            }),
+          }}
+        />
+      </head>
+      <body className={`min-h-screen bg-doom-black text-white antialiased ${inter.className}`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   );
 }

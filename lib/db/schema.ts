@@ -7,7 +7,9 @@ export const SCHEMA_SQL = `
 -- Users
 CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  clerk_id TEXT UNIQUE NOT NULL,
+  clerk_id TEXT UNIQUE,
+  email TEXT UNIQUE,
+  password_hash TEXT,
   username TEXT UNIQUE NOT NULL,
   display_name TEXT,
   avatar_url TEXT,
@@ -26,6 +28,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE INDEX IF NOT EXISTS idx_users_clerk_id ON users(clerk_id);
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 
 -- Tools (the deployed micro-apps)
 CREATE TABLE IF NOT EXISTS tools (
@@ -58,6 +61,7 @@ CREATE INDEX IF NOT EXISTS idx_tools_creator ON tools(creator_id);
 CREATE INDEX IF NOT EXISTS idx_tools_category ON tools(category);
 CREATE INDEX IF NOT EXISTS idx_tools_status ON tools(status);
 CREATE INDEX IF NOT EXISTS idx_tools_created_at ON tools(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_tools_status_created ON tools(status, created_at DESC);
 
 -- Tool Configurations (the JSON config that Forge generates)
 CREATE TABLE IF NOT EXISTS tool_configs (
@@ -214,6 +218,20 @@ CREATE TABLE IF NOT EXISTS tool_ranking_scores (
   creator_score REAL DEFAULT 0,
   last_computed_at TIMESTAMPTZ DEFAULT now()
 );
+
+-- Featured Tools (Tool of the Day)
+CREATE TABLE IF NOT EXISTS featured_tools (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tool_id UUID REFERENCES tools(id) ON DELETE CASCADE NOT NULL,
+  featured_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  reason TEXT,
+  selected_by TEXT DEFAULT 'auto' CHECK (selected_by IN ('auto', 'admin')),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(featured_date)
+);
+
+CREATE INDEX IF NOT EXISTS idx_featured_tools_date ON featured_tools(featured_date DESC);
+CREATE INDEX IF NOT EXISTS idx_featured_tools_tool ON featured_tools(tool_id);
 
 -- Waitlist signups
 CREATE TABLE IF NOT EXISTS waitlist (
