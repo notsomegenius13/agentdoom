@@ -159,7 +159,7 @@ function WaitlistForm() {
 
 // ─── MAIN PAGE ─────────────────────────────────────────────────────
 export default function TeaserPage() {
-  const launchDate = new Date('2026-04-07T12:00:00-05:00');
+  const launchDate = new Date('2026-04-06T09:00:00-04:00');
   const countdown = useCountdown(launchDate);
 
   return (
@@ -234,7 +234,7 @@ export default function TeaserPage() {
             href="/admin/login"
             className="font-mono text-[10px] text-white/10 tracking-[0.4em] uppercase hover:text-white/20 transition-colors cursor-pointer"
           >
-            04.07.2026
+            04.06.2026
           </a>
         </div>
       </div>
