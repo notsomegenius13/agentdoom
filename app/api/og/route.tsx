@@ -82,7 +82,7 @@ export async function GET() {
         }}
       >
         <span>agentdoom.ai</span>
-        <span>The TikTok of AI-Built Software</span>
+        <span>AI-Built Software for Everyone</span>
       </div>
     </div>,
     { width: 1200, height: 630 },

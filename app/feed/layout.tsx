@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Feed',
   description:
-    'Discover AI-built tools in a TikTok-style feed. Swipe through calculators, generators, dashboards, and more — all built with words.',
+    'Discover AI-built tools. Browse calculators, generators, dashboards, and more — all built with words.',
   openGraph: {
     title: 'Discover AI-Built Tools — AgentDoom',
     description:

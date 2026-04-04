@@ -176,7 +176,7 @@ export default function ToolDetailPage() {
       <main className="min-h-screen bg-doom-black text-white flex flex-col items-center justify-center gap-4">
         <p className="text-gray-400">Tool not found</p>
         <Link href="/feed" className="text-doom-accent hover:underline text-sm">
-          Back to Marketplace
+          Browse Tools
         </Link>
       </main>
     );

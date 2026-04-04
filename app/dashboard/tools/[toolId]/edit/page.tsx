@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 
 const CATEGORIES = [
   { key: 'money', label: 'Finance & Money' },
@@ -12,72 +12,72 @@ const CATEGORIES = [
   { key: 'creator', label: 'Creator Tools' },
   { key: 'business', label: 'Business' },
   { key: 'utility', label: 'Utilities' },
-]
+];
 
 interface ToolData {
-  id: string
-  slug: string
-  title: string
-  description: string
-  category: string
-  pricing: 'free' | 'paid'
-  priceCents: number
-  previewHtml: string | null
-  publishedAt: string
-  viewsCount: number
-  likesCount: number
-  remixesCount: number
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  pricing: 'free' | 'paid';
+  priceCents: number;
+  previewHtml: string | null;
+  publishedAt: string;
+  viewsCount: number;
+  likesCount: number;
+  remixesCount: number;
 }
 
 export default function EditToolPage() {
-  const params = useParams()
-  const router = useRouter()
-  const toolId = params.toolId as string
+  const params = useParams();
+  const router = useRouter();
+  const toolId = params.toolId as string;
 
-  const [tool, setTool] = useState<ToolData | null>(null)
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
-  const [pricing, setPricing] = useState<'free' | 'paid'>('free')
-  const [priceCents, setPriceCents] = useState(0)
-  const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
+  const [tool, setTool] = useState<ToolData | null>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [pricing, setPricing] = useState<'free' | 'paid'>('free');
+  const [priceCents, setPriceCents] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('agentdoom_tools')
-    if (!stored) return
+    const stored = localStorage.getItem('agentdoom_tools');
+    if (!stored) return;
 
     try {
-      const tools: ToolData[] = JSON.parse(stored)
-      const found = tools.find((t) => t.id === toolId)
+      const tools: ToolData[] = JSON.parse(stored);
+      const found = tools.find((t) => t.id === toolId);
       if (found) {
-        setTool(found)
-        setTitle(found.title)
-        setDescription(found.description)
-        setCategory(found.category)
-        setPricing(found.pricing)
-        setPriceCents(found.priceCents)
+        setTool(found);
+        setTitle(found.title);
+        setDescription(found.description);
+        setCategory(found.category);
+        setPricing(found.pricing);
+        setPriceCents(found.priceCents);
       }
     } catch {}
-  }, [toolId])
+  }, [toolId]);
 
   const handleSave = async () => {
-    if (!tool) return
-    setSaving(true)
-    setSaved(false)
+    if (!tool) return;
+    setSaving(true);
+    setSaved(false);
 
-    await new Promise((r) => setTimeout(r, 800))
+    await new Promise((r) => setTimeout(r, 800));
 
-    const stored = localStorage.getItem('agentdoom_tools')
+    const stored = localStorage.getItem('agentdoom_tools');
     if (stored) {
       try {
-        const tools: ToolData[] = JSON.parse(stored)
-        const idx = tools.findIndex((t) => t.id === toolId)
+        const tools: ToolData[] = JSON.parse(stored);
+        const idx = tools.findIndex((t) => t.id === toolId);
         if (idx >= 0) {
           const slug = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-|-$/g, '')
+            .replace(/^-|-$/g, '');
           tools[idx] = {
             ...tools[idx],
             title,
@@ -86,30 +86,30 @@ export default function EditToolPage() {
             pricing,
             priceCents: pricing === 'free' ? 0 : priceCents,
             slug,
-          }
-          localStorage.setItem('agentdoom_tools', JSON.stringify(tools))
+          };
+          localStorage.setItem('agentdoom_tools', JSON.stringify(tools));
         }
       } catch {}
     }
 
-    setSaving(false)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
-  }
+    setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
 
   const handleDelete = () => {
-    const stored = localStorage.getItem('agentdoom_tools')
+    const stored = localStorage.getItem('agentdoom_tools');
     if (stored) {
       try {
-        const tools: ToolData[] = JSON.parse(stored)
+        const tools: ToolData[] = JSON.parse(stored);
         localStorage.setItem(
           'agentdoom_tools',
-          JSON.stringify(tools.filter((t) => t.id !== toolId))
-        )
+          JSON.stringify(tools.filter((t) => t.id !== toolId)),
+        );
       } catch {}
     }
-    router.push('/dashboard')
-  }
+    router.push('/dashboard');
+  };
 
   if (!tool) {
     return (
@@ -119,10 +119,10 @@ export default function EditToolPage() {
           Back to Dashboard
         </Link>
       </main>
-    )
+    );
   }
 
-  const canSave = title.trim().length >= 3 && description.trim().length >= 10
+  const canSave = title.trim().length >= 3 && description.trim().length >= 10;
 
   return (
     <main className="min-h-screen bg-doom-black text-white">
@@ -209,7 +209,10 @@ export default function EditToolPage() {
             <label className="block text-sm font-medium text-gray-300 mb-2">Pricing</label>
             <div className="flex gap-3">
               <button
-                onClick={() => { setPricing('free'); setPriceCents(0) }}
+                onClick={() => {
+                  setPricing('free');
+                  setPriceCents(0);
+                }}
                 className={`flex-1 rounded-xl border p-3 text-left transition-all ${
                   pricing === 'free'
                     ? 'border-doom-accent bg-doom-accent/10'
@@ -220,7 +223,10 @@ export default function EditToolPage() {
                 <p className="text-xs text-gray-500 mt-0.5">Anyone can use it</p>
               </button>
               <button
-                onClick={() => { setPricing('paid'); setPriceCents(priceCents || 499) }}
+                onClick={() => {
+                  setPricing('paid');
+                  setPriceCents(priceCents || 499);
+                }}
                 className={`flex-1 rounded-xl border p-3 text-left transition-all ${
                   pricing === 'paid'
                     ? 'border-doom-accent bg-doom-accent/10'
@@ -298,7 +304,7 @@ export default function EditToolPage() {
           <div className="rounded-xl border border-red-900/40 bg-red-950/20 p-4">
             <h3 className="text-sm font-medium text-red-400 mb-2">Danger Zone</h3>
             <p className="text-xs text-gray-500 mb-3">
-              Deleting a tool removes it from the marketplace permanently.
+              Deleting a tool removes it from AgentDoom permanently.
             </p>
             <button
               onClick={handleDelete}
@@ -310,5 +316,5 @@ export default function EditToolPage() {
         </motion.div>
       </div>
     </main>
-  )
+  );
 }

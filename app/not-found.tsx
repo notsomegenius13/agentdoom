@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 const links = [
-  { href: '/marketplace', label: 'Marketplace', desc: 'Browse AI-built tools' },
-  { href: '/feed', label: 'Feed', desc: 'See what others are building' },
+  { href: '/feed', label: 'Feed', desc: 'Browse AI-built tools' },
   { href: '/launch', label: 'Create', desc: 'Build something new' },
 ];
 
@@ -17,7 +16,7 @@ export default function NotFound() {
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
 
-      <div className="grid gap-4 sm:grid-cols-3 w-full max-w-lg mb-10">
+      <div className="grid gap-4 sm:grid-cols-2 w-full max-w-lg mb-10">
         {links.map((link) => (
           <Link
             key={link.href}

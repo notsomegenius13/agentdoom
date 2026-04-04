@@ -1,53 +1,53 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import ProBadge from '@/components/ProBadge'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import ProBadge from '@/components/ProBadge';
 
 interface LeaderboardCreator {
-  rank: number
-  id: string
-  username: string
-  displayName: string | null
-  avatarUrl: string | null
-  bio: string | null
-  isVerified: boolean
-  isPro: boolean
-  toolsCreated: number
-  followersCount: number
-  totalRemixes: number
-  totalViews: number
-  totalLikes: number
-  totalShares: number
+  rank: number;
+  id: string;
+  username: string;
+  displayName: string | null;
+  avatarUrl: string | null;
+  bio: string | null;
+  isVerified: boolean;
+  isPro: boolean;
+  toolsCreated: number;
+  followersCount: number;
+  totalRemixes: number;
+  totalViews: number;
+  totalLikes: number;
+  totalShares: number;
 }
 
 export default function TopCreatorsPage() {
-  const [creators, setCreators] = useState<LeaderboardCreator[]>([])
-  const [loading, setLoading] = useState(true)
+  const [creators, setCreators] = useState<LeaderboardCreator[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCreators = async () => {
-      const res = await fetch('/api/creators?limit=30')
+      const res = await fetch('/api/creators?limit=30');
       if (res.ok) {
-        const data = await res.json()
-        setCreators(data.creators)
+        const data = await res.json();
+        setCreators(data.creators);
       }
-      setLoading(false)
-    }
-    fetchCreators()
-  }, [])
+      setLoading(false);
+    };
+    fetchCreators();
+  }, []);
 
   return (
     <main className="min-h-screen bg-doom-black text-white">
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/marketplace" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
-          <Link href="/marketplace" className="text-sm text-gray-400 hover:text-white transition-colors">
-            Marketplace
+          <Link href="/feed" className="text-sm text-gray-400 hover:text-white transition-colors">
+            Feed
           </Link>
         </div>
       </div>
@@ -79,12 +79,17 @@ export default function TopCreatorsPage() {
                 <Link href={`/u/${creator.username}`}>
                   <div className="group flex items-center gap-4 rounded-2xl border border-gray-800 bg-doom-dark p-4 transition-colors hover:border-doom-accent/40">
                     {/* Rank */}
-                    <div className={`w-8 text-center font-bold text-lg ${
-                      creator.rank === 1 ? 'text-yellow-400' :
-                      creator.rank === 2 ? 'text-gray-300' :
-                      creator.rank === 3 ? 'text-amber-600' :
-                      'text-gray-600'
-                    }`}>
+                    <div
+                      className={`w-8 text-center font-bold text-lg ${
+                        creator.rank === 1
+                          ? 'text-yellow-400'
+                          : creator.rank === 2
+                            ? 'text-gray-300'
+                            : creator.rank === 3
+                              ? 'text-amber-600'
+                              : 'text-gray-600'
+                      }`}
+                    >
                       {creator.rank}
                     </div>
 
@@ -104,7 +109,9 @@ export default function TopCreatorsPage() {
                           {creator.displayName || creator.username}
                         </span>
                         {creator.isVerified && (
-                          <span className="text-doom-accent text-xs" title="Verified">✓</span>
+                          <span className="text-doom-accent text-xs" title="Verified">
+                            ✓
+                          </span>
                         )}
                         {creator.isPro && <ProBadge size="sm" />}
                       </div>
@@ -118,15 +125,21 @@ export default function TopCreatorsPage() {
                         <div>tools</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-semibold text-white">{creator.totalRemixes.toLocaleString()}</div>
+                        <div className="font-semibold text-white">
+                          {creator.totalRemixes.toLocaleString()}
+                        </div>
                         <div>remixes</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-semibold text-white">{creator.totalLikes.toLocaleString()}</div>
+                        <div className="font-semibold text-white">
+                          {creator.totalLikes.toLocaleString()}
+                        </div>
                         <div>likes</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-semibold text-white">{creator.totalViews.toLocaleString()}</div>
+                        <div className="font-semibold text-white">
+                          {creator.totalViews.toLocaleString()}
+                        </div>
                         <div>views</div>
                       </div>
                     </div>
@@ -138,5 +151,5 @@ export default function TopCreatorsPage() {
         )}
       </div>
     </main>
-  )
+  );
 }

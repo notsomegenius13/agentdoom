@@ -1,45 +1,45 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import type { FeedTool } from '@/lib/feed/types'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import type { FeedTool } from '@/lib/feed/types';
 
 interface ToolDetail extends FeedTool {
-  creatorId?: string
+  creatorId?: string;
   creator: FeedTool['creator'] & {
-    stripeAccountId?: string | null
-    isPro?: boolean
-  }
+    stripeAccountId?: string | null;
+    isPro?: boolean;
+  };
 }
 
-const PLATFORM_FEE_PERCENT = 15
+const PLATFORM_FEE_PERCENT = 15;
 
 export default function CheckoutPage() {
-  const { toolId } = useParams<{ toolId: string }>()
-  const [tool, setTool] = useState<ToolDetail | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [processing, setProcessing] = useState(false)
+  const { toolId } = useParams<{ toolId: string }>();
+  const [tool, setTool] = useState<ToolDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     const fetchTool = async () => {
-      const res = await fetch(`/api/tools/${toolId}`)
+      const res = await fetch(`/api/tools/${toolId}`);
       if (res.ok) {
-        setTool((await res.json()) as ToolDetail)
+        setTool((await res.json()) as ToolDetail);
       }
-      setLoading(false)
-    }
-    fetchTool()
-  }, [toolId])
+      setLoading(false);
+    };
+    fetchTool();
+  }, [toolId]);
 
   const handleCheckout = async () => {
-    if (!tool || processing) return
-    setProcessing(true)
+    if (!tool || processing) return;
+    setProcessing(true);
 
     try {
-      const buyerId = localStorage.getItem('agentdoom_buyer_id') || crypto.randomUUID()
-      localStorage.setItem('agentdoom_buyer_id', buyerId)
+      const buyerId = localStorage.getItem('agentdoom_buyer_id') || crypto.randomUUID();
+      localStorage.setItem('agentdoom_buyer_id', buyerId);
 
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
@@ -54,42 +54,42 @@ export default function CheckoutPage() {
           creatorIsPro: tool.creator.isPro ?? false,
           buyerId,
         }),
-      })
+      });
 
       if (res.ok) {
-        const { url } = await res.json()
+        const { url } = await res.json();
         if (url) {
-          window.location.href = url
-          return
+          window.location.href = url;
+          return;
         }
       }
     } catch {
       // checkout failed
     }
-    setProcessing(false)
-  }
+    setProcessing(false);
+  };
 
   if (loading) {
     return (
       <main className="min-h-screen bg-doom-black flex items-center justify-center">
         <div className="h-6 w-6 rounded-full border-2 border-doom-accent border-t-transparent animate-spin" />
       </main>
-    )
+    );
   }
 
   if (!tool) {
     return (
       <main className="min-h-screen bg-doom-black text-white flex flex-col items-center justify-center gap-4">
         <p className="text-gray-400">Tool not found</p>
-        <Link href="/marketplace" className="text-doom-accent hover:underline text-sm">
-          Back to Marketplace
+        <Link href="/feed" className="text-doom-accent hover:underline text-sm">
+          Browse Tools
         </Link>
       </main>
-    )
+    );
   }
 
-  const priceDollars = (tool.priceCents / 100).toFixed(2)
-  const creatorEarnings = ((tool.priceCents * (100 - PLATFORM_FEE_PERCENT)) / 10000).toFixed(2)
+  const priceDollars = (tool.priceCents / 100).toFixed(2);
+  const creatorEarnings = ((tool.priceCents * (100 - PLATFORM_FEE_PERCENT)) / 10000).toFixed(2);
 
   return (
     <main className="min-h-screen bg-doom-black text-white flex items-center justify-center px-4">
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
         <div className="rounded-2xl border border-gray-800 bg-doom-dark overflow-hidden">
           {/* Header */}
           <div className="px-6 py-5 border-b border-gray-800">
-            <Link href="/marketplace" className="text-sm font-bold tracking-tight">
+            <Link href="/feed" className="text-sm font-bold tracking-tight">
               <span className="text-doom-accent">Agent</span>Doom
             </Link>
             <h1 className="mt-3 text-xl font-bold">Checkout</h1>
@@ -128,9 +128,7 @@ export default function CheckoutPage() {
                 <p className="text-xs text-gray-400 mt-1">
                   by {tool.creator.displayName || tool.creator.username}
                 </p>
-                <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                  {tool.description}
-                </p>
+                <p className="text-xs text-gray-500 mt-1 line-clamp-2">{tool.description}</p>
               </div>
             </div>
           </div>
@@ -196,5 +194,5 @@ export default function CheckoutPage() {
         </div>
       </motion.div>
     </main>
-  )
+  );
 }

@@ -58,8 +58,6 @@ function isTeaserAllowedPath(pathname: string): boolean {
     pathname === '/' ||
     pathname === '/feed' ||
     pathname.startsWith('/feed/') ||
-    pathname === '/marketplace' ||
-    pathname.startsWith('/marketplace/') ||
     pathname === '/create-tool' ||
     pathname.startsWith('/create-tool/') ||
     pathname.startsWith('/t/') ||

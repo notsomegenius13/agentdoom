@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const INTERESTS = [
   { key: 'money', label: 'Finance & Money' },
@@ -12,29 +12,27 @@ const INTERESTS = [
   { key: 'creator', label: 'Creator Tools' },
   { key: 'business', label: 'Business' },
   { key: 'utility', label: 'Utilities' },
-]
+];
 
 export default function BecomeCreatorPage() {
-  const router = useRouter()
-  const [step, setStep] = useState<'form' | 'submitting' | 'done'>('form')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [bio, setBio] = useState('')
-  const [interests, setInterests] = useState<string[]>([])
+  const router = useRouter();
+  const [step, setStep] = useState<'form' | 'submitting' | 'done'>('form');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [bio, setBio] = useState('');
+  const [interests, setInterests] = useState<string[]>([]);
 
   const toggleInterest = (key: string) => {
-    setInterests((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    )
-  }
+    setInterests((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
+  };
 
-  const canSubmit = name.trim() && email.trim() && interests.length > 0
+  const canSubmit = name.trim() && email.trim() && interests.length > 0;
 
   const handleSubmit = async () => {
-    if (!canSubmit) return
-    setStep('submitting')
+    if (!canSubmit) return;
+    setStep('submitting');
     // Mock submission delay
-    await new Promise((r) => setTimeout(r, 1200))
+    await new Promise((r) => setTimeout(r, 1200));
     // Store creator profile in localStorage for the onboarding flow
     localStorage.setItem(
       'agentdoom_creator',
@@ -44,10 +42,10 @@ export default function BecomeCreatorPage() {
         bio: bio.trim(),
         interests,
         createdAt: new Date().toISOString(),
-      })
-    )
-    setStep('done')
-  }
+      }),
+    );
+    setStep('done');
+  };
 
   if (step === 'done') {
     return (
@@ -73,7 +71,7 @@ export default function BecomeCreatorPage() {
           </Link>
         </motion.div>
       </main>
-    )
+    );
   }
 
   return (
@@ -84,7 +82,10 @@ export default function BecomeCreatorPage() {
           <Link href="/" className="text-xl font-bold tracking-tight">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
-          <Link href="/sign-in" className="text-sm text-gray-400 hover:text-white transition-colors">
+          <Link
+            href="/sign-in"
+            className="text-sm text-gray-400 hover:text-white transition-colors"
+          >
             Already a creator? Sign in
           </Link>
         </div>
@@ -94,7 +95,7 @@ export default function BecomeCreatorPage() {
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-3xl md:text-4xl font-bold">Become a Creator</h1>
           <p className="mt-2 text-gray-400">
-            Build AI-powered tools, publish to the marketplace, and earn money.
+            Build AI-powered tools, publish to AgentDoom, and earn money.
           </p>
         </motion.div>
 
@@ -190,5 +191,5 @@ export default function BecomeCreatorPage() {
         </motion.div>
       </div>
     </main>
-  )
+  );
 }

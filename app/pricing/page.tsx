@@ -87,11 +87,8 @@ export default function PricingPage() {
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
           <div className="flex items-center gap-4">
-            <Link
-              href="/marketplace"
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              Marketplace
+            <Link href="/feed" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Feed
             </Link>
             {!isSignedIn && (
               <Link
@@ -352,8 +349,8 @@ export default function PricingPage() {
             <div className="pb-6">
               <h3 className="font-semibold text-white">Do I need Pro to sell tools?</h3>
               <p className="mt-2 text-sm text-gray-400">
-                No. Any creator can sell tools on the marketplace. Pro just gives you a lower fee
-                rate and premium features.
+                No. Any creator can sell tools on AgentDoom. Pro just gives you a lower fee rate and
+                premium features.
               </p>
             </div>
           </div>
