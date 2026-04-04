@@ -51,6 +51,9 @@ const PRICING_TIERS = [
   },
 ];
 
+const AVATAR_FALLBACK_SVG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='24' fill='%231F2A37'/%3E%3Ccircle cx='24' cy='18' r='8' fill='%233B82F6'/%3E%3Cpath d='M10 42c1.8-7.5 7-11 14-11s12.2 3.5 14 11' fill='%233B82F6'/%3E%3C/svg%3E";
+
 export default function ToolDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const searchParams = useSearchParams();
@@ -254,7 +257,15 @@ export default function ToolDetailPage() {
                 className="mt-3 inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
                 {tool.creator.avatarUrl ? (
-                  <img src={tool.creator.avatarUrl} alt="" className="h-6 w-6 rounded-full" />
+                  <img
+                    src={tool.creator.avatarUrl}
+                    alt=""
+                    className="h-6 w-6 rounded-full"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = AVATAR_FALLBACK_SVG;
+                    }}
+                  />
                 ) : (
                   <div className="h-6 w-6 rounded-full bg-doom-accent/30" />
                 )}

@@ -138,6 +138,7 @@ export default function CreateToolPage() {
   const [toolUrl, setToolUrl] = useState<string | null>(null);
   const [genError, setGenError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const timedOutRef = useRef(false);
 
   const update = useCallback(
     (patch: Partial<ToolDraft>) => setDraft((prev) => ({ ...prev, ...patch })),
@@ -161,6 +162,11 @@ export default function CreateToolPage() {
     const prompt = `Build a ${draft.category} tool called "${draft.title}". ${draft.description}`;
 
     abortRef.current = new AbortController();
+    timedOutRef.current = false;
+    const timeoutId = window.setTimeout(() => {
+      timedOutRef.current = true;
+      abortRef.current?.abort();
+    }, 30_000);
 
     try {
       const res = await fetch('/api/generate', {
@@ -171,10 +177,10 @@ export default function CreateToolPage() {
       });
 
       if (!res.ok || !res.body) {
-        const body = await res.text();
-        setGenError(body || `Request failed: ${res.status}`);
+        setGenError(`API error (${res.status}). Please try again.`);
         setStage('error');
         setGenerating(false);
+        window.clearTimeout(timeoutId);
         return;
       }
 
@@ -213,14 +219,19 @@ export default function CreateToolPage() {
           }
 
           if (event.stage === 'error') {
-            setGenError((event.line as string) || 'Generation failed');
+            setGenError('API error while generating the tool. Please try again.');
             setGenerating(false);
           }
         }
       }
+      window.clearTimeout(timeoutId);
     } catch (err) {
+      window.clearTimeout(timeoutId);
       if ((err as Error).name !== 'AbortError') {
         setGenError(err instanceof Error ? err.message : 'Unknown error');
+        setStage('error');
+      } else if (timedOutRef.current) {
+        setGenError('Generation took too long. Please try again.');
         setStage('error');
       }
       setGenerating(false);
@@ -300,9 +311,11 @@ export default function CreateToolPage() {
                   type="text"
                   value={draft.title}
                   onChange={(e) => update({ title: e.target.value })}
+                  maxLength={100}
                   placeholder="e.g. Budget Planner, Invoice Generator"
                   className="w-full rounded-xl border border-gray-800 bg-doom-dark px-4 py-3 text-white placeholder-gray-600 focus:border-doom-accent focus:outline-none transition-colors"
                 />
+                <p className="mt-1 text-xs text-right text-gray-500">{draft.title.length}/100</p>
               </div>
 
               <div>
@@ -312,10 +325,14 @@ export default function CreateToolPage() {
                 <textarea
                   value={draft.description}
                   onChange={(e) => update({ description: e.target.value })}
+                  maxLength={500}
                   placeholder="What does your tool do? Who is it for?"
                   rows={4}
                   className="w-full rounded-xl border border-gray-800 bg-doom-dark px-4 py-3 text-white placeholder-gray-600 focus:border-doom-accent focus:outline-none transition-colors resize-none"
                 />
+                <p className="mt-1 text-xs text-right text-gray-500">
+                  {draft.description.length}/500
+                </p>
               </div>
 
               <div>
@@ -415,7 +432,7 @@ export default function CreateToolPage() {
                     <iframe
                       srcDoc={previewHtml}
                       className="w-full h-full pointer-events-none"
-                      sandbox=""
+                      sandbox="allow-scripts"
                       title="Tool Preview"
                     />
                   </div>

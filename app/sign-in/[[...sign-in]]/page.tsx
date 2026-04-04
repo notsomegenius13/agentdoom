@@ -3,10 +3,24 @@
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function SignInPage() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/feed';
+  const [error, setError] = useState<string | null>(null);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    setIsSigningIn(true);
+    try {
+      await signIn('google', { callbackUrl });
+    } catch {
+      setError('Sign-in failed. Please try again.');
+      setIsSigningIn(false);
+    }
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-doom-black px-4">
@@ -20,7 +34,8 @@ export default function SignInPage() {
 
         <div className="rounded-2xl border border-gray-800 bg-doom-dark p-8">
           <button
-            onClick={() => signIn('google', { callbackUrl })}
+            onClick={handleGoogleSignIn}
+            disabled={isSigningIn}
             className="w-full flex items-center justify-center gap-3 rounded-xl border border-gray-700 bg-doom-black px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-800"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -41,8 +56,9 @@ export default function SignInPage() {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            Continue with Google
+            {isSigningIn ? 'Signing in...' : 'Continue with Google'}
           </button>
+          {error && <p className="mt-3 text-center text-xs text-red-400">{error}</p>}
 
           <p className="mt-6 text-center text-xs text-gray-500">
             Don&apos;t have an account?{' '}
