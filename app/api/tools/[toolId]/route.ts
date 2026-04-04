@@ -16,16 +16,20 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
       SELECT t.id, t.slug, t.title, t.description, t.category,
              t.preview_html, t.deploy_url, t.is_paid, t.price_cents,
              t.remixed_from, t.remixes_count,
+             t.views_count, t.likes_count, t.uses_count, t.shares_count,
              t.creator_id,
              u.username AS creator_username,
              u.display_name AS creator_display_name,
              u.avatar_url AS creator_avatar_url,
              u.is_verified AS creator_is_verified,
              u.is_pro AS creator_is_pro,
-             tc.config
+             tc.config,
+             original.slug AS original_slug,
+             original.title AS original_title
       FROM tools t
       LEFT JOIN users u ON u.id = t.creator_id
       LEFT JOIN tool_configs tc ON tc.tool_id = t.id AND tc.is_current = true
+      LEFT JOIN tools original ON original.id = t.remixed_from
       WHERE t.id::text = ${toolId} OR t.slug = ${toolId}
     `) as Record<string, unknown>[];
 
@@ -54,7 +58,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
           isPaid: false,
           priceCents: 0,
           remixedFrom: null,
+          remixedFromSlug: null,
+          remixedFromTitle: null,
           remixesCount: 0,
+          viewsCount: 0,
+          likesCount: 0,
+          usesCount: 0,
+          sharesCount: 0,
           creatorId: 'seed-creator',
           creator: {
             username: 'agentdoom',
@@ -86,7 +96,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ too
         isPaid: row.is_paid,
         priceCents: row.price_cents,
         remixedFrom: row.remixed_from,
+        remixedFromSlug: row.original_slug ?? null,
+        remixedFromTitle: row.original_title ?? null,
         remixesCount: row.remixes_count,
+        viewsCount: (row.views_count as number) ?? 0,
+        likesCount: (row.likes_count as number) ?? 0,
+        usesCount: (row.uses_count as number) ?? 0,
+        sharesCount: (row.shares_count as number) ?? 0,
         creatorId: row.creator_id,
         creator: {
           username: row.creator_username ?? 'agentdoom',
