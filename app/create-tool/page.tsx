@@ -286,8 +286,8 @@ export default function CreateToolPage() {
                         : 'border-gray-800 bg-doom-dark hover:border-gray-700'
                     }`}
                   >
-                    <span className="text-2xl">{cat.icon}</span>
-                    <p className="mt-2 text-sm font-medium text-white">{cat.label}</p>
+                    <span className="text-xl sm:text-2xl">{cat.icon}</span>
+                    <p className="mt-2 text-xs sm:text-sm font-medium text-white">{cat.label}</p>
                   </button>
                 ))}
               </div>

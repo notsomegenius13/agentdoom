@@ -1,40 +1,42 @@
-'use client'
+'use client';
 
-import { useEffect, useState, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import type { FeedTool } from '@/lib/feed/types'
-import { trackEvent } from '@/lib/feed/tracker'
+import { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { FeedTool } from '@/lib/feed/types';
+import { trackEvent } from '@/lib/feed/tracker';
 
 function formatCount(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`
-  return String(n)
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
+  return String(n);
 }
 
 export default function FeaturedCarousel({ tools }: { tools: FeedTool[] }) {
-  const [current, setCurrent] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const next = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % tools.length)
-  }, [tools.length])
+    setCurrent((prev) => (prev + 1) % tools.length);
+  }, [tools.length]);
 
   // Auto-rotate every 5s unless paused
   useEffect(() => {
-    if (tools.length <= 1 || paused) return
-    const interval = setInterval(next, 5000)
-    return () => clearInterval(interval)
-  }, [tools.length, paused, next])
+    if (tools.length <= 1 || paused) return;
+    const interval = setInterval(next, 5000);
+    return () => clearInterval(interval);
+  }, [tools.length, paused, next]);
 
-  if (tools.length === 0) return null
+  if (tools.length === 0) return null;
 
-  const tool = tools[current]
+  const tool = tools[current];
 
   return (
     <div
       className="relative w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -98,9 +100,9 @@ export default function FeaturedCarousel({ tools }: { tools: FeedTool[] }) {
                 <div className="hidden sm:flex items-center pr-4">
                   <span
                     onClick={(e) => {
-                      e.preventDefault()
-                      trackEvent(tool.id, 'use')
-                      window.open(tool.deployUrl!, '_blank')
+                      e.preventDefault();
+                      trackEvent(tool.id, 'use');
+                      window.open(tool.deployUrl!, '_blank');
                     }}
                     className="rounded-lg bg-amber-500 text-black px-4 py-2 text-xs font-semibold hover:bg-amber-400 transition-colors cursor-pointer"
                   >
@@ -128,5 +130,5 @@ export default function FeaturedCarousel({ tools }: { tools: FeedTool[] }) {
         </div>
       )}
     </div>
-  )
+  );
 }

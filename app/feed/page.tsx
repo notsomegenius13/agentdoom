@@ -93,6 +93,7 @@ function FeedPageInner() {
   const [remixTool, setRemixTool] = useState<FeedTool | null>(null);
   const [searchTotal, setSearchTotal] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadMoreError, setLoadMoreError] = useState(false);
   const [featuredTools, setFeaturedTools] = useState<FeedTool[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
@@ -148,6 +149,7 @@ function FeedPageInner() {
       else setLoading(true);
 
       setError(null);
+      setLoadMoreError(false);
       try {
         let allTools: FeedTool[];
         let nextCursor: string | null;
@@ -199,6 +201,7 @@ function FeedPageInner() {
         setHasMore(nextCursor !== null);
       } catch {
         if (!isAppend) setError('Failed to load feed. Please try again.');
+        else setLoadMoreError(true);
       } finally {
         setLoading(false);
         setLoadingMore(false);
@@ -435,9 +438,39 @@ function FeedPageInner() {
             ))}
             {/* Infinite scroll sentinel */}
             {hasMore && <div ref={observerRef} className="h-1" />}
+            {/* Sparse category message */}
+            {!hasMore &&
+              !loadingMore &&
+              category &&
+              !isSearchMode &&
+              tools.length > 0 &&
+              tools.length < 5 && (
+                <div className="h-screen snap-start flex flex-col items-center justify-center gap-3 text-center px-6">
+                  <p className="text-gray-400 text-sm">
+                    Only {tools.length} tool{tools.length !== 1 ? 's' : ''} in this category.
+                  </p>
+                  <button
+                    onClick={() => setCategory('')}
+                    className="text-doom-accent text-sm hover:underline"
+                  >
+                    Browse all →
+                  </button>
+                </div>
+              )}
             {loadingMore && (
               <div className="h-screen snap-start flex items-center justify-center">
                 <div className="h-8 w-8 rounded-full border-2 border-doom-accent border-t-transparent animate-spin" />
+              </div>
+            )}
+            {loadMoreError && (
+              <div className="h-screen snap-start flex flex-col items-center justify-center gap-3">
+                <p className="text-sm text-gray-400">Failed to load more tools.</p>
+                <button
+                  onClick={() => fetchFeed({ cursor: cursor ?? undefined, append: true })}
+                  className="rounded-xl bg-doom-accent px-5 py-2 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+                >
+                  Retry
+                </button>
               </div>
             )}
           </>

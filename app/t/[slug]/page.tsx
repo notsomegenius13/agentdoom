@@ -61,6 +61,9 @@ export default function ToolDetailPage() {
 
   const [tool, setTool] = useState<ToolDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadingSlow, setLoadingSlow] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
   const [showReportMenu, setShowReportMenu] = useState(false);
@@ -70,28 +73,50 @@ export default function ToolDetailPage() {
   const [embedCopied, setEmbedCopied] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    setTool(null);
+    setLoadingSlow(false);
+    setFetchError(false);
+
+    const controller = new AbortController();
+    const slowTimer = setTimeout(() => {
+      setLoadingSlow(true);
+      controller.abort();
+    }, 8000);
+
     const fetchTool = async () => {
-      const res = await fetch(`/api/tools/${slug}`);
-      if (res.ok) {
-        const data: ToolDetail = await res.json();
-        if (data) {
-          setTool(data);
-          // Record view event
-          fetch('/api/feed/events', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              toolId: data.id,
-              eventType: 'view',
-              referrer: document.referrer || undefined,
-            }),
-          }).catch(() => {});
+      try {
+        const res = await fetch(`/api/tools/${slug}`, { signal: controller.signal });
+        clearTimeout(slowTimer);
+        if (res.ok) {
+          const data: ToolDetail = await res.json();
+          if (data) {
+            setTool(data);
+            // Record view event
+            fetch('/api/feed/events', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                toolId: data.id,
+                eventType: 'view',
+                referrer: document.referrer || undefined,
+              }),
+            }).catch(() => {});
+          }
         }
+      } catch {
+        clearTimeout(slowTimer);
+        setFetchError(true);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchTool();
-  }, [slug]);
+    return () => {
+      controller.abort();
+      clearTimeout(slowTimer);
+    };
+  }, [slug, retryCount]);
 
   const getToolUrl = () => `${window.location.origin}/t/${tool?.slug ?? slug}`;
 
@@ -196,8 +221,23 @@ export default function ToolDetailPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-doom-black flex items-center justify-center">
+      <main className="min-h-screen bg-doom-black flex flex-col items-center justify-center gap-3">
         <div className="h-6 w-6 rounded-full border-2 border-doom-accent border-t-transparent animate-spin" />
+        {loadingSlow && <p className="text-sm text-gray-500">Taking longer than expected...</p>}
+      </main>
+    );
+  }
+
+  if (fetchError) {
+    return (
+      <main className="min-h-screen bg-doom-black text-white flex flex-col items-center justify-center gap-4">
+        <p className="text-gray-400">Failed to load. Try again?</p>
+        <button
+          onClick={() => setRetryCount((c) => c + 1)}
+          className="rounded-xl bg-doom-accent px-6 py-2.5 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+        >
+          Retry
+        </button>
       </main>
     );
   }
@@ -297,7 +337,7 @@ export default function ToolDetailPage() {
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
               <button
                 onClick={handleLike}
-                className={`rounded-xl border px-3 sm:px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-xl border px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
                   liked
                     ? 'border-doom-accent text-doom-accent'
                     : 'border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white'
@@ -308,7 +348,7 @@ export default function ToolDetailPage() {
 
               <Link
                 href={`/remix/${tool.id}`}
-                className="rounded-xl border border-gray-700 px-3 sm:px-4 py-2 text-sm font-medium text-gray-300 hover:border-gray-500 hover:text-white transition-colors"
+                className="rounded-xl border border-gray-700 px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:border-gray-500 hover:text-white transition-colors"
               >
                 Fork
               </Link>
@@ -316,7 +356,7 @@ export default function ToolDetailPage() {
               {/* Share buttons */}
               <button
                 onClick={() => handleShare('copy')}
-                className={`rounded-xl border px-3 py-2 text-sm transition-colors ${
+                className={`rounded-xl border px-2 sm:px-3 py-2 text-xs sm:text-sm transition-colors ${
                   linkCopied
                     ? 'border-doom-green text-doom-green'
                     : 'border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white'
@@ -352,14 +392,14 @@ export default function ToolDetailPage() {
               {tool.isPaid ? (
                 <button
                   onClick={() => setShowPricing(true)}
-                  className="rounded-xl bg-doom-accent px-4 sm:px-6 py-2 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+                  className="rounded-xl bg-doom-accent px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
                 >
                   Buy — ${(tool.priceCents / 100).toFixed(2)}
                 </button>
               ) : (
                 <Link
                   href={`/remix/${tool.id}`}
-                  className="rounded-xl bg-doom-accent px-4 sm:px-6 py-2 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+                  className="rounded-xl bg-doom-accent px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
                 >
                   Fork for Free
                 </Link>
