@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import type { FeedTool } from '@/lib/feed/types';
 
 interface ToolDetail extends FeedTool {
@@ -14,50 +14,11 @@ interface ToolDetail extends FeedTool {
   };
 }
 
-const PRICING_TIERS = [
-  {
-    name: 'Free',
-    price: 'Free',
-    description: 'Fork with attribution',
-    features: ['Fork & remix', 'Creator attribution required', 'Community support'],
-    cta: 'Fork for Free',
-    accent: false,
-  },
-  {
-    name: 'Premium',
-    price: null, // dynamic from tool
-    description: 'Remove attribution + commercial use',
-    features: [
-      'No attribution required',
-      'Commercial license',
-      'Priority support',
-      'Future updates',
-    ],
-    cta: 'Buy Now',
-    accent: true,
-  },
-  {
-    name: 'Enterprise',
-    price: 'Contact',
-    description: 'Custom deployment & SLA',
-    features: [
-      'White-label license',
-      'Custom deployment',
-      'SLA & dedicated support',
-      'Bulk pricing',
-    ],
-    cta: 'Contact Us',
-    accent: false,
-  },
-];
-
 const AVATAR_FALLBACK_SVG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='24' fill='%231F2A37'/%3E%3Ccircle cx='24' cy='18' r='8' fill='%233B82F6'/%3E%3Cpath d='M10 42c1.8-7.5 7-11 14-11s12.2 3.5 14 11' fill='%233B82F6'/%3E%3C/svg%3E";
 
 export default function ToolDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const searchParams = useSearchParams();
-  const purchased = searchParams.get('purchased') === 'true';
 
   const [tool, setTool] = useState<ToolDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +26,6 @@ export default function ToolDetailPage() {
   const [fetchError, setFetchError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [liked, setLiked] = useState(false);
-  const [showPricing, setShowPricing] = useState(false);
   const [showReportMenu, setShowReportMenu] = useState(false);
   const [reportStatus, setReportStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [linkCopied, setLinkCopied] = useState(false);
@@ -127,13 +87,6 @@ export default function ToolDetailPage() {
       await navigator.clipboard.writeText(url).catch(() => {});
       setLinkCopied(true);
       setTimeout(() => setLinkCopied(false), 2000);
-    } else if (channel === 'x') {
-      window.open(
-        `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(`${tool.title} — built on @AgentDoom`)}`,
-        '_blank',
-      );
-    } else if (channel === 'whatsapp') {
-      window.open(`https://wa.me/?text=${encodeURIComponent(`${tool.title} ${url}`)}`, '_blank');
     } else if (channel === 'native') {
       if (navigator.share) {
         await navigator
@@ -194,31 +147,6 @@ export default function ToolDetailPage() {
     }
   };
 
-  const handleCheckout = async () => {
-    if (!tool?.isPaid) return;
-    const buyerId = localStorage.getItem('agentdoom_buyer_id') || crypto.randomUUID();
-    localStorage.setItem('agentdoom_buyer_id', buyerId);
-
-    const res = await fetch('/api/stripe/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'tool',
-        toolId: tool.id,
-        toolTitle: tool.title,
-        toolSlug: tool.slug,
-        priceCents: tool.priceCents,
-        creatorStripeAccountId: tool.creator.stripeAccountId ?? null,
-        creatorIsPro: tool.creator.isPro ?? false,
-        buyerId,
-      }),
-    });
-    if (res.ok) {
-      const { url } = await res.json();
-      if (url) window.location.href = url;
-    }
-  };
-
   if (loading) {
     return (
       <main className="min-h-screen bg-doom-black flex flex-col items-center justify-center gap-3">
@@ -246,7 +174,7 @@ export default function ToolDetailPage() {
     return (
       <main className="min-h-screen bg-doom-black text-white flex flex-col items-center justify-center gap-4">
         <p className="text-gray-400">Tool not found</p>
-        <Link href="/marketplace" className="text-doom-accent hover:underline text-sm">
+        <Link href="/feed" className="text-doom-accent hover:underline text-sm">
           Back to Marketplace
         </Link>
       </main>
@@ -258,14 +186,11 @@ export default function ToolDetailPage() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/marketplace" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
           <div className="flex items-center gap-3">
-            <Link
-              href="/marketplace"
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
+            <Link href="/feed" className="text-sm text-gray-400 hover:text-white transition-colors">
               Marketplace
             </Link>
           </div>
@@ -273,17 +198,6 @@ export default function ToolDetailPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Purchase success banner */}
-        {purchased && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6 rounded-xl bg-doom-green/10 border border-doom-green/30 px-4 py-3 text-doom-green text-sm"
-          >
-            Purchase complete! You now have full access to this tool.
-          </motion.div>
-        )}
-
         {/* Tool Header */}
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -346,13 +260,6 @@ export default function ToolDetailPage() {
                 {liked ? '♥' : '♡'} {tool.likesCount + (liked ? 1 : 0)}
               </button>
 
-              <Link
-                href={`/remix/${tool.id}`}
-                className="rounded-xl border border-gray-700 px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-300 hover:border-gray-500 hover:text-white transition-colors"
-              >
-                Fork
-              </Link>
-
               {/* Share buttons */}
               <button
                 onClick={() => handleShare('copy')}
@@ -365,20 +272,6 @@ export default function ToolDetailPage() {
               >
                 {linkCopied ? 'Copied!' : 'Copy Link'}
               </button>
-              <button
-                onClick={() => handleShare('x')}
-                className="hidden sm:inline-flex rounded-xl border border-gray-700 px-3 py-2 text-sm text-gray-400 hover:border-gray-500 hover:text-white transition-colors"
-                title="Share on X"
-              >
-                Share on X
-              </button>
-              <button
-                onClick={() => handleShare('whatsapp')}
-                className="hidden sm:inline-flex rounded-xl border border-gray-700 px-3 py-2 text-sm text-gray-400 hover:border-gray-500 hover:text-white transition-colors"
-                title="Share on WhatsApp"
-              >
-                WhatsApp
-              </button>
               {typeof navigator !== 'undefined' && 'share' in navigator && (
                 <button
                   onClick={() => handleShare('native')}
@@ -389,21 +282,12 @@ export default function ToolDetailPage() {
                 </button>
               )}
 
-              {tool.isPaid ? (
-                <button
-                  onClick={() => setShowPricing(true)}
-                  className="rounded-xl bg-doom-accent px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
-                >
-                  Buy — ${(tool.priceCents / 100).toFixed(2)}
-                </button>
-              ) : (
-                <Link
-                  href={`/remix/${tool.id}`}
-                  className="rounded-xl bg-doom-accent px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
-                >
-                  Fork for Free
-                </Link>
-              )}
+              <Link
+                href={`/remix/${tool.id}`}
+                className="rounded-xl bg-doom-accent px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+              >
+                Fork
+              </Link>
             </div>
           </div>
 
@@ -495,55 +379,6 @@ export default function ToolDetailPage() {
             </div>
           )}
         </motion.div>
-
-        {/* Pricing Tiers Section */}
-        {(showPricing || tool.isPaid) && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="mt-12"
-            id="pricing"
-          >
-            <h2 className="text-2xl font-bold mb-6">Pricing</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {PRICING_TIERS.map((tier) => (
-                <div
-                  key={tier.name}
-                  className={`rounded-2xl border p-4 sm:p-6 transition-colors ${
-                    tier.accent
-                      ? 'border-doom-accent bg-doom-accent/5'
-                      : 'border-gray-800 bg-doom-dark'
-                  }`}
-                >
-                  <h3 className="text-lg font-bold">{tier.name}</h3>
-                  <p className="mt-1 text-2xl font-bold">
-                    {tier.price === null ? `$${(tool.priceCents / 100).toFixed(2)}` : tier.price}
-                  </p>
-                  <p className="mt-1 text-xs text-gray-400">{tier.description}</p>
-                  <ul className="mt-4 space-y-2">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-gray-300">
-                        <span className="text-doom-green text-xs">✓</span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={tier.accent ? handleCheckout : undefined}
-                    className={`mt-6 w-full rounded-xl py-2.5 text-sm font-semibold transition-colors ${
-                      tier.accent
-                        ? 'bg-doom-accent text-white hover:bg-doom-accent-light'
-                        : 'border border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white'
-                    }`}
-                  >
-                    {tier.cta}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
 
         {/* Embed Code Section */}
         <motion.div

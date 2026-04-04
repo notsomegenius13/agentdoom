@@ -10,6 +10,11 @@ const nextConfig = {
         destination: '/feed',
         permanent: false,
       },
+      {
+        source: '/marketplace',
+        destination: '/feed',
+        permanent: true,
+      },
     ];
   },
 };

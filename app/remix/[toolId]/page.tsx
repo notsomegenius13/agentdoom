@@ -1,57 +1,57 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 
 interface ThemeConfig {
-  primaryColor: string
-  backgroundColor: string
-  fontFamily: string
-  borderRadius: string
+  primaryColor: string;
+  backgroundColor: string;
+  fontFamily: string;
+  borderRadius: string;
 }
 
 interface LayoutConfig {
-  type: string
-  maxWidth: string
-  padding: string
+  type: string;
+  maxWidth: string;
+  padding: string;
 }
 
 interface PrimitiveConfig {
-  type: string
-  id: string
-  props: Record<string, unknown>
-  position: number
+  type: string;
+  id: string;
+  props: Record<string, unknown>;
+  position: number;
 }
 
 interface ToolConfig {
-  title: string
-  description: string
-  primitives: PrimitiveConfig[]
-  layout: LayoutConfig
-  theme: ThemeConfig
+  title: string;
+  description: string;
+  primitives: PrimitiveConfig[];
+  layout: LayoutConfig;
+  theme: ThemeConfig;
 }
 
 interface ToolDetail {
-  id: string
-  slug: string
-  title: string
-  description: string | null
-  category: string
+  id: string;
+  slug: string;
+  title: string;
+  description: string | null;
+  category: string;
   creator: {
-    username: string
-    displayName: string | null
-    avatarUrl: string | null
-    isVerified: boolean
-  }
-  config: ToolConfig | null
-  previewHtml: string | null
-  remixedFrom: string | null
-  remixesCount: number
+    username: string;
+    displayName: string | null;
+    avatarUrl: string | null;
+    isVerified: boolean;
+  };
+  config: ToolConfig | null;
+  previewHtml: string | null;
+  remixedFrom: string | null;
+  remixesCount: number;
 }
 
-type WizardTab = 'theme' | 'content' | 'features' | 'json'
+type WizardTab = 'theme' | 'content' | 'features';
 
 const COLOR_PRESETS = [
   { name: 'Purple', primary: '#7c3aed', bg: '#f5f3ff' },
@@ -62,14 +62,14 @@ const COLOR_PRESETS = [
   { name: 'Teal', primary: '#14b8a6', bg: '#f0fdfa' },
   { name: 'Indigo', primary: '#6366f1', bg: '#eef2ff' },
   { name: 'Slate', primary: '#475569', bg: '#f8fafc' },
-]
+];
 
 const FONT_OPTIONS = [
   { label: 'System Default', value: 'system-ui, sans-serif' },
   { label: 'Inter', value: "'Inter', sans-serif" },
   { label: 'Georgia (Serif)', value: 'Georgia, serif' },
   { label: 'Monospace', value: "'JetBrains Mono', monospace" },
-]
+];
 
 const RADIUS_OPTIONS = [
   { label: 'None', value: '0px' },
@@ -77,42 +77,39 @@ const RADIUS_OPTIONS = [
   { label: 'Medium', value: '12px' },
   { label: 'Large', value: '16px' },
   { label: 'Round', value: '24px' },
-]
+];
 
 export default function RemixPage() {
-  const { toolId } = useParams<{ toolId: string }>()
-  const router = useRouter()
-  const [tool, setTool] = useState<ToolDetail | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [forking, setForking] = useState(false)
-  const [forked, setForked] = useState(false)
-  const [activeTab, setActiveTab] = useState<WizardTab>('theme')
-  const [jsonRaw, setJsonRaw] = useState('')
-  const [jsonError, setJsonError] = useState<string | null>(null)
+  const { toolId } = useParams<{ toolId: string }>();
+  const router = useRouter();
+  const [tool, setTool] = useState<ToolDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [forking, setForking] = useState(false);
+  const [forked, setForked] = useState(false);
+  const [activeTab, setActiveTab] = useState<WizardTab>('theme');
 
   // Customization state derived from config
-  const [config, setConfig] = useState<ToolConfig | null>(null)
-  const [previewHtml, setPreviewHtml] = useState<string>('')
-  const previewDebounce = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [config, setConfig] = useState<ToolConfig | null>(null);
+  const [previewHtml, setPreviewHtml] = useState<string>('');
+  const previewDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const fetchTool = async () => {
-      const res = await fetch(`/api/tools/${toolId}`)
+      const res = await fetch(`/api/tools/${toolId}`);
       if (res.ok) {
-        const data: ToolDetail = await res.json()
-        setTool(data)
+        const data: ToolDetail = await res.json();
+        setTool(data);
         if (data.config) {
-          setConfig(data.config)
-          setJsonRaw(JSON.stringify(data.config, null, 2))
+          setConfig(data.config);
         }
         if (data.previewHtml) {
-          setPreviewHtml(data.previewHtml)
+          setPreviewHtml(data.previewHtml);
         }
       }
-      setLoading(false)
-    }
-    fetchTool()
-  }, [toolId])
+      setLoading(false);
+    };
+    fetchTool();
+  }, [toolId]);
 
   // Live preview: debounce config changes and re-assemble HTML
   const updatePreview = useCallback(async (cfg: ToolConfig) => {
@@ -121,51 +118,33 @@ export default function RemixPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cfg),
-      })
+      });
       if (res.ok) {
-        const { html } = await res.json()
-        setPreviewHtml(html)
+        const { html } = await res.json();
+        setPreviewHtml(html);
       }
     } catch {
       // preview update failed silently
     }
-  }, [])
+  }, []);
 
   const applyConfigChange = useCallback(
     (updater: (prev: ToolConfig) => ToolConfig) => {
       setConfig((prev) => {
-        if (!prev) return prev
-        const next = updater(prev)
-        setJsonRaw(JSON.stringify(next, null, 2))
+        if (!prev) return prev;
+        const next = updater(prev);
         // Debounce preview updates
-        if (previewDebounce.current) clearTimeout(previewDebounce.current)
-        previewDebounce.current = setTimeout(() => updatePreview(next), 400)
-        return next
-      })
+        if (previewDebounce.current) clearTimeout(previewDebounce.current);
+        previewDebounce.current = setTimeout(() => updatePreview(next), 400);
+        return next;
+      });
     },
-    [updatePreview]
-  )
-
-  const handleJsonChange = useCallback(
-    (raw: string) => {
-      setJsonRaw(raw)
-      setJsonError(null)
-      try {
-        const parsed = JSON.parse(raw) as ToolConfig
-        if (!parsed.theme || !parsed.primitives) throw new Error('Invalid config structure')
-        setConfig(parsed)
-        if (previewDebounce.current) clearTimeout(previewDebounce.current)
-        previewDebounce.current = setTimeout(() => updatePreview(parsed), 600)
-      } catch (e) {
-        setJsonError(e instanceof Error ? e.message : 'Invalid JSON')
-      }
-    },
-    [updatePreview]
-  )
+    [updatePreview],
+  );
 
   const handleFork = useCallback(async () => {
-    if (!tool || !config || forking) return
-    setForking(true)
+    if (!tool || !config || forking) return;
+    setForking(true);
 
     try {
       const res = await fetch('/api/tools/fork', {
@@ -179,52 +158,51 @@ export default function RemixPage() {
             originalTitle: tool.title,
           },
         }),
-      })
+      });
 
       if (res.ok) {
-        const { slug } = await res.json()
-        setForked(true)
-        setTimeout(() => router.push(`/t/${slug}`), 1500)
+        const { slug } = await res.json();
+        setForked(true);
+        setTimeout(() => router.push(`/t/${slug}`), 1500);
       }
     } catch {
       // fork failed
     } finally {
-      setForking(false)
+      setForking(false);
     }
-  }, [tool, config, forking, router])
+  }, [tool, config, forking, router]);
 
   if (loading) {
     return (
       <main className="min-h-screen bg-doom-black flex items-center justify-center">
         <div className="h-6 w-6 rounded-full border-2 border-doom-accent border-t-transparent animate-spin" />
       </main>
-    )
+    );
   }
 
   if (!tool || !config) {
     return (
       <main className="min-h-screen bg-doom-black text-white flex flex-col items-center justify-center gap-4">
         <p className="text-gray-400">Tool not found</p>
-        <Link href="/marketplace" className="text-doom-accent hover:underline text-sm">
+        <Link href="/feed" className="text-doom-accent hover:underline text-sm">
           Back to Marketplace
         </Link>
       </main>
-    )
+    );
   }
 
   const tabs: { id: WizardTab; label: string; icon: string }[] = [
-    { id: 'theme', label: 'Theme', icon: '🎨' },
-    { id: 'content', label: 'Content', icon: '✏️' },
-    { id: 'features', label: 'Features', icon: '⚙️' },
-    { id: 'json', label: 'JSON', icon: '</>' },
-  ]
+    { id: 'theme', label: 'Appearance', icon: '🎨' },
+    { id: 'content', label: 'Text', icon: '✏️' },
+    { id: 'features', label: 'Advanced', icon: '⚙️' },
+  ];
 
   return (
     <main className="min-h-screen bg-doom-black text-white">
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/marketplace" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
           <div className="flex items-center gap-3">
@@ -267,9 +245,7 @@ export default function RemixPage() {
           <h1 className="text-2xl font-bold">Fork & Remix</h1>
           <p className="mt-1 text-sm text-gray-400">
             Forking <span className="text-white font-medium">{tool.title}</span> by{' '}
-            <span className="text-white">
-              {tool.creator.displayName || tool.creator.username}
-            </span>
+            <span className="text-white">{tool.creator.displayName || tool.creator.username}</span>
             {tool.remixesCount > 0 && (
               <span className="ml-2 text-gray-600">
                 ({tool.remixesCount} fork{tool.remixesCount !== 1 ? 's' : ''})
@@ -317,14 +293,6 @@ export default function RemixPage() {
                   {activeTab === 'features' && (
                     <FeaturesPanel config={config} onChange={applyConfigChange} key="features" />
                   )}
-                  {activeTab === 'json' && (
-                    <JsonPanel
-                      value={jsonRaw}
-                      error={jsonError}
-                      onChange={handleJsonChange}
-                      key="json"
-                    />
-                  )}
                 </AnimatePresence>
               </div>
             </div>
@@ -332,8 +300,8 @@ export default function RemixPage() {
             {/* Attribution */}
             <div className="mt-4 rounded-xl bg-doom-gray/50 border border-gray-800 px-4 py-3">
               <p className="text-xs text-gray-500">
-                <span className="text-gray-400 font-medium">Attribution:</span> This fork
-                will credit{' '}
+                <span className="text-gray-400 font-medium">Attribution:</span> This fork will
+                credit{' '}
                 <span className="text-white">
                   {tool.creator.displayName || tool.creator.username}
                 </span>{' '}
@@ -392,7 +360,7 @@ export default function RemixPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 /* ────────────────────────────────────────────
@@ -402,8 +370,8 @@ function ThemePanel({
   config,
   onChange,
 }: {
-  config: ToolConfig
-  onChange: (updater: (c: ToolConfig) => ToolConfig) => void
+  config: ToolConfig;
+  onChange: (updater: (c: ToolConfig) => ToolConfig) => void;
 }) {
   return (
     <motion.div
@@ -431,10 +399,7 @@ function ThemePanel({
                   : 'border-gray-800 hover:border-gray-600'
               }`}
             >
-              <div
-                className="h-6 w-full rounded-md mb-1"
-                style={{ background: preset.primary }}
-              />
+              <div className="h-6 w-full rounded-md mb-1" style={{ background: preset.primary }} />
               <span className="text-[10px] text-gray-400">{preset.name}</span>
             </button>
           ))}
@@ -533,7 +498,7 @@ function ThemePanel({
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
 
 /* ────────────────────────────────────────────
@@ -543,8 +508,8 @@ function ContentPanel({
   config,
   onChange,
 }: {
-  config: ToolConfig
-  onChange: (updater: (c: ToolConfig) => ToolConfig) => void
+  config: ToolConfig;
+  onChange: (updater: (c: ToolConfig) => ToolConfig) => void;
 }) {
   return (
     <motion.div
@@ -600,7 +565,7 @@ function ContentPanel({
                   onChange((c) => ({
                     ...c,
                     primitives: c.primitives.map((p, i) =>
-                      i === idx ? { ...p, props: { ...p.props, title: e.target.value } } : p
+                      i === idx ? { ...p, props: { ...p.props, title: e.target.value } } : p,
                     ),
                   }))
                 }
@@ -622,9 +587,7 @@ function ContentPanel({
                   onChange((c) => ({
                     ...c,
                     primitives: c.primitives.map((p, i) =>
-                      i === idx
-                        ? { ...p, props: { ...p.props, submitLabel: e.target.value } }
-                        : p
+                      i === idx ? { ...p, props: { ...p.props, submitLabel: e.target.value } } : p,
                     ),
                   }))
                 }
@@ -646,9 +609,7 @@ function ContentPanel({
                   onChange((c) => ({
                     ...c,
                     primitives: c.primitives.map((p, i) =>
-                      i === idx
-                        ? { ...p, props: { ...p.props, resultLabel: e.target.value } }
-                        : p
+                      i === idx ? { ...p, props: { ...p.props, resultLabel: e.target.value } } : p,
                     ),
                   }))
                 }
@@ -675,7 +636,7 @@ function ContentPanel({
                         primitives: c.primitives.map((p, i) =>
                           i === idx
                             ? { ...p, props: { ...p.props, resultPrefix: e.target.value } }
-                            : p
+                            : p,
                         ),
                       }))
                     }
@@ -697,7 +658,7 @@ function ContentPanel({
                         primitives: c.primitives.map((p, i) =>
                           i === idx
                             ? { ...p, props: { ...p.props, resultSuffix: e.target.value } }
-                            : p
+                            : p,
                         ),
                       }))
                     }
@@ -710,7 +671,7 @@ function ContentPanel({
         </div>
       ))}
     </motion.div>
-  )
+  );
 }
 
 /* ────────────────────────────────────────────
@@ -720,8 +681,8 @@ function FeaturesPanel({
   config,
   onChange,
 }: {
-  config: ToolConfig
-  onChange: (updater: (c: ToolConfig) => ToolConfig) => void
+  config: ToolConfig;
+  onChange: (updater: (c: ToolConfig) => ToolConfig) => void;
 }) {
   return (
     <motion.div
@@ -779,9 +740,7 @@ function FeaturesPanel({
                     onChange((c) => ({
                       ...c,
                       primitives: c.primitives.map((p, i) =>
-                        i === idx
-                          ? { ...p, props: { ...p.props, [key]: !val } }
-                          : p
+                        i === idx ? { ...p, props: { ...p.props, [key]: !val } } : p,
                       ),
                     }))
                   }
@@ -802,15 +761,14 @@ function FeaturesPanel({
           {Object.entries(prim.props)
             .filter(
               ([key, val]) =>
-                typeof val === 'string' &&
-                ['period', 'mode', 'chartType'].includes(key)
+                typeof val === 'string' && ['period', 'mode', 'chartType'].includes(key),
             )
             .map(([key, val]) => {
               const options: Record<string, string[]> = {
                 period: ['daily', 'weekly', 'monthly'],
                 mode: ['countdown', 'pomodoro', 'stopwatch'],
                 chartType: ['bar', 'pie', 'line'],
-              }
+              };
               return (
                 <div key={key}>
                   <label className="text-[10px] font-medium text-gray-500 mb-1 block capitalize">
@@ -824,9 +782,7 @@ function FeaturesPanel({
                           onChange((c) => ({
                             ...c,
                             primitives: c.primitives.map((p, i) =>
-                              i === idx
-                                ? { ...p, props: { ...p.props, [key]: opt } }
-                                : p
+                              i === idx ? { ...p, props: { ...p.props, [key]: opt } } : p,
                             ),
                           }))
                         }
@@ -841,7 +797,7 @@ function FeaturesPanel({
                     ))}
                   </div>
                 </div>
-              )
+              );
             })}
 
           {/* Primitive reorder controls */}
@@ -850,12 +806,12 @@ function FeaturesPanel({
               disabled={idx === 0}
               onClick={() =>
                 onChange((c) => {
-                  const prims = [...c.primitives]
-                  ;[prims[idx - 1], prims[idx]] = [prims[idx], prims[idx - 1]]
+                  const prims = [...c.primitives];
+                  [prims[idx - 1], prims[idx]] = [prims[idx], prims[idx - 1]];
                   return {
                     ...c,
                     primitives: prims.map((p, i) => ({ ...p, position: i })),
-                  }
+                  };
                 })
               }
               className="text-[10px] text-gray-600 border border-gray-800 rounded px-2 py-0.5 hover:text-gray-400 disabled:opacity-30"
@@ -866,12 +822,12 @@ function FeaturesPanel({
               disabled={idx === config.primitives.length - 1}
               onClick={() =>
                 onChange((c) => {
-                  const prims = [...c.primitives]
-                  ;[prims[idx], prims[idx + 1]] = [prims[idx + 1], prims[idx]]
+                  const prims = [...c.primitives];
+                  [prims[idx], prims[idx + 1]] = [prims[idx + 1], prims[idx]];
                   return {
                     ...c,
                     primitives: prims.map((p, i) => ({ ...p, position: i })),
-                  }
+                  };
                 })
               }
               className="text-[10px] text-gray-600 border border-gray-800 rounded px-2 py-0.5 hover:text-gray-400 disabled:opacity-30"
@@ -882,45 +838,5 @@ function FeaturesPanel({
         </div>
       ))}
     </motion.div>
-  )
-}
-
-/* ────────────────────────────────────────────
-   JSON Panel (Advanced)
-   ──────────────────────────────────────────── */
-function JsonPanel({
-  value,
-  error,
-  onChange,
-}: {
-  value: string
-  error: string | null
-  onChange: (raw: string) => void
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      className="space-y-2"
-    >
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-400">Raw Config (JSON)</label>
-        {error && (
-          <span className="text-[10px] text-doom-red bg-doom-red/10 px-2 py-0.5 rounded-full">
-            {error}
-          </span>
-        )}
-      </div>
-      <textarea
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        spellCheck={false}
-        className={`w-full bg-doom-black/50 p-3 font-mono text-xs text-gray-300 resize-none focus:outline-none rounded-lg border ${
-          error ? 'border-doom-red/50' : 'border-gray-800 focus:border-doom-accent'
-        }`}
-        style={{ minHeight: '400px' }}
-      />
-    </motion.div>
-  )
+  );
 }
