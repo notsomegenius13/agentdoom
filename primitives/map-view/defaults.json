@@ -9,5 +9,19 @@
   ],
   "zoom": 12,
   "showCoordinates": true,
-  "height": 300
+  "height": 300,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

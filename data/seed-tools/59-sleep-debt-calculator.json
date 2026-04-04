@@ -1,0 +1,43 @@
+{
+  "title": "Sleep Debt Calculator",
+  "description": "How much sleep do you owe your body? Calculate your sleep debt and recovery time",
+  "category": "health",
+  "viralHook": "I've been sleeping 6 hours for 5 years. My sleep debt is 3,650 hours. I need a nap.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "sleep-debt",
+      "props": {
+        "title": "Sleep Debt Calculator",
+        "inputs": [
+          { "name": "idealSleep", "label": "Ideal Sleep (hours/night)", "type": "number", "defaultValue": 8, "min": 6, "max": 10, "step": 0.5 },
+          { "name": "actualSleep", "label": "Actual Sleep (hours/night)", "type": "number", "defaultValue": 6, "min": 2, "max": 12, "step": 0.5 },
+          { "name": "weekdayPattern", "label": "Days/Week at This Sleep", "type": "number", "defaultValue": 5, "min": 1, "max": 7 },
+          { "name": "weekendSleep", "label": "Weekend Sleep (hours/night)", "type": "number", "defaultValue": 9, "min": 2, "max": 14, "step": 0.5 }
+        ],
+        "formula": "((idealSleep - actualSleep) * weekdayPattern + (idealSleep - weekendSleep) * (7 - weekdayPattern)) * 52",
+        "resultLabel": "Annual Sleep Debt",
+        "resultPrefix": "",
+        "resultSuffix": " hours/year"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "sleep-stats",
+      "props": {
+        "title": "Your Sleep Report",
+        "stats": [
+          { "label": "Weekly Debt", "value": "10 hours", "change": -14, "changeLabel": "accumulating fast", "icon": "trending" },
+          { "label": "Annual Debt", "value": "520 hours", "change": 0, "changeLabel": "that's 21 full days", "icon": "percent" },
+          { "label": "IQ Impact", "value": "-5 to -15 pts", "change": -10, "changeLabel": "while sleep deprived", "icon": "dollar" },
+          { "label": "Recovery Time", "value": "~4 weeks", "change": 0, "changeLabel": "of consistent 8+ hrs", "icon": "cart" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

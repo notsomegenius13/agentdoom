@@ -1,0 +1,45 @@
+{
+  "title": "Stock Portfolio Tracker",
+  "description": "Track your stock positions with real-time gain/loss and percentage change",
+  "category": "finance",
+  "viralHook": "Are your stocks actually making money? This tracker shows the brutal truth",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "table",
+      "id": "portfolio-table",
+      "props": {
+        "title": "Your Portfolio",
+        "columns": [
+          { "key": "ticker", "label": "Ticker", "align": "left", "format": "text" },
+          { "key": "shares", "label": "Shares", "align": "right", "format": "number" },
+          { "key": "buyPrice", "label": "Buy Price", "align": "right", "format": "currency" },
+          { "key": "currentPrice", "label": "Current Price", "align": "right", "format": "currency" },
+          { "key": "gainLoss", "label": "Gain/Loss", "align": "right", "format": "currency" },
+          { "key": "percentChange", "label": "% Change", "align": "right", "format": "percent" }
+        ],
+        "rows": [
+          { "ticker": "AAPL", "shares": 50, "buyPrice": "$142.50", "currentPrice": "$198.30", "gainLoss": "+$2,790.00", "percentChange": "+39.2%" },
+          { "ticker": "GOOGL", "shares": 30, "buyPrice": "$118.20", "currentPrice": "$174.85", "gainLoss": "+$1,699.50", "percentChange": "+47.9%" },
+          { "ticker": "TSLA", "shares": 25, "buyPrice": "$265.00", "currentPrice": "$241.60", "gainLoss": "-$585.00", "percentChange": "-8.8%" },
+          { "ticker": "MSFT", "shares": 40, "buyPrice": "$310.75", "currentPrice": "$428.50", "gainLoss": "+$4,710.00", "percentChange": "+37.9%" },
+          { "ticker": "NVDA", "shares": 20, "buyPrice": "$475.80", "currentPrice": "$892.40", "gainLoss": "+$8,332.00", "percentChange": "+87.6%" }
+        ],
+        "striped": true,
+        "highlightLastRow": false,
+        "editable": true,
+        "addRow": true,
+        "summary": {
+          "label": "Total Portfolio",
+          "totalInvested": "$37,507.50",
+          "currentValue": "$54,454.50",
+          "totalGainLoss": "+$16,946.50",
+          "totalPercentChange": "+45.2%"
+        }
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "860px", "padding": "24px" },
+  "theme": { "primaryColor": "#22c55e", "backgroundColor": "#0f172a", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

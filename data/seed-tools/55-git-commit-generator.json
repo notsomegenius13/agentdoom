@@ -1,0 +1,44 @@
+{
+  "title": "Git Commit Message Generator",
+  "description": "Generate proper conventional commit messages — stop writing 'fix stuff' and 'wip'",
+  "category": "utilities",
+  "viralHook": "Your git log is a crime scene. This tool fixes your commit messages.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "commit-inputs",
+      "props": {
+        "title": "Generate a Commit Message",
+        "fields": [
+          { "name": "changeType", "label": "Type of Change", "type": "select", "options": ["feat: New feature", "fix: Bug fix", "refactor: Code refactor", "docs: Documentation", "style: Formatting", "test: Tests", "chore: Maintenance", "perf: Performance", "ci: CI/CD"] },
+          { "name": "scope", "label": "Scope (optional)", "type": "text", "placeholder": "e.g., auth, api, ui, payments" },
+          { "name": "description", "label": "What did you change?", "type": "textarea", "required": true, "placeholder": "e.g., Added rate limiting to the login endpoint to prevent brute force attacks" },
+          { "name": "breaking", "label": "Breaking change?", "type": "select", "options": ["No", "Yes — includes breaking changes"] },
+          { "name": "issue", "label": "Issue/Ticket Number", "type": "text", "placeholder": "e.g., #123, JIRA-456" }
+        ],
+        "submitLabel": "Generate Message"
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "commit-examples",
+      "props": {
+        "title": "Conventional Commit Examples",
+        "columns": 2,
+        "cards": [
+          { "title": "feat(auth): add OAuth2 login", "description": "New feature in auth scope", "badge": "feat", "color": "#16a34a" },
+          { "title": "fix(api): handle null response", "description": "Bug fix in API layer", "badge": "fix", "color": "#dc2626" },
+          { "title": "refactor(db): simplify query builder", "description": "Code improvement, no behavior change", "badge": "refactor", "color": "#2563eb" },
+          { "title": "perf(render): lazy-load images", "description": "Performance improvement", "badge": "perf", "color": "#f59e0b" },
+          { "title": "docs: update API reference", "description": "Documentation only", "badge": "docs", "color": "#8b5cf6" },
+          { "title": "BREAKING: remove v1 endpoints", "description": "Breaking change needs migration", "badge": "!", "color": "#e11d48" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+  "theme": { "primaryColor": "#1e293b", "backgroundColor": "#f8fafc", "fontFamily": "'JetBrains Mono', monospace", "borderRadius": "12px" }
+}

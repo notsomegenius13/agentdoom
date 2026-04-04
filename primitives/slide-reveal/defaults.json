@@ -1,0 +1,23 @@
+{
+  "title": "New Tool Available",
+  "direction": "left",
+  "duration": 600,
+  "delay": 0,
+  "distance": 40,
+  "triggerOnView": true,
+  "content": "A powerful new primitive just landed. Check it out in the library.",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

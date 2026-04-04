@@ -1,0 +1,27 @@
+{
+  "title": "Mortgage Calculator",
+  "description": "Estimate your monthly mortgage payment instantly",
+  "category": "money",
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "mortgage",
+      "props": {
+        "title": "Mortgage Calculator",
+        "inputs": [
+          { "name": "price", "label": "Home Price ($)", "type": "number", "defaultValue": 400000, "min": 0, "step": 10000 },
+          { "name": "down", "label": "Down Payment (%)", "type": "number", "defaultValue": 20, "min": 0, "max": 100, "step": 1 },
+          { "name": "rate", "label": "Interest Rate (%)", "type": "number", "defaultValue": 6.5, "min": 0, "max": 15, "step": 0.125 },
+          { "name": "years", "label": "Loan Term", "type": "select", "options": [{ "label": "15 years", "value": 15 }, { "label": "20 years", "value": 20 }, { "label": "30 years", "value": 30 }] }
+        ],
+        "formula": "(price * (1 - down / 100)) * ((rate / 100 / 12) * Math.pow(1 + rate / 100 / 12, years * 12)) / (Math.pow(1 + rate / 100 / 12, years * 12) - 1)",
+        "resultLabel": "Monthly Payment",
+        "resultPrefix": "$",
+        "resultSuffix": "/mo"
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+  "theme": { "primaryColor": "#0d9488", "backgroundColor": "#f0fdfa", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

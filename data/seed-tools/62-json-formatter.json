@@ -1,0 +1,49 @@
+{
+  "title": "JSON Formatter & Validator",
+  "description": "Paste raw JSON to instantly format, validate, or minify it — catch syntax errors in seconds",
+  "category": "dev-tools",
+  "viralHook": "This free JSON formatter just saved me 20 minutes of debugging a missing comma",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "json-formatter-form",
+      "props": {
+        "title": "JSON Formatter & Validator",
+        "submitLabel": "Format JSON",
+        "fields": [
+          {
+            "id": "raw_json",
+            "label": "Paste Your JSON",
+            "type": "textarea",
+            "placeholder": "{\"name\":\"Alice\",\"age\":30,\"skills\":[\"JavaScript\",\"Python\"],\"active\":true}",
+            "required": true,
+            "rows": 12,
+            "monospace": true
+          },
+          {
+            "id": "format_style",
+            "label": "Output Format",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "value": "pretty", "label": "Pretty Print (2 spaces)" },
+              { "value": "pretty4", "label": "Pretty Print (4 spaces)" },
+              { "value": "minified", "label": "Minified (compact)" },
+              { "value": "sorted", "label": "Sorted Keys (alphabetical)" }
+            ],
+            "defaultValue": "pretty"
+          },
+          {
+            "id": "validate_only",
+            "label": "Validate Only (no output transform)",
+            "type": "checkbox"
+          }
+        ]
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "720px", "padding": "28px" },
+  "theme": { "primaryColor": "#22d3ee", "backgroundColor": "#0f172a", "fontFamily": "'JetBrains Mono', 'Fira Code', monospace", "borderRadius": "10px" }
+}

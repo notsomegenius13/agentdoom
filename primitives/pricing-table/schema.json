@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PricingTableConfig",
+  "description": "Configuration for the Pricing Table composite primitive",
+  "type": "object",
+  "required": [
+    "title",
+    "tiers"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Main heading for the pricing table"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Optional subtitle beneath the heading"
+    },
+    "showToggle": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show the monthly/annual toggle switch"
+    },
+    "tiers": {
+      "type": "array",
+      "description": "List of pricing tiers to display",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "monthlyPrice",
+          "annualPrice",
+          "features",
+          "ctaLabel"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the pricing tier"
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of the tier"
+          },
+          "monthlyPrice": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Price per month when billed monthly"
+          },
+          "annualPrice": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Price per month when billed annually"
+          },
+          "currency": {
+            "type": "string",
+            "default": "$",
+            "description": "Currency symbol"
+          },
+          "features": {
+            "type": "array",
+            "description": "List of features for this tier",
+            "items": {
+              "type": "object",
+              "required": [
+                "text",
+                "included"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "Feature description"
+                },
+                "included": {
+                  "type": "boolean",
+                  "description": "Whether this feature is included in the tier"
+                }
+              }
+            }
+          },
+          "ctaLabel": {
+            "type": "string",
+            "description": "Label for the call-to-action button"
+          },
+          "highlighted": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether this tier should be visually highlighted"
+          },
+          "badge": {
+            "type": "string",
+            "description": "Optional badge text for highlighted tier"
+          }
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

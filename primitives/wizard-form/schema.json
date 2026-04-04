@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WizardFormConfig",
+  "description": "Configuration for the Multi-step Wizard Form composite primitive",
+  "type": "object",
+  "required": [
+    "title",
+    "steps"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title displayed at the top of the wizard form"
+    },
+    "steps": {
+      "type": "array",
+      "description": "The ordered list of steps in the wizard",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "fields"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the step"
+          },
+          "title": {
+            "type": "string",
+            "description": "Display title for the step"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description shown below the step title"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Form fields displayed in this step",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "label",
+                "type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Unique field name used as the form data key"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label for the field"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "number",
+                    "email",
+                    "textarea",
+                    "select",
+                    "checkbox"
+                  ],
+                  "description": "The input type for the field"
+                },
+                "placeholder": {
+                  "type": "string",
+                  "description": "Placeholder text for the input"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Options for select fields"
+                },
+                "required": {
+                  "type": "boolean",
+                  "description": "Whether the field is required for validation"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "submitLabel": {
+      "type": "string",
+      "description": "Label for the submit button",
+      "default": "Submit"
+    },
+    "successMessage": {
+      "type": "string",
+      "description": "Message shown after successful submission",
+      "default": "Form submitted successfully!"
+    },
+    "showReview": {
+      "type": "boolean",
+      "description": "Whether to show a review step before submission",
+      "default": false
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface TextGeneratorConfig {
   title: string
@@ -9,6 +10,7 @@ export interface TextGeneratorConfig {
   buttonLabel: string
   templates: string[]
   outputLabel: string
+  appearance?: AppearanceConfig
 }
 
 export default function TextGenerator({ config }: { config: TextGeneratorConfig }) {
@@ -50,8 +52,9 @@ export default function TextGenerator({ config }: { config: TextGeneratorConfig 
   }, [output])
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       <label htmlFor="gen-input" className="block text-sm font-medium text-gray-700 mb-1">
         {config.inputLabel}
@@ -94,5 +97,6 @@ export default function TextGenerator({ config }: { config: TextGeneratorConfig 
         </div>
       )}
     </div>
+    </PrimitiveWrapper>
   )
 }

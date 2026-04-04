@@ -1,12 +1,42 @@
 {
   "title": "Notifications",
   "toasts": [
-    { "id": "1", "message": "File uploaded successfully!", "type": "success" },
-    { "id": "2", "message": "Failed to save changes.", "type": "error" },
-    { "id": "3", "message": "Your session will expire in 5 minutes.", "type": "warning" },
-    { "id": "4", "message": "A new version is available.", "type": "info" }
+    {
+      "id": "1",
+      "message": "File uploaded successfully!",
+      "type": "success"
+    },
+    {
+      "id": "2",
+      "message": "Failed to save changes.",
+      "type": "error"
+    },
+    {
+      "id": "3",
+      "message": "Your session will expire in 5 minutes.",
+      "type": "warning"
+    },
+    {
+      "id": "4",
+      "message": "A new version is available.",
+      "type": "info"
+    }
   ],
   "position": "top-right",
   "autoDismiss": false,
-  "dismissAfterMs": 5000
+  "dismissAfterMs": 5000,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

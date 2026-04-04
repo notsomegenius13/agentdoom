@@ -1,0 +1,95 @@
+{
+  "title": "Social Media Bio Analyzer",
+  "description": "Paste your bio and instantly see character count, emoji usage, CTA presence, and hashtag count — optimize for every platform",
+  "category": "social",
+  "viralHook": "Most bios lose followers in the first 3 seconds — find out if yours does",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "bio-input",
+      "props": {
+        "title": "Paste Your Bio",
+        "submitLabel": "Analyze Bio",
+        "fields": [
+          {
+            "name": "bioText",
+            "label": "Your Bio Text",
+            "type": "textarea",
+            "placeholder": "e.g. 🚀 Founder | Builder | Coffee addict ☕ | Helping 10K+ creators grow online | DM me 'GROW' | #ContentCreator #Marketing",
+            "required": true
+          },
+          {
+            "name": "platform",
+            "label": "Platform",
+            "type": "select",
+            "options": ["Instagram", "Twitter/X", "LinkedIn", "TikTok", "YouTube"],
+            "defaultValue": "Instagram"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "bio-stats",
+      "props": {
+        "title": "Bio Health Report",
+        "stats": [
+          {
+            "label": "Character Count",
+            "value": "148",
+            "subLabel": "Instagram limit: 150",
+            "color": "#22c55e",
+            "icon": "📝"
+          },
+          {
+            "label": "Emojis Used",
+            "value": "3",
+            "subLabel": "Recommended: 2–5",
+            "color": "#f59e0b",
+            "icon": "😊"
+          },
+          {
+            "label": "Hashtags Found",
+            "value": "2",
+            "subLabel": "Instagram: keep ≤3 in bio",
+            "color": "#6366f1",
+            "icon": "#️⃣"
+          },
+          {
+            "label": "CTA Detected",
+            "value": "Yes",
+            "subLabel": "Great — you have a call to action",
+            "color": "#22c55e",
+            "icon": "📣"
+          },
+          {
+            "label": "Keywords Found",
+            "value": "4",
+            "subLabel": "Founder, Builder, Creator, Marketing",
+            "color": "#0ea5e9",
+            "icon": "🔑"
+          },
+          {
+            "label": "Bio Score",
+            "value": "82 / 100",
+            "subLabel": "Strong bio — minor tweaks needed",
+            "color": "#22c55e",
+            "icon": "⭐"
+          }
+        ],
+        "insights": [
+          "✅ You have a clear CTA — great for conversions",
+          "✅ Character count is within platform limits",
+          "⚠️ Consider adding a link-in-bio mention",
+          "⚠️ Add your unique value proposition in the first line",
+          "💡 Move your biggest achievement to line 1 for more profile visits"
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "680px", "padding": "28px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#0f172a", "fontFamily": "'Inter', sans-serif", "borderRadius": "14px" }
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Rent vs Buy Calculator",
+  "description": "Should you rent or buy? See the real math with taxes, maintenance, and opportunity cost",
+  "category": "money",
+  "viralHook": "The answer might surprise you — most calculators hide the real costs",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "rent-scenario",
+      "props": {
+        "title": "Renting Scenario",
+        "inputs": [
+          { "name": "monthlyRent", "label": "Monthly Rent ($)", "type": "number", "defaultValue": 2000, "min": 0, "step": 100 },
+          { "name": "rentIncrease", "label": "Annual Rent Increase (%)", "type": "number", "defaultValue": 3, "min": 0, "max": 15 },
+          { "name": "renterInsurance", "label": "Renter's Insurance ($/mo)", "type": "number", "defaultValue": 25, "min": 0 },
+          { "name": "investReturn", "label": "Investment Return (%)", "type": "number", "defaultValue": 7, "min": 0, "max": 20 }
+        ],
+        "formula": "(monthlyRent * 12) * ((Math.pow(1 + rentIncrease/100, 5) - 1) / (rentIncrease/100))",
+        "resultLabel": "5-Year Total Rent Cost",
+        "resultPrefix": "$"
+      },
+      "position": 0
+    },
+    {
+      "type": "calculator",
+      "id": "buy-scenario",
+      "props": {
+        "title": "Buying Scenario",
+        "inputs": [
+          { "name": "homePrice", "label": "Home Price ($)", "type": "number", "defaultValue": 400000, "min": 0, "step": 10000 },
+          { "name": "downPayment", "label": "Down Payment (%)", "type": "number", "defaultValue": 20, "min": 0, "max": 100 },
+          { "name": "interestRate", "label": "Mortgage Rate (%)", "type": "number", "defaultValue": 6.5, "min": 0, "max": 15, "step": 0.1 },
+          { "name": "propertyTax", "label": "Property Tax (%/yr)", "type": "number", "defaultValue": 1.2, "min": 0, "max": 5, "step": 0.1 },
+          { "name": "maintenance", "label": "Maintenance (% of value/yr)", "type": "number", "defaultValue": 1, "min": 0, "max": 5, "step": 0.1 },
+          { "name": "appreciation", "label": "Home Appreciation (%/yr)", "type": "number", "defaultValue": 3, "min": -5, "max": 15 }
+        ],
+        "formula": "(homePrice * (1 - downPayment/100) * interestRate/100/12 * 60) + (homePrice * propertyTax/100 * 5) + (homePrice * maintenance/100 * 5) - (homePrice * appreciation/100 * 5)",
+        "resultLabel": "5-Year Net Cost of Buying",
+        "resultPrefix": "$"
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+  "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

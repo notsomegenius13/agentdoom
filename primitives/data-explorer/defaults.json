@@ -1,0 +1,163 @@
+{
+  "title": "Employee Directory",
+  "searchable": true,
+  "pageSize": 5,
+  "showExport": true,
+  "columns": [
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "text",
+      "sortable": true
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "text",
+      "filterable": true
+    },
+    {
+      "key": "role",
+      "label": "Role",
+      "type": "text"
+    },
+    {
+      "key": "salary",
+      "label": "Salary",
+      "type": "currency",
+      "sortable": true
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "badge",
+      "filterable": true,
+      "badgeColors": {
+        "Active": "green",
+        "On Leave": "yellow",
+        "Remote": "blue"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "name": "Alice Johnson",
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "salary": 125000,
+      "status": "Active"
+    },
+    {
+      "name": "Bob Martinez",
+      "department": "Design",
+      "role": "UI Designer",
+      "salary": 98000,
+      "status": "Remote"
+    },
+    {
+      "name": "Carol Chen",
+      "department": "Engineering",
+      "role": "Tech Lead",
+      "salary": 145000,
+      "status": "Active"
+    },
+    {
+      "name": "David Kim",
+      "department": "Marketing",
+      "role": "Marketing Manager",
+      "salary": 105000,
+      "status": "On Leave"
+    },
+    {
+      "name": "Eva Novak",
+      "department": "Engineering",
+      "role": "Backend Developer",
+      "salary": 118000,
+      "status": "Remote"
+    },
+    {
+      "name": "Frank Osei",
+      "department": "Sales",
+      "role": "Account Executive",
+      "salary": 95000,
+      "status": "Active"
+    },
+    {
+      "name": "Grace Liu",
+      "department": "Design",
+      "role": "UX Researcher",
+      "salary": 102000,
+      "status": "Active"
+    },
+    {
+      "name": "Hector Ruiz",
+      "department": "Engineering",
+      "role": "DevOps Engineer",
+      "salary": 130000,
+      "status": "Remote"
+    },
+    {
+      "name": "Irene Foster",
+      "department": "Marketing",
+      "role": "Content Strategist",
+      "salary": 88000,
+      "status": "Active"
+    },
+    {
+      "name": "James Patel",
+      "department": "Sales",
+      "role": "Sales Director",
+      "salary": 140000,
+      "status": "Active"
+    },
+    {
+      "name": "Karen Wright",
+      "department": "Engineering",
+      "role": "Frontend Developer",
+      "salary": 115000,
+      "status": "On Leave"
+    },
+    {
+      "name": "Leo Tanaka",
+      "department": "Design",
+      "role": "Design Lead",
+      "salary": 128000,
+      "status": "Active"
+    },
+    {
+      "name": "Maria Santos",
+      "department": "Marketing",
+      "role": "SEO Specialist",
+      "salary": 82000,
+      "status": "Remote"
+    },
+    {
+      "name": "Nathan Brooks",
+      "department": "Sales",
+      "role": "Business Analyst",
+      "salary": 97000,
+      "status": "Active"
+    },
+    {
+      "name": "Olivia Wagner",
+      "department": "Engineering",
+      "role": "QA Engineer",
+      "salary": 108000,
+      "status": "Active"
+    }
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

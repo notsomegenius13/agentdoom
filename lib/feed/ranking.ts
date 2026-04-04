@@ -1,6 +1,6 @@
 import { getDb } from '../db';
 import type { RankingWeights } from './types';
-import { V1_WEIGHTS } from './types';
+import { V2_WEIGHTS } from './types';
 
 /**
  * Feed Ranking Engine — V1: Curated + Chronological with engagement boost
@@ -22,7 +22,7 @@ const TRENDING_BASELINE_HOURS = 24;
  * Recompute ranking scores for all active tools and write to tool_ranking_scores.
  * Designed to be called on a cron (every 5-15 min) or after significant events.
  */
-export async function recomputeRankings(weights: RankingWeights = V1_WEIGHTS): Promise<number> {
+export async function recomputeRankings(weights: RankingWeights = V2_WEIGHTS): Promise<number> {
   const sql = getDb();
 
   // Single query: compute all scores and upsert into tool_ranking_scores
@@ -30,18 +30,19 @@ export async function recomputeRankings(weights: RankingWeights = V1_WEIGHTS): P
     WITH engagement AS (
       SELECT
         t.id AS tool_id,
-        -- Normalize engagement: views + 3*uses + 5*remixes + 2*shares + likes
+        -- Engagement signal weights: remix rate (3x), share rate (2x),
+        -- view-to-use ratio (1.5x), likes (1x), base views (0.5x)
         LEAST(1.0, (
-          COALESCE(t.views_count, 0)
-          + 3.0 * COALESCE(t.uses_count, 0)
-          + 5.0 * COALESCE(t.remixes_count, 0)
+          0.5 * COALESCE(t.views_count, 0)
+          + 1.5 * COALESCE(t.uses_count, 0)
+          + 3.0 * COALESCE(t.remixes_count, 0)
           + 2.0 * COALESCE(t.shares_count, 0)
           + 1.0 * COALESCE(t.likes_count, 0)
         ) / GREATEST(1.0, (
           SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY
-            COALESCE(t2.views_count, 0)
-            + 3.0 * COALESCE(t2.uses_count, 0)
-            + 5.0 * COALESCE(t2.remixes_count, 0)
+            0.5 * COALESCE(t2.views_count, 0)
+            + 1.5 * COALESCE(t2.uses_count, 0)
+            + 3.0 * COALESCE(t2.remixes_count, 0)
             + 2.0 * COALESCE(t2.shares_count, 0)
             + 1.0 * COALESCE(t2.likes_count, 0)
           ) FROM tools t2 WHERE t2.status = 'active'

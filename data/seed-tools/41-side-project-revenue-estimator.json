@@ -1,0 +1,44 @@
+{
+  "title": "Side Project Revenue Estimator",
+  "description": "Estimate how much your side project could make based on traffic, conversion, and pricing",
+  "category": "business",
+  "viralHook": "Your side project with 1000 visitors/mo could make $2,400/yr. Here's the math.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "revenue-calc",
+      "props": {
+        "title": "Side Project Revenue Estimator",
+        "inputs": [
+          { "name": "visitors", "label": "Monthly Visitors", "type": "number", "defaultValue": 5000, "min": 0, "step": 100 },
+          { "name": "conversionRate", "label": "Conversion Rate (%)", "type": "number", "defaultValue": 2, "min": 0.1, "max": 30, "step": 0.1 },
+          { "name": "price", "label": "Price Per Month ($)", "type": "number", "defaultValue": 19, "min": 0, "step": 1 },
+          { "name": "churnRate", "label": "Monthly Churn (%)", "type": "number", "defaultValue": 5, "min": 0, "max": 50, "step": 0.5 },
+          { "name": "trafficGrowth", "label": "Monthly Traffic Growth (%)", "type": "number", "defaultValue": 8, "min": 0, "max": 100 }
+        ],
+        "formula": "(visitors * (conversionRate / 100) * price) * 12",
+        "resultLabel": "Estimated Annual Revenue",
+        "resultPrefix": "$",
+        "resultSuffix": "/year"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "revenue-stats",
+      "props": {
+        "title": "Revenue Breakdown",
+        "stats": [
+          { "label": "Monthly Revenue", "value": "$1,900", "change": 8, "changeLabel": "growing monthly", "icon": "dollar" },
+          { "label": "New Customers/Mo", "value": "100", "change": 0, "changeLabel": "at 2% conversion", "icon": "cart" },
+          { "label": "Ramen Profitable?", "value": "Almost", "change": 0, "changeLabel": "$2K/mo = ramen profit", "icon": "trending" },
+          { "label": "Time to $10K MRR", "value": "~14 months", "change": 0, "changeLabel": "at current growth", "icon": "percent" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "540px", "padding": "24px" },
+  "theme": { "primaryColor": "#7c3aed", "backgroundColor": "#f5f3ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

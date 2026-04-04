@@ -1,9 +1,38 @@
 {
   "title": "Pricing",
   "items": [
-    { "name": "Starter", "description": "For individuals", "price": 9.99, "unit": "/month" },
-    { "name": "Pro", "description": "For teams", "price": 29.99, "unit": "/month", "featured": true },
-    { "name": "Enterprise", "description": "Custom solutions", "price": "Contact us" }
+    {
+      "name": "Starter",
+      "description": "For individuals",
+      "price": 9.99,
+      "unit": "/month"
+    },
+    {
+      "name": "Pro",
+      "description": "For teams",
+      "price": 29.99,
+      "unit": "/month",
+      "featured": true
+    },
+    {
+      "name": "Enterprise",
+      "description": "Custom solutions",
+      "price": "Contact us"
+    }
   ],
-  "currency": "$"
+  "currency": "$",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

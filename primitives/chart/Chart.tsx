@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface ChartDataPoint {
   label: string
@@ -16,6 +17,7 @@ export interface ChartConfig {
   showValues?: boolean
   width?: number
   height?: number
+  appearance?: AppearanceConfig
 }
 
 const DEFAULT_COLORS = ['#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444']
@@ -294,12 +296,14 @@ export default function Chart({ config }: { config: ChartConfig }) {
 
   if (data.length === 0) {
     return (
+      <PrimitiveWrapper appearance={config.appearance}>
       <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
         <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">{config.title}</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-8" role="status">
           No data available
         </p>
       </div>
+      </PrimitiveWrapper>
     )
   }
 

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface FormField {
   name: string
@@ -16,6 +17,7 @@ export interface FormConfig {
   fields: FormField[]
   submitLabel: string
   successMessage: string
+  appearance?: AppearanceConfig
 }
 
 export default function Form({ config }: { config: FormConfig }) {
@@ -49,18 +51,20 @@ export default function Form({ config }: { config: FormConfig }) {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-xl p-6 shadow-sm" role="status">
-        <div className="text-center py-8">
+      <PrimitiveWrapper appearance={config.appearance}>
+      <div className="rounded-xl p-6 shadow-sm" role="status" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+        <div className="text-center py-8 animate-[scaleIn_300ms_ease-out]">
           <div className="text-4xl mb-3" aria-hidden="true">✓</div>
-          <p className="text-lg font-semibold text-gray-800">{config.successMessage}</p>
+          <p className="text-lg font-semibold" style={{ color: 'var(--doom-text-primary, #1f2937)' }}>{config.successMessage}</p>
         </div>
       </div>
+      </PrimitiveWrapper>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
       <form onSubmit={handleSubmit} noValidate>
         {config.fields.map(field => (
           <div key={field.name} className="mb-3">
@@ -134,7 +138,7 @@ export default function Form({ config }: { config: FormConfig }) {
 
         <button
           type="submit"
-          className="w-full mt-2 px-4 py-2.5 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+          className="w-full mt-2 px-4 py-2.5 doom-gradient-accent text-white font-semibold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-sm hover:shadow-md"
         >
           {config.submitLabel}
         </button>

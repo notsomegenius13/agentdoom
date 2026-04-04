@@ -3,23 +3,159 @@
   "type": "object",
   "title": "ToastConfig",
   "description": "A notification/toast system with color-coded messages and auto-dismiss",
-  "required": ["title", "toasts"],
+  "required": [
+    "title",
+    "toasts"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "toasts": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "message", "type"],
+        "required": [
+          "id",
+          "message",
+          "type"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "message": { "type": "string" },
-          "type": { "type": "string", "enum": ["success", "error", "warning", "info"] }
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error",
+              "warning",
+              "info"
+            ]
+          }
         }
       }
     },
-    "position": { "type": "string", "enum": ["top-right", "top-left", "bottom-right", "bottom-left"] },
-    "autoDismiss": { "type": "boolean" },
-    "dismissAfterMs": { "type": "number" }
+    "position": {
+      "type": "string",
+      "enum": [
+        "top-right",
+        "top-left",
+        "bottom-right",
+        "bottom-left"
+      ],
+      "default": "top-right"
+    },
+    "autoDismiss": {
+      "type": "boolean",
+      "default": true
+    },
+    "dismissAfterMs": {
+      "type": "number",
+      "default": 5000,
+      "minimum": 1000
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

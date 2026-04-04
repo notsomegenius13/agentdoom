@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "check:node": "node scripts/check-node-version.cjs",
+    "predev": "npm run check:node",
+    "prebuild": "npm run check:node",
+    "prestart": "npm run check:node",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,6 +20,9 @@
     "db:migrate": "npx tsx scripts/db-migrate.ts",
     "db:seed": "npx tsx scripts/seed-tools.ts",
     "prepare": "husky"
+  },
+  "engines": {
+    "node": ">=20 <23"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [

@@ -1,0 +1,13 @@
+{
+  "extends": ["next/core-web-vitals", "prettier"],
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    "out/",
+    "build/",
+    "landing/",
+    "workers/",
+    "infrastructure/",
+    "primitives/"
+  ]
+}

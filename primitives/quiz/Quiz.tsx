@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback, useMemo } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface QuizQuestion {
   question: string
@@ -14,6 +15,7 @@ export interface QuizConfig {
   questions: QuizQuestion[]
   showScore?: boolean
   shuffleQuestions?: boolean
+  appearance?: AppearanceConfig
 }
 
 export default function Quiz({ config }: { config: QuizConfig }) {
@@ -65,8 +67,9 @@ export default function Quiz({ config }: { config: QuizConfig }) {
 
   if (finished) {
     return (
-      <div className="bg-white rounded-xl p-6 shadow-sm">
-        <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+      <PrimitiveWrapper appearance={config.appearance}>
+      <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+        <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
         <div className="text-center py-8">
           <div className="text-4xl mb-3" aria-hidden="true">🎉</div>
           <p className="text-2xl font-bold text-gray-900 mb-2">{score}/{questions.length}</p>
@@ -81,11 +84,12 @@ export default function Quiz({ config }: { config: QuizConfig }) {
           </button>
         </div>
       </div>
+      </PrimitiveWrapper>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">{config.title}</h2>
         {config.showScore !== false && (

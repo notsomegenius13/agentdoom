@@ -2,10 +2,36 @@
   "title": "Quick Poll",
   "question": "What's your favorite programming language?",
   "options": [
-    { "text": "TypeScript", "votes": 42 },
-    { "text": "Python", "votes": 38 },
-    { "text": "Rust", "votes": 21 },
-    { "text": "Go", "votes": 15 }
+    {
+      "text": "TypeScript",
+      "votes": 42
+    },
+    {
+      "text": "Python",
+      "votes": 38
+    },
+    {
+      "text": "Rust",
+      "votes": 21
+    },
+    {
+      "text": "Go",
+      "votes": 15
+    }
   ],
-  "showResults": false
+  "showResults": false,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

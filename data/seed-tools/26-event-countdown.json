@@ -1,0 +1,25 @@
+{
+  "title": "Event Countdown",
+  "description": "Beautiful countdown timer to any important date",
+  "category": "fun",
+  "primitives": [
+    {
+      "type": "timer",
+      "id": "event-countdown",
+      "props": {
+        "title": "Countdown to Launch",
+        "mode": "countdown",
+        "targetDate": "2026-04-07T00:00:00Z",
+        "showDays": true,
+        "showHours": true,
+        "showMinutes": true,
+        "showSeconds": true,
+        "completedMessage": "It's here! The moment has arrived.",
+        "showProgress": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "500px", "padding": "32px" },
+  "theme": { "primaryColor": "#f43f5e", "backgroundColor": "#fff1f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "16px" }
+}

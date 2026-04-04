@@ -1,0 +1,170 @@
+{
+  "title": "Sprint Board",
+  "subtitle": "Sprint 14 — March 2026",
+  "showStats": true,
+  "allowMove": true,
+  "allowAdd": true,
+  "showFilters": true,
+  "columns": [
+    {
+      "id": "backlog",
+      "title": "Backlog",
+      "color": "#6b7280",
+      "tasks": [
+        {
+          "id": "task-1",
+          "title": "Design settings page",
+          "description": "Create wireframes and high-fidelity mockups for the new settings page layout",
+          "priority": "medium",
+          "assignee": "Alice",
+          "tags": [
+            "frontend",
+            "feature"
+          ],
+          "dueDate": "Apr 5"
+        },
+        {
+          "id": "task-2",
+          "title": "API rate limiting",
+          "description": "Implement rate limiting middleware for all public API endpoints",
+          "priority": "high",
+          "assignee": "Bob",
+          "tags": [
+            "backend",
+            "feature"
+          ],
+          "dueDate": "Apr 8"
+        },
+        {
+          "id": "task-3",
+          "title": "Fix date picker bug",
+          "description": "Date picker shows wrong month when navigating backwards in Safari",
+          "priority": "critical",
+          "assignee": "Carol",
+          "tags": [
+            "frontend",
+            "bug"
+          ],
+          "dueDate": "Apr 2"
+        }
+      ]
+    },
+    {
+      "id": "in-progress",
+      "title": "In Progress",
+      "color": "#3b82f6",
+      "tasks": [
+        {
+          "id": "task-4",
+          "title": "User authentication flow",
+          "description": "Implement OAuth2 login with Google and GitHub providers",
+          "priority": "high",
+          "assignee": "Dave",
+          "tags": [
+            "backend",
+            "feature"
+          ],
+          "dueDate": "Apr 3"
+        },
+        {
+          "id": "task-5",
+          "title": "Dashboard charts",
+          "description": "Add interactive charts to the analytics dashboard using D3",
+          "priority": "medium",
+          "assignee": "Alice",
+          "tags": [
+            "frontend",
+            "feature"
+          ],
+          "dueDate": "Apr 6"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "title": "Review",
+      "color": "#9333ea",
+      "tasks": [
+        {
+          "id": "task-6",
+          "title": "Database migration script",
+          "description": "Migration script for adding new user preferences table",
+          "priority": "high",
+          "assignee": "Bob",
+          "tags": [
+            "backend"
+          ],
+          "dueDate": "Apr 1"
+        },
+        {
+          "id": "task-7",
+          "title": "Fix nav dropdown overlap",
+          "description": "Navigation dropdown menu overlaps with page content on mobile",
+          "priority": "low",
+          "assignee": "Carol",
+          "tags": [
+            "frontend",
+            "bug"
+          ],
+          "dueDate": "Apr 4"
+        }
+      ]
+    },
+    {
+      "id": "done",
+      "title": "Done",
+      "color": "#22c55e",
+      "tasks": [
+        {
+          "id": "task-8",
+          "title": "Setup CI pipeline",
+          "description": "Configure GitHub Actions for automated testing and deployment",
+          "priority": "high",
+          "assignee": "Dave",
+          "tags": [
+            "backend"
+          ],
+          "dueDate": "Mar 28"
+        },
+        {
+          "id": "task-9",
+          "title": "Responsive navbar",
+          "description": "Make the top navigation bar responsive for mobile and tablet",
+          "priority": "medium",
+          "assignee": "Alice",
+          "tags": [
+            "frontend",
+            "feature"
+          ],
+          "dueDate": "Mar 26"
+        },
+        {
+          "id": "task-10",
+          "title": "Fix login redirect bug",
+          "description": "Users were not redirected to the correct page after login",
+          "priority": "critical",
+          "assignee": "Bob",
+          "tags": [
+            "backend",
+            "bug"
+          ],
+          "dueDate": "Mar 25"
+        }
+      ]
+    }
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "title": "Flashcard Maker",
+  "description": "Create and study flashcards instantly — type front and back, flip to reveal answers, no account needed",
+  "category": "education",
+  "viralHook": "I made 20 study flashcards in 5 minutes and aced my exam",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "flashcard-form",
+      "props": {
+        "title": "Create a Flashcard",
+        "submitLabel": "Add Flashcard",
+        "fields": [
+          {
+            "id": "front",
+            "label": "Front (Question / Term)",
+            "type": "textarea",
+            "placeholder": "e.g. What is photosynthesis?",
+            "required": true
+          },
+          {
+            "id": "back",
+            "label": "Back (Answer / Definition)",
+            "type": "textarea",
+            "placeholder": "e.g. The process by which plants convert sunlight into glucose",
+            "required": true
+          },
+          {
+            "id": "category",
+            "label": "Category",
+            "type": "text",
+            "placeholder": "e.g. Biology, History, Spanish..."
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "flashcard-deck",
+      "props": {
+        "title": "Your Flashcard Deck",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "What is the powerhouse of the cell?",
+            "description": "Click to flip → The mitochondria",
+            "badge": "Biology",
+            "color": "#6366f1"
+          },
+          {
+            "title": "What year did WWII end?",
+            "description": "Click to flip → 1945",
+            "badge": "History",
+            "color": "#f59e0b"
+          },
+          {
+            "title": "Translate: 'Bonjour'",
+            "description": "Click to flip → Hello (French)",
+            "badge": "French",
+            "color": "#10b981"
+          },
+          {
+            "title": "What is Newton's 2nd Law?",
+            "description": "Click to flip → F = ma (Force = mass × acceleration)",
+            "badge": "Physics",
+            "color": "#ef4444"
+          },
+          {
+            "title": "What does HTTP stand for?",
+            "description": "Click to flip → HyperText Transfer Protocol",
+            "badge": "CS",
+            "color": "#8b5cf6"
+          },
+          {
+            "title": "What is the capital of Japan?",
+            "description": "Click to flip → Tokyo",
+            "badge": "Geography",
+            "color": "#ec4899"
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "760px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#f0f4ff", "fontFamily": "'Inter', sans-serif", "borderRadius": "14px" }
+}

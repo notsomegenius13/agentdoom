@@ -31,6 +31,7 @@ function ToolCard({ tool }: { tool: FeedTool }) {
               className="w-full h-full pointer-events-none"
               sandbox=""
               title={tool.title}
+              loading="lazy"
             />
           </div>
         ) : (

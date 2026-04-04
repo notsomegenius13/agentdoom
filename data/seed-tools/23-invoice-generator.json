@@ -1,0 +1,57 @@
+{
+  "title": "Invoice Generator",
+  "description": "Create professional invoices in seconds — fill, preview, download",
+  "category": "business",
+  "primitives": [
+    {
+      "type": "wizard-form",
+      "id": "invoice-wizard",
+      "props": {
+        "title": "Create Invoice",
+        "steps": [
+          {
+            "title": "Your Details",
+            "fields": [
+              { "name": "businessName", "label": "Business Name", "type": "text", "required": true },
+              { "name": "email", "label": "Email", "type": "email", "required": true },
+              { "name": "address", "label": "Address", "type": "textarea", "required": false }
+            ]
+          },
+          {
+            "title": "Client Details",
+            "fields": [
+              { "name": "clientName", "label": "Client Name", "type": "text", "required": true },
+              { "name": "clientEmail", "label": "Client Email", "type": "email", "required": true },
+              { "name": "clientAddress", "label": "Client Address", "type": "textarea", "required": false }
+            ]
+          },
+          {
+            "title": "Line Items",
+            "fields": [
+              { "name": "item1Desc", "label": "Item 1 Description", "type": "text", "required": true },
+              { "name": "item1Qty", "label": "Quantity", "type": "number", "required": true, "defaultValue": 1 },
+              { "name": "item1Rate", "label": "Rate ($)", "type": "number", "required": true },
+              { "name": "item2Desc", "label": "Item 2 Description", "type": "text", "required": false },
+              { "name": "item2Qty", "label": "Quantity", "type": "number", "required": false },
+              { "name": "item2Rate", "label": "Rate ($)", "type": "number", "required": false }
+            ]
+          },
+          {
+            "title": "Payment Terms",
+            "fields": [
+              { "name": "dueDate", "label": "Due Date", "type": "date", "required": true },
+              { "name": "paymentMethod", "label": "Payment Method", "type": "select", "options": ["Bank Transfer", "PayPal", "Stripe", "Check"], "required": true },
+              { "name": "notes", "label": "Notes", "type": "textarea", "required": false, "placeholder": "Thank you for your business!" }
+            ]
+          }
+        ],
+        "submitLabel": "Generate Invoice",
+        "showStepIndicator": true,
+        "allowBackNavigation": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "600px", "padding": "32px" },
+  "theme": { "primaryColor": "#1e40af", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

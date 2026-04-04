@@ -1,0 +1,17 @@
+{
+  "name": "tweet-bot",
+  "version": "1.0.0",
+  "description": "tweet approval bot — posts to Slack #twitter, watches for ✅, auto-posts to X",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "post-to-slack": "node index.js --post",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@slack/bolt": "^4.1.0",
+    "dotenv": "^16.4.0",
+    "oauth-1.0a": "^2.2.6",
+    "crypto": "^1.0.1"
+  }
+}

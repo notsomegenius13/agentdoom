@@ -1,0 +1,29 @@
+{
+  "title": "Impostor Syndrome Quiz",
+  "description": "Find out your impostor syndrome level — spoiler: even 10x engineers feel it",
+  "category": "fun",
+  "viralHook": "I got 'Senior Impostor' on this quiz and I've been coding for 8 years 😭",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "quiz",
+      "id": "impostor-quiz",
+      "props": {
+        "title": "How Bad Is Your Impostor Syndrome?",
+        "questions": [
+          { "question": "You just shipped a big feature. How do you feel?", "options": ["I crushed it, obviously", "Relieved nobody found the bugs yet", "Waiting for someone to realize I copy-pasted from Stack Overflow", "Already dreading the next one"], "correct": 0, "explanation": "If you shipped it, you earned it. Even if Stack Overflow helped." },
+          { "question": "A junior dev asks you to explain a concept. You:", "options": ["Explain it confidently — I know this", "Explain it while internally panicking I'll get it wrong", "Google it first 'just to make sure'", "Redirect them to the docs and pray"], "correct": 0, "explanation": "Teaching is the best way to learn. If you can explain it, you know it." },
+          { "question": "You're in a code review and someone suggests changes:", "options": ["Great feedback, let me improve this", "They found out I'm a fraud", "I should have caught that — I'm terrible", "Time to update my LinkedIn to 'seeking opportunities'"], "correct": 0, "explanation": "Code reviews improve code, not judge you. Everyone gets feedback." },
+          { "question": "Your company announces a new tech stack. You:", "options": ["Excited to learn something new", "Nervous but I'll figure it out", "Convinced everyone else already knows it", "Start polishing my resume"], "correct": 0, "explanation": "Nobody knows everything. The best engineers are the ones who keep learning." },
+          { "question": "You solve a really hard bug. Your reaction:", "options": ["I'm good at this", "That was mostly luck", "Someone else would have found it faster", "I hope nobody asks me to explain how I fixed it"], "correct": 0, "explanation": "Luck is when preparation meets opportunity. You earned that fix." },
+          { "question": "Someone calls you a 'senior developer'. You think:", "options": ["Yeah, I've put in the work", "They must not have seen my git history", "There must be a mistake on my title", "I'm just a junior who's been here too long"], "correct": 0, "explanation": "Titles reflect your contributions. Own it." }
+        ],
+        "showScore": true,
+        "shuffleQuestions": false
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "580px", "padding": "24px" },
+  "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#f5f3ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

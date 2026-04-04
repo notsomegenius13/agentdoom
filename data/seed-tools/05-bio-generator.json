@@ -1,0 +1,28 @@
+{
+  "title": "Social Media Bio Generator",
+  "description": "Generate catchy bios for any social platform instantly",
+  "category": "creator",
+  "primitives": [
+    {
+      "type": "generator",
+      "id": "bio-gen",
+      "props": {
+        "title": "Bio Generator",
+        "inputLabel": "What do you do?",
+        "inputPlaceholder": "e.g. UX designer, coffee addict, dog mom",
+        "buttonLabel": "Generate Bio",
+        "templates": [
+          "{{input}} | Making the internet a little less ugly, one pixel at a time.",
+          "Just a {{input}} trying to make it in this digital world. DMs open for collabs.",
+          "{{input}} by day. Overthinker by night. Building cool things in between.",
+          "Professional {{input}}. Amateur everything else. Let's connect.",
+          "{{input}} \u2014 turning caffeine into creativity since forever."
+        ],
+        "outputLabel": "Your Bio"
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+  "theme": { "primaryColor": "#ec4899", "backgroundColor": "#fdf2f8", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

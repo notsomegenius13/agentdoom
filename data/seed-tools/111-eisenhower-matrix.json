@@ -1,0 +1,66 @@
+{
+  "title": "Eisenhower Decision Matrix",
+  "description": "Prioritize tasks using the Eisenhower urgent-important matrix",
+  "category": "productivity",
+  "viralHook": "Stop doing busy work. Start doing the RIGHT work.",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "card-grid",
+      "id": "eisenhower-matrix",
+      "props": {
+        "columns": 2,
+        "cards": [
+          {
+            "title": "DO - Urgent & Important",
+            "color": "red",
+            "description": "Crisis and deadline-driven tasks that need your immediate personal attention. Handle these first.",
+            "items": [
+              "Project deadline due today",
+              "Client emergency or escalation",
+              "Broken production system",
+              "Last-minute presentation prep",
+              "Health or family emergency"
+            ]
+          },
+          {
+            "title": "SCHEDULE - Important, Not Urgent",
+            "color": "blue",
+            "description": "Strategic work that drives long-term success. Block dedicated time on your calendar for these.",
+            "items": [
+              "Long-term project planning",
+              "Professional development and learning",
+              "Relationship building and networking",
+              "Exercise and health routines",
+              "Writing and deep creative work"
+            ]
+          },
+          {
+            "title": "DELEGATE - Urgent, Not Important",
+            "color": "yellow",
+            "description": "Tasks that feel pressing but don't require your unique skills. Hand these off whenever possible.",
+            "items": [
+              "Most email replies",
+              "Scheduling and calendar coordination",
+              "Routine status update meetings",
+              "Data entry and formatting",
+              "Non-critical phone calls"
+            ]
+          },
+          {
+            "title": "DELETE - Not Urgent, Not Important",
+            "color": "gray",
+            "description": "Time-wasters and distractions that add no real value. Eliminate these ruthlessly.",
+            "items": [
+              "Excessive social media scrolling",
+              "Unnecessary meetings with no agenda",
+              "Busywork that nobody reads",
+              "Perfectioning things that are good enough",
+              "Gossip and workplace drama"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

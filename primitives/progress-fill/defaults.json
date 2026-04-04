@@ -1,0 +1,26 @@
+{
+  "title": "Sprint Progress",
+  "value": 72,
+  "max": 100,
+  "duration": 1500,
+  "showLabel": true,
+  "color": "#7c3aed",
+  "height": "md",
+  "striped": false,
+  "animated": true,
+  "triggerOnView": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

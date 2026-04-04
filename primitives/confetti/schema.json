@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "ConfettiConfig",
+  "description": "A trigger-able confetti burst animation for celebrations and milestones",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Celebrate!"
+    },
+    "particleCount": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 200,
+      "default": 40
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 500,
+      "maximum": 10000,
+      "default": 2000
+    },
+    "colors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "#7c3aed",
+        "#f59e0b",
+        "#10b981",
+        "#ef4444",
+        "#3b82f6",
+        "#ec4899"
+      ]
+    },
+    "spread": {
+      "type": "number",
+      "minimum": 30,
+      "maximum": 360,
+      "default": 180
+    },
+    "autoTrigger": {
+      "type": "boolean",
+      "default": false
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

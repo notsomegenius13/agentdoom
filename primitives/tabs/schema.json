@@ -3,22 +3,145 @@
   "type": "object",
   "title": "TabsConfig",
   "description": "A tabs and accordion layout component",
-  "required": ["title", "items", "mode"],
+  "required": [
+    "title",
+    "items",
+    "mode"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "items": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "label", "content"],
+        "required": [
+          "id",
+          "label",
+          "content"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "label": { "type": "string" },
-          "content": { "type": "string" }
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
         }
       }
     },
-    "mode": { "type": "string", "enum": ["tabs", "accordion"] },
-    "defaultActiveId": { "type": "string" }
+    "mode": {
+      "type": "string",
+      "enum": [
+        "tabs",
+        "accordion"
+      ]
+    },
+    "defaultActiveId": {
+      "type": "string"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

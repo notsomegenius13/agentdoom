@@ -4,5 +4,19 @@
   "content": "By using this service, you agree to our terms of use. We reserve the right to modify these terms at any time. Your continued use of the platform constitutes acceptance of any changes. Please review our privacy policy for information on how we handle your data.",
   "showCloseButton": true,
   "size": "md",
-  "overlayDismiss": true
+  "overlayDismiss": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

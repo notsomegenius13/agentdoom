@@ -1,10 +1,41 @@
 {
   "title": "Contact Form",
   "fields": [
-    { "name": "name", "label": "Name", "type": "text", "placeholder": "Your name", "required": true },
-    { "name": "email", "label": "Email", "type": "email", "placeholder": "you@example.com", "required": true },
-    { "name": "message", "label": "Message", "type": "textarea", "placeholder": "Your message..." }
+    {
+      "name": "name",
+      "label": "Name",
+      "type": "text",
+      "placeholder": "Your name",
+      "required": true
+    },
+    {
+      "name": "email",
+      "label": "Email",
+      "type": "email",
+      "placeholder": "you@example.com",
+      "required": true
+    },
+    {
+      "name": "message",
+      "label": "Message",
+      "type": "textarea",
+      "placeholder": "Your message..."
+    }
   ],
   "submitLabel": "Submit",
-  "successMessage": "Thank you! Your message has been sent."
+  "successMessage": "Thank you! Your message has been sent.",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

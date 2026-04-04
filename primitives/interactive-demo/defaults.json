@@ -1,0 +1,42 @@
+{
+  "title": "CSS Playground",
+  "description": "Experiment with common CSS layout patterns and styles. Edit the code to see changes in real time.",
+  "examples": [
+    {
+      "id": "flexbox-layout",
+      "label": "Flexbox Layout",
+      "code": "<style>\n  .flex-container {\n    display: flex;\n    gap: 12px;\n    padding: 16px;\n    background: #f8f9fa;\n    border-radius: 8px;\n  }\n  .flex-box {\n    flex: 1;\n    height: 80px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: #fff;\n    font-family: sans-serif;\n    font-weight: 600;\n  }\n</style>\n<div class=\"flex-container\">\n  <div class=\"flex-box\" style=\"background: #7c3aed;\">Box 1</div>\n  <div class=\"flex-box\" style=\"background: #a855f7;\">Box 2</div>\n  <div class=\"flex-box\" style=\"background: #c084fc;\">Box 3</div>\n  <div class=\"flex-box\" style=\"background: #d8b4fe;\">Box 4</div>\n</div>",
+      "language": "html"
+    },
+    {
+      "id": "grid-gallery",
+      "label": "Grid Gallery",
+      "code": "<style>\n  .grid-gallery {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 10px;\n    padding: 16px;\n  }\n  .grid-item {\n    aspect-ratio: 1;\n    border-radius: 8px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-family: sans-serif;\n    font-size: 14px;\n    color: #6b7280;\n    border: 2px dashed #d1d5db;\n    background: #f9fafb;\n  }\n  .grid-item:nth-child(odd) {\n    background: #f3e8ff;\n    border-color: #c084fc;\n    color: #7c3aed;\n  }\n</style>\n<div class=\"grid-gallery\">\n  <div class=\"grid-item\">Image 1</div>\n  <div class=\"grid-item\">Image 2</div>\n  <div class=\"grid-item\">Image 3</div>\n  <div class=\"grid-item\">Image 4</div>\n  <div class=\"grid-item\">Image 5</div>\n  <div class=\"grid-item\">Image 6</div>\n</div>",
+      "language": "html"
+    },
+    {
+      "id": "button-styles",
+      "label": "Button Styles",
+      "code": "<style>\n  .button-row {\n    display: flex;\n    gap: 12px;\n    padding: 20px;\n    flex-wrap: wrap;\n    align-items: center;\n  }\n  .btn {\n    padding: 10px 20px;\n    border-radius: 6px;\n    font-family: sans-serif;\n    font-size: 14px;\n    font-weight: 600;\n    cursor: pointer;\n    border: 2px solid transparent;\n    transition: opacity 0.2s;\n  }\n  .btn-primary {\n    background: #7c3aed;\n    color: #fff;\n  }\n  .btn-secondary {\n    background: #e9d5ff;\n    color: #6b21a8;\n  }\n  .btn-outline {\n    background: transparent;\n    color: #7c3aed;\n    border-color: #7c3aed;\n  }\n</style>\n<div class=\"button-row\">\n  <button class=\"btn btn-primary\">Primary</button>\n  <button class=\"btn btn-secondary\">Secondary</button>\n  <button class=\"btn btn-outline\">Outline</button>\n</div>",
+      "language": "html"
+    }
+  ],
+  "defaultExampleId": "flexbox-layout",
+  "editable": true,
+  "showLineNumbers": true,
+  "previewType": "html",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

@@ -3,5 +3,24 @@
   "currency": "$",
   "defaultTipPercent": 18,
   "defaultPeople": 2,
-  "tipOptions": [15, 18, 20, 25]
+  "tipOptions": [
+    15,
+    18,
+    20,
+    25
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

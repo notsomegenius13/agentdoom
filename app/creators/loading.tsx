@@ -1,0 +1,36 @@
+export default function CreatorsLoading() {
+  return (
+    <main className="min-h-screen bg-doom-black text-white">
+      {/* Header skeleton */}
+      <div className="border-b border-gray-800 bg-doom-dark/50 sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="h-7 w-28 rounded bg-gray-800 animate-pulse" />
+          <div className="h-4 w-20 rounded bg-gray-800 animate-pulse" />
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Title skeleton */}
+        <div className="space-y-2 mb-8">
+          <div className="h-9 w-48 rounded bg-gray-800 animate-pulse" />
+          <div className="h-4 w-72 rounded bg-gray-800/60 animate-pulse" />
+        </div>
+
+        {/* Leaderboard rows skeleton */}
+        <div className="space-y-3">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="rounded-xl border border-gray-800 bg-doom-dark p-4 flex items-center gap-4">
+              <div className="h-6 w-6 rounded bg-gray-800 animate-pulse shrink-0" />
+              <div className="h-10 w-10 rounded-full bg-gray-800 animate-pulse shrink-0" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 w-32 rounded bg-gray-800 animate-pulse" />
+                <div className="h-3 w-48 rounded bg-gray-800/60 animate-pulse" />
+              </div>
+              <div className="h-4 w-20 rounded bg-gray-800 animate-pulse" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}

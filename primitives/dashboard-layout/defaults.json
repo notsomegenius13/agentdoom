@@ -1,0 +1,172 @@
+{
+  "title": "SaaS Analytics Dashboard",
+  "subtitle": "Real-time metrics for your business",
+  "showDateFilter": true,
+  "stats": [
+    {
+      "label": "Monthly Recurring Revenue",
+      "value": "$48,250",
+      "change": "+12.5% vs last month",
+      "changeType": "positive",
+      "icon": "$"
+    },
+    {
+      "label": "Active Users",
+      "value": 3842,
+      "change": "+8.1% vs last month",
+      "changeType": "positive",
+      "icon": "👥"
+    },
+    {
+      "label": "Churn Rate",
+      "value": "2.4%",
+      "change": "+0.3% vs last month",
+      "changeType": "negative",
+      "icon": "📉"
+    },
+    {
+      "label": "Net Promoter Score",
+      "value": 72,
+      "change": "Stable",
+      "changeType": "neutral",
+      "icon": "⭐"
+    }
+  ],
+  "charts": [
+    {
+      "title": "Revenue Trend",
+      "type": "line",
+      "data": [
+        {
+          "label": "Oct",
+          "value": 32000
+        },
+        {
+          "label": "Nov",
+          "value": 35500
+        },
+        {
+          "label": "Dec",
+          "value": 38200
+        },
+        {
+          "label": "Jan",
+          "value": 41000
+        },
+        {
+          "label": "Feb",
+          "value": 44800
+        },
+        {
+          "label": "Mar",
+          "value": 48250
+        }
+      ]
+    },
+    {
+      "title": "User Acquisition by Channel",
+      "type": "bar",
+      "data": [
+        {
+          "label": "Organic Search",
+          "value": 1240,
+          "color": "#7c3aed"
+        },
+        {
+          "label": "Paid Ads",
+          "value": 860,
+          "color": "#3b82f6"
+        },
+        {
+          "label": "Referrals",
+          "value": 520,
+          "color": "#10b981"
+        },
+        {
+          "label": "Social Media",
+          "value": 380,
+          "color": "#f59e0b"
+        },
+        {
+          "label": "Direct",
+          "value": 290,
+          "color": "#ef4444"
+        }
+      ]
+    }
+  ],
+  "tableTitle": "Top Customers",
+  "tableColumns": [
+    {
+      "key": "name",
+      "label": "Customer"
+    },
+    {
+      "key": "plan",
+      "label": "Plan"
+    },
+    {
+      "key": "mrr",
+      "label": "MRR"
+    },
+    {
+      "key": "users",
+      "label": "Users"
+    },
+    {
+      "key": "status",
+      "label": "Status"
+    }
+  ],
+  "tableRows": [
+    {
+      "name": "Acme Corp",
+      "plan": "Enterprise",
+      "mrr": "$4,200",
+      "users": 185,
+      "status": "Active"
+    },
+    {
+      "name": "Globex Inc",
+      "plan": "Business",
+      "mrr": "$2,800",
+      "users": 92,
+      "status": "Active"
+    },
+    {
+      "name": "Initech",
+      "plan": "Business",
+      "mrr": "$2,100",
+      "users": 64,
+      "status": "Active"
+    },
+    {
+      "name": "Umbrella Ltd",
+      "plan": "Starter",
+      "mrr": "$1,500",
+      "users": 41,
+      "status": "Active"
+    },
+    {
+      "name": "Stark Industries",
+      "plan": "Enterprise",
+      "mrr": "$3,600",
+      "users": 128,
+      "status": "Trial"
+    }
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "ListConfig",
+  "description": "An interactive list with add, remove, and optional reorder capabilities",
+  "required": ["title"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "List heading displayed at the top"
+    },
+    "items": {
+      "type": "array",
+      "description": "Initial list items",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "addable": {
+      "type": "boolean",
+      "description": "Whether the user can add new items via an input field",
+      "default": true
+    },
+    "removable": {
+      "type": "boolean",
+      "description": "Whether the user can remove items with a delete button",
+      "default": true
+    },
+    "reorderable": {
+      "type": "boolean",
+      "description": "Whether the user can reorder items using up/down buttons",
+      "default": false
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Placeholder text for the add item input",
+      "default": "Add item..."
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": ["none", "fade", "slide", "scale"],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": { "type": "string" },
+            "surface": { "type": "string" },
+            "text": { "type": "string" },
+            "textSecondary": { "type": "string" },
+            "accent": { "type": "string" },
+            "border": { "type": "string" }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": { "type": "string" },
+                "tablet": { "type": "string" },
+                "desktop": { "type": "string" }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": { "type": "string" },
+                "tablet": { "type": "string" },
+                "desktop": { "type": "string" }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": { "type": "number" },
+                "tablet": { "type": "number" },
+                "desktop": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

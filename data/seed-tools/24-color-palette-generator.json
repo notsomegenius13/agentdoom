@@ -1,0 +1,64 @@
+{
+  "title": "Color Palette Generator",
+  "description": "Generate beautiful color palettes for your next design project",
+  "category": "creator",
+  "primitives": [
+    {
+      "type": "card-grid",
+      "id": "color-palettes",
+      "props": {
+        "title": "Color Palettes",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Sunset Vibes",
+            "description": "#FF6B6B · #FFA07A · #FFD93D · #6BCB77 · #4D96FF",
+            "image": null,
+            "tags": ["warm", "vibrant"],
+            "colors": ["#FF6B6B", "#FFA07A", "#FFD93D", "#6BCB77", "#4D96FF"]
+          },
+          {
+            "title": "Ocean Breeze",
+            "description": "#0F4C75 · #3282B8 · #BBE1FA · #1B262C · #00B4D8",
+            "image": null,
+            "tags": ["cool", "professional"],
+            "colors": ["#0F4C75", "#3282B8", "#BBE1FA", "#1B262C", "#00B4D8"]
+          },
+          {
+            "title": "Forest Walk",
+            "description": "#2D6A4F · #40916C · #52B788 · #74C69D · #95D5B2",
+            "image": null,
+            "tags": ["natural", "calm"],
+            "colors": ["#2D6A4F", "#40916C", "#52B788", "#74C69D", "#95D5B2"]
+          },
+          {
+            "title": "Neon Night",
+            "description": "#FF006E · #8338EC · #3A86FF · #06D6A0 · #FFD166",
+            "image": null,
+            "tags": ["bold", "modern"],
+            "colors": ["#FF006E", "#8338EC", "#3A86FF", "#06D6A0", "#FFD166"]
+          },
+          {
+            "title": "Minimal Mono",
+            "description": "#1A1A2E · #16213E · #0F3460 · #E94560 · #FFFFFF",
+            "image": null,
+            "tags": ["minimal", "dark"],
+            "colors": ["#1A1A2E", "#16213E", "#0F3460", "#E94560", "#FFFFFF"]
+          },
+          {
+            "title": "Pastel Dream",
+            "description": "#FFB5E8 · #B5DEFF · #B5FFD9 · #FFFFB5 · #E8B5FF",
+            "image": null,
+            "tags": ["pastel", "soft"],
+            "colors": ["#FFB5E8", "#B5DEFF", "#B5FFD9", "#FFFFB5", "#E8B5FF"]
+          }
+        ],
+        "showTags": true,
+        "clickable": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "720px", "padding": "24px" },
+  "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "16px" }
+}

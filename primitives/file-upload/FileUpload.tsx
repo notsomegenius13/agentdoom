@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface FileUploadConfig {
   title: string
@@ -9,6 +10,7 @@ export interface FileUploadConfig {
   maxFiles?: number
   uploadLabel?: string
   dragDropLabel?: string
+  appearance?: AppearanceConfig
 }
 
 interface SelectedFile {
@@ -88,8 +90,9 @@ export default function FileUpload({ config }: { config: FileUploadConfig }) {
   const acceptAttr = acceptedTypes.length > 0 ? acceptedTypes.join(',') : undefined
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       <div
         role="button"
@@ -157,5 +160,6 @@ export default function FileUpload({ config }: { config: FileUploadConfig }) {
         </p>
       )}
     </div>
+    </PrimitiveWrapper>
   )
 }

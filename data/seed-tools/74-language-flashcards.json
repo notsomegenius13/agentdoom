@@ -1,0 +1,200 @@
+{
+  "title": "Language Flashcards",
+  "description": "Learn essential phrases in Spanish, French, Japanese, and Korean — with pronunciation guides and meanings on every card",
+  "category": "education",
+  "viralHook": "You can hold a basic conversation in any language with just 50 phrases",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "language-filter",
+      "props": {
+        "title": "Choose Your Language",
+        "submitLabel": "Load Flashcards",
+        "fields": [
+          {
+            "name": "language",
+            "label": "Language",
+            "type": "select",
+            "options": ["Spanish", "French", "Japanese", "Korean"],
+            "defaultValue": "Spanish"
+          },
+          {
+            "name": "category",
+            "label": "Phrase Category",
+            "type": "select",
+            "options": ["All", "Greetings", "Food & Dining", "Travel", "Emergencies", "Numbers & Time"],
+            "defaultValue": "All"
+          },
+          {
+            "name": "difficulty",
+            "label": "Level",
+            "type": "select",
+            "options": ["Beginner", "Intermediate", "All Levels"],
+            "defaultValue": "Beginner"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "flashcard-grid",
+      "props": {
+        "title": "Flashcards",
+        "subtitle": "Click any card to flip and reveal the meaning",
+        "columns": 3,
+        "flipOnClick": true,
+        "cards": [
+          {
+            "id": "es-1",
+            "language": "Spanish",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Hola", "pronunciation": "OH-lah", "flag": "🇪🇸" },
+            "back": { "meaning": "Hello", "example": "¡Hola! ¿Cómo estás?", "exampleTranslation": "Hello! How are you?" }
+          },
+          {
+            "id": "es-2",
+            "language": "Spanish",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Buenos días", "pronunciation": "BWEH-nos DEE-ahs", "flag": "🇪🇸" },
+            "back": { "meaning": "Good morning", "example": "¡Buenos días, señor!", "exampleTranslation": "Good morning, sir!" }
+          },
+          {
+            "id": "es-3",
+            "language": "Spanish",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "¿Cómo estás?", "pronunciation": "KOH-moh es-TAHS", "flag": "🇪🇸" },
+            "back": { "meaning": "How are you?", "example": "¡Hola! ¿Cómo estás hoy?", "exampleTranslation": "Hello! How are you today?" }
+          },
+          {
+            "id": "es-4",
+            "language": "Spanish",
+            "category": "Food & Dining",
+            "difficulty": "Beginner",
+            "front": { "phrase": "La cuenta, por favor", "pronunciation": "lah KWEN-tah por fah-VOR", "flag": "🇪🇸" },
+            "back": { "meaning": "The bill, please", "example": "Disculpe, la cuenta por favor.", "exampleTranslation": "Excuse me, the bill please." }
+          },
+          {
+            "id": "es-5",
+            "language": "Spanish",
+            "category": "Travel",
+            "difficulty": "Beginner",
+            "front": { "phrase": "¿Dónde está el baño?", "pronunciation": "DON-deh es-TAH el BAH-nyoh", "flag": "🇪🇸" },
+            "back": { "meaning": "Where is the bathroom?", "example": "Perdona, ¿dónde está el baño?", "exampleTranslation": "Excuse me, where is the bathroom?" }
+          },
+          {
+            "id": "es-6",
+            "language": "Spanish",
+            "category": "Emergencies",
+            "difficulty": "Beginner",
+            "front": { "phrase": "¡Ayuda!", "pronunciation": "ah-YOO-dah", "flag": "🇪🇸" },
+            "back": { "meaning": "Help!", "example": "¡Ayuda, por favor!", "exampleTranslation": "Help, please!" }
+          },
+          {
+            "id": "fr-1",
+            "language": "French",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Bonjour", "pronunciation": "bon-ZHOOR", "flag": "🇫🇷" },
+            "back": { "meaning": "Good day / Hello", "example": "Bonjour, comment ça va?", "exampleTranslation": "Hello, how's it going?" }
+          },
+          {
+            "id": "fr-2",
+            "language": "French",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Merci beaucoup", "pronunciation": "mehr-SEE boh-KOO", "flag": "🇫🇷" },
+            "back": { "meaning": "Thank you very much", "example": "Merci beaucoup pour votre aide!", "exampleTranslation": "Thank you very much for your help!" }
+          },
+          {
+            "id": "fr-3",
+            "language": "French",
+            "category": "Travel",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Où est la gare?", "pronunciation": "oo eh lah GAHR", "flag": "🇫🇷" },
+            "back": { "meaning": "Where is the train station?", "example": "Excusez-moi, où est la gare?", "exampleTranslation": "Excuse me, where is the train station?" }
+          },
+          {
+            "id": "fr-4",
+            "language": "French",
+            "category": "Food & Dining",
+            "difficulty": "Beginner",
+            "front": { "phrase": "Je voudrais...", "pronunciation": "zhuh voo-DREH", "flag": "🇫🇷" },
+            "back": { "meaning": "I would like...", "example": "Je voudrais un café, s'il vous plaît.", "exampleTranslation": "I would like a coffee, please." }
+          },
+          {
+            "id": "ja-1",
+            "language": "Japanese",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "こんにちは", "pronunciation": "Kon-ni-chi-wa", "flag": "🇯🇵", "romanji": "Konnichiwa" },
+            "back": { "meaning": "Hello / Good afternoon", "example": "こんにちは！お元気ですか？", "exampleTranslation": "Hello! How are you?" }
+          },
+          {
+            "id": "ja-2",
+            "language": "Japanese",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "ありがとう", "pronunciation": "A-ri-ga-toh", "flag": "🇯🇵", "romanji": "Arigatou" },
+            "back": { "meaning": "Thank you", "example": "ありがとうございます！", "exampleTranslation": "Thank you very much!" }
+          },
+          {
+            "id": "ja-3",
+            "language": "Japanese",
+            "category": "Food & Dining",
+            "difficulty": "Beginner",
+            "front": { "phrase": "おいしい！", "pronunciation": "O-i-shii", "flag": "🇯🇵", "romanji": "Oishii!" },
+            "back": { "meaning": "Delicious!", "example": "このラーメンはおいしい！", "exampleTranslation": "This ramen is delicious!" }
+          },
+          {
+            "id": "ja-4",
+            "language": "Japanese",
+            "category": "Travel",
+            "difficulty": "Beginner",
+            "front": { "phrase": "どこですか？", "pronunciation": "Do-ko des-ka", "flag": "🇯🇵", "romanji": "Doko desu ka?" },
+            "back": { "meaning": "Where is it?", "example": "トイレはどこですか？", "exampleTranslation": "Where is the toilet?" }
+          },
+          {
+            "id": "ko-1",
+            "language": "Korean",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "안녕하세요", "pronunciation": "An-nyeong-ha-se-yo", "flag": "🇰🇷" },
+            "back": { "meaning": "Hello (formal)", "example": "안녕하세요! 잘 지내셨어요?", "exampleTranslation": "Hello! Have you been well?" }
+          },
+          {
+            "id": "ko-2",
+            "language": "Korean",
+            "category": "Greetings",
+            "difficulty": "Beginner",
+            "front": { "phrase": "감사합니다", "pronunciation": "Gam-sa-ham-ni-da", "flag": "🇰🇷" },
+            "back": { "meaning": "Thank you (formal)", "example": "도와주셔서 감사합니다.", "exampleTranslation": "Thank you for helping me." }
+          },
+          {
+            "id": "ko-3",
+            "language": "Korean",
+            "category": "Food & Dining",
+            "difficulty": "Beginner",
+            "front": { "phrase": "맛있어요!", "pronunciation": "Ma-shi-sseo-yo", "flag": "🇰🇷" },
+            "back": { "meaning": "It's delicious!", "example": "이 김치는 정말 맛있어요!", "exampleTranslation": "This kimchi is really delicious!" }
+          },
+          {
+            "id": "ko-4",
+            "language": "Korean",
+            "category": "Travel",
+            "difficulty": "Beginner",
+            "front": { "phrase": "얼마예요?", "pronunciation": "Eol-ma-ye-yo", "flag": "🇰🇷" },
+            "back": { "meaning": "How much is it?", "example": "이거 얼마예요?", "exampleTranslation": "How much is this?" }
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "900px", "padding": "28px" },
+  "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#0f172a", "fontFamily": "'Inter', sans-serif", "borderRadius": "16px" }
+}

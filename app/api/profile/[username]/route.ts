@@ -15,8 +15,7 @@ export async function GET(
     const rows = (await sql`
       SELECT
         id, username, display_name, avatar_url, bio,
-        is_verified, is_pro, tools_created, followers_count,
-        stripe_charges_enabled, created_at
+        is_verified, is_pro, tools_created, created_at
       FROM users
       WHERE username = ${username}
     `) as Record<string, unknown>[];
@@ -35,8 +34,8 @@ export async function GET(
       isVerified: row.is_verified,
       isPro: row.is_pro,
       toolsCreated: row.tools_created,
-      followersCount: row.followers_count,
-      stripeChargesEnabled: row.stripe_charges_enabled,
+      followersCount: 0,
+      stripeChargesEnabled: false,
       createdAt: row.created_at ? String(row.created_at) : null,
     });
   } catch (error) {

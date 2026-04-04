@@ -1,0 +1,80 @@
+{
+  "title": "HTTP Status Code Reference",
+  "description": "Search and filter every HTTP status code with name, description, and category — the dev cheat sheet you'll bookmark",
+  "category": "dev-tools",
+  "viralHook": "Finally bookmarked an HTTP status code reference that doesn't suck",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "status-search",
+      "props": {
+        "title": "Search Status Codes",
+        "submitLabel": "Search",
+        "fields": [
+          {
+            "id": "query",
+            "label": "Search by code or name",
+            "type": "text",
+            "placeholder": "e.g. 404, Not Found, redirect..."
+          },
+          {
+            "id": "category_filter",
+            "label": "Filter by Category",
+            "type": "select",
+            "options": [
+              { "value": "all", "label": "All Categories" },
+              { "value": "1xx", "label": "1xx — Informational" },
+              { "value": "2xx", "label": "2xx — Success" },
+              { "value": "3xx", "label": "3xx — Redirection" },
+              { "value": "4xx", "label": "4xx — Client Errors" },
+              { "value": "5xx", "label": "5xx — Server Errors" }
+            ],
+            "defaultValue": "all"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "status-codes-table",
+      "props": {
+        "title": "HTTP Status Codes",
+        "columns": ["Code", "Name", "Description", "Category"],
+        "rows": [
+          ["100", "Continue", "Server received request headers; client should proceed", "1xx Informational"],
+          ["101", "Switching Protocols", "Server is switching protocols as requested by the client", "1xx Informational"],
+          ["200", "OK", "Request succeeded; response body contains the result", "2xx Success"],
+          ["201", "Created", "Request succeeded and a new resource was created", "2xx Success"],
+          ["202", "Accepted", "Request accepted for processing but not yet completed", "2xx Success"],
+          ["204", "No Content", "Request succeeded but response contains no body", "2xx Success"],
+          ["206", "Partial Content", "Server delivering partial resource due to range header", "2xx Success"],
+          ["301", "Moved Permanently", "Resource permanently moved to a new URL", "3xx Redirection"],
+          ["302", "Found", "Resource temporarily at a different URL", "3xx Redirection"],
+          ["304", "Not Modified", "Cached version is still valid; no new content sent", "3xx Redirection"],
+          ["307", "Temporary Redirect", "Redirect with same HTTP method preserved", "3xx Redirection"],
+          ["308", "Permanent Redirect", "Permanent redirect with same HTTP method preserved", "3xx Redirection"],
+          ["400", "Bad Request", "Server cannot process request due to client error", "4xx Client Error"],
+          ["401", "Unauthorized", "Authentication required and has failed or not been provided", "4xx Client Error"],
+          ["403", "Forbidden", "Server understood request but refuses to authorize it", "4xx Client Error"],
+          ["404", "Not Found", "Requested resource could not be found on the server", "4xx Client Error"],
+          ["405", "Method Not Allowed", "HTTP method not supported for the requested resource", "4xx Client Error"],
+          ["408", "Request Timeout", "Server timed out waiting for the request", "4xx Client Error"],
+          ["409", "Conflict", "Request conflicts with current state of the resource", "4xx Client Error"],
+          ["410", "Gone", "Resource has been permanently deleted and will not return", "4xx Client Error"],
+          ["422", "Unprocessable Entity", "Request well-formed but has semantic errors (validation failed)", "4xx Client Error"],
+          ["429", "Too Many Requests", "User has sent too many requests in a given time (rate limiting)", "4xx Client Error"],
+          ["500", "Internal Server Error", "Generic server-side error; something went wrong", "5xx Server Error"],
+          ["501", "Not Implemented", "Server does not support the requested functionality", "5xx Server Error"],
+          ["502", "Bad Gateway", "Server acting as gateway received an invalid response upstream", "5xx Server Error"],
+          ["503", "Service Unavailable", "Server is temporarily unavailable (overloaded or down)", "5xx Server Error"],
+          ["504", "Gateway Timeout", "Gateway did not receive a timely response from upstream", "5xx Server Error"]
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "900px", "padding": "28px" },
+  "theme": { "primaryColor": "#22d3ee", "backgroundColor": "#0f172a", "fontFamily": "'JetBrains Mono', 'Fira Code', monospace", "borderRadius": "10px" }
+}

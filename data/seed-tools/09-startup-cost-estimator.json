@@ -1,0 +1,29 @@
+{
+  "title": "Startup Cost Estimator",
+  "description": "Estimate your first-year startup costs and runway",
+  "category": "business",
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "startup-cost",
+      "props": {
+        "title": "Startup Cost Estimator",
+        "inputs": [
+          { "name": "team", "label": "Team Size", "type": "number", "defaultValue": 3, "min": 1, "max": 50 },
+          { "name": "avgSalary", "label": "Avg Annual Salary ($)", "type": "number", "defaultValue": 85000, "min": 0, "step": 5000 },
+          { "name": "office", "label": "Monthly Office/Cowork ($)", "type": "number", "defaultValue": 500, "min": 0, "step": 100 },
+          { "name": "software", "label": "Monthly SaaS/Tools ($)", "type": "number", "defaultValue": 300, "min": 0, "step": 50 },
+          { "name": "marketing", "label": "Monthly Marketing ($)", "type": "number", "defaultValue": 2000, "min": 0, "step": 100 },
+          { "name": "legal", "label": "One-Time Legal/Filing ($)", "type": "number", "defaultValue": 5000, "min": 0, "step": 500 }
+        ],
+        "formula": "(team * avgSalary) + (office + software + marketing) * 12 + legal",
+        "resultLabel": "Year 1 Total Cost",
+        "resultPrefix": "$",
+        "resultSuffix": ""
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "500px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

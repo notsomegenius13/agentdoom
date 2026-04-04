@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface StatCard {
   label: string
@@ -22,6 +23,7 @@ export interface StatsDashboardConfig {
   chartTitle?: string
   chartType?: 'bar' | 'pie'
   chartData?: ChartData[]
+  appearance?: AppearanceConfig
 }
 
 export default function StatsDashboard({ config }: { config: StatsDashboardConfig }) {
@@ -30,13 +32,14 @@ export default function StatsDashboard({ config }: { config: StatsDashboardConfi
     : 1
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {(config.stats || []).map((stat, i) => (
-          <div key={i} className="bg-gray-50 rounded-lg p-3">
+          <div key={i} className="bg-gray-50 rounded-lg p-3 doom-card-hover" style={{ animation: `slideUp 300ms ease-out ${i * 60}ms both`, borderLeft: '3px solid var(--doom-accent, #7c3aed)' }}>
             {stat.icon && <span className="text-xl mb-1 block" aria-hidden="true">{stat.icon}</span>}
             <div className="text-xs text-gray-500">{stat.label}</div>
             <div className="text-xl font-bold text-gray-900">{stat.value}</div>
@@ -119,5 +122,6 @@ export default function StatsDashboard({ config }: { config: StatsDashboardConfi
         </div>
       ) : null}
     </div>
+    </PrimitiveWrapper>
   )
 }

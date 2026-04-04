@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback, useRef, useEffect } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface TimerDuration {
   label: string
@@ -12,6 +13,7 @@ export interface TimerConfig {
   mode: 'countdown' | 'pomodoro' | 'stopwatch'
   durations?: TimerDuration[]
   alertSound?: boolean
+  appearance?: AppearanceConfig
 }
 
 export default function Timer({ config }: { config: TimerConfig }) {
@@ -78,7 +80,8 @@ export default function Timer({ config }: { config: TimerConfig }) {
       : 0
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
       <h2 className="text-lg font-semibold mb-1 text-gray-900">{config.title}</h2>
       <p className="text-xs text-gray-400 mb-4 capitalize">{config.mode}</p>
 
@@ -149,5 +152,6 @@ export default function Timer({ config }: { config: TimerConfig }) {
         </button>
       </div>
     </div>
+    </PrimitiveWrapper>
   )
 }

@@ -3,25 +3,158 @@
   "type": "object",
   "title": "ChartConfig",
   "description": "SVG-based chart supporting bar, line, and pie types",
-  "required": ["title", "type", "data"],
+  "required": [
+    "title",
+    "type",
+    "data"
+  ],
   "properties": {
-    "title": { "type": "string" },
-    "type": { "type": "string", "enum": ["bar", "line", "pie"] },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "bar",
+        "line",
+        "pie"
+      ]
+    },
     "data": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "value"],
+        "required": [
+          "label",
+          "value"
+        ],
         "properties": {
-          "label": { "type": "string" },
-          "value": { "type": "number" },
-          "color": { "type": "string" }
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string"
+          }
         }
       }
     },
-    "showLegend": { "type": "boolean", "description": "Display a color legend below the chart" },
-    "showValues": { "type": "boolean", "description": "Display numeric values on the chart" },
-    "width": { "type": "number", "description": "SVG viewBox width (default 400)" },
-    "height": { "type": "number", "description": "SVG viewBox height (default 260)" }
+    "showLegend": {
+      "type": "boolean",
+      "description": "Display a color legend below the chart"
+    },
+    "showValues": {
+      "type": "boolean",
+      "description": "Display numeric values on the chart"
+    },
+    "width": {
+      "type": "number",
+      "description": "SVG viewBox width (default 400)"
+    },
+    "height": {
+      "type": "number",
+      "description": "SVG viewBox height (default 260)"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

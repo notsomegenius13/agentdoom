@@ -1,0 +1,29 @@
+{
+  "title": "What's Your Toxic Developer Trait?",
+  "description": "Every dev has one. Find yours and share it with your team (sorry not sorry)",
+  "category": "fun",
+  "viralHook": "I got 'Premature Optimizer' — I'm in this quiz and I don't like it 💀",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "quiz",
+      "id": "toxic-quiz",
+      "props": {
+        "title": "Find Your Toxic Dev Trait",
+        "questions": [
+          { "question": "Someone submits a PR with 3 files changed. You:", "options": ["Approve it — looks good", "Leave 47 comments about naming conventions", "Rewrite the whole thing in the review", "Ask why they didn't use the pattern from that blog post you read"], "correct": 0, "explanation": "Ship it. Perfect is the enemy of good." },
+          { "question": "The build is broken on main. You:", "options": ["Fix it immediately", "Check git blame first to see who broke it", "Post in Slack: 'who broke the build?'", "Secretly deploy your fix and say nothing"], "correct": 0, "explanation": "Fix first, blame never. The build doesn't care about your ego." },
+          { "question": "A non-technical stakeholder asks how long a feature will take:", "options": ["Give an honest estimate with caveats", "'It depends' (classic)", "Triple your estimate, deliver early, look like a hero", "Show them the Jira board and watch their eyes glaze over"], "correct": 0, "explanation": "Honest estimates build trust. Sandbagging builds resentment." },
+          { "question": "You discover legacy code with no tests:", "options": ["Add tests before touching anything", "Rewrite it from scratch (it's 'tech debt')", "Add a TODO comment and move on", "This is my code from 6 months ago"], "correct": 0, "explanation": "Test first, then refactor. Rewrites are almost always a bad idea." },
+          { "question": "Your preferred way to handle disagreements in code review:", "options": ["Discuss the tradeoffs professionally", "'Per the style guide, section 4.2.1...'", "Passive-aggressive 'nit:' comments", "Just approve it and complain in the team retro"], "correct": 0, "explanation": "Technical disagreements should be about tradeoffs, not egos." },
+          { "question": "How do you feel about meetings?", "options": ["Necessary for alignment", "Most could be an email", "I decline all meetings and respond async", "I have meetings about meetings"], "correct": 1, "explanation": "Some meetings matter. Most don't. Protect your focus time." }
+        ],
+        "showScore": true,
+        "shuffleQuestions": false
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "580px", "padding": "24px" },
+  "theme": { "primaryColor": "#dc2626", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

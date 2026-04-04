@@ -1,0 +1,146 @@
+{
+  "title": "Friendship Compatibility Quiz",
+  "description": "Find out what type of friendship you and your bestie really have",
+  "category": "social",
+  "viralHook": "We took the friendship quiz and got Soul Sisters... no surprise there!",
+  "shareability": 9,
+  "primitives": [
+    {
+      "type": "quiz",
+      "id": "friendship-compat-quiz",
+      "props": {
+        "title": "What Kind of Friends Are You?",
+        "subtitle": "Answer these 10 questions to discover your friendship type",
+        "questions": [
+          {
+            "id": "q1",
+            "text": "Your ideal weekend together looks like...",
+            "options": [
+              { "id": "q1a", "text": "Deep conversations over coffee for hours", "scores": { "soul": 3, "adventure": 0, "work": 1, "chill": 1 } },
+              { "id": "q1b", "text": "Spontaneous road trip to somewhere new", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 1 } },
+              { "id": "q1c", "text": "Co-working at a cute cafe then happy hour", "scores": { "soul": 1, "adventure": 0, "work": 3, "chill": 0 } },
+              { "id": "q1d", "text": "Netflix marathon with snacks on the couch", "scores": { "soul": 1, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q2",
+            "text": "How do you handle conflict with each other?",
+            "options": [
+              { "id": "q2a", "text": "We talk it out immediately and cry together", "scores": { "soul": 3, "adventure": 0, "work": 1, "chill": 0 } },
+              { "id": "q2b", "text": "Laugh it off and move on quickly", "scores": { "soul": 0, "adventure": 2, "work": 0, "chill": 3 } },
+              { "id": "q2c", "text": "Schedule a time to discuss it like adults", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 1 } },
+              { "id": "q2d", "text": "Go do something fun to blow off steam first", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 1 } }
+            ]
+          },
+          {
+            "id": "q3",
+            "text": "Your go-to way to communicate is...",
+            "options": [
+              { "id": "q3a", "text": "Hour-long voice notes pouring out feelings", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 1 } },
+              { "id": "q3b", "text": "Memes and TikToks sent at 2am", "scores": { "soul": 1, "adventure": 2, "work": 0, "chill": 3 } },
+              { "id": "q3c", "text": "Quick check-in texts during the workday", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 1 } },
+              { "id": "q3d", "text": "Tagging each other in travel posts and bucket lists", "scores": { "soul": 0, "adventure": 3, "work": 1, "chill": 0 } }
+            ]
+          },
+          {
+            "id": "q4",
+            "text": "One of you gets a big promotion. Your reaction?",
+            "options": [
+              { "id": "q4a", "text": "Tears of joy and a heartfelt letter about how proud you are", "scores": { "soul": 3, "adventure": 0, "work": 1, "chill": 0 } },
+              { "id": "q4b", "text": "Plan a celebratory trip immediately", "scores": { "soul": 0, "adventure": 3, "work": 1, "chill": 0 } },
+              { "id": "q4c", "text": "Strategize the next career move together over dinner", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 1 } },
+              { "id": "q4d", "text": "Order takeout and celebrate with a chill night in", "scores": { "soul": 1, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q5",
+            "text": "What do you argue about most?",
+            "options": [
+              { "id": "q5a", "text": "Not sharing feelings soon enough", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 1 } },
+              { "id": "q5b", "text": "Who picks the next adventure", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 1 } },
+              { "id": "q5c", "text": "Scheduling conflicts and priorities", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 1 } },
+              { "id": "q5d", "text": "We honestly never argue", "scores": { "soul": 1, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q6",
+            "text": "Your friendship anthem would be...",
+            "options": [
+              { "id": "q6a", "text": "Lean on Me - Bill Withers", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 1 } },
+              { "id": "q6b", "text": "On Top of the World - Imagine Dragons", "scores": { "soul": 0, "adventure": 3, "work": 1, "chill": 0 } },
+              { "id": "q6c", "text": "Unstoppable - Sia", "scores": { "soul": 0, "adventure": 1, "work": 3, "chill": 0 } },
+              { "id": "q6d", "text": "Best Day of My Life - American Authors", "scores": { "soul": 1, "adventure": 1, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q7",
+            "text": "How long can you go without talking?",
+            "options": [
+              { "id": "q7a", "text": "More than a day feels wrong", "scores": { "soul": 3, "adventure": 0, "work": 1, "chill": 0 } },
+              { "id": "q7b", "text": "Weeks apart but pick up right where we left off", "scores": { "soul": 0, "adventure": 2, "work": 0, "chill": 3 } },
+              { "id": "q7c", "text": "We literally talk every day during work hours", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 0 } },
+              { "id": "q7d", "text": "We sync up before and after every trip or event", "scores": { "soul": 1, "adventure": 3, "work": 0, "chill": 0 } }
+            ]
+          },
+          {
+            "id": "q8",
+            "text": "You'd describe your friendship vibe as...",
+            "options": [
+              { "id": "q8a", "text": "Emotional, deep, and unbreakable", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 0 } },
+              { "id": "q8b", "text": "Wild, spontaneous, and full of stories", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 0 } },
+              { "id": "q8c", "text": "Ambitious, supportive, and goal-oriented", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 0 } },
+              { "id": "q8d", "text": "Easy, comfortable, and low-maintenance", "scores": { "soul": 0, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q9",
+            "text": "Your friend is going through a tough time. You...",
+            "options": [
+              { "id": "q9a", "text": "Drop everything and show up with tissues and wine", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 1 } },
+              { "id": "q9b", "text": "Plan a surprise getaway to take their mind off things", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 0 } },
+              { "id": "q9c", "text": "Help them make an action plan to fix the situation", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 0 } },
+              { "id": "q9d", "text": "Invite them over for comfort food and zero pressure to talk", "scores": { "soul": 1, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          },
+          {
+            "id": "q10",
+            "text": "In 10 years, you see yourselves...",
+            "options": [
+              { "id": "q10a", "text": "Living next door and raising our kids together", "scores": { "soul": 3, "adventure": 0, "work": 0, "chill": 1 } },
+              { "id": "q10b", "text": "Still checking countries off our shared bucket list", "scores": { "soul": 0, "adventure": 3, "work": 0, "chill": 0 } },
+              { "id": "q10c", "text": "Running a business or side project together", "scores": { "soul": 0, "adventure": 0, "work": 3, "chill": 0 } },
+              { "id": "q10d", "text": "Same couch, same snacks, same us", "scores": { "soul": 0, "adventure": 0, "work": 0, "chill": 3 } }
+            ]
+          }
+        ],
+        "results": {
+          "soul": {
+            "title": "Soul Sisters",
+            "emoji": "💕",
+            "description": "Your bond runs deeper than the ocean. You finish each other's sentences, feel each other's pain, and your friendship is basically a lifelong commitment. You don't just have a friend - you have a soulmate in platonic form. People are honestly jealous of what you two have.",
+            "shareText": "We're Soul Sisters! Our friendship is basically a rom-com without the romance."
+          },
+          "adventure": {
+            "title": "Adventure Buddies",
+            "emoji": "🌍",
+            "description": "Life is one big adventure with you two! Your camera rolls are full of epic moments, your passport stamps match, and boring is never in your vocabulary. You push each other out of your comfort zones and have the wildest stories to tell at parties.",
+            "shareText": "We're Adventure Buddies! Our friendship runs on adrenaline and spontaneous plans."
+          },
+          "work": {
+            "title": "Work Besties",
+            "emoji": "💼",
+            "description": "You're the ultimate power duo. Whether you met at the office or just vibe on that hustle energy, you keep each other motivated, accountable, and winning. Your friendship is built on mutual respect, shared ambitions, and the occasional venting session about that one coworker.",
+            "shareText": "We're Work Besties! Together we're basically unstoppable career machines."
+          },
+          "chill": {
+            "title": "Chill Companions",
+            "emoji": "🛋️",
+            "description": "No drama, no pressure, just pure comfort. Your friendship is the human equivalent of a cozy blanket. You can sit in silence and it's not weird, you never have to perform, and just being together recharges your social battery. This is the friendship everyone needs but few find.",
+            "shareText": "We're Chill Companions! Our friendship is zero drama, maximum comfort."
+          }
+        },
+        "scoringMethod": "highest-category"
+      }
+    }
+  ]
+}

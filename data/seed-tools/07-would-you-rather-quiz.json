@@ -1,0 +1,29 @@
+{
+  "title": "Would You Rather",
+  "description": "Play the classic would-you-rather game with wild scenarios",
+  "category": "fun",
+  "primitives": [
+    {
+      "type": "quiz",
+      "id": "wyr",
+      "props": {
+        "title": "Would You Rather?",
+        "questions": [
+          { "question": "Would you rather have the ability to fly or be invisible?", "options": ["Fly anywhere", "Be invisible at will"], "correct": 0, "explanation": "Both are top picks! Most people choose flying for the freedom." },
+          { "question": "Would you rather live without music or without movies?", "options": ["No music ever", "No movies ever"], "correct": 1, "explanation": "Music tends to win — it's woven into everyday life." },
+          { "question": "Would you rather always be 10 minutes late or 20 minutes early?", "options": ["Always 10 min late", "Always 20 min early"], "correct": 1, "explanation": "Early birds get the worm (and less stress)." },
+          { "question": "Would you rather have unlimited free food or unlimited free travel?", "options": ["Unlimited food", "Unlimited travel"], "correct": 1, "explanation": "Most pick travel — food you can work for, experiences are priceless." },
+          { "question": "Would you rather know every language or play every instrument?", "options": ["Every language fluently", "Every instrument perfectly"], "correct": 0, "explanation": "Languages open up the whole world. But instruments win hearts!" },
+          { "question": "Would you rather have a rewind button or a pause button for life?", "options": ["Rewind button", "Pause button"], "correct": 0, "explanation": "Fix mistakes vs. savor moments — the eternal debate." },
+          { "question": "Would you rather never use social media again or never watch TV again?", "options": ["No social media", "No TV/streaming"], "correct": 0, "explanation": "Social media is the more common sacrifice — real connections win." },
+          { "question": "Would you rather have a personal chef or a personal trainer?", "options": ["Personal chef", "Personal trainer"], "correct": 0, "explanation": "Abs are made in the kitchen, they say!" }
+        ],
+        "showScore": true,
+        "shuffleQuestions": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+  "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#fffbeb", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SettingsPanelConfig",
+  "description": "Configuration schema for the SettingsPanel composite primitive",
+  "type": "object",
+  "required": [
+    "title",
+    "tabs"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title displayed at the top of the settings panel"
+    },
+    "tabs": {
+      "type": "array",
+      "description": "Array of settings tabs",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "sections"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the tab"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the tab"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Optional icon (emoji or icon identifier) for the tab"
+          },
+          "sections": {
+            "type": "array",
+            "description": "Array of form sections within the tab",
+            "items": {
+              "type": "object",
+              "required": [
+                "title",
+                "fields"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Section heading"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Optional description text below the section heading"
+                },
+                "fields": {
+                  "type": "array",
+                  "description": "Array of form fields in this section",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "label",
+                      "type"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Unique field name used as the form key"
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Display label for the field"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "text",
+                          "email",
+                          "select",
+                          "toggle",
+                          "textarea",
+                          "number"
+                        ],
+                        "description": "The type of input to render"
+                      },
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ],
+                        "description": "Default value for the field"
+                      },
+                      "placeholder": {
+                        "type": "string",
+                        "description": "Placeholder text for text-based inputs"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Options for select fields"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Helper text displayed below the field label"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "saveLabel": {
+      "type": "string",
+      "description": "Custom label for the save button",
+      "default": "Save Changes"
+    },
+    "successMessage": {
+      "type": "string",
+      "description": "Message shown after successful save",
+      "default": "Settings saved successfully!"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

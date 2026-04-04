@@ -1,0 +1,43 @@
+{
+  "title": "SaaS Idea Validator",
+  "description": "Score your SaaS idea across 8 dimensions before you waste 6 months building it",
+  "category": "business",
+  "viralHook": "My SaaS idea scored 34/80. Saved me 6 months of wasted effort.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "idea-input",
+      "props": {
+        "title": "Validate Your SaaS Idea",
+        "fields": [
+          { "name": "idea", "label": "Describe your SaaS idea in one sentence", "type": "textarea", "required": true, "placeholder": "e.g., An AI tool that writes personalized cold outreach emails..." },
+          { "name": "painLevel", "label": "How painful is the problem? (1-10)", "type": "number", "defaultValue": 7, "min": 1, "max": 10 },
+          { "name": "existingSolutions", "label": "Existing solutions?", "type": "select", "options": ["None that I know of", "A few indirect competitors", "Several direct competitors", "Dominated by big players"] },
+          { "name": "targetMarket", "label": "Target market size", "type": "select", "options": ["Niche (<10K potential users)", "Small (10K-100K)", "Medium (100K-1M)", "Large (1M+)"] },
+          { "name": "willingness", "label": "Would people pay for this?", "type": "select", "options": ["Definitely — they're already paying for worse alternatives", "Probably — it solves a real pain", "Maybe — it's nice to have", "Unclear — need to validate"] },
+          { "name": "buildTime", "label": "Time to MVP", "type": "select", "options": ["Weekend project", "1-2 weeks", "1-3 months", "3-6 months", "6+ months"] },
+          { "name": "moat", "label": "Competitive moat?", "type": "select", "options": ["Strong network effects", "Proprietary data/tech", "First-mover in niche", "Brand/community", "None yet"] }
+        ],
+        "submitLabel": "Score My Idea"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "idea-score",
+      "props": {
+        "title": "Idea Scorecard",
+        "stats": [
+          { "label": "Overall Score", "value": "—/80", "change": 0, "changeLabel": "submit to calculate", "icon": "trending" },
+          { "label": "Market Fit", "value": "—", "change": 0, "changeLabel": "pain × market size", "icon": "cart" },
+          { "label": "Build Feasibility", "value": "—", "change": 0, "changeLabel": "time + complexity", "icon": "percent" },
+          { "label": "Verdict", "value": "—", "change": 0, "changeLabel": "build it or kill it?", "icon": "dollar" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+  "theme": { "primaryColor": "#0891b2", "backgroundColor": "#ecfeff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

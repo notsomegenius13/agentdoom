@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface CardItem {
   title: string
@@ -14,14 +15,16 @@ export interface CardGridConfig {
   title: string
   cards: CardItem[]
   columns?: number
+  appearance?: AppearanceConfig
 }
 
 export default function CardGrid({ config }: { config: CardGridConfig }) {
   const cols = config.columns || 3
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
       <div
         className="grid gap-4"
         style={{ gridTemplateColumns: `repeat(${Math.min(cols, 4)}, minmax(0, 1fr))` }}
@@ -40,14 +43,15 @@ export default function CardGrid({ config }: { config: CardGridConfig }) {
             </>
           )
 
-          const cls = "bg-gray-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+          const cls = "bg-gray-50 border border-gray-200 rounded-lg p-4 doom-card-hover doom-gradient-surface"
+          const stagger = { animation: `slideUp 300ms ease-out ${i * 50}ms both` }
 
           return card.link ? (
-            <a key={i} href={card.link} className={cls} target="_blank" rel="noopener noreferrer">
+            <a key={i} href={card.link} className={cls} style={stagger} target="_blank" rel="noopener noreferrer">
               {content}
             </a>
           ) : (
-            <div key={i} className={cls}>
+            <div key={i} className={cls} style={stagger}>
               {content}
             </div>
           )
@@ -63,5 +67,6 @@ export default function CardGrid({ config }: { config: CardGridConfig }) {
         }
       `}</style>
     </div>
+    </PrimitiveWrapper>
   )
 }

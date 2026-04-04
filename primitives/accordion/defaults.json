@@ -1,0 +1,47 @@
+{
+  "title": "Frequently Asked Questions",
+  "sections": [
+    {
+      "id": "what",
+      "title": "What is AgentDoom?",
+      "content": "AgentDoom is a platform that transforms natural language into fully deployed web tools. Just describe what you need and we build it instantly.",
+      "icon": "🚀",
+      "defaultOpen": true
+    },
+    {
+      "id": "pricing",
+      "title": "How much does it cost?",
+      "content": "We offer a free tier for personal use with up to 5 tools. Pro plans start at $19/month for unlimited tools and custom domains.",
+      "icon": "💰"
+    },
+    {
+      "id": "security",
+      "title": "Is my data secure?",
+      "content": "Yes. All data is encrypted at rest and in transit. We are SOC 2 compliant and never share your data with third parties.",
+      "icon": "🔒"
+    },
+    {
+      "id": "support",
+      "title": "How do I get support?",
+      "content": "Reach us via in-app chat, email at support@agentdoom.com, or our community Discord. Pro users get priority response within 2 hours.",
+      "icon": "💬"
+    }
+  ],
+  "allowMultiple": true,
+  "bordered": true,
+  "compact": false,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

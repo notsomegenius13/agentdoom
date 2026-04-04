@@ -1,0 +1,147 @@
+{
+  "title": "GPA Calculator",
+  "description": "Calculate your semester or cumulative GPA — enter credits and letter grades, get your GPA instantly",
+  "category": "education",
+  "viralHook": "I finally understand why my GPA dropped — this calculator shows exactly which classes hurt the most",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "gpa-calculator",
+      "props": {
+        "title": "Enter Your Courses",
+        "inputs": [
+          {
+            "id": "course1_name",
+            "label": "Course 1 Name",
+            "type": "text",
+            "placeholder": "e.g. Calculus II",
+            "defaultValue": "Calculus II"
+          },
+          {
+            "id": "course1_credits",
+            "label": "Credits",
+            "type": "number",
+            "min": 1,
+            "max": 6,
+            "defaultValue": 3
+          },
+          {
+            "id": "course1_grade",
+            "label": "Grade",
+            "type": "select",
+            "options": [
+              { "value": "4.0", "label": "A" },
+              { "value": "3.7", "label": "A-" },
+              { "value": "3.3", "label": "B+" },
+              { "value": "3.0", "label": "B" },
+              { "value": "2.7", "label": "B-" },
+              { "value": "2.3", "label": "C+" },
+              { "value": "2.0", "label": "C" },
+              { "value": "1.7", "label": "C-" },
+              { "value": "1.3", "label": "D+" },
+              { "value": "1.0", "label": "D" },
+              { "value": "0.0", "label": "F" }
+            ],
+            "defaultValue": "3.0"
+          },
+          {
+            "id": "course2_name",
+            "label": "Course 2 Name",
+            "type": "text",
+            "placeholder": "e.g. English Composition",
+            "defaultValue": "English Composition"
+          },
+          {
+            "id": "course2_credits",
+            "label": "Credits",
+            "type": "number",
+            "min": 1,
+            "max": 6,
+            "defaultValue": 3
+          },
+          {
+            "id": "course2_grade",
+            "label": "Grade",
+            "type": "select",
+            "options": [
+              { "value": "4.0", "label": "A" },
+              { "value": "3.7", "label": "A-" },
+              { "value": "3.3", "label": "B+" },
+              { "value": "3.0", "label": "B" },
+              { "value": "2.7", "label": "B-" },
+              { "value": "2.3", "label": "C+" },
+              { "value": "2.0", "label": "C" },
+              { "value": "1.7", "label": "C-" },
+              { "value": "1.3", "label": "D+" },
+              { "value": "1.0", "label": "D" },
+              { "value": "0.0", "label": "F" }
+            ],
+            "defaultValue": "3.7"
+          },
+          {
+            "id": "course3_name",
+            "label": "Course 3 Name",
+            "type": "text",
+            "placeholder": "e.g. Intro to Psychology",
+            "defaultValue": "Intro to Psychology"
+          },
+          {
+            "id": "course3_credits",
+            "label": "Credits",
+            "type": "number",
+            "min": 1,
+            "max": 6,
+            "defaultValue": 4
+          },
+          {
+            "id": "course3_grade",
+            "label": "Grade",
+            "type": "select",
+            "options": [
+              { "value": "4.0", "label": "A" },
+              { "value": "3.7", "label": "A-" },
+              { "value": "3.3", "label": "B+" },
+              { "value": "3.0", "label": "B" },
+              { "value": "2.7", "label": "B-" },
+              { "value": "2.3", "label": "C+" },
+              { "value": "2.0", "label": "C" },
+              { "value": "1.7", "label": "C-" },
+              { "value": "1.3", "label": "D+" },
+              { "value": "1.0", "label": "D" },
+              { "value": "0.0", "label": "F" }
+            ],
+            "defaultValue": "4.0"
+          }
+        ],
+        "formula": "Sum of (grade_points × credits) / total_credits",
+        "outputLabel": "Semester GPA"
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "grade-scale-table",
+      "props": {
+        "title": "Grade Point Scale Reference",
+        "columns": ["Letter Grade", "Grade Points", "Percentage Range", "Description"],
+        "rows": [
+          ["A", "4.0", "93–100%", "Excellent"],
+          ["A-", "3.7", "90–92%", "Near Excellent"],
+          ["B+", "3.3", "87–89%", "Above Average"],
+          ["B", "3.0", "83–86%", "Good"],
+          ["B-", "2.7", "80–82%", "Slightly Below Good"],
+          ["C+", "2.3", "77–79%", "Average+"],
+          ["C", "2.0", "73–76%", "Average"],
+          ["C-", "1.7", "70–72%", "Below Average"],
+          ["D+", "1.3", "67–69%", "Poor"],
+          ["D", "1.0", "60–66%", "Passing (barely)"],
+          ["F", "0.0", "Below 60%", "Failing"]
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "680px", "padding": "24px" },
+  "theme": { "primaryColor": "#10b981", "backgroundColor": "#f0fdf4", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

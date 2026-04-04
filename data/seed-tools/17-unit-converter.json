@@ -1,0 +1,49 @@
+{
+  "title": "Universal Unit Converter",
+  "description": "Convert between common units — length, weight, temperature, and more",
+  "category": "utilities",
+  "primitives": [
+    {
+      "type": "converter",
+      "id": "unit-converter",
+      "props": {
+        "title": "Unit Converter",
+        "categories": [
+          {
+            "name": "Length",
+            "units": [
+              { "name": "Meters", "symbol": "m", "toBase": 1 },
+              { "name": "Feet", "symbol": "ft", "toBase": 0.3048 },
+              { "name": "Inches", "symbol": "in", "toBase": 0.0254 },
+              { "name": "Centimeters", "symbol": "cm", "toBase": 0.01 },
+              { "name": "Kilometers", "symbol": "km", "toBase": 1000 },
+              { "name": "Miles", "symbol": "mi", "toBase": 1609.344 }
+            ]
+          },
+          {
+            "name": "Weight",
+            "units": [
+              { "name": "Kilograms", "symbol": "kg", "toBase": 1 },
+              { "name": "Pounds", "symbol": "lb", "toBase": 0.453592 },
+              { "name": "Ounces", "symbol": "oz", "toBase": 0.0283495 },
+              { "name": "Grams", "symbol": "g", "toBase": 0.001 }
+            ]
+          },
+          {
+            "name": "Temperature",
+            "units": [
+              { "name": "Celsius", "symbol": "°C", "toBase": 1 },
+              { "name": "Fahrenheit", "symbol": "°F", "toBase": 1, "formula": "(value - 32) * 5/9" },
+              { "name": "Kelvin", "symbol": "K", "toBase": 1, "formula": "value - 273.15" }
+            ]
+          }
+        ],
+        "defaultCategory": "Length",
+        "precision": 4
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+  "theme": { "primaryColor": "#0ea5e9", "backgroundColor": "#f0f9ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

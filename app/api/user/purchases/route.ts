@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/user/purchases — Fetch purchase history for the authenticated user.
  * Query params:

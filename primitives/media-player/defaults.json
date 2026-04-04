@@ -5,5 +5,19 @@
   "poster": "https://www.example.com/sample-poster.jpg",
   "autoplay": false,
   "loop": false,
-  "showControls": true
+  "showControls": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

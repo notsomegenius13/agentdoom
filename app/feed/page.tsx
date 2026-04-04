@@ -1,10 +1,15 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { FeedTool, FeedResponse, FeedSection as FeedSectionType } from '@/lib/feed/types';
+import type { FeedTool, FeedResponse, FeedSection as FeedSectionType, FeedSort } from '@/lib/feed/types';
 import CategoryFilter from '@/components/feed/CategoryFilter';
+import SearchBar from '@/components/feed/SearchBar';
 import UserNav from '@/components/feed/UserNav';
+import LiveTicker from '@/components/feed/LiveTicker';
+import BuildingNowIndicator from '@/components/feed/BuildingNowIndicator';
+import FeaturedCarousel from '@/components/feed/FeaturedCarousel';
 import {
   trackEvent,
   createViewObserver,
@@ -38,23 +43,72 @@ const CATEGORY_COLORS: Record<string, string> = {
   utility: 'bg-gray-500/20 text-gray-400',
 };
 
+const SORT_TABS: { key: FeedSort; label: string }[] = [
+  { key: 'popular', label: 'For You' },
+  { key: 'trending', label: 'Trending' },
+  { key: 'new', label: 'New' },
+];
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  return debounced;
+}
+
 export default function FeedPage() {
+  return (
+    <Suspense fallback={<FeedSkeleton />}>
+      <FeedPageInner />
+    </Suspense>
+  );
+}
+
+function FeedPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Derive initial state from URL params
+  const initialSort = (searchParams.get('sort') as FeedSort) || 'popular';
+  const initialCategory = searchParams.get('category') || '';
+  const initialSearch = searchParams.get('q') || '';
+
   const [tools, setTools] = useState<FeedTool[]>([]);
-  const [category, setCategory] = useState('');
+  const [sort, setSort] = useState<FeedSort>(initialSort);
+  const [category, setCategory] = useState(initialCategory);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [searchOpen, setSearchOpen] = useState(!!initialSearch);
   const [cursor, setCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [remixTool, setRemixTool] = useState<FeedTool | null>(null);
+  const [searchTotal, setSearchTotal] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [featuredTools, setFeaturedTools] = useState<FeedTool[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
+
+  const debouncedSearch = useDebounce(searchQuery, 300);
 
   // Engagement tracking
   const viewedToolsRef = useRef(new Set<string>());
   const viewObserverRef = useRef<IntersectionObserver | null>(null);
   const timeSpentRef = useRef(new TimeSpentTracker());
   const scrollDepthRef = useRef(new ScrollDepthTracker());
+
+  // Sync state to URL params
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (sort !== 'popular') params.set('sort', sort);
+    if (category) params.set('category', category);
+    if (debouncedSearch) params.set('q', debouncedSearch);
+    const qs = params.toString();
+    router.replace(`/feed${qs ? `?${qs}` : ''}`, { scroll: false });
+  }, [sort, category, debouncedSearch, router]);
 
   // Initialize view observer (fires 'view' event once per tool after 1s visible)
   useEffect(() => {
@@ -80,23 +134,55 @@ export default function FeedPage() {
     };
   }, []);
 
+  const isSearchMode = debouncedSearch.length >= 2;
+
   const fetchFeed = useCallback(
     async (opts: { cursor?: string; append?: boolean } = {}) => {
       const isAppend = opts.append && opts.cursor;
       if (isAppend) setLoadingMore(true);
       else setLoading(true);
 
-      const params = new URLSearchParams();
-      if (category) params.set('category', category);
-      if (opts.cursor) params.set('cursor', opts.cursor);
-      params.set('limit', '20');
-
+      setError(null);
       try {
-        const res = await fetch(`/api/feed?${params}`);
-        if (!res.ok) throw new Error('Feed fetch failed');
-        const data: FeedResponse = await res.json();
+        let allTools: FeedTool[];
+        let nextCursor: string | null;
 
-        const allTools = data.sections.flatMap((s: FeedSectionType) => s.tools);
+        if (isSearchMode) {
+          // Search mode — hit the search endpoint
+          const params = new URLSearchParams();
+          params.set('q', debouncedSearch);
+          if (category) params.set('category', category);
+          if (opts.cursor) params.set('cursor', opts.cursor);
+          params.set('limit', '20');
+
+          const res = await fetch(`/api/feed/search?${params}`);
+          if (!res.ok) throw new Error('Search failed');
+          const data = await res.json();
+          allTools = data.tools;
+          nextCursor = data.cursor;
+          setSearchTotal(data.total);
+        } else {
+          // Normal feed mode
+          const params = new URLSearchParams();
+          if (category) params.set('category', category);
+          if (sort !== 'popular') params.set('sort', sort);
+          if (opts.cursor) params.set('cursor', opts.cursor);
+          params.set('limit', '20');
+
+          const res = await fetch(`/api/feed?${params}`);
+          if (!res.ok) throw new Error('Feed fetch failed');
+          const data: FeedResponse = await res.json();
+          // Extract featured tools for carousel (only on first page load)
+          if (!opts.cursor) {
+            const featured = data.sections
+              .filter((s: FeedSectionType) => s.type === 'featured' || s.type === 'curated')
+              .flatMap((s: FeedSectionType) => s.tools);
+            if (featured.length > 0) setFeaturedTools(featured);
+          }
+          allTools = data.sections.flatMap((s: FeedSectionType) => s.tools);
+          nextCursor = data.cursor;
+          setSearchTotal(null);
+        }
 
         if (isAppend) {
           setTools((prev) => [...prev, ...allTools]);
@@ -104,16 +190,16 @@ export default function FeedPage() {
           setTools(allTools);
         }
 
-        setCursor(data.cursor);
-        setHasMore(data.cursor !== null);
+        setCursor(nextCursor);
+        setHasMore(nextCursor !== null);
       } catch {
-        // Silent fail
+        if (!isAppend) setError('Failed to load feed. Please try again.');
       } finally {
         setLoading(false);
         setLoadingMore(false);
       }
     },
-    [category],
+    [category, sort, debouncedSearch, isSearchMode],
   );
 
   useEffect(() => {
@@ -168,19 +254,78 @@ export default function FeedPage() {
 
   return (
     <main className="h-screen w-screen overflow-hidden relative">
+      {/* Live ticker - real-time tool activity */}
+      <div className="fixed top-0 left-0 right-0 z-30 pointer-events-auto">
+        <LiveTicker />
+      </div>
+
       {/* Top bar - floating over feed */}
-      <header className="fixed top-0 left-0 right-0 z-20 pointer-events-none">
+      <header className="fixed top-7 left-0 right-0 z-20 pointer-events-none">
         <div className="mx-auto max-w-lg px-4 pt-4 flex items-center justify-between pointer-events-auto">
           <a href="/" className="text-xl font-bold tracking-tight drop-shadow-lg">
             <span className="text-doom-accent">Agent</span>Doom
           </a>
-          <UserNav />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                setSearchOpen((prev) => !prev);
+                if (searchOpen) setSearchQuery('');
+              }}
+              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+              aria-label="Search"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                {searchOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                )}
+              </svg>
+            </button>
+            <UserNav />
+          </div>
         </div>
+
+        {/* Search bar - slides down when open */}
+        {searchOpen && (
+          <div className="mx-auto max-w-lg px-4 pt-2 pointer-events-auto">
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+            {searchTotal !== null && debouncedSearch.length >= 2 && (
+              <p className="text-[11px] text-gray-500 mt-1 px-1">{searchTotal} result{searchTotal !== 1 ? 's' : ''}</p>
+            )}
+          </div>
+        )}
       </header>
 
-      {/* Category filter - floating */}
-      <div className="fixed top-16 left-0 right-0 z-20 pointer-events-none">
-        <div className="mx-auto max-w-lg px-4 pointer-events-auto">
+      {/* Sort tabs + Category filter - floating */}
+      <div className={`fixed ${searchOpen ? 'top-[8.5rem]' : 'top-[5.5rem]'} left-0 right-0 z-20 pointer-events-none transition-all`}>
+        <div className="mx-auto max-w-lg px-4 pointer-events-auto space-y-2">
+          {/* Sort tabs + Building indicator */}
+          {!isSearchMode && (
+            <div className="flex items-center gap-2">
+            <div className="flex gap-1 bg-doom-black/60 backdrop-blur-md rounded-full p-1 w-fit">
+              {SORT_TABS.map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setSort(tab.key)}
+                  className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                    sort === tab.key
+                      ? 'bg-doom-accent text-white shadow-sm'
+                      : 'text-gray-400 hover:text-gray-200'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <BuildingNowIndicator />
+            </div>
+          )}
+          {/* Featured carousel */}
+          {!isSearchMode && featuredTools.length > 0 && (
+            <FeaturedCarousel tools={featuredTools} />
+          )}
+          {/* Category filter */}
           <CategoryFilter active={category} onChange={setCategory} />
         </div>
       </div>
@@ -192,15 +337,45 @@ export default function FeedPage() {
       >
         {loading ? (
           <FeedSkeleton />
+        ) : error ? (
+          <div className="h-screen flex flex-col items-center justify-center gap-4">
+            <svg className="w-12 h-12 text-doom-red/60" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+            <p className="text-gray-400 text-sm">{error}</p>
+            <button
+              onClick={() => fetchFeed()}
+              className="rounded-xl bg-doom-accent px-6 py-2.5 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
         ) : tools.length === 0 ? (
           <div className="h-screen flex flex-col items-center justify-center gap-4">
-            <p className="text-gray-500 text-sm">No tools yet. Be the first to build one!</p>
-            <a
-              href="/"
-              className="rounded-xl bg-doom-accent px-6 py-2.5 text-sm font-semibold text-white"
-            >
-              Create a Tool
-            </a>
+            {isSearchMode ? (
+              <>
+                <svg className="w-12 h-12 text-gray-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <p className="text-gray-500 text-sm">No tools found for &quot;{debouncedSearch}&quot;</p>
+                <button
+                  onClick={() => { setSearchQuery(''); setSearchOpen(false); }}
+                  className="rounded-xl bg-doom-gray px-6 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  Clear Search
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-gray-500 text-sm">No tools yet. Be the first to build one!</p>
+                <a
+                  href="/"
+                  className="rounded-xl bg-doom-accent px-6 py-2.5 text-sm font-semibold text-white"
+                >
+                  Create a Tool
+                </a>
+              </>
+            )}
           </div>
         ) : (
           <>
@@ -336,7 +511,7 @@ function FeedCard({
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-doom-black/95 via-doom-black/60 to-transparent pointer-events-none" />
 
       {/* Right sidebar actions (TikTok-style) */}
-      <div className="absolute right-3 bottom-40 flex flex-col items-center gap-5 z-10">
+      <div className="absolute right-2 sm:right-3 bottom-40 flex flex-col items-center gap-4 sm:gap-5 z-10">
         {/* Like */}
         <button onClick={handleLike} className="flex flex-col items-center gap-1 group">
           <div
@@ -417,7 +592,7 @@ function FeedCard({
       </div>
 
       {/* Bottom info overlay */}
-      <div className="absolute bottom-6 left-4 right-16 z-10">
+      <div className="absolute bottom-6 left-3 sm:left-4 right-14 sm:right-16 z-10">
         {/* Creator */}
         <div className="flex items-center gap-2 mb-2">
           {tool.creator.avatarUrl ? (
@@ -455,7 +630,7 @@ function FeedCard({
         </div>
 
         {/* Title + description */}
-        <h2 className="text-lg font-bold text-white mb-1 drop-shadow-lg">{tool.title}</h2>
+        <h2 className="text-base sm:text-lg font-bold text-white mb-1 drop-shadow-lg">{tool.title}</h2>
         {tool.description && (
           <p className="text-sm text-gray-300 line-clamp-2 drop-shadow-md">{tool.description}</p>
         )}
@@ -587,7 +762,7 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
         </div>
 
         {/* Header */}
-        <div className="px-5 pt-4 pb-3 flex items-center justify-between">
+        <div className="px-3 sm:px-5 pt-4 pb-3 flex items-center justify-between">
           <div>
             <h3 className="font-bold text-white">Remix</h3>
             <p className="text-xs text-gray-400 mt-0.5">
@@ -611,7 +786,7 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
         </div>
 
         {/* Input */}
-        <div className="px-5 pb-3">
+        <div className="px-3 sm:px-5 pb-3">
           <textarea
             ref={inputRef}
             value={prompt}
@@ -628,7 +803,7 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
 
         {/* Streaming logs */}
         {logs.length > 0 && (
-          <div className="px-5 pb-3">
+          <div className="px-3 sm:px-5 pb-3">
             <div className="rounded-xl bg-doom-black border border-gray-800 p-3 max-h-32 overflow-y-auto scrollbar-thin">
               {logs.map((log, i) => (
                 <p key={i} className="text-[11px] text-gray-400 font-mono leading-relaxed">
@@ -641,7 +816,7 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
 
         {/* Deploy result */}
         {status === 'done' && deployUrl && (
-          <div className="px-5 pb-3">
+          <div className="px-3 sm:px-5 pb-3">
             <div className="rounded-xl bg-doom-green/10 border border-doom-green/30 p-3 flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-doom-green">Deployed!</p>
@@ -667,7 +842,7 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
         )}
 
         {/* Action button */}
-        <div className="px-5 pb-5">
+        <div className="px-3 sm:px-5 pb-5">
           <button
             onClick={handleRemix}
             disabled={!prompt.trim() || status === 'generating' || status === 'deploying'}

@@ -1,0 +1,57 @@
+{
+  "title": "Military Spending Counter",
+  "description": "Watch global military spending tick up in real-time — $57,000+ every second",
+  "category": "money",
+  "viralHook": "The US has spent $____ on defense since you opened this page",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "stats-dashboard",
+      "id": "spending-live",
+      "props": {
+        "title": "Global Military Spending — Live",
+        "stats": [
+          { "label": "US (per second)", "value": "$28,500", "change": 0, "changeLabel": "$886B/year budget", "icon": "dollar" },
+          { "label": "China (per second)", "value": "$8,900", "change": 0, "changeLabel": "$277B/year est.", "icon": "dollar" },
+          { "label": "Russia (per second)", "value": "$3,300", "change": 0, "changeLabel": "$102B/year est.", "icon": "dollar" },
+          { "label": "Global Total (per sec)", "value": "$72,000", "change": 0, "changeLabel": "$2.24T/year", "icon": "trending" }
+        ],
+        "charts": [
+          {
+            "type": "bar",
+            "title": "Top 10 Military Budgets ($ Billions/Year)",
+            "data": [
+              { "label": "US", "value": 886 },
+              { "label": "China", "value": 277 },
+              { "label": "Russia", "value": 102 },
+              { "label": "India", "value": 84 },
+              { "label": "Saudi Arabia", "value": 75 },
+              { "label": "UK", "value": 69 },
+              { "label": "Germany", "value": 67 },
+              { "label": "France", "value": 56 },
+              { "label": "Japan", "value": 50 },
+              { "label": "South Korea", "value": 48 }
+            ]
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "calculator",
+      "id": "spending-comparison",
+      "props": {
+        "title": "What Could That Money Buy Instead?",
+        "inputs": [
+          { "name": "seconds", "label": "Seconds on this page", "type": "number", "defaultValue": 60, "min": 1, "step": 1 }
+        ],
+        "formula": "seconds * 72000",
+        "resultLabel": "Global military spend in that time",
+        "resultPrefix": "$"
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+  "theme": { "primaryColor": "#dc2626", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

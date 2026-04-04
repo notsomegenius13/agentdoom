@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/user/earnings — Creator earnings summary and transaction history.
  * Query params:

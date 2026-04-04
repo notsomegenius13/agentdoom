@@ -1,0 +1,63 @@
+{
+  "title": "Time Zone Converter",
+  "description": "Instantly convert a time across major world time zones",
+  "category": "productivity",
+  "viralHook": "Never Google 'what time is it in Tokyo' again.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "converter",
+      "id": "time-zone-converter",
+      "props": {
+        "baseUnit": "hours",
+        "units": [
+          {
+            "label": "EST (UTC-5)",
+            "value": "EST",
+            "offset": -5
+          },
+          {
+            "label": "CST (UTC-6)",
+            "value": "CST",
+            "offset": -6
+          },
+          {
+            "label": "MST (UTC-7)",
+            "value": "MST",
+            "offset": -7
+          },
+          {
+            "label": "PST (UTC-8)",
+            "value": "PST",
+            "offset": -8
+          },
+          {
+            "label": "GMT (UTC+0)",
+            "value": "GMT",
+            "offset": 0
+          },
+          {
+            "label": "CET (UTC+1)",
+            "value": "CET",
+            "offset": 1
+          },
+          {
+            "label": "IST (UTC+5:30)",
+            "value": "IST",
+            "offset": 5.5
+          },
+          {
+            "label": "JST (UTC+9)",
+            "value": "JST",
+            "offset": 9
+          },
+          {
+            "label": "AEST (UTC+10)",
+            "value": "AEST",
+            "offset": 10
+          }
+        ]
+      }
+    }
+  ]
+}

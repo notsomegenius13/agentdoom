@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Shared appearance config schema fragment. Include via $ref or copy the 'appearance' property into each primitive schema.",
+  "type": "object",
+  "properties": {
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: animations, dark mode colors, and responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "description": "Entrance animation when the primitive mounts",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": ["none", "fade", "slide", "scale"],
+              "default": "none",
+              "description": "Animation style: fade (opacity), slide (up), scale (grow)"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300,
+              "description": "Animation duration in milliseconds"
+            },
+            "delay": {
+              "type": "number",
+              "default": 0,
+              "description": "Delay before animation starts in milliseconds"
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "description": "Custom dark mode color overrides (CSS color values)",
+          "properties": {
+            "background": { "type": "string", "description": "Page background color" },
+            "surface": { "type": "string", "description": "Card/container surface color" },
+            "text": { "type": "string", "description": "Primary text color" },
+            "textSecondary": { "type": "string", "description": "Secondary/muted text color" },
+            "accent": { "type": "string", "description": "Accent/brand color" },
+            "border": { "type": "string", "description": "Border color" }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "description": "Breakpoint-specific layout overrides",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "description": "Padding per breakpoint",
+              "properties": {
+                "mobile": { "type": "string" },
+                "tablet": { "type": "string" },
+                "desktop": { "type": "string" }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "description": "Max width per breakpoint",
+              "properties": {
+                "mobile": { "type": "string" },
+                "tablet": { "type": "string" },
+                "desktop": { "type": "string" }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "description": "Font scale factor per breakpoint (1 = default)",
+              "properties": {
+                "mobile": { "type": "number" },
+                "tablet": { "type": "number" },
+                "desktop": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

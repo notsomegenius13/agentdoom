@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "SearchConfig",
+  "description": "A search input with autocomplete dropdown, fuzzy matching, and category grouping",
+  "required": [
+    "title",
+    "items"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Search heading"
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Input placeholder text"
+    },
+    "items": {
+      "type": "array",
+      "description": "Searchable items",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "value"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Display text"
+          },
+          "value": {
+            "type": "string",
+            "description": "Unique identifier"
+          },
+          "category": {
+            "type": "string",
+            "description": "Grouping category"
+          },
+          "description": {
+            "type": "string",
+            "description": "Secondary text"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Emoji or icon character"
+          }
+        }
+      }
+    },
+    "maxResults": {
+      "type": "number",
+      "default": 10,
+      "description": "Maximum suggestions shown"
+    },
+    "showCategories": {
+      "type": "boolean",
+      "default": true,
+      "description": "Group results by category"
+    },
+    "showRecentSearches": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show recently selected items"
+    },
+    "debounceMs": {
+      "type": "number",
+      "default": 300,
+      "description": "Input debounce delay in milliseconds"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

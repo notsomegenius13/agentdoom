@@ -3,21 +3,143 @@
   "type": "object",
   "title": "TimerConfig",
   "description": "A countdown/pomodoro timer with configurable durations",
-  "required": ["title", "mode"],
+  "required": [
+    "title",
+    "mode"
+  ],
   "properties": {
-    "title": { "type": "string" },
-    "mode": { "type": "string", "enum": ["countdown", "pomodoro", "stopwatch"] },
+    "title": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "countdown",
+        "pomodoro",
+        "stopwatch"
+      ]
+    },
     "durations": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "seconds"],
+        "required": [
+          "label",
+          "seconds"
+        ],
         "properties": {
-          "label": { "type": "string" },
-          "seconds": { "type": "number" }
+          "label": {
+            "type": "string"
+          },
+          "seconds": {
+            "type": "number",
+            "minimum": 1
+          }
         }
       }
     },
-    "alertSound": { "type": "boolean" }
+    "alertSound": {
+      "type": "boolean",
+      "default": true
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

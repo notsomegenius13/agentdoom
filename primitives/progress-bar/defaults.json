@@ -1,0 +1,42 @@
+{
+  "title": "Project Progress",
+  "mode": "stepper",
+  "steps": [
+    {
+      "label": "Planning",
+      "description": "Define scope"
+    },
+    {
+      "label": "Design",
+      "description": "Create mockups"
+    },
+    {
+      "label": "Development",
+      "description": "Build features"
+    },
+    {
+      "label": "Testing",
+      "description": "QA & review"
+    },
+    {
+      "label": "Launch",
+      "description": "Deploy to prod"
+    }
+  ],
+  "currentStep": 2,
+  "allowClickNavigation": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

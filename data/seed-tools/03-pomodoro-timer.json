@@ -1,0 +1,24 @@
+{
+  "title": "Pomodoro Timer",
+  "description": "Stay focused with timed work sessions and breaks",
+  "category": "productivity",
+  "primitives": [
+    {
+      "type": "timer",
+      "id": "pomodoro",
+      "props": {
+        "title": "Pomodoro Timer",
+        "mode": "pomodoro",
+        "durations": [
+          { "label": "Focus", "seconds": 1500 },
+          { "label": "Short Break", "seconds": 300 },
+          { "label": "Long Break", "seconds": 900 }
+        ],
+        "alertSound": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+  "theme": { "primaryColor": "#ef4444", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

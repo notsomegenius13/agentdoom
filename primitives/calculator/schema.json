@@ -3,39 +3,186 @@
   "type": "object",
   "title": "CalculatorConfig",
   "description": "A calculator with labeled inputs, a formula, and a result display",
-  "required": ["title", "inputs", "formula", "resultLabel"],
+  "required": [
+    "title",
+    "inputs",
+    "formula",
+    "resultLabel"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "inputs": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "label", "type"],
+        "required": [
+          "name",
+          "label",
+          "type"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "label": { "type": "string" },
-          "type": { "type": "string", "enum": ["number", "select"] },
-          "defaultValue": { "type": "number" },
-          "min": { "type": "number" },
-          "max": { "type": "number" },
-          "step": { "type": "number" },
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "number",
+              "select"
+            ]
+          },
+          "defaultValue": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "step": {
+            "type": "number",
+            "default": 1
+          },
           "options": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["label", "value"],
+              "required": [
+                "label",
+                "value"
+              ],
               "properties": {
-                "label": { "type": "string" },
-                "value": { "type": "number" }
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
               }
             }
           }
         }
       }
     },
-    "formula": { "type": "string", "description": "JavaScript expression using input names as variables" },
-    "resultLabel": { "type": "string" },
-    "resultPrefix": { "type": "string" },
-    "resultSuffix": { "type": "string" }
+    "formula": {
+      "type": "string",
+      "description": "JavaScript expression using input names as variables"
+    },
+    "resultLabel": {
+      "type": "string"
+    },
+    "resultPrefix": {
+      "type": "string",
+      "default": ""
+    },
+    "resultSuffix": {
+      "type": "string",
+      "default": ""
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

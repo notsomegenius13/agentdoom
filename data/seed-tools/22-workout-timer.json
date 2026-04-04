@@ -1,0 +1,32 @@
+{
+  "title": "HIIT Workout Timer",
+  "description": "Interval timer for high-intensity workouts with rest periods",
+  "category": "health",
+  "primitives": [
+    {
+      "type": "timer",
+      "id": "hiit-timer",
+      "props": {
+        "title": "HIIT Workout Timer",
+        "durations": [
+          { "label": "Warm Up", "seconds": 120, "color": "#22c55e" },
+          { "label": "Round 1 — Work", "seconds": 40, "color": "#ef4444" },
+          { "label": "Rest", "seconds": 20, "color": "#3b82f6" },
+          { "label": "Round 2 — Work", "seconds": 40, "color": "#ef4444" },
+          { "label": "Rest", "seconds": 20, "color": "#3b82f6" },
+          { "label": "Round 3 — Work", "seconds": 40, "color": "#ef4444" },
+          { "label": "Rest", "seconds": 20, "color": "#3b82f6" },
+          { "label": "Round 4 — Work", "seconds": 40, "color": "#ef4444" },
+          { "label": "Cool Down", "seconds": 120, "color": "#22c55e" }
+        ],
+        "autoAdvance": true,
+        "showProgress": true,
+        "soundOnTransition": true,
+        "totalRounds": 4
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "400px", "padding": "24px" },
+  "theme": { "primaryColor": "#ef4444", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "16px" }
+}

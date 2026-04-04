@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "ProgressFillConfig",
+  "description": "A smooth animated progress bar fill for trackers and goals",
+  "required": [
+    "value"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Current value"
+    },
+    "max": {
+      "type": "number",
+      "minimum": 1,
+      "default": 100
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 100,
+      "maximum": 10000,
+      "default": 1500
+    },
+    "showLabel": {
+      "type": "boolean",
+      "default": true
+    },
+    "label": {
+      "type": "string",
+      "description": "Custom label text, defaults to percentage"
+    },
+    "color": {
+      "type": "string",
+      "default": "#7c3aed"
+    },
+    "height": {
+      "type": "string",
+      "enum": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "striped": {
+      "type": "boolean",
+      "default": false
+    },
+    "animated": {
+      "type": "boolean",
+      "default": true
+    },
+    "triggerOnView": {
+      "type": "boolean",
+      "default": true
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

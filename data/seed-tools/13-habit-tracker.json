@@ -1,0 +1,27 @@
+{
+  "title": "Daily Habit Tracker",
+  "description": "Build better habits with daily tracking and streaks",
+  "category": "productivity",
+  "primitives": [
+    {
+      "type": "tracker",
+      "id": "habits",
+      "props": {
+        "title": "Daily Habits",
+        "items": [
+          { "name": "Drink 8 glasses of water", "icon": "\ud83d\udca7", "target": 8 },
+          { "name": "Exercise 30 minutes", "icon": "\ud83c\udfc3", "target": 1 },
+          { "name": "Read 20 pages", "icon": "\ud83d\udcda", "target": 20 },
+          { "name": "Meditate 10 minutes", "icon": "\ud83e\uddd8", "target": 1 },
+          { "name": "No social media before noon", "icon": "\ud83d\udcf5", "target": 1 },
+          { "name": "Journal before bed", "icon": "\u270d\ufe0f", "target": 1 }
+        ],
+        "period": "daily",
+        "showStreak": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+  "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

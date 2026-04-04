@@ -1,0 +1,184 @@
+{
+  "title": "Citation Generator",
+  "description": "Generate properly formatted citations in APA, MLA, or Chicago style from source details",
+  "category": "education",
+  "viralHook": "Never lose points on citations again -- APA, MLA, and Chicago in one click",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "citation-form",
+      "props": {
+        "title": "Citation Generator",
+        "description": "Enter source details and select a citation format. The tool will generate a properly formatted citation you can copy directly into your paper.",
+        "fields": [
+          {
+            "id": "format_type",
+            "label": "Citation Format",
+            "type": "toggle-group",
+            "required": true,
+            "options": [
+              { "label": "APA 7th Edition", "value": "apa" },
+              { "label": "MLA 9th Edition", "value": "mla" },
+              { "label": "Chicago 17th Edition", "value": "chicago" }
+            ],
+            "defaultValue": "apa"
+          },
+          {
+            "id": "source_type",
+            "label": "Source Type",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "label": "Book", "value": "book" },
+              { "label": "Journal Article", "value": "journal" },
+              { "label": "Website", "value": "website" },
+              { "label": "Newspaper Article", "value": "newspaper" },
+              { "label": "Magazine Article", "value": "magazine" },
+              { "label": "Edited Book Chapter", "value": "chapter" }
+            ],
+            "defaultValue": "book"
+          },
+          {
+            "id": "author_last",
+            "label": "Author Last Name",
+            "type": "text",
+            "placeholder": "e.g. Smith",
+            "required": true
+          },
+          {
+            "id": "author_first",
+            "label": "Author First Name",
+            "type": "text",
+            "placeholder": "e.g. John",
+            "required": true
+          },
+          {
+            "id": "author2_last",
+            "label": "Second Author Last Name (optional)",
+            "type": "text",
+            "placeholder": "e.g. Johnson",
+            "required": false
+          },
+          {
+            "id": "author2_first",
+            "label": "Second Author First Name (optional)",
+            "type": "text",
+            "placeholder": "e.g. Mary",
+            "required": false
+          },
+          {
+            "id": "title",
+            "label": "Title of Work",
+            "type": "text",
+            "placeholder": "e.g. The Art of Scientific Writing",
+            "required": true
+          },
+          {
+            "id": "container_title",
+            "label": "Journal / Website / Container Title (if applicable)",
+            "type": "text",
+            "placeholder": "e.g. Nature, The New York Times",
+            "required": false
+          },
+          {
+            "id": "year",
+            "label": "Year of Publication",
+            "type": "text",
+            "placeholder": "e.g. 2024",
+            "required": true
+          },
+          {
+            "id": "publisher",
+            "label": "Publisher",
+            "type": "text",
+            "placeholder": "e.g. Oxford University Press",
+            "required": false
+          },
+          {
+            "id": "volume",
+            "label": "Volume Number (journals)",
+            "type": "text",
+            "placeholder": "e.g. 42",
+            "required": false
+          },
+          {
+            "id": "issue",
+            "label": "Issue Number (journals)",
+            "type": "text",
+            "placeholder": "e.g. 3",
+            "required": false
+          },
+          {
+            "id": "pages",
+            "label": "Page Numbers",
+            "type": "text",
+            "placeholder": "e.g. 15-28",
+            "required": false
+          },
+          {
+            "id": "url",
+            "label": "URL (for online sources)",
+            "type": "text",
+            "placeholder": "https://example.com/article",
+            "required": false
+          },
+          {
+            "id": "doi",
+            "label": "DOI (if available)",
+            "type": "text",
+            "placeholder": "e.g. 10.1000/xyz123",
+            "required": false
+          },
+          {
+            "id": "access_date",
+            "label": "Date Accessed (for websites)",
+            "type": "date",
+            "required": false,
+            "helperText": "Required for MLA website citations"
+          },
+          {
+            "id": "edition",
+            "label": "Edition (if not first)",
+            "type": "text",
+            "placeholder": "e.g. 3rd",
+            "required": false
+          },
+          {
+            "id": "apa_output",
+            "label": "APA Citation",
+            "type": "textarea",
+            "readonly": true,
+            "rows": 3,
+            "copyButton": true,
+            "helperText": "APA 7th Edition format"
+          },
+          {
+            "id": "mla_output",
+            "label": "MLA Citation",
+            "type": "textarea",
+            "readonly": true,
+            "rows": 3,
+            "copyButton": true,
+            "helperText": "MLA 9th Edition format"
+          },
+          {
+            "id": "chicago_output",
+            "label": "Chicago Citation",
+            "type": "textarea",
+            "readonly": true,
+            "rows": 3,
+            "copyButton": true,
+            "helperText": "Chicago Manual of Style 17th Edition (Notes-Bibliography)"
+          }
+        ],
+        "computedFields": {
+          "apa_output": "author_last + ', ' + author_first.charAt(0) + '.' + (author2_last ? ' & ' + author2_last + ', ' + author2_first.charAt(0) + '.' : '') + ' (' + year + '). ' + (source_type === 'book' ? title + (edition ? ' (' + edition + ' ed.)' : '') + '. ' + (publisher || '') + '.' : (source_type === 'journal' ? title + '. ' + (container_title ? container_title + ', ' : '') + (volume || '') + (issue ? '(' + issue + ')' : '') + (pages ? ', ' + pages : '') + '.' : title + '. ' + (container_title || '') + '.')) + (doi ? ' https://doi.org/' + doi : (url ? ' ' + url : ''))",
+          "mla_output": "author_last + ', ' + author_first + (author2_last ? ', and ' + author2_first + ' ' + author2_last : '') + '. ' + (source_type === 'book' ? '\"' + title + '.\"' : '\"' + title + '.\"') + (container_title ? ' ' + container_title + ',' : '') + (publisher ? ' ' + publisher + ',' : '') + ' ' + year + (volume ? ', vol. ' + volume : '') + (issue ? ', no. ' + issue : '') + (pages ? ', pp. ' + pages : '') + '.' + (url ? ' ' + url + '.' : '') + (access_date ? ' Accessed ' + access_date + '.' : '')",
+          "chicago_output": "author_last + ', ' + author_first + (author2_last ? ', and ' + author2_first + ' ' + author2_last : '') + '. ' + (source_type === 'book' ? title + '.' : '\"' + title + '.\"') + (container_title ? ' ' + container_title : '') + (volume ? ' ' + volume : '') + (issue ? ', no. ' + issue : '') + (pages ? ' (' + year + '): ' + pages : '') + '. ' + (publisher ? publisher + ', ' : '') + year + '.' + (doi ? ' https://doi.org/' + doi : (url ? ' ' + url + '.' : ''))"
+        },
+        "submitLabel": "Generate Citations"
+      }
+    }
+  ]
+}

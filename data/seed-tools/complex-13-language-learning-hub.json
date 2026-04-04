@@ -1,0 +1,113 @@
+{
+  "title": "Language Learning Hub",
+  "description": "Practice vocabulary, track daily study habits, measure skill progress, and quiz yourself — your Spanish learning dashboard",
+  "category": "education",
+  "primitives": [
+    {
+      "type": "stats-dashboard",
+      "id": "learning-overview",
+      "props": {
+        "title": "Learning Progress — Spanish",
+        "stats": [
+          { "label": "Words Learned", "value": "342", "change": 28, "changeLabel": "new this week", "icon": "cart" },
+          { "label": "Daily Streak", "value": "24 days", "change": 8, "changeLabel": "longer than avg", "icon": "trending" },
+          { "label": "Fluency Score", "value": "62%", "change": 4.5, "changeLabel": "vs last month", "icon": "percent" },
+          { "label": "Time Studied", "value": "48h", "change": 6.2, "changeLabel": "this month", "icon": "dollar" }
+        ],
+        "charts": [
+          {
+            "type": "bar",
+            "title": "Study Minutes Per Day (This Week)",
+            "data": [
+              { "label": "Mon", "value": 45 },
+              { "label": "Tue", "value": 30 },
+              { "label": "Wed", "value": 60 },
+              { "label": "Thu", "value": 25 },
+              { "label": "Fri", "value": 40 },
+              { "label": "Sat", "value": 55 },
+              { "label": "Sun", "value": 35 }
+            ]
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "quiz",
+      "id": "vocab-quiz",
+      "props": {
+        "title": "Spanish Vocabulary Quiz",
+        "questions": [
+          { "question": "What does 'mariposa' mean in English?", "options": ["Butterfly", "Flower", "Rainbow", "Ladybug"], "correct": 0, "explanation": "'Mariposa' means butterfly. It comes from the phrase 'María, posa' (Mary, alight)." },
+          { "question": "How do you say 'I would like' in Spanish?", "options": ["Yo quiero", "Me gustaría", "Yo necesito", "Yo tengo"], "correct": 1, "explanation": "'Me gustaría' is the conditional form meaning 'I would like'. 'Yo quiero' is more direct — 'I want'." },
+          { "question": "What is the past tense of 'ir' (to go) for 'yo'?", "options": ["Iba", "Fui", "Fue", "Ido"], "correct": 1, "explanation": "'Fui' is the preterite (past tense) of 'ir' for the first person. 'Iba' is the imperfect tense." },
+          { "question": "What does 'sin embargo' mean?", "options": ["Without doubt", "However/Nevertheless", "For example", "In addition"], "correct": 1, "explanation": "'Sin embargo' is a common connector meaning 'however' or 'nevertheless'." },
+          { "question": "Which is correct: 'Estoy caliente' or 'Tengo calor'?", "options": ["Estoy caliente (I'm hot)", "Tengo calor (I'm hot)", "Both are correct", "Neither is correct"], "correct": 1, "explanation": "'Tengo calor' means 'I'm hot' (temperature). 'Estoy caliente' has a very different, inappropriate meaning!" },
+          { "question": "What does 'aprovechar' mean?", "options": ["To approve", "To approach", "To take advantage of", "To appreciate"], "correct": 2, "explanation": "'Aprovechar' means 'to take advantage of' or 'to make the most of'. It's a false friend with 'approve'." },
+          { "question": "How do you say 'suddenly' in Spanish?", "options": ["Lentamente", "De repente", "Finalmente", "Mientras tanto"], "correct": 1, "explanation": "'De repente' means 'suddenly'. 'Lentamente' means 'slowly', the opposite!" },
+          { "question": "What is the subjunctive of 'hablar' for 'tú'?", "options": ["Hablas", "Hables", "Hablaste", "Hablarás"], "correct": 1, "explanation": "The subjunctive of 'hablar' for 'tú' is 'hables'. Used after expressions of doubt, desire, or emotion." },
+          { "question": "What does 'red' mean in Spanish?", "options": ["Red (color)", "Network", "Read", "King"], "correct": 1, "explanation": "'Red' in Spanish means 'network' or 'net'. The color red is 'rojo'. A classic false friend!" },
+          { "question": "Complete: 'Si yo ___ rico, viajaría por el mundo'", "options": ["soy", "era", "fuera", "seré"], "correct": 2, "explanation": "'Si yo fuera rico' uses the imperfect subjunctive for hypothetical/contrary-to-fact conditions." }
+        ],
+        "showScore": true,
+        "shuffleQuestions": true
+      },
+      "position": 1
+    },
+    {
+      "type": "tracker",
+      "id": "daily-practice",
+      "props": {
+        "title": "Daily Practice Tracker",
+        "items": [
+          { "name": "Vocabulary — 30 new words", "icon": "📝", "target": 30 },
+          { "name": "Grammar exercises — 2 lessons", "icon": "📖", "target": 2 },
+          { "name": "Listening practice — 20 min podcast", "icon": "🎧", "target": 1 },
+          { "name": "Speaking practice — shadowing 15 min", "icon": "🗣️", "target": 1 },
+          { "name": "Writing — journal entry (100+ words)", "icon": "✍️", "target": 1 }
+        ],
+        "period": "daily",
+        "showStreak": true
+      },
+      "position": 2
+    },
+    {
+      "type": "chart",
+      "id": "skill-levels",
+      "props": {
+        "title": "Skill Levels (%)",
+        "type": "bar",
+        "data": [
+          { "label": "Reading", "value": 72 },
+          { "label": "Writing", "value": 45 },
+          { "label": "Listening", "value": 58 },
+          { "label": "Speaking", "value": 38 }
+        ]
+      },
+      "position": 3
+    },
+    {
+      "type": "checklist",
+      "id": "weekly-goals",
+      "props": {
+        "title": "This Week's Goals",
+        "categories": [
+          {
+            "name": "Study Goals",
+            "items": [
+              "Complete Unit 12 — Subjunctive Mood",
+              "Watch a Spanish movie without English subtitles",
+              "Practice 30 minutes with language exchange partner",
+              "Review all irregular verb conjugations (ser, ir, tener, hacer)",
+              "Record yourself speaking and compare to native audio"
+            ]
+          }
+        ],
+        "showProgress": true
+      },
+      "position": 4
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "900px", "padding": "24px" },
+  "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#fffbeb", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

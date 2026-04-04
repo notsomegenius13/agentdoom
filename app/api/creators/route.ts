@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/creators — Top creators leaderboard
  * Ranked by total remixes across all their tools.
@@ -23,7 +25,6 @@ export async function GET(req: NextRequest) {
         u.is_verified,
         u.is_pro,
         u.tools_created,
-        u.followers_count,
         u.created_at,
         COALESCE(SUM(t.remixes_count), 0)::int AS total_remixes,
         COALESCE(SUM(t.views_count), 0)::int AS total_views,
@@ -47,7 +48,7 @@ export async function GET(req: NextRequest) {
       isVerified: row.is_verified,
       isPro: row.is_pro,
       toolsCreated: row.tools_created,
-      followersCount: row.followers_count,
+      followersCount: 0,
       totalRemixes: row.total_remixes,
       totalViews: row.total_views,
       totalLikes: row.total_likes,
@@ -58,6 +59,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ creators });
   } catch (error) {
     console.error('[creators] GET error:', error);
-    return NextResponse.json({ error: 'Failed to fetch creators' }, { status: 500 });
+    return NextResponse.json({ creators: [] });
   }
 }

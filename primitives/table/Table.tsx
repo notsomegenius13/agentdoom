@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface TableColumn {
   key: string
@@ -13,6 +14,7 @@ export interface TableConfig {
   columns: TableColumn[]
   rows: Record<string, unknown>[]
   searchable?: boolean
+  appearance?: AppearanceConfig
 }
 
 type SortDir = 'asc' | 'desc' | null
@@ -71,8 +73,9 @@ export default function Table({ config }: { config: TableConfig }) {
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       {config.searchable && (
         <input
@@ -123,5 +126,6 @@ export default function Table({ config }: { config: TableConfig }) {
         </table>
       </div>
     </div>
+    </PrimitiveWrapper>
   )
 }

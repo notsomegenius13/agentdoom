@@ -3,13 +3,136 @@
   "type": "object",
   "title": "ModalConfig",
   "description": "A modal dialog component with trigger button",
-  "required": ["title", "triggerLabel", "content"],
+  "required": [
+    "title",
+    "triggerLabel",
+    "content"
+  ],
   "properties": {
-    "title": { "type": "string" },
-    "triggerLabel": { "type": "string" },
-    "content": { "type": "string" },
-    "showCloseButton": { "type": "boolean" },
-    "size": { "type": "string", "enum": ["sm", "md", "lg"] },
-    "overlayDismiss": { "type": "boolean" }
+    "title": {
+      "type": "string"
+    },
+    "triggerLabel": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "showCloseButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "overlayDismiss": {
+      "type": "boolean",
+      "default": true
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

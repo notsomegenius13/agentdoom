@@ -3,7 +3,10 @@
   "title": "StripeCheckoutConfig",
   "description": "Configuration for the Stripe Checkout button primitive",
   "type": "object",
-  "required": ["productName", "priceCents"],
+  "required": [
+    "productName",
+    "priceCents"
+  ],
   "properties": {
     "productName": {
       "type": "string",
@@ -25,7 +28,10 @@
     },
     "mode": {
       "type": "string",
-      "enum": ["payment", "subscription"],
+      "enum": [
+        "payment",
+        "subscription"
+      ],
       "default": "payment",
       "description": "'payment' for one-time, 'subscription' for recurring"
     },
@@ -44,7 +50,9 @@
     },
     "metadata": {
       "type": "object",
-      "additionalProperties": { "type": "string" },
+      "additionalProperties": {
+        "type": "string"
+      },
       "description": "Additional metadata passed to the checkout session"
     },
     "successUrl": {
@@ -57,9 +65,112 @@
     },
     "variant": {
       "type": "string",
-      "enum": ["default", "compact", "card"],
+      "enum": [
+        "default",
+        "compact",
+        "card"
+      ],
       "default": "default",
       "description": "Visual style variant"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

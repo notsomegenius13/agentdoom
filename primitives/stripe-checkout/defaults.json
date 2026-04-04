@@ -6,5 +6,19 @@
   "checkoutApiUrl": "/api/stripe/checkout",
   "buttonLabel": "Buy Now",
   "description": "One-time purchase with instant access",
-  "variant": "default"
+  "variant": "default",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

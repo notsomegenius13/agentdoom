@@ -1,0 +1,27 @@
+{
+  "title": "Developer Personality Quiz",
+  "description": "Find out what kind of developer you really are",
+  "category": "fun",
+  "primitives": [
+    {
+      "type": "quiz",
+      "id": "dev-quiz",
+      "props": {
+        "title": "What Kind of Dev Are You?",
+        "questions": [
+          { "question": "It's Friday afternoon. You find a bug in production. What do you do?", "options": ["Fix it immediately, deploy, go home", "Write a detailed ticket and fix Monday", "Investigate the root cause for 3 hours", "Ask if anyone else noticed it"], "correct": 0, "explanation": "The ship-it mentality! Speed + quality = senior energy." },
+          { "question": "Your preferred way to name variables?", "options": ["Short and sweet: x, tmp, val", "Descriptive: userAuthenticationToken", "Hungarian notation: strUserName", "Whatever the AI suggests"], "correct": 1, "explanation": "Code is read more than it's written. Descriptive names win." },
+          { "question": "Tabs or spaces?", "options": ["Tabs (obviously)", "Spaces (2)", "Spaces (4)", "Whatever the formatter says"], "correct": 3, "explanation": "The correct answer is: let the tool decide and stop arguing." },
+          { "question": "How do you handle a failing test?", "options": ["Fix the code", "Fix the test", "Delete the test", "Mark it as skip and open a ticket"], "correct": 0, "explanation": "Tests are there for a reason. Fix the code, not the test." },
+          { "question": "Your ideal documentation is:", "options": ["Code so clean it doesn't need docs", "JSDoc on every function", "A comprehensive wiki", "A README with examples"], "correct": 3, "explanation": "Examples > theory. A good README with usage examples is gold." },
+          { "question": "You're starting a new project. First thing you do?", "options": ["npm init, start coding", "Spend 2 days on the perfect folder structure", "Research frameworks for a week", "Clone a boilerplate and customize"], "correct": 3, "explanation": "Standing on the shoulders of boilerplates. Ship fast, iterate later." }
+        ],
+        "showScore": true,
+        "shuffleQuestions": false
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+  "theme": { "primaryColor": "#f97316", "backgroundColor": "#fff7ed", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

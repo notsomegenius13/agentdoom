@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LandingHeroConfig",
+  "description": "Configuration for the Landing Page Hero composite primitive.",
+  "type": "object",
+  "required": [
+    "title",
+    "subtitle",
+    "ctaLabel"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The main hero heading text."
+    },
+    "highlightText": {
+      "type": "string",
+      "description": "A substring of the title to highlight in a different color."
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Supporting text displayed below the title."
+    },
+    "ctaLabel": {
+      "type": "string",
+      "description": "Label for the primary call-to-action button."
+    },
+    "ctaSecondaryLabel": {
+      "type": "string",
+      "description": "Label for an optional secondary outline CTA button."
+    },
+    "emailCapture": {
+      "type": "boolean",
+      "description": "When true, show an email input form instead of standalone CTA buttons.",
+      "default": false
+    },
+    "emailPlaceholder": {
+      "type": "string",
+      "description": "Placeholder text for the email input field.",
+      "default": "Enter your email"
+    },
+    "successMessage": {
+      "type": "string",
+      "description": "Message shown after successful email submission.",
+      "default": "Thanks! We'll be in touch."
+    },
+    "features": {
+      "type": "array",
+      "description": "Feature cards displayed in a grid below the hero.",
+      "items": {
+        "type": "object",
+        "required": [
+          "icon",
+          "title",
+          "description"
+        ],
+        "properties": {
+          "icon": {
+            "type": "string",
+            "description": "Emoji or icon character for the feature."
+          },
+          "title": {
+            "type": "string",
+            "description": "Feature card heading."
+          },
+          "description": {
+            "type": "string",
+            "description": "Feature card description text."
+          }
+        }
+      }
+    },
+    "backgroundGradient": {
+      "type": "string",
+      "description": "CSS gradient value for the hero background.",
+      "default": "linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #3730a3 100%)"
+    },
+    "trustedBy": {
+      "type": "array",
+      "description": "List of trust indicators displayed at the bottom of the hero.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

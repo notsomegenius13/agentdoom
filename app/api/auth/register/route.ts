@@ -53,10 +53,60 @@ export async function POST(req: NextRequest) {
       username = `${baseUsername}${suffix++}`;
     }
 
-    await sql`
-      INSERT INTO users (email, password_hash, username, display_name)
-      VALUES (${emailLower}, ${passwordHash}, ${username}, ${username})
-    `;
+    const userColumns = (await sql`
+      SELECT column_name
+      FROM information_schema.columns
+      WHERE table_name = 'users'
+    `) as Array<{ column_name: string }>;
+
+    const hasPasswordHash = userColumns.some((c) => c.column_name === 'password_hash');
+    const hasPassword = userColumns.some((c) => c.column_name === 'password');
+    const hasDisplayName = userColumns.some((c) => c.column_name === 'display_name');
+
+    if (!hasPasswordHash && !hasPassword) {
+      return NextResponse.json(
+        { error: 'Email/password auth is not enabled in this database' },
+        { status: 503 },
+      );
+    }
+
+    if (hasPasswordHash && hasPassword) {
+      if (hasDisplayName) {
+        await sql`
+          INSERT INTO users (email, password_hash, password, username, display_name)
+          VALUES (${emailLower}, ${passwordHash}, ${passwordHash}, ${username}, ${username})
+        `;
+      } else {
+        await sql`
+          INSERT INTO users (email, password_hash, password, username)
+          VALUES (${emailLower}, ${passwordHash}, ${passwordHash}, ${username})
+        `;
+      }
+    } else if (hasPasswordHash) {
+      if (hasDisplayName) {
+        await sql`
+          INSERT INTO users (email, password_hash, username, display_name)
+          VALUES (${emailLower}, ${passwordHash}, ${username}, ${username})
+        `;
+      } else {
+        await sql`
+          INSERT INTO users (email, password_hash, username)
+          VALUES (${emailLower}, ${passwordHash}, ${username})
+        `;
+      }
+    } else if (hasPassword) {
+      if (hasDisplayName) {
+        await sql`
+          INSERT INTO users (email, password, username, display_name)
+          VALUES (${emailLower}, ${passwordHash}, ${username}, ${username})
+        `;
+      } else {
+        await sql`
+          INSERT INTO users (email, password, username)
+          VALUES (${emailLower}, ${passwordHash}, ${username})
+        `;
+      }
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

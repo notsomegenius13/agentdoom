@@ -1,0 +1,49 @@
+{
+  "title": "March 2026",
+  "mode": "single",
+  "minDate": "2026-03-01",
+  "maxDate": "2026-03-31",
+  "firstDayOfWeek": 0,
+  "showWeekNumbers": false,
+  "highlightedDates": [
+    {
+      "date": "2026-03-08",
+      "label": "International Women's Day",
+      "color": "bg-pink-400"
+    },
+    {
+      "date": "2026-03-14",
+      "label": "Pi Day",
+      "color": "bg-blue-400"
+    },
+    {
+      "date": "2026-03-17",
+      "label": "St. Patrick's Day",
+      "color": "bg-green-400"
+    },
+    {
+      "date": "2026-03-20",
+      "label": "Spring Equinox",
+      "color": "bg-yellow-400"
+    },
+    {
+      "date": "2026-03-31",
+      "label": "End of Q1",
+      "color": "bg-red-400"
+    }
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

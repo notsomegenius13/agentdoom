@@ -1,8 +1,26 @@
 {
   "title": "Upload Images",
-  "acceptedTypes": [".jpg", ".png", ".gif"],
+  "acceptedTypes": [
+    ".jpg",
+    ".png",
+    ".gif"
+  ],
   "maxFileSizeMB": 5,
   "maxFiles": 3,
   "uploadLabel": "Click to browse",
-  "dragDropLabel": "Drag and drop images here"
+  "dragDropLabel": "Drag and drop images here",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

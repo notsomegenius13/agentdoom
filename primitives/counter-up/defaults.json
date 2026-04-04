@@ -1,0 +1,25 @@
+{
+  "title": "Total Users",
+  "target": 12450,
+  "duration": 2000,
+  "prefix": "",
+  "suffix": "",
+  "decimals": 0,
+  "separator": true,
+  "triggerOnView": true,
+  "easing": "easeOut",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

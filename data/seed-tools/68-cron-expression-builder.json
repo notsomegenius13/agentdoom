@@ -1,0 +1,135 @@
+{
+  "title": "Cron Expression Builder",
+  "description": "Build cron expressions visually without memorizing syntax — pick minute, hour, day, month, weekday and get the expression",
+  "category": "dev-tools",
+  "viralHook": "Never googled a cron syntax again after finding this visual builder",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "cron-builder",
+      "props": {
+        "title": "Build Your Cron Expression",
+        "submitLabel": "Generate Expression",
+        "fields": [
+          {
+            "id": "preset",
+            "label": "Start with a Preset",
+            "type": "select",
+            "options": [
+              { "value": "custom", "label": "Custom (configure below)" },
+              { "value": "* * * * *", "label": "Every minute" },
+              { "value": "0 * * * *", "label": "Every hour" },
+              { "value": "0 0 * * *", "label": "Every day at midnight" },
+              { "value": "0 9 * * 1-5", "label": "Weekdays at 9am" },
+              { "value": "0 0 * * 0", "label": "Every Sunday at midnight" },
+              { "value": "0 0 1 * *", "label": "1st of every month" },
+              { "value": "*/5 * * * *", "label": "Every 5 minutes" },
+              { "value": "0 0 1 1 *", "label": "Once a year (Jan 1st)" }
+            ],
+            "defaultValue": "custom"
+          },
+          {
+            "id": "minute",
+            "label": "Minute",
+            "type": "select",
+            "options": [
+              { "value": "*", "label": "Every minute (*)" },
+              { "value": "*/5", "label": "Every 5 minutes (*/5)" },
+              { "value": "*/10", "label": "Every 10 minutes (*/10)" },
+              { "value": "*/15", "label": "Every 15 minutes (*/15)" },
+              { "value": "*/30", "label": "Every 30 minutes (*/30)" },
+              { "value": "0", "label": "At minute 0" },
+              { "value": "30", "label": "At minute 30" }
+            ],
+            "defaultValue": "0"
+          },
+          {
+            "id": "hour",
+            "label": "Hour",
+            "type": "select",
+            "options": [
+              { "value": "*", "label": "Every hour (*)" },
+              { "value": "*/2", "label": "Every 2 hours (*/2)" },
+              { "value": "*/6", "label": "Every 6 hours (*/6)" },
+              { "value": "*/12", "label": "Every 12 hours (*/12)" },
+              { "value": "0", "label": "Midnight (0)" },
+              { "value": "6", "label": "6am" },
+              { "value": "9", "label": "9am" },
+              { "value": "12", "label": "Noon (12)" },
+              { "value": "18", "label": "6pm" },
+              { "value": "23", "label": "11pm" }
+            ],
+            "defaultValue": "0"
+          },
+          {
+            "id": "day_of_month",
+            "label": "Day of Month",
+            "type": "select",
+            "options": [
+              { "value": "*", "label": "Every day (*)" },
+              { "value": "1", "label": "1st of month" },
+              { "value": "15", "label": "15th of month" },
+              { "value": "L", "label": "Last day of month (L)" }
+            ],
+            "defaultValue": "*"
+          },
+          {
+            "id": "month",
+            "label": "Month",
+            "type": "select",
+            "options": [
+              { "value": "*", "label": "Every month (*)" },
+              { "value": "1", "label": "January" },
+              { "value": "2", "label": "February" },
+              { "value": "3", "label": "March" },
+              { "value": "4", "label": "April" },
+              { "value": "6", "label": "June" },
+              { "value": "7", "label": "July" },
+              { "value": "9", "label": "September" },
+              { "value": "12", "label": "December" }
+            ],
+            "defaultValue": "*"
+          },
+          {
+            "id": "weekday",
+            "label": "Day of Week",
+            "type": "select",
+            "options": [
+              { "value": "*", "label": "Every day (*)" },
+              { "value": "0", "label": "Sunday (0)" },
+              { "value": "1", "label": "Monday (1)" },
+              { "value": "2", "label": "Tuesday (2)" },
+              { "value": "3", "label": "Wednesday (3)" },
+              { "value": "4", "label": "Thursday (4)" },
+              { "value": "5", "label": "Friday (5)" },
+              { "value": "6", "label": "Saturday (6)" },
+              { "value": "1-5", "label": "Weekdays (1-5)" },
+              { "value": "0,6", "label": "Weekends (0,6)" }
+            ],
+            "defaultValue": "*"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "next-executions",
+      "props": {
+        "title": "Example Cron Schedules & Next Run Times",
+        "columns": ["Expression", "Description", "Next Run (example)", "Frequency"],
+        "rows": [
+          ["0 9 * * 1-5", "Weekdays at 9am", "Mon Apr 1 09:00:00 2026", "~261x/year"],
+          ["*/5 * * * *", "Every 5 minutes", "Today at :05, :10, :15...", "288x/day"],
+          ["0 0 1 * *", "1st of each month at midnight", "May 1 00:00:00 2026", "12x/year"],
+          ["0 2 * * 0", "Sundays at 2am", "Sun Apr 5 02:00:00 2026", "52x/year"],
+          ["0 */6 * * *", "Every 6 hours", "Today at 00:00, 06:00, 12:00, 18:00", "4x/day"]
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "760px", "padding": "28px" },
+  "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#0f172a", "fontFamily": "'JetBrains Mono', 'Fira Code', monospace", "borderRadius": "10px" }
+}

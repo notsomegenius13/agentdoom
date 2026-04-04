@@ -1,0 +1,34 @@
+{
+  "title": "Debt Payoff Calculator",
+  "description": "Calculate your debt payoff timeline using snowball or avalanche methods",
+  "category": "finance",
+  "viralHook": "Find out exactly when you'll be debt-free — the answer might surprise you",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "debt-payoff-form",
+      "props": {
+        "title": "Debt Payoff Planner",
+        "fields": [
+          { "name": "totalDebt", "label": "Total Debt ($)", "type": "number", "defaultValue": 25000, "min": 0, "prefix": "$", "placeholder": "Enter total debt amount" },
+          { "name": "interestRate", "label": "Average Interest Rate (%)", "type": "number", "defaultValue": 18.5, "min": 0, "max": 100, "suffix": "%", "step": 0.1 },
+          { "name": "monthlyPayment", "label": "Monthly Payment ($)", "type": "number", "defaultValue": 750, "min": 0, "prefix": "$", "placeholder": "How much can you pay monthly?" },
+          { "name": "method", "label": "Payoff Strategy", "type": "select", "options": ["Snowball (smallest balance first)", "Avalanche (highest interest first)"], "defaultValue": "Avalanche (highest interest first)" },
+          { "name": "extraPayment", "label": "Extra Monthly Payment ($)", "type": "number", "defaultValue": 0, "min": 0, "prefix": "$", "placeholder": "Any additional amount?" }
+        ],
+        "submitLabel": "Calculate Payoff Plan",
+        "results": [
+          { "label": "Payoff Date", "key": "payoffDate", "format": "text" },
+          { "label": "Months to Pay Off", "key": "monthsToPayoff", "format": "number" },
+          { "label": "Total Interest Paid", "key": "totalInterest", "format": "currency" },
+          { "label": "Total Amount Paid", "key": "totalPaid", "format": "currency" },
+          { "label": "Interest Savings vs. Minimum", "key": "interestSavings", "format": "currency" }
+        ]
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "640px", "padding": "24px" },
+  "theme": { "primaryColor": "#ef4444", "backgroundColor": "#1e1b2e", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

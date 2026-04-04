@@ -1,0 +1,39 @@
+{
+  "title": "Currency Exchange Calculator",
+  "description": "Convert between major world currencies with up-to-date exchange rates",
+  "category": "finance",
+  "viralHook": "Traveling soon? Stop getting ripped off — know the real exchange rate before you go",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "converter",
+      "id": "currency-converter",
+      "props": {
+        "title": "Currency Converter",
+        "categories": [
+          {
+            "name": "Currency",
+            "units": [
+              { "name": "US Dollar", "symbol": "USD", "toBase": 1 },
+              { "name": "Euro", "symbol": "EUR", "toBase": 1.0845 },
+              { "name": "British Pound", "symbol": "GBP", "toBase": 1.2638 },
+              { "name": "Japanese Yen", "symbol": "JPY", "toBase": 0.006623 },
+              { "name": "Canadian Dollar", "symbol": "CAD", "toBase": 0.7385 },
+              { "name": "Australian Dollar", "symbol": "AUD", "toBase": 0.6542 },
+              { "name": "Swiss Franc", "symbol": "CHF", "toBase": 1.1174 },
+              { "name": "Chinese Yuan", "symbol": "CNY", "toBase": 0.1378 }
+            ]
+          }
+        ],
+        "defaultCategory": "Currency",
+        "defaultFrom": "USD",
+        "defaultTo": "EUR",
+        "defaultValue": 1000,
+        "precision": 2
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+  "theme": { "primaryColor": "#0ea5e9", "backgroundColor": "#0f172a", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

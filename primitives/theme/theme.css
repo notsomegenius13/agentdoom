@@ -1,0 +1,85 @@
+/*
+ * AgentDoom Theme CSS Variables
+ * These are scoped to [data-theme] so they only apply within the ThemeProvider.
+ * Existing Tailwind classes and globals.css remain unaffected.
+ */
+
+[data-theme="dark"] {
+  --doom-bg: #0a0a0a;
+  --doom-surface: #111111;
+  --doom-border: #2a2a2a;
+
+  --doom-text-primary: #f5f5f5;
+  --doom-text-secondary: #a1a1aa;
+
+  --doom-accent: #7c3aed;
+  --doom-accent-hover: #a78bfa;
+
+  --doom-success: #10b981;
+  --doom-error: #ef4444;
+  --doom-warning: #f59e0b;
+
+  --doom-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] {
+  --doom-bg: #f8f8fc;
+  --doom-surface: #ffffff;
+  --doom-border: #e2e2ea;
+
+  --doom-text-primary: #18181b;
+  --doom-text-secondary: #52525b;
+
+  --doom-accent: #7c3aed;
+  --doom-accent-hover: #6d28d9;
+
+  --doom-success: #059669;
+  --doom-error: #dc2626;
+  --doom-warning: #d97706;
+
+  --doom-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/*
+ * Responsive spacing utilities
+ * Mobile-first: base is mobile, scale up for tablet/desktop
+ */
+[data-theme] {
+  --doom-spacing-unit: 16px;
+  --doom-radius: 12px;
+  --doom-font-heading: 1.125rem;
+  --doom-font-body: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  [data-theme] {
+    --doom-spacing-unit: 20px;
+    --doom-font-heading: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-theme] {
+    --doom-spacing-unit: 24px;
+    --doom-font-heading: 1.375rem;
+    --doom-font-body: 0.9375rem;
+  }
+}
+
+/*
+ * Entrance animation keyframes for PrimitiveWrapper
+ */
+@keyframes doomFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes doomSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes doomScaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}

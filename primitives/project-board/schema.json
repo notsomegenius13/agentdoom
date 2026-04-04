@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectBoardConfig",
+  "description": "Configuration for the ProjectBoard composite primitive",
+  "type": "object",
+  "required": [
+    "title",
+    "columns"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The board title"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Optional subtitle shown below the title"
+    },
+    "columns": {
+      "type": "array",
+      "description": "Kanban columns with their tasks",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "tasks"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique column identifier"
+          },
+          "title": {
+            "type": "string",
+            "description": "Column header text"
+          },
+          "color": {
+            "type": "string",
+            "description": "CSS color for the column top border"
+          },
+          "tasks": {
+            "type": "array",
+            "description": "Tasks in this column",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "title"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique task identifier"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Task title"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Task description, displayed truncated on cards"
+                },
+                "priority": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "critical"
+                  ],
+                  "description": "Task priority level"
+                },
+                "assignee": {
+                  "type": "string",
+                  "description": "Name of the assigned person"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Tags displayed as small pills"
+                },
+                "dueDate": {
+                  "type": "string",
+                  "description": "Due date string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "showStats": {
+      "type": "boolean",
+      "description": "Show the stats bar with task counts and completion rate",
+      "default": false
+    },
+    "allowAdd": {
+      "type": "boolean",
+      "description": "Show Add Task button at the bottom of each column",
+      "default": false
+    },
+    "allowMove": {
+      "type": "boolean",
+      "description": "Show move arrows on task cards",
+      "default": false
+    },
+    "showFilters": {
+      "type": "boolean",
+      "description": "Show the search and priority filter bar",
+      "default": false
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

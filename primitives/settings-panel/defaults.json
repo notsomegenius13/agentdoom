@@ -1,0 +1,193 @@
+{
+  "title": "Account Settings",
+  "tabs": [
+    {
+      "id": "profile",
+      "label": "Profile",
+      "icon": "👤",
+      "sections": [
+        {
+          "title": "Personal Information",
+          "description": "Update your personal details and public profile.",
+          "fields": [
+            {
+              "name": "fullName",
+              "label": "Full Name",
+              "type": "text",
+              "value": "",
+              "placeholder": "Enter your full name"
+            },
+            {
+              "name": "email",
+              "label": "Email Address",
+              "type": "email",
+              "value": "",
+              "placeholder": "you@example.com"
+            },
+            {
+              "name": "bio",
+              "label": "Bio",
+              "type": "textarea",
+              "value": "",
+              "placeholder": "Tell us a little about yourself..."
+            }
+          ]
+        },
+        {
+          "title": "Preferences",
+          "description": "Customize your experience.",
+          "fields": [
+            {
+              "name": "language",
+              "label": "Language",
+              "type": "select",
+              "value": "English",
+              "options": [
+                "English",
+                "Spanish",
+                "French",
+                "German",
+                "Japanese",
+                "Chinese"
+              ]
+            },
+            {
+              "name": "timezone",
+              "label": "Timezone",
+              "type": "select",
+              "value": "UTC",
+              "options": [
+                "UTC",
+                "US/Eastern",
+                "US/Central",
+                "US/Mountain",
+                "US/Pacific",
+                "Europe/London",
+                "Europe/Berlin",
+                "Asia/Tokyo"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notifications",
+      "label": "Notifications",
+      "icon": "🔔",
+      "sections": [
+        {
+          "title": "Email Notifications",
+          "description": "Choose which emails you'd like to receive.",
+          "fields": [
+            {
+              "name": "marketingEmails",
+              "label": "Marketing Emails",
+              "type": "toggle",
+              "value": false,
+              "description": "Receive emails about new features and promotions"
+            },
+            {
+              "name": "productUpdates",
+              "label": "Product Updates",
+              "type": "toggle",
+              "value": true,
+              "description": "Get notified about product changes and improvements"
+            },
+            {
+              "name": "weeklyDigest",
+              "label": "Weekly Digest",
+              "type": "toggle",
+              "value": true,
+              "description": "Receive a weekly summary of your activity"
+            }
+          ]
+        },
+        {
+          "title": "Push Notifications",
+          "description": "Manage push notification preferences.",
+          "fields": [
+            {
+              "name": "desktopNotifications",
+              "label": "Desktop Notifications",
+              "type": "toggle",
+              "value": true,
+              "description": "Show notifications on your desktop"
+            },
+            {
+              "name": "mobileNotifications",
+              "label": "Mobile Notifications",
+              "type": "toggle",
+              "value": false,
+              "description": "Send push notifications to your mobile device"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "icon": "🔒",
+      "sections": [
+        {
+          "title": "Password",
+          "description": "Update your password to keep your account secure.",
+          "fields": [
+            {
+              "name": "currentPassword",
+              "label": "Current Password",
+              "type": "text",
+              "value": "",
+              "placeholder": "Enter current password"
+            },
+            {
+              "name": "newPassword",
+              "label": "New Password",
+              "type": "text",
+              "value": "",
+              "placeholder": "Enter new password"
+            }
+          ]
+        },
+        {
+          "title": "Two-Factor Authentication",
+          "description": "Add an extra layer of security to your account.",
+          "fields": [
+            {
+              "name": "enable2FA",
+              "label": "Enable Two-Factor Authentication",
+              "type": "toggle",
+              "value": false,
+              "description": "Require a verification code when signing in"
+            },
+            {
+              "name": "backupEmail",
+              "label": "Backup Email",
+              "type": "email",
+              "value": "",
+              "placeholder": "backup@example.com",
+              "description": "Used for account recovery if 2FA device is lost"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "saveLabel": "Save Changes",
+  "successMessage": "Settings saved successfully!",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

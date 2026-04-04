@@ -1,0 +1,86 @@
+{
+  "title": "SQL Cheat Sheet",
+  "description": "Searchable SQL reference — find syntax, examples, and usage for any SQL command instantly",
+  "category": "dev-tools",
+  "viralHook": "Stop Googling the same SQL syntax every time — bookmark this and never forget a JOIN again",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "sql-search",
+      "props": {
+        "title": "Search SQL Reference",
+        "fields": [
+          {
+            "name": "query",
+            "label": "Search commands, keywords, or concepts",
+            "type": "text",
+            "placeholder": "e.g. JOIN, GROUP BY, subquery, HAVING...",
+            "autofocus": true
+          },
+          {
+            "name": "category",
+            "label": "Filter by Category",
+            "type": "select",
+            "options": ["All", "Querying", "Filtering", "Aggregation", "Joins", "Modifying Data", "Schema", "Indexes & Performance"],
+            "defaultValue": "All"
+          }
+        ],
+        "submitLabel": "Search",
+        "liveSearch": true
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "sql-reference-table",
+      "props": {
+        "title": "SQL Reference",
+        "searchable": true,
+        "columns": [
+          { "key": "command", "label": "Command", "align": "left", "width": "160px", "monospace": true },
+          { "key": "category", "label": "Category", "align": "center", "width": "140px" },
+          { "key": "syntax", "label": "Syntax", "align": "left", "monospace": true },
+          { "key": "example", "label": "Example", "align": "left", "monospace": true },
+          { "key": "description", "label": "Description", "align": "left" }
+        ],
+        "rows": [
+          { "command": "SELECT", "category": "Querying", "syntax": "SELECT col1, col2 FROM table", "example": "SELECT name, email FROM users", "description": "Retrieve columns from a table" },
+          { "command": "SELECT *", "category": "Querying", "syntax": "SELECT * FROM table", "example": "SELECT * FROM products", "description": "Retrieve all columns from a table" },
+          { "command": "WHERE", "category": "Filtering", "syntax": "SELECT ... FROM t WHERE condition", "example": "SELECT * FROM users WHERE age > 30", "description": "Filter rows by a condition" },
+          { "command": "AND / OR", "category": "Filtering", "syntax": "WHERE cond1 AND cond2", "example": "WHERE age > 18 AND active = true", "description": "Combine multiple filter conditions" },
+          { "command": "IN", "category": "Filtering", "syntax": "WHERE col IN (v1, v2, v3)", "example": "WHERE status IN ('active', 'pending')", "description": "Match against a list of values" },
+          { "command": "LIKE", "category": "Filtering", "syntax": "WHERE col LIKE 'pattern%'", "example": "WHERE name LIKE 'John%'", "description": "Pattern match using wildcards (% = any, _ = one)" },
+          { "command": "BETWEEN", "category": "Filtering", "syntax": "WHERE col BETWEEN v1 AND v2", "example": "WHERE salary BETWEEN 50000 AND 100000", "description": "Filter rows within a range (inclusive)" },
+          { "command": "ORDER BY", "category": "Querying", "syntax": "ORDER BY col ASC|DESC", "example": "ORDER BY created_at DESC", "description": "Sort results in ascending or descending order" },
+          { "command": "LIMIT", "category": "Querying", "syntax": "LIMIT n", "example": "SELECT * FROM users LIMIT 10", "description": "Restrict number of rows returned" },
+          { "command": "OFFSET", "category": "Querying", "syntax": "LIMIT n OFFSET m", "example": "LIMIT 10 OFFSET 20", "description": "Skip m rows before returning results (pagination)" },
+          { "command": "INNER JOIN", "category": "Joins", "syntax": "JOIN t2 ON t1.id = t2.fk", "example": "JOIN orders ON users.id = orders.user_id", "description": "Return rows with matching keys in both tables" },
+          { "command": "LEFT JOIN", "category": "Joins", "syntax": "LEFT JOIN t2 ON t1.id = t2.fk", "example": "LEFT JOIN orders ON users.id = orders.user_id", "description": "Return all left rows, NULLs for unmatched right rows" },
+          { "command": "RIGHT JOIN", "category": "Joins", "syntax": "RIGHT JOIN t2 ON t1.id = t2.fk", "example": "RIGHT JOIN orders ON users.id = orders.user_id", "description": "Return all right rows, NULLs for unmatched left rows" },
+          { "command": "FULL OUTER JOIN", "category": "Joins", "syntax": "FULL OUTER JOIN t2 ON t1.id = t2.fk", "example": "FULL OUTER JOIN orders ON users.id = orders.user_id", "description": "Return all rows from both tables" },
+          { "command": "GROUP BY", "category": "Aggregation", "syntax": "GROUP BY col", "example": "SELECT dept, COUNT(*) FROM employees GROUP BY dept", "description": "Group rows that share a value for aggregation" },
+          { "command": "HAVING", "category": "Aggregation", "syntax": "GROUP BY col HAVING condition", "example": "GROUP BY dept HAVING COUNT(*) > 5", "description": "Filter groups after GROUP BY (like WHERE for aggregates)" },
+          { "command": "COUNT", "category": "Aggregation", "syntax": "COUNT(col) or COUNT(*)", "example": "SELECT COUNT(*) FROM orders", "description": "Count rows or non-NULL values" },
+          { "command": "SUM", "category": "Aggregation", "syntax": "SUM(col)", "example": "SELECT SUM(amount) FROM payments", "description": "Sum all numeric values in a column" },
+          { "command": "AVG", "category": "Aggregation", "syntax": "AVG(col)", "example": "SELECT AVG(rating) FROM reviews", "description": "Calculate the average of a numeric column" },
+          { "command": "MAX / MIN", "category": "Aggregation", "syntax": "MAX(col) / MIN(col)", "example": "SELECT MAX(price) FROM products", "description": "Return the highest or lowest value in a column" },
+          { "command": "INSERT", "category": "Modifying Data", "syntax": "INSERT INTO t (cols) VALUES (vals)", "example": "INSERT INTO users (name, email) VALUES ('Alice', 'a@b.com')", "description": "Add a new row to a table" },
+          { "command": "UPDATE", "category": "Modifying Data", "syntax": "UPDATE t SET col=val WHERE condition", "example": "UPDATE users SET active=false WHERE last_login < '2023-01-01'", "description": "Modify existing rows matching a condition" },
+          { "command": "DELETE", "category": "Modifying Data", "syntax": "DELETE FROM t WHERE condition", "example": "DELETE FROM sessions WHERE expired_at < NOW()", "description": "Remove rows matching a condition" },
+          { "command": "CREATE TABLE", "category": "Schema", "syntax": "CREATE TABLE t (col type, ...)", "example": "CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT)", "description": "Create a new table with defined columns" },
+          { "command": "ALTER TABLE", "category": "Schema", "syntax": "ALTER TABLE t ADD COLUMN col type", "example": "ALTER TABLE users ADD COLUMN bio TEXT", "description": "Modify an existing table structure" },
+          { "command": "DROP TABLE", "category": "Schema", "syntax": "DROP TABLE t", "example": "DROP TABLE temp_imports", "description": "Permanently delete a table and all its data" },
+          { "command": "CREATE INDEX", "category": "Indexes & Performance", "syntax": "CREATE INDEX idx ON t(col)", "example": "CREATE INDEX idx_email ON users(email)", "description": "Create an index to speed up queries on a column" },
+          { "command": "EXPLAIN", "category": "Indexes & Performance", "syntax": "EXPLAIN SELECT ...", "example": "EXPLAIN SELECT * FROM orders WHERE user_id = 5", "description": "Show the query execution plan for optimization" }
+        ],
+        "striped": true,
+        "stickyHeader": true,
+        "filterKey": "category"
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "1100px", "padding": "24px" },
+  "theme": { "primaryColor": "#a78bfa", "backgroundColor": "#0d1117", "fontFamily": "'JetBrains Mono', 'Fira Code', monospace", "borderRadius": "8px" }
+}

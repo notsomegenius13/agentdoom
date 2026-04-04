@@ -1,0 +1,83 @@
+{
+  "title": "Task Estimator",
+  "description": "Estimate realistic task completion time with complexity and interruption factors",
+  "category": "productivity",
+  "viralHook": "Stop underestimating. Start shipping on time.",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "task-estimator-calc",
+      "props": {
+        "inputs": [
+          {
+            "name": "numTasks",
+            "label": "Number of Tasks",
+            "type": "number",
+            "min": 1,
+            "max": 500,
+            "default": 10,
+            "required": true
+          },
+          {
+            "name": "avgComplexity",
+            "label": "Average Complexity (1-5)",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "label": "1 - Trivial (15 min each)", "value": 0.25 },
+              { "label": "2 - Simple (30 min each)", "value": 0.5 },
+              { "label": "3 - Moderate (1 hour each)", "value": 1 },
+              { "label": "4 - Complex (2 hours each)", "value": 2 },
+              { "label": "5 - Very Complex (4 hours each)", "value": 4 }
+            ]
+          },
+          {
+            "name": "interruptionFactor",
+            "label": "Interruption Factor",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "label": "Low - Mostly focused (1.2x)", "value": 1.2 },
+              { "label": "Medium - Some meetings/distractions (1.5x)", "value": 1.5 },
+              { "label": "High - Frequent interruptions (2.0x)", "value": 2.0 }
+            ]
+          },
+          {
+            "name": "hoursPerDay",
+            "label": "Productive Hours Available per Day",
+            "type": "number",
+            "min": 1,
+            "max": 12,
+            "default": 6,
+            "required": true
+          }
+        ],
+        "outputs": [
+          {
+            "name": "estimatedTotalHours",
+            "label": "Estimated Total Hours",
+            "formula": "numTasks * avgComplexity * interruptionFactor",
+            "format": "decimal",
+            "precision": 1,
+            "suffix": " hours"
+          },
+          {
+            "name": "daysToComplete",
+            "label": "Working Days to Complete",
+            "formula": "Math.ceil((numTasks * avgComplexity * interruptionFactor) / hoursPerDay)",
+            "format": "integer",
+            "suffix": " days"
+          },
+          {
+            "name": "recommendedDeadline",
+            "label": "Recommended Deadline (with 20% buffer)",
+            "formula": "Math.ceil(((numTasks * avgComplexity * interruptionFactor) / hoursPerDay) * 1.2)",
+            "format": "integer",
+            "suffix": " working days from now"
+          }
+        ]
+      }
+    }
+  ]
+}

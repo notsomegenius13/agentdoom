@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useMemo, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface ConversionUnit {
   name: string
@@ -13,6 +14,7 @@ export interface ConverterConfig {
     name: string
     units: ConversionUnit[]
   }[]
+  appearance?: AppearanceConfig
 }
 
 export default function Converter({ config }: { config: ConverterConfig }) {
@@ -42,8 +44,9 @@ export default function Converter({ config }: { config: ConverterConfig }) {
   }, [config.categories])
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       {config.categories.length > 1 && (
         <div className="flex gap-2 mb-4 flex-wrap">
@@ -115,5 +118,6 @@ export default function Converter({ config }: { config: ConverterConfig }) {
         </div>
       </div>
     </div>
+    </PrimitiveWrapper>
   )
 }

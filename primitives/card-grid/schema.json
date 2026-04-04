@@ -3,23 +3,146 @@
   "type": "object",
   "title": "CardGridConfig",
   "description": "A responsive grid of content cards",
-  "required": ["title", "cards"],
+  "required": [
+    "title",
+    "cards"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "cards": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["title", "description"],
+        "required": [
+          "title",
+          "description"
+        ],
         "properties": {
-          "title": { "type": "string" },
-          "description": { "type": "string" },
-          "icon": { "type": "string" },
-          "tag": { "type": "string" },
-          "link": { "type": "string" }
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri"
+          }
         }
       }
     },
-    "columns": { "type": "number", "minimum": 1, "maximum": 4 }
+    "columns": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 3
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

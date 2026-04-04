@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface StripeCheckoutConfig {
   /** Display name of the product */
@@ -27,6 +28,7 @@ export interface StripeCheckoutConfig {
   cancelUrl?: string
   /** Visual style variant */
   variant?: 'default' | 'compact' | 'card'
+  appearance?: AppearanceConfig
 }
 
 export default function StripeCheckout({ config }: { config: StripeCheckoutConfig }) {
@@ -106,6 +108,7 @@ export default function StripeCheckout({ config }: { config: StripeCheckoutConfi
 
   if (variant === 'card') {
     return (
+      <PrimitiveWrapper appearance={config.appearance}>
       <div className="rounded-xl border-2 border-gray-200 p-6 text-center transition-all hover:border-purple-300 hover:shadow-md">
         <h3 className="text-lg font-bold text-gray-900">{productName}</h3>
         {description && <p className="mt-1 text-sm text-gray-500">{description}</p>}
@@ -130,6 +133,7 @@ export default function StripeCheckout({ config }: { config: StripeCheckoutConfi
           <p className="mt-2 text-xs text-red-600" role="alert">{error}</p>
         )}
       </div>
+      </PrimitiveWrapper>
     )
   }
 

@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "description": "Seed tool metadata for AgentDoom launch — descriptions, categories, tags, and thumbnail specs",
+  "generatedBy": "scraps",
+  "generatedAt": "2026-03-31",
+  "tools": [
+    {
+      "slug": "freelance-rate-calculator",
+      "title": "Freelance Rate Calculator",
+      "description": "Calculate your ideal hourly rate based on income goals, expenses, and taxes. Stop guessing what to charge — let the math decide.",
+      "categories": ["money", "freelance"],
+      "tags": ["freelance", "hourly rate", "pricing", "income", "self-employed", "calculator", "contractor", "billing"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "$125/hr",
+        "subtext": "Your ideal rate",
+        "accentColor": "#10b981",
+        "bgColor": "#f0fdf4",
+        "icon": "dollar-sign"
+      }
+    },
+    {
+      "slug": "subscription-tracker",
+      "title": "Subscription Tracker",
+      "description": "See every recurring charge in one place and find out how much you're really spending each month. Cancel the ones you forgot about.",
+      "categories": ["money", "productivity"],
+      "tags": ["subscriptions", "recurring", "budget", "spending", "cancel", "tracker", "monthly costs", "saas"],
+      "thumbnail": {
+        "type": "table-preview",
+        "headline": "$247/mo",
+        "subtext": "12 active subscriptions",
+        "accentColor": "#6366f1",
+        "bgColor": "#eef2ff",
+        "icon": "credit-card"
+      }
+    },
+    {
+      "slug": "pomodoro-timer",
+      "title": "Pomodoro Timer",
+      "description": "Stay focused with timed work sessions and built-in breaks. The classic productivity technique, ready to use in one click.",
+      "categories": ["productivity", "utilities"],
+      "tags": ["pomodoro", "timer", "focus", "productivity", "work sessions", "breaks", "time management", "deep work"],
+      "thumbnail": {
+        "type": "timer-preview",
+        "headline": "25:00",
+        "subtext": "Focus session",
+        "accentColor": "#ef4444",
+        "bgColor": "#fef2f2",
+        "icon": "clock"
+      }
+    },
+    {
+      "slug": "meal-prep-checklist",
+      "title": "Meal Prep Checklist",
+      "description": "Plan your weekly meals and generate a shopping list automatically. Eat better without the decision fatigue.",
+      "categories": ["health", "productivity"],
+      "tags": ["meal prep", "grocery list", "cooking", "nutrition", "weekly planning", "food", "healthy eating", "shopping list"],
+      "thumbnail": {
+        "type": "checklist-preview",
+        "headline": "5 meals planned",
+        "subtext": "12 items to buy",
+        "accentColor": "#f97316",
+        "bgColor": "#fff7ed",
+        "icon": "utensils"
+      }
+    },
+    {
+      "slug": "bio-generator",
+      "title": "Bio Generator",
+      "description": "Create polished bios for social media, LinkedIn, or your website in seconds. Just fill in a few details and pick your tone.",
+      "categories": ["creator", "business"],
+      "tags": ["bio", "social media", "linkedin", "twitter", "profile", "copywriting", "personal brand", "about me"],
+      "thumbnail": {
+        "type": "text-preview",
+        "headline": "Your Bio",
+        "subtext": "Professional · 160 chars",
+        "accentColor": "#8b5cf6",
+        "bgColor": "#f5f3ff",
+        "icon": "user"
+      }
+    },
+    {
+      "slug": "cold-email-template",
+      "title": "Cold Email Template",
+      "description": "Write cold emails that actually get replies. Fill in the blanks, pick a framework, and get a ready-to-send email.",
+      "categories": ["business", "creator"],
+      "tags": ["cold email", "outreach", "sales", "template", "email", "lead generation", "b2b", "prospecting"],
+      "thumbnail": {
+        "type": "template-preview",
+        "headline": "Hi {{name}}",
+        "subtext": "3 proven frameworks",
+        "accentColor": "#0ea5e9",
+        "bgColor": "#f0f9ff",
+        "icon": "mail"
+      }
+    },
+    {
+      "slug": "would-you-rather-quiz",
+      "title": "Would You Rather",
+      "description": "Play the classic party game with wild, thought-provoking scenarios. Share it with friends and compare answers.",
+      "categories": ["fun", "social"],
+      "tags": ["would you rather", "quiz", "game", "party", "icebreaker", "fun", "social", "conversation starter"],
+      "thumbnail": {
+        "type": "quiz-preview",
+        "headline": "Would you rather...",
+        "subtext": "8 wild questions",
+        "accentColor": "#f59e0b",
+        "bgColor": "#fffbeb",
+        "icon": "zap"
+      }
+    },
+    {
+      "slug": "bmi-calculator",
+      "title": "BMI Calculator",
+      "description": "Check your Body Mass Index instantly with height and weight. Get your number and see where you fall on the chart.",
+      "categories": ["health", "utilities"],
+      "tags": ["bmi", "body mass index", "health", "weight", "fitness", "calculator", "wellness", "body composition"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "24.2",
+        "subtext": "Normal weight",
+        "accentColor": "#14b8a6",
+        "bgColor": "#f0fdfa",
+        "icon": "heart"
+      }
+    },
+    {
+      "slug": "startup-cost-estimator",
+      "title": "Startup Cost Estimator",
+      "description": "Estimate how much it'll cost to launch your business. Covers legal, tech, marketing, and runway so you're not surprised.",
+      "categories": ["business", "money"],
+      "tags": ["startup", "costs", "budget", "launch", "business plan", "funding", "runway", "entrepreneur", "seed money"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "$24,500",
+        "subtext": "Estimated launch cost",
+        "accentColor": "#6366f1",
+        "bgColor": "#eef2ff",
+        "icon": "rocket"
+      }
+    },
+    {
+      "slug": "client-onboarding-checklist",
+      "title": "Client Onboarding Checklist",
+      "description": "Never miss a step when bringing on a new client. From contracts to kickoff calls, every task is tracked.",
+      "categories": ["business", "productivity"],
+      "tags": ["client", "onboarding", "checklist", "freelance", "agency", "process", "workflow", "project management"],
+      "thumbnail": {
+        "type": "checklist-preview",
+        "headline": "New Client",
+        "subtext": "8 steps to kickoff",
+        "accentColor": "#059669",
+        "bgColor": "#ecfdf5",
+        "icon": "check-circle"
+      }
+    },
+    {
+      "slug": "content-calendar",
+      "title": "Content Calendar",
+      "description": "Plan and organize your content across platforms with a visual calendar. Never scramble for post ideas again.",
+      "categories": ["creator", "productivity"],
+      "tags": ["content calendar", "social media", "planning", "editorial", "scheduling", "marketing", "creator", "posts"],
+      "thumbnail": {
+        "type": "grid-preview",
+        "headline": "March 2026",
+        "subtext": "14 posts planned",
+        "accentColor": "#ec4899",
+        "bgColor": "#fdf2f8",
+        "icon": "calendar"
+      }
+    },
+    {
+      "slug": "lead-capture-form",
+      "title": "Lead Capture Form",
+      "description": "Collect emails and contact info with a clean, conversion-optimized form. Plug it into your landing page or share the link.",
+      "categories": ["business", "creator"],
+      "tags": ["lead capture", "email", "form", "landing page", "conversion", "newsletter", "signup", "marketing funnel"],
+      "thumbnail": {
+        "type": "form-preview",
+        "headline": "Get Early Access",
+        "subtext": "Name · Email · Submit",
+        "accentColor": "#7c3aed",
+        "bgColor": "#f5f3ff",
+        "icon": "inbox"
+      }
+    },
+    {
+      "slug": "habit-tracker",
+      "title": "Habit Tracker",
+      "description": "Build streaks and track daily habits with a simple, visual tracker. See your consistency at a glance.",
+      "categories": ["productivity", "health"],
+      "tags": ["habits", "tracker", "streaks", "daily", "routine", "goals", "self-improvement", "consistency"],
+      "thumbnail": {
+        "type": "tracker-preview",
+        "headline": "7-day streak",
+        "subtext": "5 habits tracked",
+        "accentColor": "#22c55e",
+        "bgColor": "#f0fdf4",
+        "icon": "flame"
+      }
+    },
+    {
+      "slug": "mortgage-calculator",
+      "title": "Mortgage Calculator",
+      "description": "Estimate your monthly mortgage payment with principal, interest, taxes, and insurance. See what you can actually afford.",
+      "categories": ["money", "utilities"],
+      "tags": ["mortgage", "home loan", "real estate", "monthly payment", "interest rate", "housing", "calculator", "amortization"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "$2,147/mo",
+        "subtext": "30-year fixed at 6.5%",
+        "accentColor": "#0284c7",
+        "bgColor": "#f0f9ff",
+        "icon": "home"
+      }
+    },
+    {
+      "slug": "personality-quiz",
+      "title": "Personality Quiz",
+      "description": "Find out your personality type with a quick, shareable quiz. Fun results you'll want to post everywhere.",
+      "categories": ["fun", "social"],
+      "tags": ["personality", "quiz", "mbti", "fun", "shareable", "buzzfeed", "results", "self-discovery"],
+      "thumbnail": {
+        "type": "quiz-preview",
+        "headline": "What type are you?",
+        "subtext": "10 questions · 4 results",
+        "accentColor": "#d946ef",
+        "bgColor": "#fdf4ff",
+        "icon": "sparkles"
+      }
+    },
+    {
+      "slug": "tip-calculator",
+      "title": "Tip Calculator",
+      "description": "Split the bill and calculate tips for any group size. No more awkward math at the table.",
+      "categories": ["money", "utilities"],
+      "tags": ["tip", "split bill", "restaurant", "calculator", "dining", "group", "gratuity", "money"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "$8.50 each",
+        "subtext": "4 people · 20% tip",
+        "accentColor": "#f59e0b",
+        "bgColor": "#fffbeb",
+        "icon": "users"
+      }
+    },
+    {
+      "slug": "unit-converter",
+      "title": "Unit Converter",
+      "description": "Convert between units instantly — length, weight, temperature, volume, and more. Bookmark it and never Google conversions again.",
+      "categories": ["utilities"],
+      "tags": ["converter", "units", "metric", "imperial", "temperature", "length", "weight", "measurement"],
+      "thumbnail": {
+        "type": "converter-preview",
+        "headline": "72°F → 22.2°C",
+        "subtext": "Length · Weight · Temp",
+        "accentColor": "#64748b",
+        "bgColor": "#f8fafc",
+        "icon": "repeat"
+      }
+    },
+    {
+      "slug": "weekly-poll",
+      "title": "Weekly Poll",
+      "description": "Create quick polls and get instant results from your audience. Perfect for newsletters, teams, or social feeds.",
+      "categories": ["fun", "creator"],
+      "tags": ["poll", "voting", "survey", "audience", "engagement", "feedback", "social", "community"],
+      "thumbnail": {
+        "type": "poll-preview",
+        "headline": "What do you prefer?",
+        "subtext": "142 votes so far",
+        "accentColor": "#3b82f6",
+        "bgColor": "#eff6ff",
+        "icon": "bar-chart"
+      }
+    },
+    {
+      "slug": "pricing-page",
+      "title": "Pricing Page",
+      "description": "Build a professional pricing table for your product or service. Compare tiers, highlight features, and drive conversions.",
+      "categories": ["business", "creator"],
+      "tags": ["pricing", "saas", "tiers", "plans", "landing page", "conversion", "product", "subscription"],
+      "thumbnail": {
+        "type": "pricing-preview",
+        "headline": "Free · Pro · Team",
+        "subtext": "3 tiers compared",
+        "accentColor": "#7c3aed",
+        "bgColor": "#f5f3ff",
+        "icon": "layers"
+      }
+    },
+    {
+      "slug": "project-kanban",
+      "title": "Project Kanban Board",
+      "description": "Organize tasks visually with drag-and-drop columns. A lightweight Trello alternative you can embed anywhere.",
+      "categories": ["productivity", "dev-tools"],
+      "tags": ["kanban", "project management", "tasks", "trello", "agile", "board", "workflow", "drag and drop"],
+      "thumbnail": {
+        "type": "kanban-preview",
+        "headline": "To Do → Done",
+        "subtext": "3 columns · 9 cards",
+        "accentColor": "#0ea5e9",
+        "bgColor": "#f0f9ff",
+        "icon": "columns"
+      }
+    },
+    {
+      "slug": "sales-dashboard",
+      "title": "Sales Dashboard",
+      "description": "Track revenue, orders, and conversion rates at a glance. A clean dashboard with charts you can customize for any business.",
+      "categories": ["business", "data-viz"],
+      "tags": ["sales", "dashboard", "revenue", "analytics", "metrics", "kpi", "charts", "ecommerce", "business intelligence"],
+      "thumbnail": {
+        "type": "dashboard-preview",
+        "headline": "$48,250",
+        "subtext": "Revenue ↑12.5%",
+        "accentColor": "#059669",
+        "bgColor": "#ecfdf5",
+        "icon": "trending-up"
+      }
+    },
+    {
+      "slug": "workout-timer",
+      "title": "Workout Timer",
+      "description": "Time your intervals, rest periods, and rounds for any workout. Built for HIIT, circuits, and strength training.",
+      "categories": ["health", "utilities"],
+      "tags": ["workout", "timer", "hiit", "intervals", "fitness", "exercise", "circuit training", "rest timer"],
+      "thumbnail": {
+        "type": "timer-preview",
+        "headline": "00:45",
+        "subtext": "Round 3 of 5",
+        "accentColor": "#ef4444",
+        "bgColor": "#fef2f2",
+        "icon": "activity"
+      }
+    },
+    {
+      "slug": "invoice-generator",
+      "title": "Invoice Generator",
+      "description": "Create professional invoices in minutes. Add line items, tax, and your branding — then export or share a link.",
+      "categories": ["business", "money"],
+      "tags": ["invoice", "billing", "freelance", "payment", "professional", "generator", "accounting", "small business"],
+      "thumbnail": {
+        "type": "form-preview",
+        "headline": "Invoice #001",
+        "subtext": "Total: $3,200.00",
+        "accentColor": "#1d4ed8",
+        "bgColor": "#eff6ff",
+        "icon": "file-text"
+      }
+    },
+    {
+      "slug": "color-palette-generator",
+      "title": "Color Palette Generator",
+      "description": "Generate beautiful, curated color palettes for your next design project. Browse themes or create your own.",
+      "categories": ["creator", "design"],
+      "tags": ["color palette", "design", "colors", "hex codes", "branding", "ui design", "themes", "aesthetic"],
+      "thumbnail": {
+        "type": "swatch-preview",
+        "headline": "Sunset Vibes",
+        "subtext": "6 curated palettes",
+        "accentColor": "#8b5cf6",
+        "bgColor": "#faf5ff",
+        "icon": "palette"
+      }
+    },
+    {
+      "slug": "expense-tracker",
+      "title": "Expense Tracker",
+      "description": "Log expenses on the go and see where your money goes. Categorize spending and spot trends over time.",
+      "categories": ["money", "productivity"],
+      "tags": ["expense", "tracker", "budget", "spending", "money", "finance", "categories", "personal finance"],
+      "thumbnail": {
+        "type": "table-preview",
+        "headline": "$1,842 this month",
+        "subtext": "23 transactions",
+        "accentColor": "#dc2626",
+        "bgColor": "#fef2f2",
+        "icon": "receipt"
+      }
+    },
+    {
+      "slug": "event-countdown",
+      "title": "Event Countdown",
+      "description": "Count down to any event with a beautiful, shareable timer. Weddings, launches, vacations — make the wait exciting.",
+      "categories": ["fun", "utilities"],
+      "tags": ["countdown", "event", "timer", "launch", "wedding", "shareable", "deadline", "days remaining"],
+      "thumbnail": {
+        "type": "countdown-preview",
+        "headline": "14d 6h 32m",
+        "subtext": "Until launch day",
+        "accentColor": "#e11d48",
+        "bgColor": "#fff1f2",
+        "icon": "calendar-clock"
+      }
+    },
+    {
+      "slug": "social-media-post-planner",
+      "title": "Social Media Post Planner",
+      "description": "Draft, schedule, and organize your social posts across platforms. Plan a week's content in one sitting.",
+      "categories": ["creator", "business"],
+      "tags": ["social media", "post planner", "scheduling", "content", "instagram", "twitter", "tiktok", "marketing"],
+      "thumbnail": {
+        "type": "grid-preview",
+        "headline": "This Week",
+        "subtext": "7 posts · 3 platforms",
+        "accentColor": "#ec4899",
+        "bgColor": "#fdf2f8",
+        "icon": "share-2"
+      }
+    },
+    {
+      "slug": "price-change-tracker",
+      "title": "Price Change Tracker",
+      "description": "See how much everyday prices have changed in your area since any year. Groceries, gas, rent — the real numbers.",
+      "categories": ["money", "data"],
+      "tags": ["inflation", "prices", "cost of living", "tracker", "economics", "city", "comparison", "trending"],
+      "thumbnail": {
+        "type": "dashboard-preview",
+        "headline": "+23%",
+        "subtext": "Groceries since 2020",
+        "accentColor": "#ef4444",
+        "bgColor": "#fef2f2",
+        "icon": "trending-up"
+      }
+    },
+    {
+      "slug": "rent-vs-buy-calculator",
+      "title": "Rent vs Buy Calculator",
+      "description": "Should you rent or buy? See the real math with taxes, maintenance, and opportunity cost — not a dumbed-down answer.",
+      "categories": ["money", "real-estate"],
+      "tags": ["rent", "buy", "house", "mortgage", "real estate", "calculator", "investment", "housing"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "Rent wins",
+        "subtext": "by $47K over 5 years",
+        "accentColor": "#3b82f6",
+        "bgColor": "#eff6ff",
+        "icon": "home"
+      }
+    },
+    {
+      "slug": "money-visualizer",
+      "title": "Money Visualizer",
+      "description": "See any dollar amount as stacked bills, real-world comparisons, and mind-blowing facts. How tall is a million dollars in $1 bills?",
+      "categories": ["fun", "money"],
+      "tags": ["money", "visualizer", "bills", "wealth", "comparison", "fun", "viral", "stacks"],
+      "thumbnail": {
+        "type": "visual-preview",
+        "headline": "$1M",
+        "subtext": "= 358 ft of $1 bills",
+        "accentColor": "#16a34a",
+        "bgColor": "#f0fdf4",
+        "icon": "dollar-sign"
+      }
+    },
+    {
+      "slug": "ai-text-detector",
+      "title": "AI Text Detector",
+      "description": "Paste any text and score how AI-written it sounds. Check your essays before your professor does.",
+      "categories": ["utilities", "ai"],
+      "tags": ["ai", "detector", "chatgpt", "writing", "essay", "plagiarism", "vibe check", "academic"],
+      "thumbnail": {
+        "type": "dashboard-preview",
+        "headline": "87% AI",
+        "subtext": "High AI probability",
+        "accentColor": "#8b5cf6",
+        "bgColor": "#f5f3ff",
+        "icon": "cpu"
+      }
+    },
+    {
+      "slug": "military-spending-counter",
+      "title": "Military Spending Counter",
+      "description": "Watch global military spending tick up in real-time. $72,000 every second. See what that money could buy instead.",
+      "categories": ["money", "data"],
+      "tags": ["military", "spending", "defense", "budget", "real-time", "counter", "politics", "government"],
+      "thumbnail": {
+        "type": "counter-preview",
+        "headline": "$72K/sec",
+        "subtext": "Global military spending",
+        "accentColor": "#dc2626",
+        "bgColor": "#fef2f2",
+        "icon": "shield"
+      }
+    },
+    {
+      "slug": "drum-machine",
+      "title": "Browser Drum Machine",
+      "description": "Make beats instantly in your browser. Tap pads, loop patterns, switch kits. No downloads, no accounts.",
+      "categories": ["fun", "music"],
+      "tags": ["drum machine", "beats", "music", "808", "trap", "producer", "browser", "audio"],
+      "thumbnail": {
+        "type": "grid-preview",
+        "headline": "KICK",
+        "subtext": "12 pads · 5 kits",
+        "accentColor": "#1e1e1e",
+        "bgColor": "#111827",
+        "icon": "music"
+      }
+    },
+    {
+      "slug": "movie-release-radar",
+      "title": "Movie Release Radar",
+      "description": "Clean calendar of upcoming movie releases. No bloat, no ads — just the movies you care about and when they drop.",
+      "categories": ["fun", "entertainment"],
+      "tags": ["movies", "releases", "calendar", "upcoming", "cinema", "film", "radar", "entertainment"],
+      "thumbnail": {
+        "type": "grid-preview",
+        "headline": "Apr 2026",
+        "subtext": "9 upcoming releases",
+        "accentColor": "#6366f1",
+        "bgColor": "#eef2ff",
+        "icon": "film"
+      }
+    },
+    {
+      "slug": "global-mood-map",
+      "title": "Global Mood Map",
+      "description": "Pin your mood on the world map and see how everyone else is feeling today. Share your result!",
+      "categories": ["fun", "social"],
+      "tags": ["mood", "map", "global", "feelings", "poll", "social", "share", "community"],
+      "thumbnail": {
+        "type": "dashboard-preview",
+        "headline": "😊 Happy",
+        "subtext": "8,294 pins today",
+        "accentColor": "#f59e0b",
+        "bgColor": "#fffbeb",
+        "icon": "globe"
+      }
+    },
+    {
+      "slug": "drake-equation-calculator",
+      "title": "Drake Equation Calculator",
+      "description": "Estimate how many alien civilizations exist in our galaxy using real astrophysics. I got 42 — how many did you get?",
+      "categories": ["fun", "science"],
+      "tags": ["drake equation", "aliens", "space", "astrophysics", "civilizations", "science", "calculator", "fermi"],
+      "thumbnail": {
+        "type": "calculator-preview",
+        "headline": "32.4",
+        "subtext": "civilizations in our galaxy",
+        "accentColor": "#6366f1",
+        "bgColor": "#0f172a",
+        "icon": "star"
+      }
+    },
+    {
+      "slug": "svg-logo-maker",
+      "title": "SVG Logo Maker",
+      "description": "Create a simple logo in seconds. Pick shape, colors, font, download SVG. No Figma, no Canva, no signup.",
+      "categories": ["creator", "design"],
+      "tags": ["logo", "svg", "design", "branding", "startup", "generator", "graphic", "icon"],
+      "thumbnail": {
+        "type": "visual-preview",
+        "headline": "A",
+        "subtext": "Your logo in 30 sec",
+        "accentColor": "#3b82f6",
+        "bgColor": "#f8fafc",
+        "icon": "hexagon"
+      }
+    }
+  ]
+}

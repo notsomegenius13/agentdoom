@@ -116,13 +116,74 @@ export async function complete(request: CompletionRequest): Promise<CompletionRe
   }
 }
 
+/**
+ * Stream completion from the model, yielding partial text chunks.
+ */
+export async function* streamComplete(
+  request: CompletionRequest
+): AsyncGenerator<string, CompletionResponse> {
+  const config = getModelConfig(request.task)
+  const start = Date.now()
+  let fullContent = ''
+
+  const Anthropic = (await import('@anthropic-ai/sdk')).default
+  const client = new Anthropic()
+
+  const stream = client.messages.stream({
+    model: config.model,
+    max_tokens: config.maxTokens,
+    temperature: config.temperature,
+    system: request.system || undefined,
+    messages: request.messages.map((m) => ({
+      role: m.role as 'user' | 'assistant',
+      content: m.content,
+    })),
+  })
+
+  for await (const event of stream) {
+    if (
+      event.type === 'content_block_delta' &&
+      event.delta.type === 'text_delta'
+    ) {
+      fullContent += event.delta.text
+      yield event.delta.text
+    }
+  }
+
+  return {
+    content: fullContent,
+    model: config.model,
+    latency: Date.now() - start,
+    cost: config.costPerCall,
+    usedFallback: false,
+  }
+}
+
 async function callProvider(
   provider: ModelProvider,
   model: string,
   request: CompletionRequest
 ): Promise<string> {
-  // TODO: Implement actual API calls
-  // For Anthropic: use @anthropic-ai/sdk
-  // For OpenAI: use openai sdk
-  throw new Error(`Provider ${provider}/${model} not yet implemented. Install SDKs and add API keys.`)
+  if (provider === 'anthropic') {
+    const Anthropic = (await import('@anthropic-ai/sdk')).default
+    const client = new Anthropic() // reads ANTHROPIC_API_KEY from env
+    const config = getModelConfig(request.task)
+
+    const response = await client.messages.create({
+      model,
+      max_tokens: config.maxTokens,
+      temperature: config.temperature,
+      system: request.system || undefined,
+      messages: request.messages.map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+    })
+
+    const block = response.content[0]
+    if (block.type === 'text') return block.text
+    throw new Error('Unexpected response type from Anthropic')
+  }
+
+  throw new Error(`Provider ${provider}/${model} not supported. Only Anthropic is implemented.`)
 }

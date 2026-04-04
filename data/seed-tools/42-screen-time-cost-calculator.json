@@ -1,0 +1,43 @@
+{
+  "title": "Screen Time Cost Calculator",
+  "description": "How much of your life are you spending on your phone? Convert screen time to dollars, books, and workouts",
+  "category": "fun",
+  "viralHook": "Your 4hrs/day of screen time = 61 days/year. That's 2 months of your life, gone.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "screen-time",
+      "props": {
+        "title": "Screen Time Life Cost",
+        "inputs": [
+          { "name": "hoursPerDay", "label": "Daily Screen Time (hours)", "type": "number", "defaultValue": 4, "min": 0, "max": 16, "step": 0.5 },
+          { "name": "hourlyRate", "label": "Your Hourly Rate ($)", "type": "number", "defaultValue": 45, "min": 0, "step": 5 },
+          { "name": "age", "label": "Your Age", "type": "number", "defaultValue": 28, "min": 10, "max": 80 },
+          { "name": "lifeExpectancy", "label": "Life Expectancy", "type": "number", "defaultValue": 80, "min": 50, "max": 100 }
+        ],
+        "formula": "hoursPerDay * 365 * hourlyRate",
+        "resultLabel": "Annual Opportunity Cost",
+        "resultPrefix": "$",
+        "resultSuffix": "/year"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "life-stats",
+      "props": {
+        "title": "What You're Trading Away (at 4 hrs/day)",
+        "stats": [
+          { "label": "Days Per Year", "value": "61 days", "change": 0, "changeLabel": "staring at a screen", "icon": "percent" },
+          { "label": "Books You Could Read", "value": "292", "change": 0, "changeLabel": "at 5 hrs per book", "icon": "trending" },
+          { "label": "Lifetime Hours Left", "value": "75,920", "change": -50, "changeLabel": "of phone time remaining", "icon": "dollar" },
+          { "label": "Workouts Missed", "value": "1,460", "change": 0, "changeLabel": "1-hr sessions per year", "icon": "cart" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+  "theme": { "primaryColor": "#e11d48", "backgroundColor": "#fff1f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

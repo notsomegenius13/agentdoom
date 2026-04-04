@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface ToastItem {
   id: string
@@ -14,6 +15,7 @@ export interface ToastConfig {
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
   autoDismiss?: boolean
   dismissAfterMs?: number
+  appearance?: AppearanceConfig
 }
 
 const typeStyles: Record<ToastItem['type'], string> = {
@@ -71,8 +73,9 @@ export default function Toast({ config }: { config: ToastConfig }) {
   const activeToasts = config.toasts.filter(t => visible.has(t.id))
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
 
       <div className={`relative min-h-[200px]`}>
         <div className={`absolute ${positionStyles[position]} flex flex-col gap-3 w-80`}>
@@ -81,7 +84,7 @@ export default function Toast({ config }: { config: ToastConfig }) {
               key={toast.id}
               role="alert"
               aria-live="polite"
-              className={`flex items-start gap-3 p-3 rounded-lg border ${typeStyles[toast.type]} transition-all duration-300`}
+              className={`flex items-start gap-3 p-3 rounded-lg border ${typeStyles[toast.type]} transition-all duration-300 animate-[slideInRight_300ms_ease-out]`}
             >
               <span className="text-base font-bold mt-0.5" aria-hidden="true">
                 {typeIcons[toast.type]}
@@ -99,5 +102,6 @@ export default function Toast({ config }: { config: ToastConfig }) {
         </div>
       </div>
     </div>
+    </PrimitiveWrapper>
   )
 }

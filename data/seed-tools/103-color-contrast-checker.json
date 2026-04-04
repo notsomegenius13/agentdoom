@@ -1,0 +1,91 @@
+{
+  "title": "Color Contrast Checker",
+  "description": "Check WCAG 2.1 color contrast ratios for accessibility compliance",
+  "category": "dev-tools",
+  "viralHook": "Is your UI accessible? Check your color contrast in one click",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "contrast-checker-form",
+      "props": {
+        "title": "WCAG Color Contrast Checker",
+        "description": "Enter foreground and background colors to check if they meet WCAG 2.1 accessibility guidelines for contrast ratios.",
+        "submitLabel": "Check Contrast",
+        "liveProcess": true,
+        "fields": [
+          {
+            "id": "fg_color",
+            "label": "Foreground Color (Hex)",
+            "type": "text",
+            "placeholder": "#1a1a2e",
+            "required": true,
+            "defaultValue": "#1a1a2e",
+            "helperText": "Text or foreground element color in hex (e.g., #333333)",
+            "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+            "validationMessage": "Enter a valid hex color (e.g., #FF5733 or #F57)"
+          },
+          {
+            "id": "bg_color",
+            "label": "Background Color (Hex)",
+            "type": "text",
+            "placeholder": "#ffffff",
+            "required": true,
+            "defaultValue": "#ffffff",
+            "helperText": "Background color in hex (e.g., #FFFFFF)",
+            "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+            "validationMessage": "Enter a valid hex color (e.g., #FF5733 or #F57)"
+          }
+        ],
+        "output": {
+          "id": "contrast_results",
+          "type": "field-group",
+          "fields": [
+            {
+              "id": "preview",
+              "label": "Preview",
+              "type": "color-preview",
+              "description": "Visual preview of the foreground text on the background color"
+            },
+            {
+              "id": "contrast_ratio",
+              "label": "Contrast Ratio",
+              "type": "text",
+              "readonly": true,
+              "helperText": "Calculated luminance contrast ratio (e.g., 12.5:1)"
+            },
+            {
+              "id": "wcag_aa_normal",
+              "label": "WCAG AA - Normal Text (4.5:1)",
+              "type": "text",
+              "readonly": true,
+              "helperText": "Minimum 4.5:1 ratio required for normal text (under 18pt / 14pt bold)"
+            },
+            {
+              "id": "wcag_aa_large",
+              "label": "WCAG AA - Large Text (3:1)",
+              "type": "text",
+              "readonly": true,
+              "helperText": "Minimum 3:1 ratio required for large text (18pt+ or 14pt+ bold)"
+            },
+            {
+              "id": "wcag_aaa_normal",
+              "label": "WCAG AAA - Normal Text (7:1)",
+              "type": "text",
+              "readonly": true,
+              "helperText": "Enhanced contrast: 7:1 ratio for normal text"
+            },
+            {
+              "id": "wcag_aaa_large",
+              "label": "WCAG AAA - Large Text (4.5:1)",
+              "type": "text",
+              "readonly": true,
+              "helperText": "Enhanced contrast: 4.5:1 ratio for large text"
+            }
+          ]
+        },
+        "transform": "wcagContrastCheck"
+      }
+    }
+  ]
+}

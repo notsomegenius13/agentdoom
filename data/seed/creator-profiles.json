@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "description": "Fake creator profiles for AgentDoom seed content",
+  "generatedBy": "scraps",
+  "generatedAt": "2026-03-31",
+  "profiles": [
+    {
+      "id": "creator-001",
+      "displayName": "Alex Rivera",
+      "username": "alexbuilds",
+      "avatar": null,
+      "bio": "Product designer turned tool maker. I build small utilities that save big time.",
+      "location": "Austin, TX",
+      "joinedDate": "2026-01-15",
+      "toolCount": 6,
+      "totalForks": 342,
+      "verified": true
+    },
+    {
+      "id": "creator-002",
+      "displayName": "Priya Sharma",
+      "username": "priyacodes",
+      "avatar": null,
+      "bio": "Full-stack dev who loves shipping fast. Finance tools are my jam.",
+      "location": "Toronto, CA",
+      "joinedDate": "2026-01-22",
+      "toolCount": 4,
+      "totalForks": 218,
+      "verified": true
+    },
+    {
+      "id": "creator-003",
+      "displayName": "Jordan Kim",
+      "username": "jkimtools",
+      "avatar": null,
+      "bio": "Making boring business stuff look good. Templates, dashboards, forms.",
+      "location": "Brooklyn, NY",
+      "joinedDate": "2026-02-01",
+      "toolCount": 5,
+      "totalForks": 289,
+      "verified": false
+    },
+    {
+      "id": "creator-004",
+      "displayName": "Sam Okafor",
+      "username": "samtoolbox",
+      "avatar": null,
+      "bio": "Freelance consultant. I build the tools I wish existed when I started out.",
+      "location": "Lagos, NG",
+      "joinedDate": "2026-02-10",
+      "toolCount": 3,
+      "totalForks": 156,
+      "verified": false
+    },
+    {
+      "id": "creator-005",
+      "displayName": "Mia Chen",
+      "username": "miamakes",
+      "avatar": null,
+      "bio": "Health & wellness nerd. Building tools to help people live better, one habit at a time.",
+      "location": "San Francisco, CA",
+      "joinedDate": "2026-02-14",
+      "toolCount": 4,
+      "totalForks": 198,
+      "verified": true
+    },
+    {
+      "id": "creator-006",
+      "displayName": "Leo Martins",
+      "username": "leoships",
+      "avatar": null,
+      "bio": "Serial side-project builder. If it can be a widget, I've probably made it.",
+      "location": "Lisbon, PT",
+      "joinedDate": "2026-02-20",
+      "toolCount": 3,
+      "totalForks": 127,
+      "verified": false
+    },
+    {
+      "id": "creator-007",
+      "displayName": "Nina Volkov",
+      "username": "ninavdesign",
+      "avatar": null,
+      "bio": "UI/UX designer obsessed with color and typography. Design tools for designers.",
+      "location": "Berlin, DE",
+      "joinedDate": "2026-03-01",
+      "toolCount": 2,
+      "totalForks": 94,
+      "verified": false
+    },
+    {
+      "id": "creator-008",
+      "displayName": "Dex Washington",
+      "username": "dexhacks",
+      "avatar": null,
+      "bio": "Engineer by day, quiz maker by night. I make things people actually want to share.",
+      "location": "Chicago, IL",
+      "joinedDate": "2026-03-05",
+      "toolCount": 3,
+      "totalForks": 412,
+      "verified": true
+    }
+  ]
+}

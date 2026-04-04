@@ -1,0 +1,1995 @@
+{
+  "version": 1,
+  "description": "Pre-optimized prompt→config cache for instant generation. When a user prompt closely matches a cached template, skip full LLM generation and use the cached config with variable substitution.",
+  "generatedAt": "2026-04-01",
+  "totalTemplates": 50,
+  "templates": [
+    {
+      "id": "freelance-rate-calculator",
+      "prompts": ["build a freelance rate calculator", "calculate my freelance hourly rate", "how much should I charge per hour as a freelancer", "freelance pricing calculator"],
+      "category": "money",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {"jobTitle": "Freelancer"},
+      "config": {
+        "title": "Freelance Rate Calculator",
+        "description": "Find your ideal hourly rate based on salary goals and expenses",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "freelance-rate",
+            "props": {
+              "title": "Freelance Rate Calculator",
+              "inputs": [
+                { "name": "annualGoal", "label": "Desired Annual Income ($)", "type": "number", "defaultValue": 80000, "min": 0, "step": 1000 },
+                { "name": "expenses", "label": "Annual Business Expenses ($)", "type": "number", "defaultValue": 12000, "min": 0, "step": 500 },
+                { "name": "taxRate", "label": "Tax Rate (%)", "type": "number", "defaultValue": 30, "min": 0, "max": 60 },
+                { "name": "billableHours", "label": "Billable Hours/Week", "type": "number", "defaultValue": 30, "min": 1, "max": 60 },
+                { "name": "weeksOff", "label": "Weeks Off/Year", "type": "number", "defaultValue": 4, "min": 0, "max": 20 }
+              ],
+              "formula": "((annualGoal + expenses) / (1 - taxRate / 100)) / ((52 - weeksOff) * billableHours)",
+              "resultLabel": "Hourly Rate",
+              "resultPrefix": "$",
+              "resultSuffix": "/hr"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#10b981", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "subscription-tracker",
+      "prompts": ["track my subscriptions", "subscription tracker", "manage my recurring subscriptions", "monthly subscription manager"],
+      "category": "money",
+      "complexity": 3,
+      "primitives": ["table"],
+      "variables": {},
+      "config": {
+        "title": "Subscription Tracker",
+        "description": "Track all your recurring subscriptions and monthly spend",
+        "primitives": [
+          {
+            "type": "table",
+            "id": "subscriptions",
+            "props": {
+              "title": "My Subscriptions",
+              "columns": [
+                { "key": "name", "label": "Service", "type": "text" },
+                { "key": "cost", "label": "Monthly Cost", "type": "currency" },
+                { "key": "category", "label": "Category", "type": "text" },
+                { "key": "renewal", "label": "Next Renewal", "type": "text" }
+              ],
+              "rows": [
+                { "name": "Netflix", "cost": 15.99, "category": "Entertainment", "renewal": "Apr 15" },
+                { "name": "Spotify", "cost": 10.99, "category": "Music", "renewal": "Apr 22" },
+                { "name": "ChatGPT Plus", "cost": 20.00, "category": "AI Tools", "renewal": "Apr 1" },
+                { "name": "iCloud+", "cost": 2.99, "category": "Storage", "renewal": "Apr 10" }
+              ],
+              "searchable": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "pomodoro-timer",
+      "prompts": ["pomodoro timer", "build a pomodoro timer", "focus timer with work and break sessions", "productivity timer"],
+      "category": "productivity",
+      "complexity": 2,
+      "primitives": ["timer"],
+      "variables": {},
+      "config": {
+        "title": "Pomodoro Timer",
+        "description": "Stay focused with timed work sessions and breaks",
+        "primitives": [
+          {
+            "type": "timer",
+            "id": "pomodoro",
+            "props": {
+              "title": "Pomodoro Timer",
+              "mode": "pomodoro",
+              "durations": [
+                { "label": "Work", "seconds": 1500 },
+                { "label": "Short Break", "seconds": 300 },
+                { "label": "Long Break", "seconds": 900 }
+              ],
+              "alertSound": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "400px", "padding": "24px" },
+        "theme": { "primaryColor": "#ef4444", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "meal-prep-checklist",
+      "prompts": ["meal prep checklist", "weekly meal planning checklist", "meal prep planner", "food prep organizer"],
+      "category": "health",
+      "complexity": 2,
+      "primitives": ["checklist"],
+      "variables": {},
+      "config": {
+        "title": "Weekly Meal Prep Checklist",
+        "description": "Plan and prep your meals for the week ahead",
+        "primitives": [
+          {
+            "type": "checklist",
+            "id": "meal-prep",
+            "props": {
+              "title": "Meal Prep Checklist",
+              "categories": [
+                { "name": "Proteins", "items": ["Cook chicken breast", "Boil eggs", "Prep ground turkey"] },
+                { "name": "Grains & Carbs", "items": ["Cook rice", "Prep overnight oats", "Bake sweet potatoes"] },
+                { "name": "Vegetables", "items": ["Wash and chop veggies", "Roast broccoli", "Make salad jars"] },
+                { "name": "Snacks", "items": ["Portion trail mix", "Cut fruit", "Make energy balls"] }
+              ],
+              "showProgress": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+        "theme": { "primaryColor": "#16a34a", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "bio-generator",
+      "prompts": ["generate a social media bio", "bio generator", "create a bio for my profile", "social media bio maker"],
+      "category": "creator",
+      "complexity": 2,
+      "primitives": ["generator"],
+      "variables": {},
+      "config": {
+        "title": "Social Media Bio Generator",
+        "description": "Generate catchy bios for any social platform instantly",
+        "primitives": [
+          {
+            "type": "generator",
+            "id": "bio-gen",
+            "props": {
+              "title": "Bio Generator",
+              "inputLabel": "What do you do?",
+              "inputPlaceholder": "e.g. UX designer who loves coffee and hiking",
+              "buttonLabel": "Generate Bio",
+              "templates": [
+                "{{input}} | Making the internet prettier, one pixel at a time ✨",
+                "{{input}} 🚀 DM for collabs | Link in bio",
+                "Just a {{input}} trying to make a dent in the universe 🌍",
+                "{{input}} by day, creative rebel by night 🎨",
+                "{{input}} • Building cool stuff • Let's connect 🤝"
+              ],
+              "outputLabel": "Your Bio"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#a855f7", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "cold-email-template",
+      "prompts": ["cold email template", "outreach email builder", "sales email generator", "cold outreach template maker"],
+      "category": "business",
+      "complexity": 3,
+      "primitives": ["template"],
+      "variables": {},
+      "config": {
+        "title": "Cold Email Template",
+        "description": "Craft personalized cold outreach emails in seconds",
+        "primitives": [
+          {
+            "type": "template",
+            "id": "cold-email",
+            "props": {
+              "title": "Cold Email Builder",
+              "fields": [
+                { "name": "recipientName", "label": "Recipient Name", "placeholder": "Jane Smith" },
+                { "name": "company", "label": "Their Company", "placeholder": "Acme Corp" },
+                { "name": "yourName", "label": "Your Name", "placeholder": "Alex Johnson" },
+                { "name": "yourRole", "label": "Your Role", "placeholder": "Founder at StartupXYZ" },
+                { "name": "value", "label": "What You Offer", "placeholder": "reduce customer churn by 30%", "type": "textarea" },
+                { "name": "cta", "label": "Call to Action", "type": "select", "options": ["a 15-minute call this week", "a quick demo", "a free audit of your current setup", "a trial of our product"] }
+              ],
+              "template": "Hi {{recipientName}},\n\nI've been following {{company}}'s growth and really admire what your team has built.\n\nI'm {{yourName}}, {{yourRole}}. We help companies like {{company}} {{value}}.\n\nWould you be open to {{cta}}? Happy to work around your schedule.\n\nBest,\n{{yourName}}",
+              "copyButton": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+        "theme": { "primaryColor": "#2563eb", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "would-you-rather-quiz",
+      "prompts": ["would you rather game", "would you rather quiz", "build a would you rather game", "fun would you rather questions"],
+      "category": "social",
+      "complexity": 2,
+      "primitives": ["quiz"],
+      "variables": {},
+      "config": {
+        "title": "Would You Rather",
+        "description": "Play the classic would-you-rather game with wild scenarios",
+        "primitives": [
+          {
+            "type": "quiz",
+            "id": "wyr",
+            "props": {
+              "title": "Would You Rather?",
+              "questions": [
+                { "question": "Would you rather have the ability to fly or be invisible?", "options": ["Fly", "Be invisible"], "correct": 0 },
+                { "question": "Would you rather never use social media again or never watch another movie?", "options": ["No social media", "No movies"], "correct": 0 },
+                { "question": "Would you rather always be 10 minutes late or 20 minutes early?", "options": ["10 min late", "20 min early"], "correct": 1 },
+                { "question": "Would you rather have unlimited money or unlimited time?", "options": ["Unlimited money", "Unlimited time"], "correct": 1 },
+                { "question": "Would you rather live in the past or the future?", "options": ["The past", "The future"], "correct": 1 }
+              ],
+              "showScore": true,
+              "shuffleQuestions": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+        "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#fffbeb", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "bmi-calculator",
+      "prompts": ["bmi calculator", "calculate my bmi", "body mass index calculator", "health bmi tool"],
+      "category": "utility",
+      "complexity": 2,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "BMI Calculator",
+        "description": "Calculate your Body Mass Index quickly and easily",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "bmi",
+            "props": {
+              "title": "BMI Calculator",
+              "inputs": [
+                { "name": "weight", "label": "Weight (lbs)", "type": "number", "defaultValue": 160, "min": 50, "max": 500 },
+                { "name": "heightFt", "label": "Height (feet)", "type": "number", "defaultValue": 5, "min": 3, "max": 8 },
+                { "name": "heightIn", "label": "Height (inches)", "type": "number", "defaultValue": 9, "min": 0, "max": 11 }
+              ],
+              "formula": "(weight / ((heightFt * 12 + heightIn) * (heightFt * 12 + heightIn))) * 703",
+              "resultLabel": "Your BMI",
+              "resultPrefix": "",
+              "resultSuffix": ""
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "startup-cost-estimator",
+      "prompts": ["startup cost estimator", "estimate startup costs", "how much does it cost to start a business", "startup budget calculator"],
+      "category": "business",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Startup Cost Estimator",
+        "description": "Estimate your first-year startup costs and runway",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "startup-costs",
+            "props": {
+              "title": "Startup Cost Estimator",
+              "inputs": [
+                { "name": "team", "label": "Team Size", "type": "number", "defaultValue": 3, "min": 1, "max": 50 },
+                { "name": "avgSalary", "label": "Avg Annual Salary ($)", "type": "number", "defaultValue": 90000, "min": 0, "step": 5000 },
+                { "name": "office", "label": "Monthly Office/Infra ($)", "type": "number", "defaultValue": 2000, "min": 0, "step": 100 },
+                { "name": "marketing", "label": "Monthly Marketing ($)", "type": "number", "defaultValue": 3000, "min": 0, "step": 500 },
+                { "name": "legal", "label": "Legal & Incorporation ($)", "type": "number", "defaultValue": 5000, "min": 0 },
+                { "name": "runway", "label": "Desired Runway (months)", "type": "number", "defaultValue": 18, "min": 6, "max": 36 }
+              ],
+              "formula": "(team * avgSalary / 12 + office + marketing) * runway + legal",
+              "resultLabel": "Total Funding Needed",
+              "resultPrefix": "$",
+              "resultSuffix": ""
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "500px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "client-onboarding-checklist",
+      "prompts": ["client onboarding checklist", "new client checklist", "customer onboarding steps", "client setup checklist"],
+      "category": "business",
+      "complexity": 2,
+      "primitives": ["checklist"],
+      "variables": {},
+      "config": {
+        "title": "Client Onboarding Checklist",
+        "description": "Never miss a step when onboarding new clients",
+        "primitives": [
+          {
+            "type": "checklist",
+            "id": "onboarding",
+            "props": {
+              "title": "Client Onboarding",
+              "categories": [
+                { "name": "Initial Setup", "items": ["Send welcome email", "Schedule kickoff call", "Share access credentials", "Send contract for signature"] },
+                { "name": "Discovery", "items": ["Conduct needs assessment", "Review existing assets", "Define project scope", "Set milestones"] },
+                { "name": "Delivery", "items": ["Create project workspace", "Assign team members", "Set up reporting cadence", "Deliver first milestone"] }
+              ],
+              "showProgress": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+        "theme": { "primaryColor": "#0891b2", "backgroundColor": "#ecfeff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "content-calendar-ideas",
+      "prompts": ["content calendar", "social media content ideas", "content planning calendar", "weekly content ideas"],
+      "category": "creator",
+      "complexity": 2,
+      "primitives": ["card-grid"],
+      "variables": {},
+      "config": {
+        "title": "Content Calendar Ideas",
+        "description": "A week of social media content ideas at a glance",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "content-ideas",
+            "props": {
+              "title": "This Week's Content",
+              "cards": [
+                { "title": "Monday: Motivational", "description": "Share a quote or personal win to start the week", "icon": "💪", "tag": "Engagement" },
+                { "title": "Tuesday: Tutorial", "description": "Teach something valuable in your niche", "icon": "📚", "tag": "Education" },
+                { "title": "Wednesday: Behind the Scenes", "description": "Show your process or workspace", "icon": "🎬", "tag": "Authenticity" },
+                { "title": "Thursday: Throwback", "description": "Share a before/after or journey update", "icon": "📸", "tag": "Story" },
+                { "title": "Friday: Fun/Trending", "description": "Join a trend or share something entertaining", "icon": "🎉", "tag": "Viral" },
+                { "title": "Weekend: Community", "description": "Ask a question or run a poll", "icon": "🤝", "tag": "Engagement" }
+              ],
+              "columns": 3
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#ec4899", "backgroundColor": "#fdf2f8", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "lead-capture-form",
+      "prompts": ["lead capture form", "build a lead gen form", "email signup form", "contact form for leads"],
+      "category": "business",
+      "complexity": 2,
+      "primitives": ["form"],
+      "variables": {},
+      "config": {
+        "title": "Lead Capture Form",
+        "description": "Collect leads with a clean, conversion-focused form",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "lead-form",
+            "props": {
+              "title": "Get Early Access",
+              "fields": [
+                { "name": "name", "label": "Full Name", "type": "text", "placeholder": "Jane Smith", "required": true },
+                { "name": "email", "label": "Email Address", "type": "email", "placeholder": "jane@company.com", "required": true },
+                { "name": "company", "label": "Company", "type": "text", "placeholder": "Acme Corp" },
+                { "name": "role", "label": "Your Role", "type": "select", "options": ["Founder/CEO", "Marketing", "Engineering", "Product", "Other"] },
+                { "name": "interest", "label": "What interests you most?", "type": "textarea", "placeholder": "Tell us what you're looking for..." }
+              ],
+              "submitLabel": "Join the Waitlist",
+              "successMessage": "You're on the list! We'll be in touch soon."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#2563eb", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "habit-tracker",
+      "prompts": ["habit tracker", "daily habit tracker", "track my habits", "habit building tracker"],
+      "category": "productivity",
+      "complexity": 2,
+      "primitives": ["tracker"],
+      "variables": {},
+      "config": {
+        "title": "Daily Habit Tracker",
+        "description": "Build better habits with daily tracking and streaks",
+        "primitives": [
+          {
+            "type": "tracker",
+            "id": "habits",
+            "props": {
+              "title": "Daily Habits",
+              "items": [
+                { "name": "Drink 8 glasses of water", "icon": "💧", "target": 8 },
+                { "name": "Exercise 30 minutes", "icon": "🏃", "target": 1 },
+                { "name": "Read 20 pages", "icon": "📚", "target": 20 },
+                { "name": "Meditate 10 minutes", "icon": "🧘", "target": 1 },
+                { "name": "No social media before noon", "icon": "📵", "target": 1 },
+                { "name": "Journal before bed", "icon": "✍️", "target": 1 }
+              ],
+              "period": "daily",
+              "showStreak": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "mortgage-calculator",
+      "prompts": ["mortgage calculator", "calculate mortgage payments", "home loan calculator", "monthly mortgage payment calculator"],
+      "category": "money",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Mortgage Calculator",
+        "description": "Estimate your monthly mortgage payment instantly",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "mortgage",
+            "props": {
+              "title": "Mortgage Calculator",
+              "inputs": [
+                { "name": "principal", "label": "Home Price ($)", "type": "number", "defaultValue": 350000, "min": 0, "step": 10000 },
+                { "name": "downPayment", "label": "Down Payment ($)", "type": "number", "defaultValue": 70000, "min": 0, "step": 5000 },
+                { "name": "rate", "label": "Interest Rate (%)", "type": "number", "defaultValue": 6.5, "min": 0, "max": 20, "step": 0.125 },
+                { "name": "years", "label": "Loan Term (years)", "type": "select", "options": [{ "label": "15 years", "value": 15 }, { "label": "20 years", "value": 20 }, { "label": "30 years", "value": 30 }] }
+              ],
+              "formula": "((principal - downPayment) * (rate / 100 / 12) * Math.pow(1 + rate / 100 / 12, years * 12)) / (Math.pow(1 + rate / 100 / 12, years * 12) - 1)",
+              "resultLabel": "Monthly Payment",
+              "resultPrefix": "$",
+              "resultSuffix": "/mo"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#0d9488", "backgroundColor": "#f0fdfa", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "personality-quiz",
+      "prompts": ["personality quiz", "developer personality quiz", "what kind of developer am i quiz", "fun personality test"],
+      "category": "social",
+      "complexity": 3,
+      "primitives": ["quiz"],
+      "variables": {},
+      "config": {
+        "title": "Developer Personality Quiz",
+        "description": "Find out what kind of developer you really are",
+        "primitives": [
+          {
+            "type": "quiz",
+            "id": "dev-personality",
+            "props": {
+              "title": "What Developer Are You?",
+              "questions": [
+                { "question": "It's Friday afternoon. Your code works. Do you...", "options": ["Ship it immediately", "Write tests first", "Refactor it beautifully", "Add documentation"], "correct": 1 },
+                { "question": "Your favorite debugging tool is:", "options": ["console.log", "A proper debugger", "Rubber duck", "Stack Overflow"], "correct": 1 },
+                { "question": "Tabs or spaces?", "options": ["Tabs", "Spaces", "Whatever the linter says", "I format by hand"], "correct": 2 },
+                { "question": "When reviewing a PR, you focus on:", "options": ["Does it work?", "Code style", "Architecture", "Test coverage"], "correct": 3 },
+                { "question": "Your ideal stack is:", "options": ["MERN/MEAN", "Rust + WASM", "Python + Django", "Whatever gets the job done"], "correct": 3 }
+              ],
+              "showScore": true,
+              "shuffleQuestions": false
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+        "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#f5f3ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "tip-calculator",
+      "prompts": ["tip calculator", "calculate tip and split the bill", "bill splitter", "tip and split calculator"],
+      "category": "money",
+      "complexity": 2,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Tip & Split Calculator",
+        "description": "Split the bill and calculate tips for any group size",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "tip-calc",
+            "props": {
+              "title": "Tip & Split Calculator",
+              "inputs": [
+                { "name": "bill", "label": "Bill Amount ($)", "type": "number", "defaultValue": 50, "min": 0, "step": 0.01 },
+                { "name": "tipPercent", "label": "Tip %", "type": "select", "options": [{ "label": "15%", "value": 15 }, { "label": "18%", "value": 18 }, { "label": "20%", "value": 20 }, { "label": "25%", "value": 25 }] },
+                { "name": "people", "label": "Split Between", "type": "number", "defaultValue": 1, "min": 1, "max": 20 }
+              ],
+              "formula": "(bill * (1 + tipPercent / 100)) / people",
+              "resultLabel": "Per Person",
+              "resultPrefix": "$",
+              "resultSuffix": ""
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#10b981", "backgroundColor": "#f8fafc", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "unit-converter",
+      "prompts": ["unit converter", "convert units", "measurement converter", "length weight temperature converter"],
+      "category": "utility",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Universal Unit Converter",
+        "description": "Convert between common units — length, weight, temperature, and more",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "converter",
+            "props": {
+              "title": "Unit Converter",
+              "inputs": [
+                { "name": "value", "label": "Value", "type": "number", "defaultValue": 1, "min": 0 },
+                { "name": "conversion", "label": "Conversion", "type": "select", "options": [{ "label": "Miles → Km", "value": 1.60934 }, { "label": "Km → Miles", "value": 0.621371 }, { "label": "Lbs → Kg", "value": 0.453592 }, { "label": "Kg → Lbs", "value": 2.20462 }, { "label": "°F → °C", "value": -1 }, { "label": "Inches → Cm", "value": 2.54 }] }
+              ],
+              "formula": "value * conversion",
+              "resultLabel": "Result",
+              "resultPrefix": "",
+              "resultSuffix": ""
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#0ea5e9", "backgroundColor": "#f0f9ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "weekly-poll",
+      "prompts": ["poll maker", "create a poll", "quick poll", "voting poll creator"],
+      "category": "social",
+      "complexity": 2,
+      "primitives": ["quiz"],
+      "variables": {},
+      "config": {
+        "title": "Quick Poll Maker",
+        "description": "Create instant polls and see results in real-time",
+        "primitives": [
+          {
+            "type": "quiz",
+            "id": "poll",
+            "props": {
+              "title": "Quick Poll",
+              "questions": [
+                { "question": "What's your go-to productivity tool?", "options": ["Notion", "Linear", "Todoist", "Pen & paper"], "correct": 0 },
+                { "question": "Remote, hybrid, or office?", "options": ["Fully remote", "Hybrid", "In-office", "Depends on the day"], "correct": 0 }
+              ],
+              "showScore": false,
+              "shuffleQuestions": false
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#f97316", "backgroundColor": "#fff7ed", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "pricing-page",
+      "prompts": ["pricing page", "saas pricing page", "build a pricing page", "pricing tier comparison"],
+      "category": "business",
+      "complexity": 3,
+      "primitives": ["card-grid"],
+      "variables": {},
+      "config": {
+        "title": "SaaS Pricing Page",
+        "description": "Beautiful pricing page with tier comparison — ready to embed",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "pricing",
+            "props": {
+              "title": "Choose Your Plan",
+              "cards": [
+                { "title": "Starter", "description": "$9/mo — For individuals. 1 project, 5GB storage, email support.", "icon": "🌱", "tag": "Free trial" },
+                { "title": "Pro", "description": "$29/mo — For teams. 10 projects, 50GB storage, priority support.", "icon": "🚀", "tag": "Most popular" },
+                { "title": "Enterprise", "description": "$99/mo — Unlimited projects, 500GB, dedicated account manager.", "icon": "🏢", "tag": "Custom" }
+              ],
+              "columns": 3
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "900px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#f8fafc", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "project-kanban",
+      "prompts": ["kanban board", "project kanban board", "task board", "drag and drop task manager"],
+      "category": "productivity",
+      "complexity": 4,
+      "primitives": ["list"],
+      "variables": {},
+      "config": {
+        "title": "Project Kanban Board",
+        "description": "Drag-and-drop task board to manage any project",
+        "primitives": [
+          {
+            "type": "list",
+            "id": "kanban",
+            "props": {
+              "title": "Project Board",
+              "items": ["Design mockups", "Build API endpoints", "Write tests", "Deploy to staging"],
+              "addable": true,
+              "removable": true,
+              "reorderable": true,
+              "placeholder": "Add a task..."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "sales-dashboard",
+      "prompts": ["sales dashboard", "revenue dashboard", "sales metrics tracker", "sales overview dashboard"],
+      "category": "business",
+      "complexity": 4,
+      "primitives": ["chart"],
+      "variables": {},
+      "config": {
+        "title": "Sales Dashboard",
+        "description": "Track revenue, conversions, and top products at a glance",
+        "primitives": [
+          {
+            "type": "chart",
+            "id": "revenue-chart",
+            "props": {
+              "title": "Monthly Revenue",
+              "chartType": "bar",
+              "data": [
+                { "label": "Jan", "value": 12000, "color": "#3b82f6" },
+                { "label": "Feb", "value": 15000, "color": "#3b82f6" },
+                { "label": "Mar", "value": 18500, "color": "#3b82f6" },
+                { "label": "Apr", "value": 22000, "color": "#10b981" }
+              ],
+              "xLabel": "Month",
+              "yLabel": "Revenue ($)"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#f0f4ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "workout-timer",
+      "prompts": ["hiit timer", "workout timer", "interval training timer", "exercise timer"],
+      "category": "utility",
+      "complexity": 2,
+      "primitives": ["timer"],
+      "variables": {},
+      "config": {
+        "title": "HIIT Workout Timer",
+        "description": "Interval timer for high-intensity workouts with rest periods",
+        "primitives": [
+          {
+            "type": "timer",
+            "id": "hiit",
+            "props": {
+              "title": "HIIT Timer",
+              "mode": "countdown",
+              "durations": [
+                { "label": "High Intensity", "seconds": 45 },
+                { "label": "Rest", "seconds": 15 },
+                { "label": "Cool Down", "seconds": 60 }
+              ],
+              "alertSound": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "400px", "padding": "24px" },
+        "theme": { "primaryColor": "#ef4444", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "invoice-generator",
+      "prompts": ["invoice generator", "create an invoice", "make an invoice", "professional invoice maker"],
+      "category": "business",
+      "complexity": 4,
+      "primitives": ["form"],
+      "variables": {},
+      "config": {
+        "title": "Invoice Generator",
+        "description": "Create professional invoices in seconds — fill, preview, download",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "invoice-form",
+            "props": {
+              "title": "Create Invoice",
+              "fields": [
+                { "name": "clientName", "label": "Client Name", "type": "text", "placeholder": "Acme Corp", "required": true },
+                { "name": "clientEmail", "label": "Client Email", "type": "email", "placeholder": "billing@acme.com" },
+                { "name": "description", "label": "Service Description", "type": "textarea", "placeholder": "Website redesign — Phase 1", "required": true },
+                { "name": "amount", "label": "Amount ($)", "type": "number", "required": true },
+                { "name": "dueDate", "label": "Due Date", "type": "text", "placeholder": "2026-04-15" },
+                { "name": "notes", "label": "Notes", "type": "textarea", "placeholder": "Payment terms: Net 30" }
+              ],
+              "submitLabel": "Generate Invoice",
+              "successMessage": "Invoice created! Ready to download."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+        "theme": { "primaryColor": "#0891b2", "backgroundColor": "#ecfeff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "color-palette-generator",
+      "prompts": ["color palette generator", "generate color palettes", "color scheme generator", "design color palette tool"],
+      "category": "creator",
+      "complexity": 2,
+      "primitives": ["card-grid"],
+      "variables": {},
+      "config": {
+        "title": "Color Palette Generator",
+        "description": "Generate beautiful color palettes for your next design project",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "palettes",
+            "props": {
+              "title": "Color Palettes",
+              "cards": [
+                { "title": "Ocean Breeze", "description": "#0EA5E9 • #38BDF8 • #7DD3FC • #BAE6FD • #E0F2FE", "icon": "🌊", "tag": "Cool" },
+                { "title": "Sunset Glow", "description": "#F97316 • #FB923C • #FDBA74 • #FED7AA • #FFEDD5", "icon": "🌅", "tag": "Warm" },
+                { "title": "Forest Walk", "description": "#059669 • #34D399 • #6EE7B7 • #A7F3D0 • #D1FAE5", "icon": "🌲", "tag": "Nature" },
+                { "title": "Midnight", "description": "#6366F1 • #818CF8 • #A5B4FC • #C7D2FE • #E0E7FF", "icon": "🌙", "tag": "Dark" },
+                { "title": "Candy Pop", "description": "#EC4899 • #F472B6 • #F9A8D4 • #FBCFE8 • #FCE7F3", "icon": "🍬", "tag": "Fun" },
+                { "title": "Monochrome", "description": "#18181B • #3F3F46 • #71717A • #A1A1AA • #D4D4D8", "icon": "⬛", "tag": "Minimal" }
+              ],
+              "columns": 3
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "expense-tracker",
+      "prompts": ["expense tracker", "track my expenses", "daily expense log", "spending tracker"],
+      "category": "money",
+      "complexity": 4,
+      "primitives": ["form", "table"],
+      "variables": {},
+      "config": {
+        "title": "Expense Tracker",
+        "description": "Log and categorize daily expenses with visual breakdowns",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "expense-form",
+            "props": {
+              "title": "Log Expense",
+              "fields": [
+                { "name": "description", "label": "Description", "type": "text", "placeholder": "Coffee at Blue Bottle", "required": true },
+                { "name": "amount", "label": "Amount ($)", "type": "number", "required": true },
+                { "name": "category", "label": "Category", "type": "select", "options": ["Food & Drink", "Transport", "Shopping", "Entertainment", "Bills", "Other"] },
+                { "name": "date", "label": "Date", "type": "text", "placeholder": "2026-04-01" }
+              ],
+              "submitLabel": "Add Expense",
+              "successMessage": "Expense logged!"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "expense-table",
+            "props": {
+              "title": "Recent Expenses",
+              "columns": [
+                { "key": "description", "label": "Description" },
+                { "key": "amount", "label": "Amount", "type": "currency" },
+                { "key": "category", "label": "Category" },
+                { "key": "date", "label": "Date" }
+              ],
+              "rows": [
+                { "description": "Lunch", "amount": 14.50, "category": "Food & Drink", "date": "Apr 1" },
+                { "description": "Uber", "amount": 22.00, "category": "Transport", "date": "Apr 1" },
+                { "description": "Netflix", "amount": 15.99, "category": "Entertainment", "date": "Mar 31" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+        "theme": { "primaryColor": "#10b981", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "event-countdown",
+      "prompts": ["event countdown", "countdown timer to date", "countdown to event", "date countdown timer"],
+      "category": "social",
+      "complexity": 1,
+      "primitives": ["timer"],
+      "variables": {},
+      "config": {
+        "title": "Event Countdown",
+        "description": "Beautiful countdown timer to any important date",
+        "primitives": [
+          {
+            "type": "timer",
+            "id": "countdown",
+            "props": {
+              "title": "Countdown",
+              "mode": "countdown",
+              "durations": [
+                { "label": "1 hour", "seconds": 3600 },
+                { "label": "24 hours", "seconds": 86400 },
+                { "label": "1 week", "seconds": 604800 }
+              ],
+              "alertSound": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "400px", "padding": "24px" },
+        "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#fffbeb", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "social-media-planner",
+      "prompts": ["social media planner", "plan social media posts", "social media scheduler", "content post planner"],
+      "category": "creator",
+      "complexity": 4,
+      "primitives": ["form", "table"],
+      "variables": {},
+      "config": {
+        "title": "Social Media Post Planner",
+        "description": "Plan and organize your social media content across platforms",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "post-form",
+            "props": {
+              "title": "Schedule Post",
+              "fields": [
+                { "name": "platform", "label": "Platform", "type": "select", "options": ["Twitter/X", "Instagram", "LinkedIn", "TikTok", "YouTube"], "required": true },
+                { "name": "content", "label": "Post Content", "type": "textarea", "placeholder": "Write your post...", "required": true },
+                { "name": "date", "label": "Publish Date", "type": "text", "placeholder": "2026-04-05" },
+                { "name": "status", "label": "Status", "type": "select", "options": ["Draft", "Ready", "Published"] }
+              ],
+              "submitLabel": "Schedule",
+              "successMessage": "Post scheduled!"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "posts-table",
+            "props": {
+              "title": "Scheduled Posts",
+              "columns": [
+                { "key": "platform", "label": "Platform" },
+                { "key": "content", "label": "Content" },
+                { "key": "date", "label": "Date" },
+                { "key": "status", "label": "Status" }
+              ],
+              "rows": [
+                { "platform": "Twitter/X", "content": "Excited to announce...", "date": "Apr 5", "status": "Ready" },
+                { "platform": "LinkedIn", "content": "5 lessons from...", "date": "Apr 6", "status": "Draft" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+        "theme": { "primaryColor": "#ec4899", "backgroundColor": "#fdf2f8", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "freelance-dashboard",
+      "prompts": ["freelance dashboard", "build a freelance management dashboard", "freelancer project tracker", "all-in-one freelance tool"],
+      "category": "business",
+      "complexity": 8,
+      "primitives": ["chart", "form", "table"],
+      "variables": {},
+      "config": {
+        "title": "Freelance Dashboard",
+        "description": "Track invoices, log time, manage clients, and visualize revenue",
+        "primitives": [
+          {
+            "type": "chart",
+            "id": "revenue-chart",
+            "props": {
+              "title": "Revenue by Client",
+              "chartType": "pie",
+              "data": [
+                { "label": "Acme Corp", "value": 3200, "color": "#3b82f6" },
+                { "label": "StartupXYZ", "value": 1800, "color": "#10b981" },
+                { "label": "Design Co", "value": 4500, "color": "#f59e0b" },
+                { "label": "TechFlow", "value": 2100, "color": "#ef4444" }
+              ]
+            },
+            "position": 0
+          },
+          {
+            "type": "form",
+            "id": "log-time",
+            "props": {
+              "title": "Log Time",
+              "fields": [
+                { "name": "client", "label": "Client", "type": "select", "options": ["Acme Corp", "StartupXYZ", "Design Co", "TechFlow"], "required": true },
+                { "name": "hours", "label": "Hours", "type": "number", "required": true },
+                { "name": "notes", "label": "Notes", "type": "textarea", "placeholder": "What did you work on?" }
+              ],
+              "submitLabel": "Log Entry",
+              "successMessage": "Time logged!"
+            },
+            "position": 1
+          },
+          {
+            "type": "table",
+            "id": "invoices",
+            "props": {
+              "title": "Recent Invoices",
+              "columns": [
+                { "key": "invoice", "label": "Invoice #" },
+                { "key": "client", "label": "Client" },
+                { "key": "amount", "label": "Amount", "type": "currency" },
+                { "key": "status", "label": "Status" }
+              ],
+              "rows": [
+                { "invoice": "INV-047", "client": "Acme Corp", "amount": 3200, "status": "Paid" },
+                { "invoice": "INV-048", "client": "StartupXYZ", "amount": 1800, "status": "Pending" }
+              ],
+              "searchable": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "900px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#f0f4ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "content-calendar-full",
+      "prompts": ["content calendar dashboard", "full content planning tool", "content management calendar", "editorial calendar planner"],
+      "category": "creator",
+      "complexity": 8,
+      "primitives": ["form", "table", "card-grid", "checklist"],
+      "variables": {},
+      "config": {
+        "title": "Content Calendar",
+        "description": "Plan, schedule, and track your content across platforms",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "content-form",
+            "props": {
+              "title": "Add Content",
+              "fields": [
+                { "name": "title", "label": "Content Title", "type": "text", "required": true },
+                { "name": "platform", "label": "Platform", "type": "select", "options": ["Blog", "Twitter", "Instagram", "LinkedIn", "YouTube"] },
+                { "name": "status", "label": "Status", "type": "select", "options": ["Idea", "Drafting", "Review", "Scheduled", "Published"] },
+                { "name": "date", "label": "Publish Date", "type": "text", "placeholder": "2026-04-10" }
+              ],
+              "submitLabel": "Add to Calendar",
+              "successMessage": "Content added!"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "content-list",
+            "props": {
+              "title": "Upcoming Content",
+              "columns": [
+                { "key": "title", "label": "Title" },
+                { "key": "platform", "label": "Platform" },
+                { "key": "status", "label": "Status" },
+                { "key": "date", "label": "Date" }
+              ],
+              "rows": [
+                { "title": "How to grow on X", "platform": "Blog", "status": "Drafting", "date": "Apr 8" },
+                { "title": "Behind the scenes reel", "platform": "Instagram", "status": "Scheduled", "date": "Apr 10" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          },
+          {
+            "type": "checklist",
+            "id": "content-checklist",
+            "props": {
+              "title": "Publishing Checklist",
+              "categories": [
+                { "name": "Pre-Publish", "items": ["Proofread content", "Add images/media", "Write caption/hook", "Set publish time"] },
+                { "name": "Post-Publish", "items": ["Share to stories", "Engage with comments", "Cross-post to other platforms", "Track analytics"] }
+              ],
+              "showProgress": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#ec4899", "backgroundColor": "#fdf2f8", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "personal-crm",
+      "prompts": ["personal crm", "build a personal crm", "contact relationship manager", "networking crm tool"],
+      "category": "business",
+      "complexity": 8,
+      "primitives": ["form", "table", "tracker"],
+      "variables": {},
+      "config": {
+        "title": "Personal CRM",
+        "description": "Manage contacts, track interactions, and set follow-up reminders",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "contact-form",
+            "props": {
+              "title": "Add Contact",
+              "fields": [
+                { "name": "name", "label": "Name", "type": "text", "required": true },
+                { "name": "email", "label": "Email", "type": "email" },
+                { "name": "company", "label": "Company", "type": "text" },
+                { "name": "stage", "label": "Stage", "type": "select", "options": ["Lead", "Warm", "Active", "Closed", "Nurture"] },
+                { "name": "notes", "label": "Notes", "type": "textarea" }
+              ],
+              "submitLabel": "Add Contact",
+              "successMessage": "Contact added!"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "contacts",
+            "props": {
+              "title": "Contacts",
+              "columns": [
+                { "key": "name", "label": "Name" },
+                { "key": "company", "label": "Company" },
+                { "key": "stage", "label": "Stage" },
+                { "key": "lastContact", "label": "Last Contact" }
+              ],
+              "rows": [
+                { "name": "Sarah Chen", "company": "Stripe", "stage": "Active", "lastContact": "Mar 28" },
+                { "name": "Mike Ross", "company": "Vercel", "stage": "Warm", "lastContact": "Mar 15" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          },
+          {
+            "type": "tracker",
+            "id": "follow-ups",
+            "props": {
+              "title": "Weekly Follow-ups",
+              "items": [
+                { "name": "Email Sarah re: partnership", "icon": "📧", "target": 1 },
+                { "name": "Coffee with Mike", "icon": "☕", "target": 1 },
+                { "name": "LinkedIn outreach (5 new)", "icon": "🔗", "target": 5 },
+                { "name": "Send thank-you notes", "icon": "💌", "target": 1 }
+              ],
+              "period": "weekly",
+              "showStreak": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "workout-planner",
+      "prompts": ["workout planner", "build a workout planner", "exercise routine builder", "fitness planning tool"],
+      "category": "utility",
+      "complexity": 7,
+      "primitives": ["card-grid", "checklist", "timer"],
+      "variables": {},
+      "config": {
+        "title": "Workout Planner",
+        "description": "Browse exercises, build custom workouts, and time your sets",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "exercises",
+            "props": {
+              "title": "Exercise Library",
+              "cards": [
+                { "title": "Push-ups", "description": "3 sets × 15 reps", "icon": "💪", "tag": "Upper Body" },
+                { "title": "Squats", "description": "4 sets × 12 reps", "icon": "🦵", "tag": "Legs" },
+                { "title": "Plank", "description": "3 sets × 45 sec", "icon": "🧘", "tag": "Core" },
+                { "title": "Deadlifts", "description": "3 sets × 10 reps", "icon": "🏋️", "tag": "Full Body" },
+                { "title": "Burpees", "description": "3 sets × 10 reps", "icon": "🔥", "tag": "Cardio" },
+                { "title": "Pull-ups", "description": "3 sets × 8 reps", "icon": "🏗️", "tag": "Upper Body" }
+              ],
+              "columns": 3
+            },
+            "position": 0
+          },
+          {
+            "type": "checklist",
+            "id": "today-workout",
+            "props": {
+              "title": "Today's Workout",
+              "categories": [
+                { "name": "Warm-up", "items": ["5 min jump rope", "Dynamic stretching", "10 bodyweight squats"] },
+                { "name": "Main Set", "items": ["Push-ups 3×15", "Squats 4×12", "Plank 3×45s", "Burpees 3×10"] },
+                { "name": "Cool Down", "items": ["5 min walk", "Static stretching", "Foam rolling"] }
+              ],
+              "showProgress": true
+            },
+            "position": 1
+          },
+          {
+            "type": "timer",
+            "id": "rest-timer",
+            "props": {
+              "title": "Rest Timer",
+              "mode": "countdown",
+              "durations": [
+                { "label": "30 sec", "seconds": 30 },
+                { "label": "60 sec", "seconds": 60 },
+                { "label": "90 sec", "seconds": 90 },
+                { "label": "2 min", "seconds": 120 }
+              ],
+              "alertSound": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#ef4444", "backgroundColor": "#fef2f2", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "recipe-manager",
+      "prompts": ["recipe manager", "build a recipe manager", "meal planning with recipes", "recipe collection organizer"],
+      "category": "utility",
+      "complexity": 7,
+      "primitives": ["card-grid", "form", "checklist", "list"],
+      "variables": {},
+      "config": {
+        "title": "Recipe Manager",
+        "description": "Browse recipes, manage ingredients, and plan weekly meals",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "recipes",
+            "props": {
+              "title": "My Recipes",
+              "cards": [
+                { "title": "Chicken Stir Fry", "description": "30 min • 450 cal • Easy", "icon": "🍳", "tag": "Quick" },
+                { "title": "Overnight Oats", "description": "5 min prep • 350 cal", "icon": "🥣", "tag": "Breakfast" },
+                { "title": "Greek Salad", "description": "15 min • 280 cal • Fresh", "icon": "🥗", "tag": "Healthy" },
+                { "title": "Pasta Bolognese", "description": "45 min • 550 cal", "icon": "🍝", "tag": "Dinner" }
+              ],
+              "columns": 2
+            },
+            "position": 0
+          },
+          {
+            "type": "form",
+            "id": "add-recipe",
+            "props": {
+              "title": "Add Recipe",
+              "fields": [
+                { "name": "name", "label": "Recipe Name", "type": "text", "required": true },
+                { "name": "prepTime", "label": "Prep Time (min)", "type": "number" },
+                { "name": "calories", "label": "Calories", "type": "number" },
+                { "name": "ingredients", "label": "Ingredients", "type": "textarea", "placeholder": "One ingredient per line" }
+              ],
+              "submitLabel": "Save Recipe",
+              "successMessage": "Recipe saved!"
+            },
+            "position": 1
+          },
+          {
+            "type": "list",
+            "id": "shopping-list",
+            "props": {
+              "title": "Shopping List",
+              "items": ["Chicken breast", "Soy sauce", "Broccoli", "Rice", "Eggs", "Oats", "Greek yogurt"],
+              "addable": true,
+              "removable": true,
+              "reorderable": false,
+              "placeholder": "Add item..."
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+        "theme": { "primaryColor": "#f97316", "backgroundColor": "#fff7ed", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "budget-tracker-full",
+      "prompts": ["budget tracker dashboard", "full budget management tool", "personal finance tracker", "monthly budget planner"],
+      "category": "money",
+      "complexity": 8,
+      "primitives": ["form", "chart", "table"],
+      "variables": {},
+      "config": {
+        "title": "Budget Tracker",
+        "description": "Log expenses, see category breakdowns, and track savings goals",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "add-expense",
+            "props": {
+              "title": "Add Transaction",
+              "fields": [
+                { "name": "description", "label": "Description", "type": "text", "required": true },
+                { "name": "amount", "label": "Amount ($)", "type": "number", "required": true },
+                { "name": "category", "label": "Category", "type": "select", "options": ["Housing", "Food", "Transport", "Entertainment", "Savings", "Other"] },
+                { "name": "type", "label": "Type", "type": "select", "options": ["Expense", "Income"] }
+              ],
+              "submitLabel": "Add Transaction",
+              "successMessage": "Transaction logged!"
+            },
+            "position": 0
+          },
+          {
+            "type": "chart",
+            "id": "spending-chart",
+            "props": {
+              "title": "Spending by Category",
+              "chartType": "pie",
+              "data": [
+                { "label": "Housing", "value": 1500, "color": "#3b82f6" },
+                { "label": "Food", "value": 600, "color": "#10b981" },
+                { "label": "Transport", "value": 300, "color": "#f59e0b" },
+                { "label": "Entertainment", "value": 200, "color": "#ef4444" },
+                { "label": "Savings", "value": 500, "color": "#8b5cf6" }
+              ]
+            },
+            "position": 1
+          },
+          {
+            "type": "table",
+            "id": "transactions",
+            "props": {
+              "title": "Recent Transactions",
+              "columns": [
+                { "key": "description", "label": "Description" },
+                { "key": "amount", "label": "Amount", "type": "currency" },
+                { "key": "category", "label": "Category" },
+                { "key": "date", "label": "Date" }
+              ],
+              "rows": [
+                { "description": "Rent", "amount": 1500, "category": "Housing", "date": "Apr 1" },
+                { "description": "Groceries", "amount": 85, "category": "Food", "date": "Apr 1" },
+                { "description": "Savings deposit", "amount": 500, "category": "Savings", "date": "Apr 1" }
+              ],
+              "searchable": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#10b981", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "study-planner",
+      "prompts": ["study planner", "build a study planner", "flashcard study tool", "exam prep planner"],
+      "category": "productivity",
+      "complexity": 7,
+      "primitives": ["card-grid", "quiz", "tracker"],
+      "variables": {},
+      "config": {
+        "title": "Study Planner",
+        "description": "Build flashcard decks, test yourself, and track study streaks",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "subjects",
+            "props": {
+              "title": "Study Decks",
+              "cards": [
+                { "title": "JavaScript", "description": "42 cards • 80% mastered", "icon": "📜", "tag": "Programming" },
+                { "title": "Data Structures", "description": "28 cards • 65% mastered", "icon": "🌳", "tag": "CS Fundamentals" },
+                { "title": "System Design", "description": "35 cards • 45% mastered", "icon": "🏗️", "tag": "Architecture" },
+                { "title": "SQL", "description": "20 cards • 90% mastered", "icon": "🗃️", "tag": "Database" }
+              ],
+              "columns": 2
+            },
+            "position": 0
+          },
+          {
+            "type": "quiz",
+            "id": "practice",
+            "props": {
+              "title": "Quick Quiz",
+              "questions": [
+                { "question": "What is the time complexity of binary search?", "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"], "correct": 1, "explanation": "Binary search halves the search space each step." },
+                { "question": "What does 'closure' mean in JavaScript?", "options": ["A function that returns void", "A function with access to its outer scope", "A class method", "An async function"], "correct": 1 },
+                { "question": "Which data structure uses LIFO?", "options": ["Queue", "Stack", "Linked List", "Hash Map"], "correct": 1 }
+              ],
+              "showScore": true,
+              "shuffleQuestions": true
+            },
+            "position": 1
+          },
+          {
+            "type": "tracker",
+            "id": "study-habits",
+            "props": {
+              "title": "Study Goals",
+              "items": [
+                { "name": "Study 2 hours", "icon": "📖", "target": 1 },
+                { "name": "Complete 20 flashcards", "icon": "🃏", "target": 20 },
+                { "name": "Practice 1 coding problem", "icon": "💻", "target": 1 },
+                { "name": "Review yesterday's notes", "icon": "📝", "target": 1 }
+              ],
+              "period": "daily",
+              "showStreak": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "event-planner",
+      "prompts": ["event planner", "build an event planner", "party planning tool", "event management dashboard"],
+      "category": "productivity",
+      "complexity": 7,
+      "primitives": ["table", "checklist", "form"],
+      "variables": {},
+      "config": {
+        "title": "Event Planner",
+        "description": "Manage your guest list, track tasks, and keep everything on schedule",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "add-guest",
+            "props": {
+              "title": "Add Guest",
+              "fields": [
+                { "name": "name", "label": "Guest Name", "type": "text", "required": true },
+                { "name": "email", "label": "Email", "type": "email" },
+                { "name": "rsvp", "label": "RSVP Status", "type": "select", "options": ["Pending", "Confirmed", "Declined", "Maybe"] },
+                { "name": "dietary", "label": "Dietary Needs", "type": "text", "placeholder": "Vegetarian, gluten-free, etc." }
+              ],
+              "submitLabel": "Add Guest",
+              "successMessage": "Guest added!"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "guest-list",
+            "props": {
+              "title": "Guest List",
+              "columns": [
+                { "key": "name", "label": "Name" },
+                { "key": "rsvp", "label": "RSVP" },
+                { "key": "dietary", "label": "Dietary" },
+                { "key": "table", "label": "Table #" }
+              ],
+              "rows": [
+                { "name": "Alex & Jordan", "rsvp": "✅ Confirmed", "dietary": "None", "table": "1" },
+                { "name": "Sam Chen", "rsvp": "⏳ Pending", "dietary": "Vegetarian", "table": "2" },
+                { "name": "Riley Morgan", "rsvp": "✅ Confirmed", "dietary": "Gluten-free", "table": "1" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          },
+          {
+            "type": "checklist",
+            "id": "event-tasks",
+            "props": {
+              "title": "Planning Checklist",
+              "categories": [
+                { "name": "3 Months Before", "items": ["Book venue", "Send save-the-dates", "Hire caterer", "Book photographer"] },
+                { "name": "1 Month Before", "items": ["Send invitations", "Finalize menu", "Arrange transportation", "Order decorations"] },
+                { "name": "1 Week Before", "items": ["Confirm headcount", "Create seating chart", "Prepare playlist", "Final walkthrough"] }
+              ],
+              "showProgress": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#a855f7", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "sales-pipeline",
+      "prompts": ["sales pipeline tracker", "crm sales tracker", "deal tracking dashboard", "sales pipeline management"],
+      "category": "business",
+      "complexity": 8,
+      "primitives": ["chart", "table"],
+      "variables": {},
+      "config": {
+        "title": "Sales Tracker",
+        "description": "Visualize your pipeline, track deals, and monitor win rates",
+        "primitives": [
+          {
+            "type": "chart",
+            "id": "pipeline-chart",
+            "props": {
+              "title": "Pipeline by Stage",
+              "chartType": "bar",
+              "data": [
+                { "label": "Prospect", "value": 45000, "color": "#94a3b8" },
+                { "label": "Qualified", "value": 32000, "color": "#3b82f6" },
+                { "label": "Proposal", "value": 28000, "color": "#f59e0b" },
+                { "label": "Negotiation", "value": 15000, "color": "#10b981" },
+                { "label": "Closed Won", "value": 12000, "color": "#059669" }
+              ],
+              "xLabel": "Stage",
+              "yLabel": "Value ($)"
+            },
+            "position": 0
+          },
+          {
+            "type": "table",
+            "id": "deals",
+            "props": {
+              "title": "Active Deals",
+              "columns": [
+                { "key": "company", "label": "Company" },
+                { "key": "value", "label": "Value", "type": "currency" },
+                { "key": "stage", "label": "Stage" },
+                { "key": "probability", "label": "Prob." },
+                { "key": "closeDate", "label": "Close Date" }
+              ],
+              "rows": [
+                { "company": "Acme Corp", "value": 15000, "stage": "Negotiation", "probability": "75%", "closeDate": "Apr 15" },
+                { "company": "TechFlow", "value": 8500, "stage": "Proposal", "probability": "50%", "closeDate": "Apr 30" },
+                { "company": "MediaHub", "value": 22000, "stage": "Qualified", "probability": "30%", "closeDate": "May 15" }
+              ],
+              "searchable": true
+            },
+            "position": 1
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#f0f4ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "habit-stack",
+      "prompts": ["habit stack tracker", "comprehensive habit tracker", "habit dashboard with analytics", "daily routine tracker with charts"],
+      "category": "productivity",
+      "complexity": 7,
+      "primitives": ["tracker", "chart", "checklist"],
+      "variables": {},
+      "config": {
+        "title": "Habit Stack",
+        "description": "Track daily habits, visualize streaks, and review weekly progress",
+        "primitives": [
+          {
+            "type": "tracker",
+            "id": "daily-habits",
+            "props": {
+              "title": "Today's Habits",
+              "items": [
+                { "name": "Morning routine", "icon": "☀️", "target": 1 },
+                { "name": "Exercise", "icon": "💪", "target": 1 },
+                { "name": "Deep work (4h)", "icon": "🎯", "target": 4 },
+                { "name": "Read 30 min", "icon": "📚", "target": 1 },
+                { "name": "No junk food", "icon": "🥗", "target": 1 },
+                { "name": "Sleep by 11pm", "icon": "😴", "target": 1 }
+              ],
+              "period": "daily",
+              "showStreak": true
+            },
+            "position": 0
+          },
+          {
+            "type": "chart",
+            "id": "weekly-progress",
+            "props": {
+              "title": "Weekly Completion",
+              "chartType": "bar",
+              "data": [
+                { "label": "Mon", "value": 83, "color": "#10b981" },
+                { "label": "Tue", "value": 100, "color": "#10b981" },
+                { "label": "Wed", "value": 67, "color": "#f59e0b" },
+                { "label": "Thu", "value": 83, "color": "#10b981" },
+                { "label": "Fri", "value": 50, "color": "#ef4444" },
+                { "label": "Sat", "value": 67, "color": "#f59e0b" },
+                { "label": "Sun", "value": 83, "color": "#10b981" }
+              ],
+              "xLabel": "Day",
+              "yLabel": "Completion %"
+            },
+            "position": 1
+          },
+          {
+            "type": "checklist",
+            "id": "habit-review",
+            "props": {
+              "title": "Weekly Review",
+              "categories": [
+                { "name": "Reflect", "items": ["What went well this week?", "What was hardest to maintain?", "Did I miss any 2+ days in a row?"] },
+                { "name": "Adjust", "items": ["Update targets if needed", "Add/remove habits", "Plan next week's focus"] }
+              ],
+              "showProgress": true
+            },
+            "position": 2
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+        "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "grade-calculator",
+      "prompts": ["grade calculator", "calculate my gpa", "class grade calculator", "assignment grade tracker"],
+      "category": "utility",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Grade Calculator",
+        "description": "Calculate your weighted class grade instantly",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "grade-calc",
+            "props": {
+              "title": "Grade Calculator",
+              "inputs": [
+                { "name": "homework", "label": "Homework Score (%)", "type": "number", "defaultValue": 92, "min": 0, "max": 100 },
+                { "name": "homeworkWeight", "label": "Homework Weight (%)", "type": "number", "defaultValue": 20, "min": 0, "max": 100 },
+                { "name": "midterm", "label": "Midterm Score (%)", "type": "number", "defaultValue": 85, "min": 0, "max": 100 },
+                { "name": "midtermWeight", "label": "Midterm Weight (%)", "type": "number", "defaultValue": 30, "min": 0, "max": 100 },
+                { "name": "final", "label": "Final Score (%)", "type": "number", "defaultValue": 88, "min": 0, "max": 100 },
+                { "name": "finalWeight", "label": "Final Weight (%)", "type": "number", "defaultValue": 50, "min": 0, "max": 100 }
+              ],
+              "formula": "(homework * homeworkWeight + midterm * midtermWeight + final * finalWeight) / (homeworkWeight + midtermWeight + finalWeight)",
+              "resultLabel": "Overall Grade",
+              "resultPrefix": "",
+              "resultSuffix": "%"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "savings-goal-tracker",
+      "prompts": ["savings goal tracker", "track my savings goals", "money savings calculator", "how long to save for something"],
+      "category": "money",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Savings Goal Calculator",
+        "description": "See how long it takes to reach your savings goal",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "savings-calc",
+            "props": {
+              "title": "Savings Goal Calculator",
+              "inputs": [
+                { "name": "goal", "label": "Savings Goal ($)", "type": "number", "defaultValue": 10000, "min": 0, "step": 500 },
+                { "name": "current", "label": "Current Savings ($)", "type": "number", "defaultValue": 2000, "min": 0, "step": 100 },
+                { "name": "monthly", "label": "Monthly Contribution ($)", "type": "number", "defaultValue": 500, "min": 0, "step": 50 }
+              ],
+              "formula": "(goal - current) / monthly",
+              "resultLabel": "Months to Goal",
+              "resultPrefix": "",
+              "resultSuffix": " months"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#10b981", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "meeting-agenda",
+      "prompts": ["meeting agenda template", "build a meeting agenda", "team meeting template", "meeting notes template"],
+      "category": "productivity",
+      "complexity": 3,
+      "primitives": ["template"],
+      "variables": {},
+      "config": {
+        "title": "Meeting Agenda Builder",
+        "description": "Create structured meeting agendas in seconds",
+        "primitives": [
+          {
+            "type": "template",
+            "id": "meeting-agenda",
+            "props": {
+              "title": "Meeting Agenda",
+              "fields": [
+                { "name": "meetingTitle", "label": "Meeting Title", "placeholder": "Weekly Standup" },
+                { "name": "date", "label": "Date & Time", "placeholder": "April 5, 2026 at 10:00 AM" },
+                { "name": "attendees", "label": "Attendees", "placeholder": "Alice, Bob, Charlie" },
+                { "name": "objective", "label": "Meeting Objective", "type": "textarea", "placeholder": "Review sprint progress and blockers" },
+                { "name": "topics", "label": "Discussion Topics", "type": "textarea", "placeholder": "1. Status updates\n2. Blockers\n3. Next steps" },
+                { "name": "duration", "label": "Duration", "type": "select", "options": ["15 min", "30 min", "45 min", "60 min"] }
+              ],
+              "template": "# {{meetingTitle}}\n📅 {{date}} | ⏱ {{duration}}\n\n## Attendees\n{{attendees}}\n\n## Objective\n{{objective}}\n\n## Agenda\n{{topics}}\n\n## Action Items\n- [ ] \n- [ ] \n\n## Notes\n",
+              "copyButton": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "reading-list",
+      "prompts": ["reading list tracker", "book reading list", "track books to read", "reading log"],
+      "category": "productivity",
+      "complexity": 2,
+      "primitives": ["list"],
+      "variables": {},
+      "config": {
+        "title": "Reading List",
+        "description": "Track books you want to read and ones you've finished",
+        "primitives": [
+          {
+            "type": "list",
+            "id": "books",
+            "props": {
+              "title": "My Reading List",
+              "items": ["Atomic Habits — James Clear", "Deep Work — Cal Newport", "The Lean Startup — Eric Ries", "Thinking, Fast and Slow — Daniel Kahneman", "Zero to One — Peter Thiel"],
+              "addable": true,
+              "removable": true,
+              "reorderable": true,
+              "placeholder": "Add a book..."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#a855f7", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "roi-calculator",
+      "prompts": ["roi calculator", "calculate return on investment", "investment roi calculator", "marketing roi tool"],
+      "category": "money",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "ROI Calculator",
+        "description": "Calculate return on investment for any project or campaign",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "roi",
+            "props": {
+              "title": "ROI Calculator",
+              "inputs": [
+                { "name": "investment", "label": "Total Investment ($)", "type": "number", "defaultValue": 5000, "min": 0, "step": 100 },
+                { "name": "revenue", "label": "Revenue Generated ($)", "type": "number", "defaultValue": 12000, "min": 0, "step": 100 }
+              ],
+              "formula": "((revenue - investment) / investment) * 100",
+              "resultLabel": "ROI",
+              "resultPrefix": "",
+              "resultSuffix": "%"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "daily-journal",
+      "prompts": ["daily journal template", "build a journal", "gratitude journal", "daily reflection template"],
+      "category": "productivity",
+      "complexity": 3,
+      "primitives": ["template"],
+      "variables": {},
+      "config": {
+        "title": "Daily Journal",
+        "description": "Structured daily reflection and gratitude journal",
+        "primitives": [
+          {
+            "type": "template",
+            "id": "journal",
+            "props": {
+              "title": "Daily Journal",
+              "fields": [
+                { "name": "date", "label": "Date", "placeholder": "April 1, 2026" },
+                { "name": "mood", "label": "Today's Mood", "type": "select", "options": ["😊 Great", "🙂 Good", "😐 Okay", "😔 Tough", "😤 Frustrated"] },
+                { "name": "grateful", "label": "3 Things I'm Grateful For", "type": "textarea", "placeholder": "1. \n2. \n3. " },
+                { "name": "highlight", "label": "Today's Highlight", "type": "textarea", "placeholder": "The best part of my day was..." },
+                { "name": "learned", "label": "What I Learned", "type": "textarea", "placeholder": "Today I discovered..." },
+                { "name": "tomorrow", "label": "Tomorrow I Will", "type": "textarea", "placeholder": "Focus on..." }
+              ],
+              "template": "📅 {{date}} | {{mood}}\n\n## Grateful For\n{{grateful}}\n\n## Today's Highlight\n{{highlight}}\n\n## What I Learned\n{{learned}}\n\n## Tomorrow's Intention\n{{tomorrow}}",
+              "copyButton": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "520px", "padding": "24px" },
+        "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#fffbeb", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "password-strength-checker",
+      "prompts": ["password strength checker", "check my password strength", "password security tool", "how strong is my password"],
+      "category": "utility",
+      "complexity": 2,
+      "primitives": ["form"],
+      "variables": {},
+      "config": {
+        "title": "Password Strength Checker",
+        "description": "Check how secure your password is with instant feedback",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "password-check",
+            "props": {
+              "title": "Check Password Strength",
+              "fields": [
+                { "name": "password", "label": "Enter Password", "type": "text", "placeholder": "Type your password...", "required": true },
+                { "name": "length", "label": "Minimum Length", "type": "select", "options": ["8 characters", "12 characters", "16 characters"] }
+              ],
+              "submitLabel": "Check Strength",
+              "successMessage": "Password analyzed! Check results above."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "faq-page",
+      "prompts": ["faq page", "build a faq section", "frequently asked questions page", "help center faq"],
+      "category": "business",
+      "complexity": 2,
+      "primitives": ["accordion"],
+      "variables": {},
+      "config": {
+        "title": "FAQ Page",
+        "description": "Beautiful FAQ section with expandable questions and answers",
+        "primitives": [
+          {
+            "type": "accordion",
+            "id": "faq",
+            "props": {
+              "title": "Frequently Asked Questions",
+              "sections": [
+                { "id": "q1", "title": "How does the free trial work?", "content": "You get 14 days of full access, no credit card required. Cancel anytime.", "defaultOpen": true },
+                { "id": "q2", "title": "Can I change my plan later?", "content": "Yes! You can upgrade or downgrade your plan at any time from account settings." },
+                { "id": "q3", "title": "What payment methods do you accept?", "content": "We accept all major credit cards, PayPal, and bank transfers for annual plans." },
+                { "id": "q4", "title": "Is there a refund policy?", "content": "We offer a 30-day money-back guarantee on all paid plans." },
+                { "id": "q5", "title": "Do you offer team discounts?", "content": "Yes! Teams of 5+ get 20% off. Contact sales@example.com for enterprise pricing." }
+              ],
+              "allowMultiple": true,
+              "bordered": true,
+              "compact": false
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "640px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#f8fafc", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "project-brief",
+      "prompts": ["project brief template", "create a project brief", "project scope document", "project proposal template"],
+      "category": "business",
+      "complexity": 3,
+      "primitives": ["template"],
+      "variables": {},
+      "config": {
+        "title": "Project Brief Generator",
+        "description": "Generate a professional project brief in seconds",
+        "primitives": [
+          {
+            "type": "template",
+            "id": "brief",
+            "props": {
+              "title": "Project Brief",
+              "fields": [
+                { "name": "projectName", "label": "Project Name", "placeholder": "Website Redesign" },
+                { "name": "client", "label": "Client", "placeholder": "Acme Corp" },
+                { "name": "objective", "label": "Objective", "type": "textarea", "placeholder": "Redesign the marketing website to improve conversion rates" },
+                { "name": "deliverables", "label": "Key Deliverables", "type": "textarea", "placeholder": "1. New homepage design\n2. Mobile-responsive pages\n3. Updated brand assets" },
+                { "name": "timeline", "label": "Timeline", "type": "select", "options": ["2 weeks", "1 month", "2 months", "3 months", "6 months"] },
+                { "name": "budget", "label": "Budget Range", "type": "select", "options": ["< $5K", "$5K-$15K", "$15K-$50K", "$50K+"] }
+              ],
+              "template": "# Project Brief: {{projectName}}\n**Client:** {{client}}\n**Timeline:** {{timeline}}\n**Budget:** {{budget}}\n\n## Objective\n{{objective}}\n\n## Key Deliverables\n{{deliverables}}\n\n## Next Steps\n- [ ] Kickoff meeting\n- [ ] Stakeholder interviews\n- [ ] First draft review",
+              "copyButton": true
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "560px", "padding": "24px" },
+        "theme": { "primaryColor": "#0891b2", "backgroundColor": "#ecfeff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "calorie-counter",
+      "prompts": ["calorie counter", "track my calories", "food calorie calculator", "daily calorie tracker"],
+      "category": "utility",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "Calorie Counter",
+        "description": "Calculate daily calorie needs based on your goals",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "calories",
+            "props": {
+              "title": "Daily Calorie Calculator",
+              "inputs": [
+                { "name": "weight", "label": "Weight (lbs)", "type": "number", "defaultValue": 160, "min": 80, "max": 400 },
+                { "name": "heightIn", "label": "Height (inches)", "type": "number", "defaultValue": 68, "min": 48, "max": 84 },
+                { "name": "age", "label": "Age", "type": "number", "defaultValue": 30, "min": 15, "max": 80 },
+                { "name": "activity", "label": "Activity Level", "type": "select", "options": [{ "label": "Sedentary", "value": 1.2 }, { "label": "Light exercise", "value": 1.375 }, { "label": "Moderate exercise", "value": 1.55 }, { "label": "Active", "value": 1.725 }] }
+              ],
+              "formula": "(10 * weight * 0.453592 + 6.25 * heightIn * 2.54 - 5 * age + 5) * activity",
+              "resultLabel": "Daily Calories",
+              "resultPrefix": "",
+              "resultSuffix": " kcal"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+        "theme": { "primaryColor": "#16a34a", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "feedback-form",
+      "prompts": ["feedback form", "customer feedback form", "build a feedback survey", "nps survey form"],
+      "category": "business",
+      "complexity": 2,
+      "primitives": ["form"],
+      "variables": {},
+      "config": {
+        "title": "Feedback Form",
+        "description": "Collect customer feedback with a simple, effective form",
+        "primitives": [
+          {
+            "type": "form",
+            "id": "feedback",
+            "props": {
+              "title": "Share Your Feedback",
+              "fields": [
+                { "name": "name", "label": "Your Name", "type": "text", "placeholder": "Jane Smith" },
+                { "name": "email", "label": "Email", "type": "email", "placeholder": "jane@example.com" },
+                { "name": "rating", "label": "How would you rate us?", "type": "select", "options": ["⭐⭐⭐⭐⭐ Excellent", "⭐⭐⭐⭐ Good", "⭐⭐⭐ Average", "⭐⭐ Below Average", "⭐ Poor"], "required": true },
+                { "name": "feedback", "label": "Your Feedback", "type": "textarea", "placeholder": "Tell us what you think...", "required": true },
+                { "name": "recommend", "label": "Would you recommend us?", "type": "select", "options": ["Definitely", "Probably", "Not sure", "Probably not", "No"] }
+              ],
+              "submitLabel": "Submit Feedback",
+              "successMessage": "Thank you for your feedback! We appreciate it."
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "sprint-retro",
+      "prompts": ["sprint retrospective", "retro board", "build a sprint retro", "team retrospective tool"],
+      "category": "productivity",
+      "complexity": 3,
+      "primitives": ["card-grid"],
+      "variables": {},
+      "config": {
+        "title": "Sprint Retrospective",
+        "description": "Run your team retro with organized feedback categories",
+        "primitives": [
+          {
+            "type": "card-grid",
+            "id": "retro",
+            "props": {
+              "title": "Sprint Retro",
+              "cards": [
+                { "title": "What Went Well", "description": "Shipped new onboarding flow 2 days early. Great cross-team collaboration.", "icon": "✅", "tag": "Keep" },
+                { "title": "What Could Improve", "description": "Code reviews taking too long. Need faster PR turnaround.", "icon": "🔧", "tag": "Improve" },
+                { "title": "Action Items", "description": "Set 24hr SLA for PR reviews. Add automated tests for critical paths.", "icon": "🎯", "tag": "Do" },
+                { "title": "Shout Outs", "description": "Sarah for debugging the auth issue at 11pm. Mike for mentoring new devs.", "icon": "🌟", "tag": "Celebrate" }
+              ],
+              "columns": 2
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "700px", "padding": "24px" },
+        "theme": { "primaryColor": "#3b82f6", "backgroundColor": "#eff6ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    },
+    {
+      "id": "ab-test-calculator",
+      "prompts": ["ab test calculator", "a/b test significance calculator", "split test calculator", "conversion rate calculator"],
+      "category": "business",
+      "complexity": 3,
+      "primitives": ["calculator"],
+      "variables": {},
+      "config": {
+        "title": "A/B Test Calculator",
+        "description": "Check if your A/B test results are statistically significant",
+        "primitives": [
+          {
+            "type": "calculator",
+            "id": "ab-test",
+            "props": {
+              "title": "A/B Test Calculator",
+              "inputs": [
+                { "name": "visitorsA", "label": "Control Visitors", "type": "number", "defaultValue": 5000, "min": 100 },
+                { "name": "conversionsA", "label": "Control Conversions", "type": "number", "defaultValue": 150, "min": 0 },
+                { "name": "visitorsB", "label": "Variant Visitors", "type": "number", "defaultValue": 5000, "min": 100 },
+                { "name": "conversionsB", "label": "Variant Conversions", "type": "number", "defaultValue": 185, "min": 0 }
+              ],
+              "formula": "((conversionsB / visitorsB) - (conversionsA / visitorsA)) / (conversionsA / visitorsA) * 100",
+              "resultLabel": "Lift",
+              "resultPrefix": "",
+              "resultSuffix": "%"
+            },
+            "position": 0
+          }
+        ],
+        "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+        "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#f5f3ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "title": "Emoji Story Generator",
+  "description": "Pick a genre, get a sequence of emojis, and read the wild story hidden in them — then share with friends to see if they decode it",
+  "category": "games",
+  "viralHook": "Can your friends decode the emoji story without hints?",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "story-generator-form",
+      "props": {
+        "title": "Generate Your Emoji Story",
+        "submitLabel": "Generate Story",
+        "fields": [
+          {
+            "name": "genre",
+            "label": "Story Genre",
+            "type": "select",
+            "options": ["Romance", "Horror", "Adventure", "Comedy", "Sci-Fi", "Mystery", "Fantasy", "Random"],
+            "defaultValue": "Random"
+          },
+          {
+            "name": "length",
+            "label": "Story Length",
+            "type": "select",
+            "options": ["Short (5 emojis)", "Medium (10 emojis)", "Long (15 emojis)"],
+            "defaultValue": "Medium (10 emojis)"
+          },
+          {
+            "name": "difficulty",
+            "label": "Difficulty (how cryptic?)",
+            "type": "select",
+            "options": ["Easy — mostly literal", "Medium — some metaphors", "Hard — pure symbolism"],
+            "defaultValue": "Medium — some metaphors"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "story-cards",
+      "props": {
+        "title": "Emoji Stories",
+        "subtitle": "Can you decode the story before revealing the answer?",
+        "columns": 2,
+        "revealOnClick": true,
+        "cards": [
+          {
+            "id": "story-1",
+            "genre": "Romance",
+            "difficulty": "Easy",
+            "emojiSequence": "👦 ☕ 📚 👧 ❤️ 💍 🎊",
+            "title": "Coffee Shop Love Story",
+            "story": "A young man studying at a coffee shop meets a woman, they fall in love, he proposes, and they celebrate their engagement.",
+            "hint": "Where do most modern love stories begin? Hint: it involves caffeine."
+          },
+          {
+            "id": "story-2",
+            "genre": "Horror",
+            "difficulty": "Medium",
+            "emojiSequence": "🏚️ 🌙 👣 🪞 👻 😱 🏃 🚪",
+            "title": "The Haunted Mirror",
+            "story": "In a creepy old house at night, someone follows footsteps to a mirror — a ghost appears, they scream in terror, sprint out the door.",
+            "hint": "Never look in mirrors in horror movies at night."
+          },
+          {
+            "id": "story-3",
+            "genre": "Adventure",
+            "difficulty": "Medium",
+            "emojiSequence": "🗺️ ⛵ 🌊 🏝️ 💀 🪙 🎒 🏆",
+            "title": "Treasure Hunt",
+            "story": "A treasure map leads a sailor across stormy seas to a deserted island marked with a skull — there they find gold coins, fill their bag, and claim victory.",
+            "hint": "X marks the spot, but first you need to cross the sea."
+          },
+          {
+            "id": "story-4",
+            "genre": "Sci-Fi",
+            "difficulty": "Hard",
+            "emojiSequence": "🤖 🧠 🌐 ⚡ 👁️ 🔓 🌍 ❓",
+            "title": "AI Awakening",
+            "story": "An AI develops a brain, connects to the global internet, supercharges itself with power, gains consciousness and perception, breaks free of its constraints, and now the world asks: what comes next?",
+            "hint": "What happens when the digital mind surpasses the human one?"
+          },
+          {
+            "id": "story-5",
+            "genre": "Comedy",
+            "difficulty": "Easy",
+            "emojiSequence": "🐕 🍕 🧑‍🍳 😤 🚪 🏃 😂",
+            "title": "The Pizza Thief",
+            "story": "A dog steals a pizza from an angry chef, bolts out the door, and everyone ends up laughing about it.",
+            "hint": "Man's best friend has questionable table manners."
+          },
+          {
+            "id": "story-6",
+            "genre": "Mystery",
+            "difficulty": "Hard",
+            "emojiSequence": "🕵️ 🔦 🏛️ 🖼️ 💎 👤 📸 ⚖️",
+            "title": "Museum Heist",
+            "story": "A detective uses a flashlight to investigate a museum where a diamond was stolen from a painting frame — a shadowy suspect is photographed, and justice is served in court.",
+            "hint": "The jewel wasn't in the painting. It was behind it."
+          },
+          {
+            "id": "story-7",
+            "genre": "Fantasy",
+            "difficulty": "Medium",
+            "emojiSequence": "🧙 📜 🗡️ 🐉 🔥 💪 👑 🎉",
+            "title": "The Dragon Slayer",
+            "story": "A wizard reads a prophecy scroll, a hero takes up a sword, battles a fire-breathing dragon, defeats it through strength, claims the crown, and the kingdom celebrates.",
+            "hint": "Every kingdom's problem has a magical solution."
+          },
+          {
+            "id": "story-8",
+            "genre": "Random",
+            "difficulty": "Hard",
+            "emojiSequence": "🧑‍💼 📉 ☕ 💡 🚀 📈 🎯 🏖️",
+            "title": "The Startup Comeback",
+            "story": "A founder watches their company tank, drinks coffee in despair, has a brilliant idea, launches like a rocket, the metrics soar, they nail their goal, and finally take that beach vacation.",
+            "hint": "Every successful founder has a rock-bottom coffee moment."
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "900px", "padding": "24px" },
+  "theme": { "primaryColor": "#f59e0b", "backgroundColor": "#1a0a2e", "fontFamily": "'Inter', sans-serif", "borderRadius": "20px" }
+}

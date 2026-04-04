@@ -1,0 +1,58 @@
+{
+  "title": "Net Worth Tracker",
+  "description": "Track your total assets vs liabilities to see your true net worth",
+  "category": "finance",
+  "viralHook": "Your net worth isn't what you think — most people are shocked when they add it all up",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "net-worth-form",
+      "props": {
+        "title": "Enter Your Financials",
+        "sections": [
+          {
+            "title": "Assets (What You Own)",
+            "fields": [
+              { "name": "cash", "label": "Cash & Savings ($)", "type": "number", "defaultValue": 15000, "min": 0, "prefix": "$" },
+              { "name": "investments", "label": "Investments & Brokerage ($)", "type": "number", "defaultValue": 48000, "min": 0, "prefix": "$" },
+              { "name": "property", "label": "Property / Real Estate ($)", "type": "number", "defaultValue": 320000, "min": 0, "prefix": "$" },
+              { "name": "retirement", "label": "Retirement Accounts ($)", "type": "number", "defaultValue": 85000, "min": 0, "prefix": "$" },
+              { "name": "otherAssets", "label": "Other Assets ($)", "type": "number", "defaultValue": 12000, "min": 0, "prefix": "$" }
+            ]
+          },
+          {
+            "title": "Liabilities (What You Owe)",
+            "fields": [
+              { "name": "mortgage", "label": "Mortgage Balance ($)", "type": "number", "defaultValue": 245000, "min": 0, "prefix": "$" },
+              { "name": "studentLoans", "label": "Student Loans ($)", "type": "number", "defaultValue": 32000, "min": 0, "prefix": "$" },
+              { "name": "creditCards", "label": "Credit Card Debt ($)", "type": "number", "defaultValue": 4500, "min": 0, "prefix": "$" },
+              { "name": "autoLoans", "label": "Auto Loans ($)", "type": "number", "defaultValue": 18000, "min": 0, "prefix": "$" },
+              { "name": "otherLiabilities", "label": "Other Liabilities ($)", "type": "number", "defaultValue": 0, "min": 0, "prefix": "$" }
+            ]
+          }
+        ],
+        "submitLabel": "Calculate Net Worth"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "net-worth-dashboard",
+      "props": {
+        "title": "Net Worth Summary",
+        "stats": [
+          { "label": "Total Assets", "value": "$480,000", "format": "currency", "color": "#22c55e", "icon": "trending-up" },
+          { "label": "Total Liabilities", "value": "$299,500", "format": "currency", "color": "#ef4444", "icon": "trending-down" },
+          { "label": "Net Worth", "value": "$180,500", "format": "currency", "color": "#6366f1", "icon": "wallet", "highlighted": true },
+          { "label": "Debt-to-Asset Ratio", "value": "62.4%", "format": "percent", "color": "#f59e0b", "icon": "pie-chart" }
+        ],
+        "layout": "grid",
+        "columns": 2
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "720px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#0c0a1a", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

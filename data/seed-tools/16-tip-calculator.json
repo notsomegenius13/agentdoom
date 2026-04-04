@@ -1,0 +1,23 @@
+{
+  "title": "Tip & Split Calculator",
+  "description": "Split the bill and calculate tips for any group size",
+  "category": "money",
+  "primitives": [
+    {
+      "type": "split-calculator",
+      "id": "tip-split",
+      "props": {
+        "title": "Tip & Split Calculator",
+        "currency": "$",
+        "defaultTipPercentages": [15, 18, 20, 25],
+        "maxPeople": 20,
+        "showPerPersonBreakdown": true,
+        "showTipAmount": true,
+        "showTotal": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "480px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

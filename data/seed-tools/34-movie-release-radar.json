@@ -1,0 +1,44 @@
+{
+  "title": "Movie Release Radar",
+  "description": "Clean calendar of upcoming movie releases — no IMDb bloat, just what you need",
+  "category": "fun",
+  "viralHook": "Finally a movie calendar that doesn't suck",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "filter-bar",
+      "props": {
+        "title": "Filter Releases",
+        "fields": [
+          { "name": "genre", "label": "Genre", "type": "select", "options": ["All Genres", "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Thriller", "Romance"] },
+          { "name": "timeframe", "label": "Timeframe", "type": "select", "options": ["This Week", "This Month", "Next 3 Months", "This Year"] }
+        ],
+        "submitLabel": "Filter"
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "releases",
+      "props": {
+        "title": "Upcoming Releases",
+        "columns": 3,
+        "cards": [
+          { "title": "Mission Impossible 8", "description": "Apr 3 · Action · Tom Cruise returns for one last impossible mission", "badge": "Apr 3", "color": "#ef4444" },
+          { "title": "Thunderbolts*", "description": "Apr 10 · Action · Marvel's anti-hero team assembles", "badge": "Apr 10", "color": "#3b82f6" },
+          { "title": "Sinners", "description": "Apr 18 · Horror · Ryan Coogler + Michael B. Jordan vampire thriller", "badge": "Apr 18", "color": "#8b5cf6" },
+          { "title": "Lilo & Stitch", "description": "May 23 · Family · Live-action remake of the Disney classic", "badge": "May 23", "color": "#10b981" },
+          { "title": "Mission: Impossible — The Final Reckoning", "description": "May 23 · Action · The saga concludes", "badge": "May 23", "color": "#f59e0b" },
+          { "title": "Ballerina", "description": "Jun 6 · Action · John Wick spinoff with Ana de Armas", "badge": "Jun 6", "color": "#ec4899" },
+          { "title": "How to Train Your Dragon", "description": "Jun 13 · Fantasy · Live-action reimagining", "badge": "Jun 13", "color": "#14b8a6" },
+          { "title": "Superman", "description": "Jul 11 · Superhero · James Gunn's DCU begins", "badge": "Jul 11", "color": "#dc2626" },
+          { "title": "Jurassic World: Rebirth", "description": "Jul 2 · Sci-Fi · Scarlett Johansson leads new era", "badge": "Jul 2", "color": "#16a34a" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

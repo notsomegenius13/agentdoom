@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "CalendarConfig",
+  "description": "A calendar/date picker with single or range selection, navigation, and highlighted dates",
+  "required": [
+    "title",
+    "mode"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Calendar heading"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "single",
+        "range"
+      ],
+      "description": "Selection mode: single date or date range"
+    },
+    "minDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Earliest selectable date (ISO format, e.g. 2026-01-01)"
+    },
+    "maxDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Latest selectable date (ISO format, e.g. 2026-12-31)"
+    },
+    "highlightedDates": {
+      "type": "array",
+      "description": "Dates to visually highlight with optional labels",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "label"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "ISO date string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Tooltip/label for the highlighted date"
+          },
+          "color": {
+            "type": "string",
+            "description": "Tailwind background class for the dot indicator (default: bg-yellow-200)"
+          }
+        }
+      }
+    },
+    "firstDayOfWeek": {
+      "type": "integer",
+      "enum": [
+        0,
+        1
+      ],
+      "description": "0 = Sunday, 1 = Monday"
+    },
+    "showWeekNumbers": {
+      "type": "boolean",
+      "description": "Show ISO week numbers in the first column"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

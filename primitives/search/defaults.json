@@ -1,0 +1,94 @@
+{
+  "title": "Product Search",
+  "placeholder": "Search products...",
+  "maxResults": 10,
+  "showCategories": true,
+  "showRecentSearches": true,
+  "debounceMs": 300,
+  "items": [
+    {
+      "label": "MacBook Pro 16\"",
+      "value": "macbook-pro-16",
+      "category": "Laptops",
+      "description": "Apple M3 Max, 36GB RAM",
+      "icon": "💻"
+    },
+    {
+      "label": "MacBook Air 13\"",
+      "value": "macbook-air-13",
+      "category": "Laptops",
+      "description": "Apple M3, 16GB RAM",
+      "icon": "💻"
+    },
+    {
+      "label": "Dell XPS 15",
+      "value": "dell-xps-15",
+      "category": "Laptops",
+      "description": "Intel i7, 32GB RAM",
+      "icon": "💻"
+    },
+    {
+      "label": "iPhone 16 Pro",
+      "value": "iphone-16-pro",
+      "category": "Phones",
+      "description": "6.3\" display, A18 Pro chip",
+      "icon": "📱"
+    },
+    {
+      "label": "Samsung Galaxy S25",
+      "value": "galaxy-s25",
+      "category": "Phones",
+      "description": "6.2\" display, Snapdragon 8 Gen 4",
+      "icon": "📱"
+    },
+    {
+      "label": "Google Pixel 9",
+      "value": "pixel-9",
+      "category": "Phones",
+      "description": "6.3\" display, Tensor G4",
+      "icon": "📱"
+    },
+    {
+      "label": "AirPods Pro 3",
+      "value": "airpods-pro-3",
+      "category": "Audio",
+      "description": "Active noise cancellation",
+      "icon": "🎧"
+    },
+    {
+      "label": "Sony WH-1000XM6",
+      "value": "sony-wh1000xm6",
+      "category": "Audio",
+      "description": "Over-ear noise cancelling",
+      "icon": "🎧"
+    },
+    {
+      "label": "iPad Pro 13\"",
+      "value": "ipad-pro-13",
+      "category": "Tablets",
+      "description": "M4 chip, Liquid Retina XDR",
+      "icon": "📲"
+    },
+    {
+      "label": "Samsung Galaxy Tab S10",
+      "value": "galaxy-tab-s10",
+      "category": "Tablets",
+      "description": "14.6\" display, Snapdragon 8 Gen 3",
+      "icon": "📲"
+    }
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

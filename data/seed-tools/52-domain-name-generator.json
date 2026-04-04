@@ -1,0 +1,49 @@
+{
+  "title": "Domain Name Generator",
+  "description": "Generate catchy domain name ideas for your project based on keywords and style",
+  "category": "business",
+  "viralHook": "Still naming projects? This tool generates 12 domain ideas from 2 keywords.",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "domain-inputs",
+      "props": {
+        "title": "Generate Domain Names",
+        "fields": [
+          { "name": "keyword1", "label": "Primary Keyword", "type": "text", "required": true, "placeholder": "e.g., code, pixel, stack" },
+          { "name": "keyword2", "label": "Secondary Keyword", "type": "text", "required": false, "placeholder": "e.g., flow, hub, lab" },
+          { "name": "style", "label": "Naming Style", "type": "select", "options": ["Techy (ByteForge, CodeNova)", "Friendly (Helloify, Buddy.io)", "Short & Punchy (Zap, Snip)", "Professional (Acumen, Vertex)", "Playful (Wobbly, Fizzbuzz)"] },
+          { "name": "tld", "label": "Preferred TLD", "type": "select", "options": [".com", ".io", ".co", ".dev", ".app", ".ai", "Any"] }
+        ],
+        "submitLabel": "Generate Names"
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "domain-results",
+      "props": {
+        "title": "Generated Domain Ideas",
+        "columns": 3,
+        "cards": [
+          { "title": "CodeForge.io", "description": "Techy + professional", "badge": ".io", "color": "#2563eb" },
+          { "title": "StackPulse.dev", "description": "Developer focused", "badge": ".dev", "color": "#7c3aed" },
+          { "title": "ByteFlow.co", "description": "Modern + clean", "badge": ".co", "color": "#059669" },
+          { "title": "PixelCraft.app", "description": "Creative + visual", "badge": ".app", "color": "#e11d48" },
+          { "title": "NovaBuild.ai", "description": "AI-forward", "badge": ".ai", "color": "#ea580c" },
+          { "title": "ZapCode.dev", "description": "Short + punchy", "badge": ".dev", "color": "#0891b2" },
+          { "title": "LaunchKit.io", "description": "Startup vibes", "badge": ".io", "color": "#4f46e5" },
+          { "title": "HyperStack.co", "description": "Bold + energetic", "badge": ".co", "color": "#dc2626" },
+          { "title": "Shipfast.dev", "description": "Action-oriented", "badge": ".dev", "color": "#16a34a" },
+          { "title": "Buildly.app", "description": "Friendly + approachable", "badge": ".app", "color": "#f59e0b" },
+          { "title": "CodeNest.io", "description": "Cozy + developer", "badge": ".io", "color": "#8b5cf6" },
+          { "title": "Snapforge.ai", "description": "Fast + powerful", "badge": ".ai", "color": "#0ea5e9" }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "640px", "padding": "24px" },
+  "theme": { "primaryColor": "#4f46e5", "backgroundColor": "#eef2ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

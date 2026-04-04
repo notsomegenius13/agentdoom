@@ -1,0 +1,164 @@
+{
+  "title": "Hashtag Generator",
+  "description": "Enter your niche or topic and get relevant hashtags grouped by popularity tier — with estimated reach potential for each set",
+  "category": "social",
+  "viralHook": "The right 5 hashtags can 10x your post reach — most people use the wrong ones",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "hashtag-form",
+      "props": {
+        "title": "Generate Hashtags for Your Niche",
+        "submitLabel": "Generate Hashtags",
+        "fields": [
+          {
+            "name": "niche",
+            "label": "Your Niche or Topic",
+            "type": "text",
+            "placeholder": "e.g. fitness, travel photography, vegan food, coding, personal finance...",
+            "required": true
+          },
+          {
+            "name": "platform",
+            "label": "Platform",
+            "type": "select",
+            "options": ["Instagram", "TikTok", "Twitter/X", "LinkedIn", "YouTube"],
+            "defaultValue": "Instagram"
+          },
+          {
+            "name": "contentType",
+            "label": "Content Type",
+            "type": "select",
+            "options": ["Photo Post", "Reel / Short Video", "Story", "Carousel", "Long-form Video"],
+            "defaultValue": "Reel / Short Video"
+          },
+          {
+            "name": "audienceSize",
+            "label": "Your Current Follower Count",
+            "type": "select",
+            "options": ["Under 1K", "1K–10K", "10K–100K", "100K+"],
+            "defaultValue": "1K–10K"
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "hashtag-results",
+      "props": {
+        "title": "Your Hashtag Strategy",
+        "subtitle": "Grouped by tier — use a mix of all three for maximum reach",
+        "columns": 3,
+        "copyable": true,
+        "cards": [
+          {
+            "id": "mega-tags",
+            "tier": "Mega (1M+ posts)",
+            "color": "#ef4444",
+            "icon": "🔥",
+            "description": "High competition — good for discovery but hard to rank",
+            "hashtags": [
+              "#fitness", "#workout", "#gym", "#health", "#motivation",
+              "#fitlife", "#exercise", "#bodybuilding", "#fitnessmotivation", "#healthylifestyle"
+            ],
+            "reachEstimate": "50M–500M potential views",
+            "recommendation": "Use 2–3 mega tags max per post"
+          },
+          {
+            "id": "mid-tags",
+            "tier": "Mid-Tier (100K–1M posts)",
+            "color": "#f59e0b",
+            "icon": "⚡",
+            "description": "Sweet spot — competitive but rankable for growing accounts",
+            "hashtags": [
+              "#fitnesscommunity", "#workoutroutine", "#gymlife", "#fitfam",
+              "#homeworkout", "#strengthtraining", "#fitnessgoals", "#bodyweight",
+              "#fitnessblogger", "#activelife"
+            ],
+            "reachEstimate": "5M–50M potential views",
+            "recommendation": "Use 5–7 mid-tier tags — your best ROI"
+          },
+          {
+            "id": "niche-tags",
+            "tier": "Niche (Under 100K posts)",
+            "color": "#22c55e",
+            "icon": "🎯",
+            "description": "Lower volume but highly targeted — easiest to rank #1",
+            "hashtags": [
+              "#morningworkoutroutine", "#5amclub", "#homegymsetup", "#calisthenicslife",
+              "#naturalfitness", "#minimalistworkout", "#quietgymhours", "#fitnessdad",
+              "#workoutathome2024", "#fitnessmindset365"
+            ],
+            "reachEstimate": "100K–2M potential views",
+            "recommendation": "Use 3–5 niche tags to dominate small communities"
+          }
+        ],
+        "presets": {
+          "fitness": {
+            "mega": ["#fitness", "#workout", "#gym", "#health", "#motivation"],
+            "mid": ["#fitnesscommunity", "#workoutroutine", "#gymlife", "#fitfam", "#homeworkout"],
+            "niche": ["#morningworkoutroutine", "#5amclub", "#calisthenicslife", "#naturalfitness", "#fitnessmindset365"]
+          },
+          "travel": {
+            "mega": ["#travel", "#wanderlust", "#adventure", "#photography", "#explore"],
+            "mid": ["#travelphotography", "#travelgram", "#travelblogger", "#instatravel", "#backpacker"],
+            "niche": ["#solofemaletraveler", "#budgetbackpacking", "#hiddengems", "#offthebeatenpath", "#slowtravel"]
+          },
+          "food": {
+            "mega": ["#food", "#foodie", "#instafood", "#yummy", "#delicious"],
+            "mid": ["#foodphotography", "#homecooking", "#foodblogger", "#recipeoftheday", "#mealprep"],
+            "niche": ["#plantbasedrecipes", "#glutenfreeeats", "#mealprepsunday", "#weeknightdinner", "#vegancomfortfood"]
+          },
+          "coding": {
+            "mega": ["#coding", "#programming", "#tech", "#developer", "#software"],
+            "mid": ["#100daysofcode", "#webdeveloper", "#javascript", "#python", "#learntocode"],
+            "niche": ["#codenewbie", "#selflearning", "#devlife", "#sideproject", "#opentowork"]
+          }
+        }
+      },
+      "position": 1
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "hashtag-stats",
+      "props": {
+        "title": "Reach Potential Summary",
+        "stats": [
+          {
+            "label": "Total Hashtags Generated",
+            "value": "30",
+            "subLabel": "Across 3 tiers",
+            "color": "#6366f1",
+            "icon": "#️⃣"
+          },
+          {
+            "label": "Recommended Per Post",
+            "value": "10–15",
+            "subLabel": "Instagram optimal range",
+            "color": "#22c55e",
+            "icon": "✅"
+          },
+          {
+            "label": "Est. Total Reach Potential",
+            "value": "55M+",
+            "subLabel": "Combined tag audience size",
+            "color": "#f59e0b",
+            "icon": "📈"
+          },
+          {
+            "label": "Best Strategy",
+            "value": "2 Mega + 7 Mid + 4 Niche",
+            "subLabel": "Optimal mix for your account size",
+            "color": "#0ea5e9",
+            "icon": "🎯"
+          }
+        ]
+      },
+      "position": 2
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "960px", "padding": "28px" },
+  "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#0f172a", "fontFamily": "'Inter', sans-serif", "borderRadius": "14px" }
+}

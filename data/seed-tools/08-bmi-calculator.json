@@ -1,0 +1,26 @@
+{
+  "title": "BMI Calculator",
+  "description": "Calculate your Body Mass Index quickly and easily",
+  "category": "health",
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "bmi-calc",
+      "props": {
+        "title": "BMI Calculator",
+        "inputs": [
+          { "name": "weight", "label": "Weight (lbs)", "type": "number", "defaultValue": 160, "min": 50, "max": 500, "step": 1 },
+          { "name": "heightFt", "label": "Height (feet)", "type": "number", "defaultValue": 5, "min": 3, "max": 8 },
+          { "name": "heightIn", "label": "Height (inches)", "type": "number", "defaultValue": 9, "min": 0, "max": 11 }
+        ],
+        "formula": "(weight / ((heightFt * 12 + heightIn) * (heightFt * 12 + heightIn))) * 703",
+        "resultLabel": "Your BMI",
+        "resultPrefix": "",
+        "resultSuffix": ""
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "420px", "padding": "24px" },
+  "theme": { "primaryColor": "#0ea5e9", "backgroundColor": "#f0f9ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

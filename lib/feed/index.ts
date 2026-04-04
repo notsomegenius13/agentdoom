@@ -25,6 +25,7 @@ const DEFAULT_LIMIT = 20;
 const TRENDING_LIMIT = 10;
 const JUST_SHIPPED_LIMIT = 8;
 const CURATED_LIMIT = 6;
+const MAX_CONSECUTIVE_SAME_CATEGORY = 2;
 
 /**
  * Get the full feed for a user. V1: sections-based layout.
@@ -208,13 +209,15 @@ async function getNewestFeed(
   return rows.map(mapToolRow);
 }
 
-/** Main feed: ranked by score, cursor-paginated */
+/** Main feed: ranked by score, cursor-paginated, with diversity enforcement */
 async function getRankedFeed(
   category?: string,
   cursor?: string,
   limit: number = DEFAULT_LIMIT,
 ): Promise<FeedTool[]> {
   const sql = getDb();
+  // Fetch extra rows so diversity re-ordering still fills the page
+  const fetchLimit = category ? limit : limit * 2;
   const rows = await sql`
     SELECT ${toolColumns()}
     FROM tools t
@@ -225,9 +228,52 @@ async function getRankedFeed(
       ${category ? sql`AND t.category = ${category}` : sql``}
       ${cursor ? sql`AND t.id < ${cursor}` : sql``}
     ORDER BY COALESCE(rs.score, 0) DESC, t.created_at DESC
-    LIMIT ${limit}
+    LIMIT ${fetchLimit}
   `;
-  return rows.map(mapToolRow);
+  const tools = rows.map(mapToolRow);
+  // Skip diversity when filtering by a single category
+  if (category) return tools;
+  return diversifyFeed(tools, limit);
+}
+
+/**
+ * Re-order tools so no more than MAX_CONSECUTIVE_SAME_CATEGORY appear in a row.
+ * Preserves overall ranking as much as possible — only swaps when clustering detected.
+ */
+function diversifyFeed(tools: FeedTool[], limit: number): FeedTool[] {
+  if (tools.length <= 1) return tools.slice(0, limit);
+
+  const result: FeedTool[] = [];
+  const remaining = [...tools];
+
+  while (result.length < limit && remaining.length > 0) {
+    // Count trailing consecutive same-category items in result
+    let trailingCount = 0;
+    let trailingCategory: string | null = null;
+    if (result.length > 0) {
+      trailingCategory = result[result.length - 1].category;
+      for (let i = result.length - 1; i >= 0; i--) {
+        if (result[i].category === trailingCategory) trailingCount++;
+        else break;
+      }
+    }
+
+    if (trailingCount < MAX_CONSECUTIVE_SAME_CATEGORY) {
+      // No clustering risk — take the top-ranked remaining tool
+      result.push(remaining.shift()!);
+    } else {
+      // Find the first remaining tool with a different category
+      const diffIdx = remaining.findIndex((t) => t.category !== trailingCategory);
+      if (diffIdx === -1) {
+        // All remaining are same category — just append (nothing we can do)
+        result.push(remaining.shift()!);
+      } else {
+        result.push(remaining.splice(diffIdx, 1)[0]);
+      }
+    }
+  }
+
+  return result;
 }
 
 /** Tools by a specific creator (for profile pages) */

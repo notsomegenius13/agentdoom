@@ -3,35 +3,166 @@
   "type": "object",
   "title": "KanbanBoardConfig",
   "description": "A kanban board with draggable cards across columns",
-  "required": ["title", "columns"],
+  "required": [
+    "title",
+    "columns"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "columns": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "title", "cards"],
+        "required": [
+          "id",
+          "title",
+          "cards"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "title": { "type": "string" },
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
           "cards": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "title"],
+              "required": [
+                "id",
+                "title"
+              ],
               "properties": {
-                "id": { "type": "string" },
-                "title": { "type": "string" },
-                "description": { "type": "string" },
-                "color": { "type": "string" },
-                "assignee": { "type": "string" }
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "assignee": {
+                  "type": "string"
+                }
               }
             }
           }
         }
       }
     },
-    "allowAdd": { "type": "boolean" },
-    "allowMove": { "type": "boolean" }
+    "allowAdd": {
+      "type": "boolean",
+      "default": true
+    },
+    "allowMove": {
+      "type": "boolean",
+      "default": true
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

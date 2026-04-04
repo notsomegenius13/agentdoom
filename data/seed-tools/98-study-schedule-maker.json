@@ -1,0 +1,117 @@
+{
+  "title": "Study Schedule Maker",
+  "description": "Create a personalized study schedule for upcoming exams based on available time and difficulty",
+  "category": "education",
+  "viralHook": "Finals week panic? Build a study plan in 60 seconds flat",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "study-schedule-form",
+      "props": {
+        "title": "Study Schedule Maker",
+        "description": "Enter your exam details and availability to generate a structured study plan. The schedule allocates more time to harder subjects and builds in review sessions.",
+        "fields": [
+          {
+            "id": "exam_name",
+            "label": "Exam Name",
+            "type": "text",
+            "placeholder": "e.g. Final Exams - Spring 2026",
+            "required": true
+          },
+          {
+            "id": "exam_date",
+            "label": "Exam Date",
+            "type": "date",
+            "required": true,
+            "helperText": "The date of your first exam or the target date to be fully prepared by"
+          },
+          {
+            "id": "subjects",
+            "label": "Subjects to Study",
+            "type": "multi-select",
+            "required": true,
+            "options": [
+              { "label": "Mathematics", "value": "mathematics" },
+              { "label": "Physics", "value": "physics" },
+              { "label": "Chemistry", "value": "chemistry" },
+              { "label": "Biology", "value": "biology" },
+              { "label": "English / Literature", "value": "english" },
+              { "label": "History", "value": "history" },
+              { "label": "Computer Science", "value": "computer_science" },
+              { "label": "Economics", "value": "economics" },
+              { "label": "Psychology", "value": "psychology" },
+              { "label": "Foreign Language", "value": "foreign_language" },
+              { "label": "Philosophy", "value": "philosophy" },
+              { "label": "Statistics", "value": "statistics" },
+              { "label": "Accounting", "value": "accounting" },
+              { "label": "Political Science", "value": "political_science" },
+              { "label": "Sociology", "value": "sociology" }
+            ],
+            "helperText": "Select all subjects you need to study for"
+          },
+          {
+            "id": "hours_per_day",
+            "label": "Hours Available per Day",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "label": "2 hours", "value": "2" },
+              { "label": "3 hours", "value": "3" },
+              { "label": "4 hours", "value": "4" },
+              { "label": "5 hours", "value": "5" },
+              { "label": "6 hours", "value": "6" },
+              { "label": "8 hours", "value": "8" },
+              { "label": "10 hours", "value": "10" }
+            ],
+            "defaultValue": "4",
+            "helperText": "Be realistic — include only focused study time, not breaks"
+          },
+          {
+            "id": "difficulty",
+            "label": "Overall Difficulty Level",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "label": "Light Review - I know most of the material", "value": "light" },
+              { "label": "Moderate - Need to review key concepts", "value": "moderate" },
+              { "label": "Heavy - Significant gaps in understanding", "value": "heavy" },
+              { "label": "Intensive - Starting nearly from scratch", "value": "intensive" }
+            ],
+            "defaultValue": "moderate"
+          },
+          {
+            "id": "study_style",
+            "label": "Preferred Study Style",
+            "type": "select",
+            "required": false,
+            "options": [
+              { "label": "Pomodoro (25 min focus / 5 min break)", "value": "pomodoro" },
+              { "label": "Deep Focus (50 min focus / 10 min break)", "value": "deep_focus" },
+              { "label": "Mixed Blocks (alternate subjects every hour)", "value": "mixed" },
+              { "label": "Single Subject per Day", "value": "single_subject" }
+            ],
+            "defaultValue": "pomodoro"
+          },
+          {
+            "id": "include_breaks",
+            "label": "Include Break Reminders",
+            "type": "toggle",
+            "defaultValue": true,
+            "helperText": "Add scheduled breaks and self-care reminders to your plan"
+          },
+          {
+            "id": "notes",
+            "label": "Additional Notes",
+            "type": "textarea",
+            "placeholder": "Any specific topics to prioritize, schedule constraints (e.g., 'No studying on Sundays', 'Weak in organic chemistry'), or other preferences...",
+            "required": false,
+            "rows": 3
+          }
+        ],
+        "submitLabel": "Generate Study Schedule",
+        "outputTemplate": "Study Plan for {{exam_name}}\n\nExam Date: {{exam_date}}\nSubjects: {{subjects}}\nDaily Study Time: {{hours_per_day}} hours\nDifficulty: {{difficulty}}\nStudy Method: {{study_style}}\n\n--- RECOMMENDED SCHEDULE ---\n\nWeek Structure:\n- Allocate {{hours_per_day}} hours daily across selected subjects\n- Difficulty-weighted distribution: harder subjects get 40% more time\n- Final 2 days reserved for comprehensive review\n- Include practice tests where available\n\nDaily Template:\n1. Warm-up review of yesterday's material (15 min)\n2. Primary subject block (40% of time)\n3. Secondary subject block (30% of time)\n4. Tertiary subject / weak areas (20% of time)\n5. End-of-day summary and next-day planning (10% of time)\n\nTips for {{difficulty}} preparation:\n- Light: Focus on practice problems and edge cases\n- Moderate: Re-read notes, then do practice problems\n- Heavy: Re-learn core concepts first, then practice\n- Intensive: Start with fundamentals, build up gradually"
+      }
+    }
+  ]
+}

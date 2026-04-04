@@ -1,0 +1,26 @@
+{
+  "title": "Welcome",
+  "text": "Build tools that work like magic. Ship faster with AI-powered primitives.",
+  "speed": 50,
+  "startDelay": 300,
+  "cursor": true,
+  "cursorChar": "|",
+  "loop": false,
+  "loopDelay": 2000,
+  "triggerOnView": true,
+  "tag": "p",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

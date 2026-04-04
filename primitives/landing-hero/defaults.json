@@ -1,0 +1,46 @@
+{
+  "title": "Ship 10x Faster",
+  "highlightText": "10x Faster",
+  "subtitle": "AI-powered development platform that turns ideas into production-ready apps in minutes, not months.",
+  "ctaLabel": "Get Started Free",
+  "ctaSecondaryLabel": "Watch Demo",
+  "emailCapture": true,
+  "emailPlaceholder": "Enter your work email",
+  "successMessage": "You're on the list! Check your inbox.",
+  "features": [
+    {
+      "icon": "🚀",
+      "title": "Lightning Speed",
+      "description": "Go from idea to deployed app in minutes. Our AI handles the boilerplate so you can focus on what matters."
+    },
+    {
+      "icon": "🛡️",
+      "title": "Production Quality",
+      "description": "Enterprise-grade code with built-in best practices, security checks, and comprehensive test coverage."
+    },
+    {
+      "icon": "📈",
+      "title": "Infinite Scale",
+      "description": "Auto-scaling infrastructure that grows with your users. From zero to millions without breaking a sweat."
+    }
+  ],
+  "trustedBy": [
+    "500+ teams",
+    "50k+ apps built",
+    "99.9% uptime"
+  ],
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

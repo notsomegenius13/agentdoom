@@ -1,0 +1,73 @@
+{
+  "title": "Daily Standup Generator",
+  "description": "Fill in your update, get a perfectly formatted standup message ready to paste into Slack",
+  "category": "productivity",
+  "viralHook": "Stop spending 5 minutes writing the same standup every morning — generate it in 30 seconds",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "standup-form",
+      "props": {
+        "title": "What's Your Update?",
+        "fields": [
+          {
+            "name": "yesterday",
+            "label": "Yesterday I worked on...",
+            "type": "textarea",
+            "placeholder": "e.g. Fixed the login bug on the auth service, reviewed 2 PRs",
+            "rows": 3,
+            "required": true
+          },
+          {
+            "name": "today",
+            "label": "Today I'm planning to...",
+            "type": "textarea",
+            "placeholder": "e.g. Finish the user dashboard feature, write unit tests for payment module",
+            "rows": 3,
+            "required": true
+          },
+          {
+            "name": "blockers",
+            "label": "Blockers / Impediments",
+            "type": "textarea",
+            "placeholder": "e.g. Waiting on design review for the new onboarding flow (or leave blank for none)",
+            "rows": 2,
+            "required": false
+          },
+          {
+            "name": "mood",
+            "label": "Team Mood",
+            "type": "select",
+            "options": ["🟢 On Track", "🟡 Minor Delays", "🔴 Blocked", "🚀 Crushing It"],
+            "defaultValue": "🟢 On Track"
+          },
+          {
+            "name": "format",
+            "label": "Output Format",
+            "type": "select",
+            "options": ["Slack (emoji)", "Plain Text", "Markdown", "Bullet Points"],
+            "defaultValue": "Slack (emoji)"
+          }
+        ],
+        "submitLabel": "Generate Standup"
+      },
+      "position": 0
+    },
+    {
+      "type": "template",
+      "id": "standup-output",
+      "props": {
+        "title": "Your Standup Update",
+        "copyable": true,
+        "copyLabel": "Copy to Clipboard",
+        "template": ":calendar: *Daily Standup — {{date}}*\n\n:white_check_mark: *Yesterday:*\n{{yesterday}}\n\n:rocket: *Today:*\n{{today}}\n\n:warning: *Blockers:*\n{{blockers_or_none}}\n\n{{mood}}",
+        "placeholder": "Fill out the form above and click Generate to see your formatted standup here.",
+        "style": "code-block"
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "680px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#fafafa", "fontFamily": "'Inter', sans-serif", "borderRadius": "12px" }
+}

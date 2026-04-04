@@ -1,0 +1,38 @@
+{
+  "title": "Sales Dashboard",
+  "description": "Track revenue, conversions, and top products at a glance",
+  "category": "business",
+  "primitives": [
+    {
+      "type": "stats-dashboard",
+      "id": "sales-dash",
+      "props": {
+        "title": "Sales Dashboard",
+        "stats": [
+          { "label": "Revenue", "value": "$48,250", "change": 12.5, "changeLabel": "vs last month", "icon": "dollar" },
+          { "label": "Orders", "value": "1,247", "change": 8.3, "changeLabel": "vs last month", "icon": "cart" },
+          { "label": "Conversion Rate", "value": "3.2%", "change": -0.4, "changeLabel": "vs last month", "icon": "percent" },
+          { "label": "Avg Order Value", "value": "$38.69", "change": 4.1, "changeLabel": "vs last month", "icon": "trending" }
+        ],
+        "charts": [
+          {
+            "type": "line",
+            "title": "Revenue (Last 7 Days)",
+            "data": [
+              { "label": "Mon", "value": 6200 },
+              { "label": "Tue", "value": 7100 },
+              { "label": "Wed", "value": 5800 },
+              { "label": "Thu", "value": 8400 },
+              { "label": "Fri", "value": 9200 },
+              { "label": "Sat", "value": 6800 },
+              { "label": "Sun", "value": 4750 }
+            ]
+          }
+        ]
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "800px", "padding": "24px" },
+  "theme": { "primaryColor": "#059669", "backgroundColor": "#ecfdf5", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

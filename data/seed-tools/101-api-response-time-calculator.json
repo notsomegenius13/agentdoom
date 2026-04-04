@@ -1,0 +1,102 @@
+{
+  "title": "API Response Time Calculator",
+  "description": "Calculate API latency budgets and throughput capacity for your services",
+  "category": "dev-tools",
+  "viralHook": "Stop guessing your API latency budget -- calculate it in seconds",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "api-latency-calc",
+      "props": {
+        "title": "API Latency Budget Calculator",
+        "description": "Enter your API call parameters to calculate total latency, p99 estimates, and maximum throughput capacity.",
+        "inputs": [
+          {
+            "id": "num_calls",
+            "label": "Number of Sequential API Calls",
+            "type": "number",
+            "placeholder": "5",
+            "defaultValue": 5,
+            "min": 1,
+            "max": 100,
+            "helperText": "Total sequential API calls in a single request chain"
+          },
+          {
+            "id": "avg_response_ms",
+            "label": "Average Response Time (ms)",
+            "type": "number",
+            "placeholder": "120",
+            "defaultValue": 120,
+            "min": 1,
+            "max": 30000,
+            "helperText": "Mean response time per API call in milliseconds"
+          },
+          {
+            "id": "p99_target_ms",
+            "label": "P99 Latency Target (ms)",
+            "type": "number",
+            "placeholder": "500",
+            "defaultValue": 500,
+            "min": 1,
+            "max": 60000,
+            "helperText": "Your target p99 latency SLA in milliseconds"
+          },
+          {
+            "id": "concurrent_users",
+            "label": "Concurrent Users",
+            "type": "number",
+            "placeholder": "1000",
+            "defaultValue": 1000,
+            "min": 1,
+            "max": 1000000,
+            "helperText": "Expected number of concurrent users hitting the endpoint"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "total_latency",
+            "label": "Total Chain Latency (ms)",
+            "formula": "num_calls * avg_response_ms",
+            "unit": "ms",
+            "description": "Sum of all sequential API call response times"
+          },
+          {
+            "id": "p99_estimate",
+            "label": "Estimated P99 Latency (ms)",
+            "formula": "num_calls * avg_response_ms * 2.5",
+            "unit": "ms",
+            "description": "Estimated p99 latency using 2.5x multiplier on average"
+          },
+          {
+            "id": "p99_budget_status",
+            "label": "P99 Budget Status",
+            "formula": "(num_calls * avg_response_ms * 2.5) <= p99_target_ms ? 'WITHIN BUDGET' : 'OVER BUDGET'",
+            "description": "Whether your estimated p99 fits within your target SLA"
+          },
+          {
+            "id": "per_call_budget",
+            "label": "Per-Call P99 Budget (ms)",
+            "formula": "p99_target_ms / num_calls",
+            "unit": "ms",
+            "description": "Maximum allowed time per call to stay within p99 target"
+          },
+          {
+            "id": "throughput_rps",
+            "label": "Throughput Capacity (req/s)",
+            "formula": "(1000 / (num_calls * avg_response_ms)) * concurrent_users",
+            "unit": "req/s",
+            "description": "Maximum requests per second the system can handle"
+          },
+          {
+            "id": "requests_per_minute",
+            "label": "Requests Per Minute",
+            "formula": "((1000 / (num_calls * avg_response_ms)) * concurrent_users) * 60",
+            "unit": "rpm",
+            "description": "Total request throughput per minute"
+          }
+        ]
+      }
+    }
+  ]
+}

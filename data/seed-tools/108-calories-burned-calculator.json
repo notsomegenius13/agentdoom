@@ -1,0 +1,130 @@
+{
+  "title": "Calories Burned Calculator",
+  "description": "Calculate how many calories you burn during any workout activity",
+  "category": "health",
+  "viralHook": "Just found out my 30-min walk burns the same as a slice of pizza... motivation unlocked!",
+  "shareability": 6,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "calories-burned-calc",
+      "props": {
+        "title": "Calories Burned Calculator",
+        "subtitle": "Enter your details to see how many calories you torched",
+        "inputs": [
+          {
+            "id": "weight",
+            "label": "Your Weight",
+            "type": "number",
+            "placeholder": "Enter your weight",
+            "required": true,
+            "min": 50,
+            "max": 500,
+            "defaultValue": 150
+          },
+          {
+            "id": "weight-unit",
+            "label": "Weight Unit",
+            "type": "toggle",
+            "options": [
+              { "value": "lbs", "label": "Pounds (lbs)" },
+              { "value": "kg", "label": "Kilograms (kg)" }
+            ],
+            "defaultValue": "lbs"
+          },
+          {
+            "id": "activity",
+            "label": "Activity",
+            "type": "select",
+            "required": true,
+            "options": [
+              { "value": "running", "label": "Running", "icon": "🏃" },
+              { "value": "cycling", "label": "Cycling", "icon": "🚴" },
+              { "value": "swimming", "label": "Swimming", "icon": "🏊" },
+              { "value": "walking", "label": "Walking", "icon": "🚶" },
+              { "value": "hiit", "label": "HIIT", "icon": "💥" },
+              { "value": "yoga", "label": "Yoga", "icon": "🧘" },
+              { "value": "weight-training", "label": "Weight Training", "icon": "🏋️" }
+            ],
+            "defaultValue": "running"
+          },
+          {
+            "id": "duration",
+            "label": "Duration (minutes)",
+            "type": "number",
+            "placeholder": "How long did you work out?",
+            "required": true,
+            "min": 1,
+            "max": 480,
+            "defaultValue": 30,
+            "unit": "min"
+          },
+          {
+            "id": "intensity",
+            "label": "Intensity Level",
+            "type": "select",
+            "options": [
+              { "value": "low", "label": "Low - Easy pace, can hold a conversation" },
+              { "value": "medium", "label": "Medium - Moderate effort, slightly breathless" },
+              { "value": "high", "label": "High - All out effort, can barely talk" }
+            ],
+            "defaultValue": "medium"
+          }
+        ],
+        "formulas": {
+          "weightInKg": "weight-unit == 'lbs' ? weight * 0.453592 : weight",
+          "metValues": {
+            "running":         { "low": 7.0,  "medium": 9.8,  "high": 12.8 },
+            "cycling":         { "low": 4.0,  "medium": 6.8,  "high": 10.0 },
+            "swimming":        { "low": 5.8,  "medium": 8.0,  "high": 10.0 },
+            "walking":         { "low": 2.5,  "medium": 3.5,  "high": 5.0 },
+            "hiit":            { "low": 6.0,  "medium": 8.0,  "high": 12.0 },
+            "yoga":            { "low": 2.0,  "medium": 3.0,  "high": 4.0 },
+            "weight-training":  { "low": 3.5,  "medium": 5.0,  "high": 6.0 }
+          },
+          "caloriesBurned": "metValues[activity][intensity] * weightInKg * (duration / 60)"
+        },
+        "outputs": [
+          {
+            "id": "total-calories",
+            "label": "Total Calories Burned",
+            "formula": "caloriesBurned",
+            "format": "number",
+            "decimals": 0,
+            "unit": "kcal",
+            "highlight": true,
+            "size": "large"
+          },
+          {
+            "id": "per-minute",
+            "label": "Calories Per Minute",
+            "formula": "caloriesBurned / duration",
+            "format": "number",
+            "decimals": 1,
+            "unit": "kcal/min"
+          },
+          {
+            "id": "per-hour",
+            "label": "Calories Per Hour",
+            "formula": "(caloriesBurned / duration) * 60",
+            "format": "number",
+            "decimals": 0,
+            "unit": "kcal/hr"
+          }
+        ],
+        "foodEquivalents": [
+          { "name": "Slices of Pizza", "emoji": "🍕", "calories": 285 },
+          { "name": "Chocolate Chip Cookies", "emoji": "🍪", "calories": 78 },
+          { "name": "Bananas", "emoji": "🍌", "calories": 105 },
+          { "name": "Glazed Donuts", "emoji": "🍩", "calories": 253 },
+          { "name": "Cans of Soda", "emoji": "🥤", "calories": 140 },
+          { "name": "Scoops of Ice Cream", "emoji": "🍦", "calories": 137 },
+          { "name": "Avocado Toasts", "emoji": "🥑", "calories": 210 },
+          { "name": "Handfuls of Almonds", "emoji": "🥜", "calories": 165 }
+        ],
+        "foodEquivalentFormula": "floor(caloriesBurned / item.calories)",
+        "disclaimer": "Calorie estimates are approximate and vary based on individual metabolism, body composition, and other factors. Consult a healthcare provider for personalized nutrition advice."
+      }
+    }
+  ]
+}

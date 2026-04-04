@@ -1,10 +1,36 @@
 {
   "title": "Cold Email Template",
   "fields": [
-    { "name": "recipientName", "label": "Recipient Name", "placeholder": "John" },
-    { "name": "company", "label": "Company", "placeholder": "Acme Corp" },
-    { "name": "product", "label": "Your Product", "placeholder": "our analytics platform" }
+    {
+      "name": "recipientName",
+      "label": "Recipient Name",
+      "placeholder": "John"
+    },
+    {
+      "name": "company",
+      "label": "Company",
+      "placeholder": "Acme Corp"
+    },
+    {
+      "name": "product",
+      "label": "Your Product",
+      "placeholder": "our analytics platform"
+    }
   ],
   "template": "Hi {{recipientName}},\n\nI noticed {{company}} is growing fast — congrats! I wanted to reach out because {{product}} has helped similar companies cut costs by 30%.\n\nWould you be open to a quick 15-minute call this week?\n\nBest regards",
-  "copyButton": true
+  "copyButton": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

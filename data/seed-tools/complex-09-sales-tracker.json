@@ -1,0 +1,122 @@
+{
+  "title": "Sales Tracker",
+  "description": "Visualize your lead pipeline, track deal values, monitor win rates, and log activities",
+  "category": "business",
+  "primitives": [
+    {
+      "type": "stats-dashboard",
+      "id": "sales-kpis",
+      "props": {
+        "title": "Sales KPIs — Q1 2026",
+        "stats": [
+          { "label": "Pipeline Value", "value": "$284K", "change": 22.5, "changeLabel": "vs Q4", "icon": "dollar" },
+          { "label": "Deals Closed", "value": "18", "change": 28.6, "changeLabel": "vs Q4", "icon": "cart" },
+          { "label": "Win Rate", "value": "34%", "change": 6.2, "changeLabel": "vs Q4", "icon": "percent" },
+          { "label": "Avg Deal Size", "value": "$15.8K", "change": -2.1, "changeLabel": "vs Q4", "icon": "trending" }
+        ],
+        "charts": [
+          {
+            "type": "line",
+            "title": "Monthly Closed Revenue",
+            "data": [
+              { "label": "Jan", "value": 82000 },
+              { "label": "Feb", "value": 96000 },
+              { "label": "Mar", "value": 106000 }
+            ]
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "kanban-board",
+      "id": "deal-pipeline",
+      "props": {
+        "title": "Deal Pipeline",
+        "columns": [
+          {
+            "id": "qualified",
+            "title": "🎯 Qualified",
+            "color": "#f59e0b",
+            "cards": [
+              { "id": "d1", "title": "Acme Corp — Enterprise Plan", "description": "$45K ARR · Decision: April", "tag": "$45K" },
+              { "id": "d2", "title": "Bloom Health — Pro Tier", "description": "$12K ARR · Demo scheduled", "tag": "$12K" },
+              { "id": "d3", "title": "NovaTech — Custom", "description": "$28K ARR · Needs POC", "tag": "$28K" }
+            ]
+          },
+          {
+            "id": "proposal",
+            "title": "📋 Proposal",
+            "color": "#3b82f6",
+            "cards": [
+              { "id": "d4", "title": "DataSync — Team Plan", "description": "$8K ARR · Sent Mar 28", "tag": "$8K" },
+              { "id": "d5", "title": "CloudFirst — Enterprise", "description": "$62K ARR · Awaiting legal", "tag": "$62K" }
+            ]
+          },
+          {
+            "id": "negotiation",
+            "title": "🤝 Negotiation",
+            "color": "#8b5cf6",
+            "cards": [
+              { "id": "d6", "title": "RetailMax — Growth", "description": "$22K ARR · Price discussion", "tag": "$22K" }
+            ]
+          },
+          {
+            "id": "closed",
+            "title": "✅ Closed Won",
+            "color": "#10b981",
+            "cards": [
+              { "id": "d7", "title": "FinServ — Enterprise", "description": "$55K ARR · Signed!", "tag": "$55K" },
+              { "id": "d8", "title": "EduPlatform — Pro", "description": "$15K ARR · Onboarding", "tag": "$15K" }
+            ]
+          }
+        ]
+      },
+      "position": 1
+    },
+    {
+      "type": "chart",
+      "id": "win-rate-chart",
+      "props": {
+        "title": "Win Rate by Deal Size",
+        "chartType": "bar",
+        "data": [
+          { "label": "<$10K", "value": 52, "color": "#10b981" },
+          { "label": "$10-25K", "value": 38, "color": "#3b82f6" },
+          { "label": "$25-50K", "value": 28, "color": "#f59e0b" },
+          { "label": "$50K+", "value": 18, "color": "#ef4444" }
+        ],
+        "xLabel": "Deal Size",
+        "yLabel": "Win Rate (%)"
+      },
+      "position": 2
+    },
+    {
+      "type": "table",
+      "id": "activity-log",
+      "props": {
+        "title": "Recent Activity",
+        "columns": [
+          { "key": "date", "label": "Date", "sortable": true },
+          { "key": "rep", "label": "Rep", "sortable": true },
+          { "key": "activity", "label": "Activity", "sortable": true },
+          { "key": "deal", "label": "Deal", "sortable": true },
+          { "key": "outcome", "label": "Outcome", "sortable": false }
+        ],
+        "data": [
+          { "date": "2026-03-31", "rep": "Sarah", "activity": "Demo", "deal": "Acme Corp", "outcome": "Strong interest, scheduling follow-up" },
+          { "date": "2026-03-31", "rep": "Marcus", "activity": "Call", "deal": "CloudFirst", "outcome": "Legal reviewing contract" },
+          { "date": "2026-03-30", "rep": "Sarah", "activity": "Email", "deal": "RetailMax", "outcome": "Counter-offer sent" },
+          { "date": "2026-03-30", "rep": "Priya", "activity": "Meeting", "deal": "Bloom Health", "outcome": "Scheduled demo for April 3" },
+          { "date": "2026-03-29", "rep": "Marcus", "activity": "Contract", "deal": "FinServ", "outcome": "Signed! 🎉" },
+          { "date": "2026-03-28", "rep": "Priya", "activity": "Discovery", "deal": "NovaTech", "outcome": "Needs custom POC" }
+        ],
+        "showSearch": true,
+        "pageSize": 10
+      },
+      "position": 3
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "960px", "padding": "24px" },
+  "theme": { "primaryColor": "#0284c7", "backgroundColor": "#f0f9ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

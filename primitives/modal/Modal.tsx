@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface ModalConfig {
   title: string
@@ -9,6 +10,7 @@ export interface ModalConfig {
   showCloseButton?: boolean
   size?: 'sm' | 'md' | 'lg'
   overlayDismiss?: boolean
+  appearance?: AppearanceConfig
 }
 
 const sizeClasses: Record<string, string> = {
@@ -43,8 +45,9 @@ export default function Modal({ config }: { config: ModalConfig }) {
   }, [isOpen, close])
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900">{config.title}</h2>
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
+      <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--doom-text-primary, #111827)' }}>{config.title}</h2>
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(true)}
@@ -55,11 +58,11 @@ export default function Modal({ config }: { config: ModalConfig }) {
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center animate-[fadeIn_200ms_ease-out]"
           data-testid="modal-overlay"
         >
           <div
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/50 animate-[fadeIn_200ms_ease-out]"
             onClick={overlayDismiss ? close : undefined}
             aria-hidden="true"
           />
@@ -69,7 +72,8 @@ export default function Modal({ config }: { config: ModalConfig }) {
             aria-modal="true"
             aria-labelledby="modal-title"
             tabIndex={-1}
-            className={`relative bg-white rounded-xl shadow-lg p-6 w-full mx-4 ${sizeClasses[size]}`}
+            className={`relative rounded-xl p-6 w-full mx-4 ${sizeClasses[size]} animate-[scaleIn_200ms_ease-out]`}
+            style={{ backgroundColor: 'var(--doom-surface, white)', transformOrigin: 'center center', boxShadow: 'var(--doom-shadow, 0 25px 50px -12px rgba(0, 0, 0, 0.25))' }}
           >
             <div className="flex items-center justify-between mb-4">
               <h3 id="modal-title" className="text-base font-semibold text-gray-900">
@@ -90,5 +94,6 @@ export default function Modal({ config }: { config: ModalConfig }) {
         </div>
       )}
     </div>
+    </PrimitiveWrapper>
   )
 }

@@ -1,0 +1,32 @@
+{
+  "title": "Subscription Tracker",
+  "description": "Track all your recurring subscriptions and monthly spend",
+  "category": "money",
+  "primitives": [
+    {
+      "type": "table",
+      "id": "sub-table",
+      "props": {
+        "title": "My Subscriptions",
+        "columns": [
+          { "key": "name", "label": "Service", "type": "text" },
+          { "key": "cost", "label": "Monthly Cost", "type": "currency" },
+          { "key": "category", "label": "Category", "type": "text" },
+          { "key": "renewal", "label": "Renewal Date", "type": "text" }
+        ],
+        "rows": [
+          { "name": "Netflix", "cost": 15.49, "category": "Entertainment", "renewal": "15th" },
+          { "name": "Spotify", "cost": 10.99, "category": "Entertainment", "renewal": "3rd" },
+          { "name": "iCloud", "cost": 2.99, "category": "Storage", "renewal": "1st" },
+          { "name": "ChatGPT Plus", "cost": 20.00, "category": "Productivity", "renewal": "22nd" },
+          { "name": "Gym", "cost": 49.99, "category": "Health", "renewal": "1st" },
+          { "name": "Adobe CC", "cost": 54.99, "category": "Creative", "renewal": "12th" }
+        ],
+        "searchable": true
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "640px", "padding": "24px" },
+  "theme": { "primaryColor": "#8b5cf6", "backgroundColor": "#faf5ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

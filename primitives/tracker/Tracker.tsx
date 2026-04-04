@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface TrackerItem {
   name: string
@@ -13,6 +14,7 @@ export interface TrackerConfig {
   items: TrackerItem[]
   period: 'daily' | 'weekly' | 'monthly'
   showStreak?: boolean
+  appearance?: AppearanceConfig
 }
 
 interface ItemState {
@@ -50,7 +52,8 @@ export default function Tracker({ config }: { config: TrackerConfig }) {
   const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
       <h2 className="text-lg font-semibold mb-1 text-gray-900">{config.title}</h2>
       <p className="text-xs text-gray-400 mb-4 capitalize">{config.period} tracker</p>
 
@@ -103,5 +106,6 @@ export default function Tracker({ config }: { config: TrackerConfig }) {
         })}
       </ul>
     </div>
+    </PrimitiveWrapper>
   )
 }

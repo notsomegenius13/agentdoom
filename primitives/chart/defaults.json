@@ -2,13 +2,45 @@
   "title": "Monthly Revenue",
   "type": "bar",
   "data": [
-    { "label": "Jan", "value": 4200 },
-    { "label": "Feb", "value": 5100 },
-    { "label": "Mar", "value": 6800 },
-    { "label": "Apr", "value": 5900 },
-    { "label": "May", "value": 7400 },
-    { "label": "Jun", "value": 8200 }
+    {
+      "label": "Jan",
+      "value": 4200
+    },
+    {
+      "label": "Feb",
+      "value": 5100
+    },
+    {
+      "label": "Mar",
+      "value": 6800
+    },
+    {
+      "label": "Apr",
+      "value": 5900
+    },
+    {
+      "label": "May",
+      "value": 7400
+    },
+    {
+      "label": "Jun",
+      "value": 8200
+    }
   ],
   "showLegend": true,
-  "showValues": true
+  "showValues": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

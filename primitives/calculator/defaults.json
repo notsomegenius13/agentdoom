@@ -1,11 +1,57 @@
 {
   "title": "Tip Calculator",
   "inputs": [
-    { "name": "bill", "label": "Bill Amount ($)", "type": "number", "defaultValue": 50, "min": 0, "step": 0.01 },
-    { "name": "tipPercent", "label": "Tip %", "type": "select", "options": [{ "label": "15%", "value": 15 }, { "label": "18%", "value": 18 }, { "label": "20%", "value": 20 }] },
-    { "name": "people", "label": "Split Between", "type": "number", "defaultValue": 2, "min": 1, "max": 20 }
+    {
+      "name": "bill",
+      "label": "Bill Amount ($)",
+      "type": "number",
+      "defaultValue": 50,
+      "min": 0,
+      "step": 0.01
+    },
+    {
+      "name": "tipPercent",
+      "label": "Tip %",
+      "type": "select",
+      "options": [
+        {
+          "label": "15%",
+          "value": 15
+        },
+        {
+          "label": "18%",
+          "value": 18
+        },
+        {
+          "label": "20%",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "name": "people",
+      "label": "Split Between",
+      "type": "number",
+      "defaultValue": 2,
+      "min": 1,
+      "max": 20
+    }
   ],
   "formula": "(bill * (1 + tipPercent / 100)) / people",
   "resultLabel": "Per Person",
-  "resultPrefix": "$"
+  "resultPrefix": "$",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

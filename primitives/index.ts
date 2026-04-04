@@ -25,6 +25,7 @@ export { default as Calendar } from './calendar/Calendar'
 export { default as ProgressBar } from './progress-bar/ProgressBar'
 export { default as Search } from './search/Search'
 export { default as Accordion } from './accordion/Accordion'
+export { default as List } from './list/List'
 
 // Animation primitives
 export { default as Confetti } from './confetti/Confetti'
@@ -77,12 +78,14 @@ export type { CalendarConfig } from './calendar/Calendar'
 export type { ProgressBarConfig } from './progress-bar/ProgressBar'
 export type { SearchConfig, SearchItem } from './search/Search'
 export type { AccordionConfig, AccordionSection } from './accordion/Accordion'
+export type { ListConfig } from './list/List'
 export type { ConfettiConfig } from './confetti/Confetti'
 export type { CounterUpConfig } from './counter-up/CounterUp'
 export type { ProgressFillConfig } from './progress-fill/ProgressFill'
 export type { TypingEffectConfig } from './typing-effect/TypingEffect'
 export type { SlideRevealConfig } from './slide-reveal/SlideReveal'
-export type { ThemeProviderProps, Breakpoint } from './theme'
+export type { ThemeProviderProps, Breakpoint, AppearanceConfig, AnimationConfig, DarkModeColors, ResponsiveConfig } from './theme'
+export { PrimitiveWrapper } from './theme'
 
 // Commerce config type exports
 export type { StripeCheckoutConfig } from './stripe-checkout/StripeCheckout'

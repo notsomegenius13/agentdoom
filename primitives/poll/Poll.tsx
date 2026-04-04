@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useCallback, useMemo } from 'react'
+import { AppearanceConfig, PrimitiveWrapper } from '../theme'
 
 export interface PollOption {
   text: string
@@ -12,6 +13,7 @@ export interface PollConfig {
   question: string
   options: PollOption[]
   showResults?: boolean
+  appearance?: AppearanceConfig
 }
 
 export default function Poll({ config }: { config: PollConfig }) {
@@ -31,7 +33,8 @@ export default function Poll({ config }: { config: PollConfig }) {
   const showResults = voted !== null || config.showResults
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
+    <PrimitiveWrapper appearance={config.appearance}>
+    <div className="rounded-xl p-6 shadow-sm" style={{ backgroundColor: 'var(--doom-surface, white)', color: 'var(--doom-text-primary, #18181b)' }}>
       <h2 className="text-lg font-semibold mb-1 text-gray-900">{config.title}</h2>
       <p className="text-sm text-gray-600 mb-4">{config.question}</p>
 
@@ -74,5 +77,6 @@ export default function Poll({ config }: { config: PollConfig }) {
         <p className="text-xs text-gray-400 mt-3 text-center">{total} vote{total !== 1 ? 's' : ''}</p>
       )}
     </div>
+    </PrimitiveWrapper>
   )
 }

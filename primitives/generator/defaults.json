@@ -10,5 +10,19 @@
     "[Action Required] {{input}}",
     "{{input}} — Here's what you need to know"
   ],
-  "outputLabel": "Generated Subject Line"
+  "outputLabel": "Generated Subject Line",
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
 }

@@ -1,0 +1,47 @@
+{
+  "title": "Social Media Post Planner",
+  "description": "Plan and organize your social media content across platforms",
+  "category": "creator",
+  "primitives": [
+    {
+      "type": "form",
+      "id": "post-form",
+      "props": {
+        "title": "Create Post",
+        "fields": [
+          { "name": "platform", "label": "Platform", "type": "select", "options": ["Instagram", "Twitter/X", "LinkedIn", "TikTok", "Facebook"], "required": true },
+          { "name": "content", "label": "Post Content", "type": "textarea", "required": true, "placeholder": "Write your post here...", "maxLength": 280 },
+          { "name": "scheduledDate", "label": "Schedule Date", "type": "date", "required": true },
+          { "name": "scheduledTime", "label": "Schedule Time", "type": "time", "required": true },
+          { "name": "hashtags", "label": "Hashtags", "type": "text", "required": false, "placeholder": "#marketing #growth" },
+          { "name": "status", "label": "Status", "type": "select", "options": ["Draft", "Ready to Post", "Posted"], "required": true }
+        ],
+        "submitLabel": "Schedule Post"
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "post-schedule",
+      "props": {
+        "title": "Scheduled Posts",
+        "columns": [
+          { "key": "platform", "label": "Platform", "sortable": true },
+          { "key": "content", "label": "Content", "sortable": false },
+          { "key": "scheduledDate", "label": "Date", "sortable": true },
+          { "key": "status", "label": "Status", "sortable": true }
+        ],
+        "data": [
+          { "platform": "Instagram", "content": "New feature drop incoming...", "scheduledDate": "2026-04-01", "status": "Ready to Post" },
+          { "platform": "Twitter/X", "content": "We've been building something different. April 7.", "scheduledDate": "2026-04-03", "status": "Draft" },
+          { "platform": "LinkedIn", "content": "Excited to announce our upcoming launch...", "scheduledDate": "2026-04-05", "status": "Draft" }
+        ],
+        "showSearch": true,
+        "pageSize": 10
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "680px", "padding": "24px" },
+  "theme": { "primaryColor": "#ec4899", "backgroundColor": "#fdf2f8", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

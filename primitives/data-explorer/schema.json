@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DataExplorerConfig",
+  "description": "Configuration schema for the DataExplorer composite primitive",
+  "type": "object",
+  "required": [
+    "title",
+    "columns",
+    "rows"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title displayed at the top of the data explorer"
+    },
+    "columns": {
+      "type": "array",
+      "description": "Column definitions for the table",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "label"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Property key to read from each row object"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the column header"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "number",
+              "currency",
+              "date",
+              "badge"
+            ],
+            "default": "text",
+            "description": "Data type used for rendering and sorting"
+          },
+          "filterable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to show a filter dropdown for this column"
+          },
+          "sortable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether clicking the column header sorts the table"
+          },
+          "badgeColors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Map of cell values to color names (e.g. green, blue, yellow) for badge-type columns"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "rows": {
+      "type": "array",
+      "description": "Array of data row objects",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "pageSize": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 10,
+      "description": "Number of rows displayed per page"
+    },
+    "searchable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show the search bar"
+    },
+    "showExport": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show the Export CSV button"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

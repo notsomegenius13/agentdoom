@@ -1,0 +1,112 @@
+{
+  "title": "Personal CRM",
+  "description": "Manage contacts, track interactions, set follow-up reminders, and visualize your pipeline",
+  "category": "business",
+  "primitives": [
+    {
+      "type": "kanban-board",
+      "id": "pipeline",
+      "props": {
+        "title": "Deal Pipeline",
+        "columns": [
+          {
+            "id": "lead",
+            "title": "🎯 Lead",
+            "color": "#f59e0b",
+            "cards": [
+              { "id": "c1", "title": "Sarah Chen — Consulting", "description": "$5,000 · First call scheduled", "tag": "Hot" },
+              { "id": "c2", "title": "Mike Johnson — Web Dev", "description": "$3,200 · Inbound from referral", "tag": "New" }
+            ]
+          },
+          {
+            "id": "proposal",
+            "title": "📋 Proposal Sent",
+            "color": "#3b82f6",
+            "cards": [
+              { "id": "c3", "title": "TechStart Inc — SaaS MVP", "description": "$15,000 · Proposal v2 sent", "tag": "Enterprise" },
+              { "id": "c4", "title": "GreenLeaf — Brand Identity", "description": "$4,500 · Awaiting approval", "tag": "Design" }
+            ]
+          },
+          {
+            "id": "negotiation",
+            "title": "🤝 Negotiation",
+            "color": "#8b5cf6",
+            "cards": [
+              { "id": "c5", "title": "DataFlow — API Integration", "description": "$8,000 · Scope adjustment", "tag": "Tech" }
+            ]
+          },
+          {
+            "id": "won",
+            "title": "✅ Won",
+            "color": "#10b981",
+            "cards": [
+              { "id": "c6", "title": "PixelPerfect — Redesign", "description": "$6,200 · Signed!", "tag": "Design" }
+            ]
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "form",
+      "id": "add-contact",
+      "props": {
+        "title": "Add Contact",
+        "fields": [
+          { "name": "name", "label": "Full Name", "type": "text", "required": true, "placeholder": "Jane Smith" },
+          { "name": "email", "label": "Email", "type": "email", "placeholder": "jane@company.com" },
+          { "name": "company", "label": "Company", "type": "text", "placeholder": "Acme Inc" },
+          { "name": "stage", "label": "Pipeline Stage", "type": "select", "options": ["Lead", "Proposal Sent", "Negotiation", "Won", "Lost"], "required": true },
+          { "name": "value", "label": "Deal Value ($)", "type": "number" },
+          { "name": "notes", "label": "Notes", "type": "textarea", "placeholder": "How did you meet? Key details..." }
+        ],
+        "submitLabel": "Add Contact",
+        "successMessage": "Contact added to CRM!"
+      },
+      "position": 1
+    },
+    {
+      "type": "table",
+      "id": "interaction-log",
+      "props": {
+        "title": "Recent Interactions",
+        "columns": [
+          { "key": "date", "label": "Date", "sortable": true },
+          { "key": "contact", "label": "Contact", "sortable": true },
+          { "key": "type", "label": "Type", "sortable": true },
+          { "key": "summary", "label": "Summary", "sortable": false },
+          { "key": "followUp", "label": "Follow-up", "sortable": true }
+        ],
+        "data": [
+          { "date": "2026-03-31", "contact": "Sarah Chen", "type": "📞 Call", "summary": "Discussed scope for consulting engagement", "followUp": "Apr 3" },
+          { "date": "2026-03-30", "contact": "TechStart Inc", "type": "📧 Email", "summary": "Sent revised proposal with timeline", "followUp": "Apr 2" },
+          { "date": "2026-03-29", "contact": "GreenLeaf", "type": "🤝 Meeting", "summary": "Brand workshop — narrowed color palette", "followUp": "Apr 1" },
+          { "date": "2026-03-28", "contact": "DataFlow", "type": "📧 Email", "summary": "Scope change request — added auth module", "followUp": "Apr 4" },
+          { "date": "2026-03-27", "contact": "PixelPerfect", "type": "📞 Call", "summary": "Contract signed! Kickoff next week", "followUp": "Apr 7" }
+        ],
+        "showSearch": true,
+        "pageSize": 10
+      },
+      "position": 2
+    },
+    {
+      "type": "tracker",
+      "id": "follow-ups",
+      "props": {
+        "title": "Follow-up Reminders",
+        "items": [
+          { "name": "Email Sarah Chen re: consulting scope", "icon": "📧" },
+          { "name": "Call TechStart for proposal feedback", "icon": "📞" },
+          { "name": "Send GreenLeaf mood board v2", "icon": "🎨" },
+          { "name": "Check in with DataFlow on timeline", "icon": "⏰" },
+          { "name": "Send PixelPerfect kickoff agenda", "icon": "📋" }
+        ],
+        "period": "daily",
+        "showStreak": false
+      },
+      "position": 3
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "960px", "padding": "24px" },
+  "theme": { "primaryColor": "#0ea5e9", "backgroundColor": "#f0f9ff", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

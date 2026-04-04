@@ -90,3 +90,11 @@ export const V1_WEIGHTS: RankingWeights = {
   creator: 0.1,
   trending: 0.25,
 };
+
+/** V2 weights — engagement-forward ranking with remix/share signal boost */
+export const V2_WEIGHTS: RankingWeights = {
+  freshness: 0.25,
+  engagement: 0.40,
+  creator: 0.05,
+  trending: 0.30,
+};

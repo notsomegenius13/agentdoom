@@ -1,0 +1,53 @@
+{
+  "title": "Drake Equation Calculator",
+  "description": "Estimate how many alien civilizations exist in our galaxy using real astrophysics",
+  "category": "fun",
+  "viralHook": "I got 42 civilizations — how many did you get?",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "drake",
+      "props": {
+        "title": "The Drake Equation: N = R* × fp × ne × fl × fi × fc × L",
+        "inputs": [
+          { "name": "rStar", "label": "R* — Stars formed per year in galaxy", "type": "number", "defaultValue": 1.5, "min": 0.1, "max": 10, "step": 0.1 },
+          { "name": "fp", "label": "fp — Fraction with planets", "type": "number", "defaultValue": 0.9, "min": 0, "max": 1, "step": 0.05 },
+          { "name": "ne", "label": "ne — Habitable planets per star", "type": "number", "defaultValue": 0.4, "min": 0, "max": 10, "step": 0.1 },
+          { "name": "fl", "label": "fl — Fraction where life develops", "type": "number", "defaultValue": 0.3, "min": 0, "max": 1, "step": 0.05 },
+          { "name": "fi", "label": "fi — Fraction with intelligence", "type": "number", "defaultValue": 0.2, "min": 0, "max": 1, "step": 0.05 },
+          { "name": "fc", "label": "fc — Fraction that communicate", "type": "number", "defaultValue": 0.1, "min": 0, "max": 1, "step": 0.05 },
+          { "name": "bigL", "label": "L — Years a civilization communicates", "type": "number", "defaultValue": 10000, "min": 1, "max": 1000000, "step": 100 }
+        ],
+        "formula": "rStar * fp * ne * fl * fi * fc * bigL",
+        "resultLabel": "Estimated Civilizations in Our Galaxy",
+        "resultPrefix": "",
+        "resultSuffix": " civilizations"
+      },
+      "position": 0
+    },
+    {
+      "type": "table",
+      "id": "famous-estimates",
+      "props": {
+        "title": "Famous Estimates",
+        "columns": [
+          { "key": "who", "label": "Who", "sortable": false },
+          { "key": "result", "label": "N (Civilizations)", "sortable": true },
+          { "key": "key_assumption", "label": "Key Assumption", "sortable": false }
+        ],
+        "data": [
+          { "who": "Frank Drake (1961)", "result": "10,000", "key_assumption": "Optimistic L (long-lived civilizations)" },
+          { "who": "Carl Sagan", "result": "1,000,000", "key_assumption": "Very optimistic on life emergence" },
+          { "who": "Pessimistic Modern", "result": "1", "key_assumption": "We might be alone (rare Earth)" },
+          { "who": "NASA Exoplanet Data", "result": "~36", "key_assumption": "Updated fp and ne from Kepler" }
+        ],
+        "showSearch": false,
+        "pageSize": 5
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "600px", "padding": "24px" },
+  "theme": { "primaryColor": "#6366f1", "backgroundColor": "#0f172a", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

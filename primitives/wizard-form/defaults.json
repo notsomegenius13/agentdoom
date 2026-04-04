@@ -1,0 +1,108 @@
+{
+  "title": "Job Application",
+  "steps": [
+    {
+      "id": "personal-info",
+      "title": "Personal Information",
+      "description": "Please provide your basic contact details.",
+      "fields": [
+        {
+          "name": "fullName",
+          "label": "Full Name",
+          "type": "text",
+          "placeholder": "Enter your full name",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "placeholder": "you@example.com",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone Number",
+          "type": "text",
+          "placeholder": "+1 (555) 000-0000",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Experience",
+      "description": "Tell us about your professional background.",
+      "fields": [
+        {
+          "name": "currentRole",
+          "label": "Current Role",
+          "type": "text",
+          "placeholder": "e.g. Software Engineer",
+          "required": true
+        },
+        {
+          "name": "yearsOfExperience",
+          "label": "Years of Experience",
+          "type": "number",
+          "placeholder": "e.g. 5",
+          "required": true
+        },
+        {
+          "name": "skills",
+          "label": "Primary Skill",
+          "type": "select",
+          "placeholder": "Select your primary skill",
+          "options": [
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "Go",
+            "Rust",
+            "Java",
+            "C++",
+            "Other"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "cover-letter",
+      "title": "Cover Letter",
+      "description": "Share why you'd be a great fit for this role.",
+      "fields": [
+        {
+          "name": "coverLetter",
+          "label": "Cover Letter",
+          "type": "textarea",
+          "placeholder": "Tell us about yourself and why you're interested in this position...",
+          "required": true
+        },
+        {
+          "name": "subscribeNewsletter",
+          "label": "Subscribe to our newsletter for job updates",
+          "type": "checkbox",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "submitLabel": "Submit Application",
+  "successMessage": "Your application has been submitted successfully!",
+  "showReview": true,
+  "appearance": {
+    "animation": {
+      "entrance": "fade",
+      "duration": 300,
+      "delay": 0
+    },
+    "responsive": {
+      "padding": {
+        "mobile": "16px",
+        "tablet": "20px",
+        "desktop": "24px"
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Money Visualizer",
+  "description": "See any dollar amount as stacked bills, coins, or real-world comparisons",
+  "category": "fun",
+  "viralHook": "Elon's net worth in $100 bills would stack to the Moon and back",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "calculator",
+      "id": "money-input",
+      "props": {
+        "title": "Visualize Any Amount",
+        "inputs": [
+          { "name": "amount", "label": "Amount ($)", "type": "number", "defaultValue": 1000000, "min": 0, "step": 1000 }
+        ],
+        "formula": "amount",
+        "resultLabel": "Your Amount",
+        "resultPrefix": "$"
+      },
+      "position": 0
+    },
+    {
+      "type": "stats-dashboard",
+      "id": "money-facts",
+      "props": {
+        "title": "$1,000,000 Looks Like...",
+        "stats": [
+          { "label": "In $100 Bills", "value": "10,000 bills", "change": 0, "changeLabel": "43 inches tall", "icon": "dollar" },
+          { "label": "Weight", "value": "22 lbs", "change": 0, "changeLabel": "fits in a briefcase", "icon": "cart" },
+          { "label": "In $1 Bills", "value": "1M bills", "change": 0, "changeLabel": "358 ft tall stack", "icon": "trending" },
+          { "label": "Time to Count", "value": "11.5 days", "change": 0, "changeLabel": "at 1 bill/second", "icon": "percent" }
+        ],
+        "charts": [
+          {
+            "type": "bar",
+            "title": "Real-World Comparisons",
+            "data": [
+              { "label": "Avg US Salary", "value": 15 },
+              { "label": "Tesla Model 3", "value": 25 },
+              { "label": "US House (median)", "value": 3 },
+              { "label": "Big Macs", "value": 175000 },
+              { "label": "iPhones", "value": 850 }
+            ]
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "580px", "padding": "24px" },
+  "theme": { "primaryColor": "#16a34a", "backgroundColor": "#f0fdf4", "fontFamily": "system-ui, sans-serif", "borderRadius": "12px" }
+}

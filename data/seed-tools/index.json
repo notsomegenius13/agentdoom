@@ -1,0 +1,1070 @@
+{
+  "version": 3,
+  "description": "AgentDoom seed tool configurations for pre-launch feed",
+  "generatedBy": "forge",
+  "tools": [
+    {
+      "file": "01-freelance-rate-calculator.json",
+      "category": "money",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "02-subscription-tracker.json",
+      "category": "money",
+      "primitives": [
+        "table"
+      ]
+    },
+    {
+      "file": "03-pomodoro-timer.json",
+      "category": "productivity",
+      "primitives": [
+        "timer"
+      ]
+    },
+    {
+      "file": "04-meal-prep-checklist.json",
+      "category": "health",
+      "primitives": [
+        "checklist"
+      ]
+    },
+    {
+      "file": "05-bio-generator.json",
+      "category": "creator",
+      "primitives": [
+        "generator"
+      ]
+    },
+    {
+      "file": "06-cold-email-template.json",
+      "category": "business",
+      "primitives": [
+        "template"
+      ]
+    },
+    {
+      "file": "07-would-you-rather-quiz.json",
+      "category": "fun",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "08-bmi-calculator.json",
+      "category": "health",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "09-startup-cost-estimator.json",
+      "category": "business",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "10-client-onboarding-checklist.json",
+      "category": "business",
+      "primitives": [
+        "checklist"
+      ]
+    },
+    {
+      "file": "11-content-calendar.json",
+      "category": "creator",
+      "primitives": [
+        "card-grid"
+      ]
+    },
+    {
+      "file": "12-lead-capture-form.json",
+      "category": "business",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "13-habit-tracker.json",
+      "category": "productivity",
+      "primitives": [
+        "tracker"
+      ]
+    },
+    {
+      "file": "14-mortgage-calculator.json",
+      "category": "money",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "15-personality-quiz.json",
+      "category": "fun",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "16-tip-calculator.json",
+      "category": "money",
+      "primitives": [
+        "split-calculator"
+      ]
+    },
+    {
+      "file": "17-unit-converter.json",
+      "category": "utilities",
+      "primitives": [
+        "converter"
+      ]
+    },
+    {
+      "file": "18-weekly-poll.json",
+      "category": "fun",
+      "primitives": [
+        "poll"
+      ]
+    },
+    {
+      "file": "19-pricing-page.json",
+      "category": "business",
+      "primitives": [
+        "pricing-table"
+      ]
+    },
+    {
+      "file": "20-project-kanban.json",
+      "category": "productivity",
+      "primitives": [
+        "kanban-board"
+      ]
+    },
+    {
+      "file": "21-sales-dashboard.json",
+      "category": "business",
+      "primitives": [
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "22-workout-timer.json",
+      "category": "health",
+      "primitives": [
+        "timer"
+      ]
+    },
+    {
+      "file": "23-invoice-generator.json",
+      "category": "business",
+      "primitives": [
+        "wizard-form"
+      ]
+    },
+    {
+      "file": "24-color-palette-generator.json",
+      "category": "creator",
+      "primitives": [
+        "card-grid"
+      ]
+    },
+    {
+      "file": "25-expense-tracker.json",
+      "category": "money",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "26-event-countdown.json",
+      "category": "fun",
+      "primitives": [
+        "timer"
+      ]
+    },
+    {
+      "file": "27-social-media-post-planner.json",
+      "category": "creator",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "28-price-change-tracker.json",
+      "category": "money",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "29-rent-vs-buy-calculator.json",
+      "category": "money",
+      "primitives": [
+        "calculator"
+      ],
+      "viral": true
+    },
+    {
+      "file": "30-money-visualizer.json",
+      "category": "fun",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "31-ai-text-detector.json",
+      "category": "utilities",
+      "primitives": [
+        "form",
+        "stats-dashboard",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "32-military-spending-counter.json",
+      "category": "money",
+      "primitives": [
+        "stats-dashboard",
+        "calculator"
+      ],
+      "viral": true
+    },
+    {
+      "file": "33-drum-machine.json",
+      "category": "fun",
+      "primitives": [
+        "card-grid",
+        "form"
+      ],
+      "viral": true
+    },
+    {
+      "file": "34-movie-release-radar.json",
+      "category": "fun",
+      "primitives": [
+        "form",
+        "card-grid"
+      ],
+      "viral": true
+    },
+    {
+      "file": "35-global-mood-map.json",
+      "category": "fun",
+      "primitives": [
+        "form",
+        "stats-dashboard",
+        "poll"
+      ],
+      "viral": true
+    },
+    {
+      "file": "36-drake-equation-calculator.json",
+      "category": "fun",
+      "primitives": [
+        "calculator",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "37-svg-logo-maker.json",
+      "category": "creator",
+      "primitives": [
+        "form",
+        "card-grid"
+      ],
+      "viral": true
+    },
+    {
+      "file": "complex-01-freelance-dashboard.json",
+      "category": "business",
+      "primitives": [
+        "stats-dashboard",
+        "form",
+        "table",
+        "chart"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-02-content-calendar.json",
+      "category": "creator",
+      "primitives": [
+        "form",
+        "table",
+        "card-grid",
+        "checklist"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-03-personal-crm.json",
+      "category": "business",
+      "primitives": [
+        "kanban-board",
+        "form",
+        "table",
+        "tracker"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-04-workout-planner.json",
+      "category": "health",
+      "primitives": [
+        "card-grid",
+        "checklist",
+        "chart",
+        "timer"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-05-recipe-manager.json",
+      "category": "health",
+      "primitives": [
+        "card-grid",
+        "form",
+        "checklist",
+        "list"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-06-budget-tracker.json",
+      "category": "money",
+      "primitives": [
+        "stats-dashboard",
+        "form",
+        "chart",
+        "table"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-07-study-planner.json",
+      "category": "productivity",
+      "primitives": [
+        "card-grid",
+        "quiz",
+        "tracker",
+        "chart"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-08-event-planner.json",
+      "category": "productivity",
+      "primitives": [
+        "stats-dashboard",
+        "table",
+        "checklist",
+        "form"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-09-sales-tracker.json",
+      "category": "business",
+      "primitives": [
+        "stats-dashboard",
+        "kanban-board",
+        "chart",
+        "table"
+      ],
+      "complex": true
+    },
+    {
+      "file": "complex-10-habit-stack.json",
+      "category": "productivity",
+      "primitives": [
+        "stats-dashboard",
+        "tracker",
+        "chart",
+        "checklist"
+      ],
+      "complex": true
+    },
+    {
+      "file": "38-meeting-cost-calculator.json",
+      "category": "business",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "39-startup-runway-calculator.json",
+      "category": "business",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "40-salary-negotiation-tool.json",
+      "category": "money",
+      "primitives": [
+        "form",
+        "stats-dashboard",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "41-side-project-revenue-estimator.json",
+      "category": "business",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "42-screen-time-cost-calculator.json",
+      "category": "fun",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "43-coffee-addiction-calculator.json",
+      "category": "fun",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "44-impostor-syndrome-quiz.json",
+      "category": "fun",
+      "primitives": [
+        "quiz"
+      ],
+      "viral": true
+    },
+    {
+      "file": "45-saas-idea-validator.json",
+      "category": "business",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "46-fire-calculator.json",
+      "category": "money",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "47-password-strength-checker.json",
+      "category": "utilities",
+      "primitives": [
+        "form",
+        "stats-dashboard",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "48-carbon-footprint-calculator.json",
+      "category": "utilities",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "49-procrastination-cost-calculator.json",
+      "category": "productivity",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "50-influencer-rate-calculator.json",
+      "category": "creator",
+      "primitives": [
+        "calculator",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "51-tech-stack-quiz.json",
+      "category": "fun",
+      "primitives": [
+        "quiz"
+      ],
+      "viral": true
+    },
+    {
+      "file": "52-domain-name-generator.json",
+      "category": "business",
+      "primitives": [
+        "form",
+        "card-grid"
+      ],
+      "viral": true
+    },
+    {
+      "file": "53-regex-cheat-sheet.json",
+      "category": "utilities",
+      "primitives": [
+        "form",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "54-dark-pattern-checklist.json",
+      "category": "utilities",
+      "primitives": [
+        "checklist"
+      ],
+      "viral": true
+    },
+    {
+      "file": "55-git-commit-generator.json",
+      "category": "utilities",
+      "primitives": [
+        "form",
+        "card-grid"
+      ],
+      "viral": true
+    },
+    {
+      "file": "56-toxic-trait-quiz.json",
+      "category": "fun",
+      "primitives": [
+        "quiz"
+      ],
+      "viral": true
+    },
+    {
+      "file": "57-spotify-wrapped-maker.json",
+      "category": "fun",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "58-launch-checklist.json",
+      "category": "business",
+      "primitives": [
+        "checklist"
+      ],
+      "viral": true
+    },
+    {
+      "file": "59-sleep-debt-calculator.json",
+      "category": "health",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ],
+      "viral": true
+    },
+    {
+      "file": "60-api-pricing-comparison.json",
+      "category": "utilities",
+      "primitives": [
+        "calculator",
+        "table"
+      ],
+      "viral": true
+    },
+    {
+      "file": "61-flashcard-maker.json",
+      "category": "education",
+      "primitives": [
+        "form",
+        "card-grid"
+      ]
+    },
+    {
+      "file": "62-json-formatter.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "63-grade-calculator.json",
+      "category": "education",
+      "primitives": [
+        "calculator",
+        "table"
+      ]
+    },
+    {
+      "file": "64-css-gradient-generator.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form",
+        "card-grid"
+      ]
+    },
+    {
+      "file": "65-study-session-timer.json",
+      "category": "education",
+      "primitives": [
+        "timer",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "66-http-status-code-reference.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "67-essay-word-counter.json",
+      "category": "education",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "68-cron-expression-builder.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "69-multiplication-quiz.json",
+      "category": "education",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "70-chmod-calculator.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "71-social-media-bio-analyzer.json",
+      "category": "social",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "72-trivia-challenge.json",
+      "category": "games",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "73-typing-speed-test.json",
+      "category": "games",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "74-language-flashcards.json",
+      "category": "education",
+      "primitives": [
+        "form",
+        "card-grid"
+      ]
+    },
+    {
+      "file": "75-would-you-rather-generator.json",
+      "category": "games",
+      "primitives": [
+        "poll",
+        "card-grid"
+      ]
+    },
+    {
+      "file": "76-follower-milestone-calculator.json",
+      "category": "social",
+      "primitives": [
+        "calculator",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "77-chemistry-periodic-table.json",
+      "category": "education",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "78-emoji-story-generator.json",
+      "category": "games",
+      "primitives": [
+        "form",
+        "card-grid"
+      ]
+    },
+    {
+      "file": "79-hashtag-generator.json",
+      "category": "social",
+      "primitives": [
+        "form",
+        "card-grid",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "80-math-problem-generator.json",
+      "category": "education",
+      "primitives": [
+        "form",
+        "quiz"
+      ]
+    },
+    {
+      "file": "81-rock-paper-scissors.json",
+      "category": "games",
+      "primitives": [
+        "card-grid",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "82-compound-interest-calculator.json",
+      "category": "finance",
+      "primitives": [
+        "calculator",
+        "table"
+      ]
+    },
+    {
+      "file": "83-water-intake-tracker.json",
+      "category": "health",
+      "primitives": [
+        "tracker",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "84-daily-standup-generator.json",
+      "category": "productivity",
+      "primitives": [
+        "form",
+        "template"
+      ]
+    },
+    {
+      "file": "85-sql-cheat-sheet.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form",
+        "table"
+      ]
+    },
+    {
+      "file": "86-coin-flip-simulator.json",
+      "category": "games",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "87-tax-bracket-calculator.json",
+      "category": "finance",
+      "primitives": [
+        "calculator",
+        "table"
+      ]
+    },
+    {
+      "file": "88-meditation-timer.json",
+      "category": "health",
+      "primitives": [
+        "form",
+        "timer"
+      ]
+    },
+    {
+      "file": "89-retrospective-board.json",
+      "category": "productivity",
+      "primitives": [
+        "kanban-board"
+      ]
+    },
+    {
+      "file": "90-base64-encoder.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "91-stock-portfolio-tracker.json",
+      "category": "finance",
+      "primitives": [
+        "table"
+      ]
+    },
+    {
+      "file": "92-debt-payoff-calculator.json",
+      "category": "finance",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "93-investment-return-calculator.json",
+      "category": "finance",
+      "primitives": [
+        "calculator",
+        "table"
+      ]
+    },
+    {
+      "file": "94-net-worth-tracker.json",
+      "category": "finance",
+      "primitives": [
+        "form",
+        "stats-dashboard"
+      ]
+    },
+    {
+      "file": "95-currency-exchange-calculator.json",
+      "category": "finance",
+      "primitives": [
+        "converter"
+      ]
+    },
+    {
+      "file": "96-gpa-calculator.json",
+      "category": "education",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "97-reading-level-analyzer.json",
+      "category": "education",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "98-study-schedule-maker.json",
+      "category": "education",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "99-citation-generator.json",
+      "category": "education",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "100-vocabulary-builder.json",
+      "category": "education",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "101-api-response-time-calculator.json",
+      "category": "dev-tools",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "102-docker-compose-generator.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "103-color-contrast-checker.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "104-jwt-decoder.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "105-readme-generator.json",
+      "category": "dev-tools",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "106-friendship-compatibility-quiz.json",
+      "category": "social",
+      "primitives": [
+        "quiz"
+      ]
+    },
+    {
+      "file": "107-social-media-analytics-tracker.json",
+      "category": "social",
+      "primitives": [
+        "tracker"
+      ]
+    },
+    {
+      "file": "108-calories-burned-calculator.json",
+      "category": "health",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "109-mental-health-check-in.json",
+      "category": "health",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "110-group-poll-maker.json",
+      "category": "social",
+      "primitives": [
+        "poll"
+      ]
+    },
+    {
+      "file": "111-eisenhower-matrix.json",
+      "category": "productivity",
+      "primitives": [
+        "card-grid"
+      ]
+    },
+    {
+      "file": "112-meeting-agenda-generator.json",
+      "category": "productivity",
+      "primitives": [
+        "form"
+      ]
+    },
+    {
+      "file": "113-weekly-review-template.json",
+      "category": "productivity",
+      "primitives": [
+        "checklist"
+      ]
+    },
+    {
+      "file": "114-time-zone-converter.json",
+      "category": "productivity",
+      "primitives": [
+        "converter"
+      ]
+    },
+    {
+      "file": "115-task-estimator.json",
+      "category": "productivity",
+      "primitives": [
+        "calculator"
+      ]
+    },
+    {
+      "file": "complex-11-startup-launch-dashboard.json",
+      "category": "business",
+      "primitives": [
+        "stats-dashboard",
+        "checklist",
+        "kanban-board",
+        "table"
+      ]
+    },
+    {
+      "file": "complex-12-fitness-journey-tracker.json",
+      "category": "health",
+      "primitives": [
+        "stats-dashboard",
+        "tracker",
+        "chart",
+        "checklist",
+        "form"
+      ]
+    },
+    {
+      "file": "complex-13-language-learning-hub.json",
+      "category": "education",
+      "primitives": [
+        "stats-dashboard",
+        "quiz",
+        "tracker",
+        "chart",
+        "checklist"
+      ]
+    },
+    {
+      "file": "complex-14-personal-finance-dashboard.json",
+      "category": "finance",
+      "primitives": [
+        "stats-dashboard",
+        "table",
+        "chart",
+        "tracker",
+        "calculator"
+      ]
+    },
+    {
+      "file": "complex-15-content-creator-studio.json",
+      "category": "creator",
+      "primitives": [
+        "stats-dashboard",
+        "kanban-board",
+        "table",
+        "checklist",
+        "tracker"
+      ]
+    }
+  ]
+}

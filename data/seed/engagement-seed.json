@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "description": "Seed engagement data for AgentDoom launch tools — avoids empty-state UX",
+  "generatedBy": "scraps",
+  "generatedAt": "2026-03-31",
+  "toolEngagement": [
+    {
+      "slug": "freelance-rate-calculator",
+      "creatorId": "creator-004",
+      "views": 2841,
+      "forks": 187,
+      "likes": 94,
+      "shares": 42
+    },
+    {
+      "slug": "subscription-tracker",
+      "creatorId": "creator-002",
+      "views": 1923,
+      "forks": 112,
+      "likes": 67,
+      "shares": 28
+    },
+    {
+      "slug": "pomodoro-timer",
+      "creatorId": "creator-001",
+      "views": 3412,
+      "forks": 234,
+      "likes": 156,
+      "shares": 71
+    },
+    {
+      "slug": "meal-prep-checklist",
+      "creatorId": "creator-005",
+      "views": 1654,
+      "forks": 89,
+      "likes": 53,
+      "shares": 22
+    },
+    {
+      "slug": "bio-generator",
+      "creatorId": "creator-001",
+      "views": 4287,
+      "forks": 312,
+      "likes": 201,
+      "shares": 95
+    },
+    {
+      "slug": "cold-email-template",
+      "creatorId": "creator-003",
+      "views": 2156,
+      "forks": 143,
+      "likes": 78,
+      "shares": 34
+    },
+    {
+      "slug": "would-you-rather-quiz",
+      "creatorId": "creator-008",
+      "views": 5623,
+      "forks": 389,
+      "likes": 267,
+      "shares": 182
+    },
+    {
+      "slug": "bmi-calculator",
+      "creatorId": "creator-005",
+      "views": 1876,
+      "forks": 76,
+      "likes": 41,
+      "shares": 19
+    },
+    {
+      "slug": "startup-cost-estimator",
+      "creatorId": "creator-004",
+      "views": 1432,
+      "forks": 98,
+      "likes": 62,
+      "shares": 27
+    },
+    {
+      "slug": "client-onboarding-checklist",
+      "creatorId": "creator-003",
+      "views": 1287,
+      "forks": 84,
+      "likes": 49,
+      "shares": 18
+    },
+    {
+      "slug": "content-calendar",
+      "creatorId": "creator-001",
+      "views": 2543,
+      "forks": 167,
+      "likes": 112,
+      "shares": 53
+    },
+    {
+      "slug": "lead-capture-form",
+      "creatorId": "creator-003",
+      "views": 1876,
+      "forks": 124,
+      "likes": 71,
+      "shares": 31
+    },
+    {
+      "slug": "habit-tracker",
+      "creatorId": "creator-005",
+      "views": 3187,
+      "forks": 198,
+      "likes": 134,
+      "shares": 62
+    },
+    {
+      "slug": "mortgage-calculator",
+      "creatorId": "creator-002",
+      "views": 2234,
+      "forks": 97,
+      "likes": 54,
+      "shares": 23
+    },
+    {
+      "slug": "personality-quiz",
+      "creatorId": "creator-008",
+      "views": 6789,
+      "forks": 456,
+      "likes": 312,
+      "shares": 234
+    },
+    {
+      "slug": "tip-calculator",
+      "creatorId": "creator-006",
+      "views": 1543,
+      "forks": 64,
+      "likes": 38,
+      "shares": 15
+    },
+    {
+      "slug": "unit-converter",
+      "creatorId": "creator-006",
+      "views": 1987,
+      "forks": 73,
+      "likes": 42,
+      "shares": 17
+    },
+    {
+      "slug": "weekly-poll",
+      "creatorId": "creator-008",
+      "views": 3421,
+      "forks": 213,
+      "likes": 145,
+      "shares": 89
+    },
+    {
+      "slug": "pricing-page",
+      "creatorId": "creator-003",
+      "views": 2876,
+      "forks": 178,
+      "likes": 98,
+      "shares": 43
+    },
+    {
+      "slug": "project-kanban",
+      "creatorId": "creator-001",
+      "views": 2654,
+      "forks": 156,
+      "likes": 89,
+      "shares": 37
+    },
+    {
+      "slug": "sales-dashboard",
+      "creatorId": "creator-002",
+      "views": 1987,
+      "forks": 121,
+      "likes": 73,
+      "shares": 29
+    },
+    {
+      "slug": "workout-timer",
+      "creatorId": "creator-005",
+      "views": 2123,
+      "forks": 134,
+      "likes": 87,
+      "shares": 41
+    },
+    {
+      "slug": "invoice-generator",
+      "creatorId": "creator-004",
+      "views": 3567,
+      "forks": 243,
+      "likes": 164,
+      "shares": 72
+    },
+    {
+      "slug": "color-palette-generator",
+      "creatorId": "creator-007",
+      "views": 4123,
+      "forks": 287,
+      "likes": 198,
+      "shares": 112
+    },
+    {
+      "slug": "expense-tracker",
+      "creatorId": "creator-002",
+      "views": 1765,
+      "forks": 108,
+      "likes": 64,
+      "shares": 26
+    },
+    {
+      "slug": "event-countdown",
+      "creatorId": "creator-006",
+      "views": 2876,
+      "forks": 167,
+      "likes": 113,
+      "shares": 78
+    },
+    {
+      "slug": "social-media-post-planner",
+      "creatorId": "creator-001",
+      "views": 2345,
+      "forks": 154,
+      "likes": 97,
+      "shares": 44
+    },
+    {
+      "slug": "price-change-tracker",
+      "creatorId": "creator-003",
+      "views": 4821,
+      "forks": 312,
+      "likes": 287,
+      "shares": 198
+    },
+    {
+      "slug": "rent-vs-buy-calculator",
+      "creatorId": "creator-004",
+      "views": 5134,
+      "forks": 289,
+      "likes": 241,
+      "shares": 167
+    },
+    {
+      "slug": "money-visualizer",
+      "creatorId": "creator-006",
+      "views": 7823,
+      "forks": 456,
+      "likes": 523,
+      "shares": 387
+    },
+    {
+      "slug": "ai-text-detector",
+      "creatorId": "creator-002",
+      "views": 6241,
+      "forks": 378,
+      "likes": 312,
+      "shares": 234
+    },
+    {
+      "slug": "military-spending-counter",
+      "creatorId": "creator-005",
+      "views": 4567,
+      "forks": 198,
+      "likes": 267,
+      "shares": 189
+    },
+    {
+      "slug": "drum-machine",
+      "creatorId": "creator-001",
+      "views": 5678,
+      "forks": 423,
+      "likes": 345,
+      "shares": 278
+    },
+    {
+      "slug": "movie-release-radar",
+      "creatorId": "creator-007",
+      "views": 3456,
+      "forks": 187,
+      "likes": 198,
+      "shares": 134
+    },
+    {
+      "slug": "global-mood-map",
+      "creatorId": "creator-008",
+      "views": 6789,
+      "forks": 367,
+      "likes": 412,
+      "shares": 356
+    },
+    {
+      "slug": "drake-equation-calculator",
+      "creatorId": "creator-003",
+      "views": 3987,
+      "forks": 234,
+      "likes": 267,
+      "shares": 198
+    },
+    {
+      "slug": "svg-logo-maker",
+      "creatorId": "creator-004",
+      "views": 4123,
+      "forks": 287,
+      "likes": 213,
+      "shares": 156
+    }
+  ]
+}

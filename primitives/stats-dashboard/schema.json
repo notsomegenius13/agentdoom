@@ -3,34 +3,180 @@
   "type": "object",
   "title": "StatsDashboardConfig",
   "description": "KPI cards and charts dashboard",
-  "required": ["title", "stats"],
+  "required": [
+    "title",
+    "stats"
+  ],
   "properties": {
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "stats": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "value"],
+        "required": [
+          "label",
+          "value"
+        ],
         "properties": {
-          "label": { "type": "string" },
-          "value": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
-          "change": { "type": "string" },
-          "changeType": { "type": "string", "enum": ["positive", "negative", "neutral"] },
-          "icon": { "type": "string" }
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "change": {
+            "type": "string"
+          },
+          "changeType": {
+            "type": "string",
+            "enum": [
+              "positive",
+              "negative",
+              "neutral"
+            ]
+          },
+          "icon": {
+            "type": "string"
+          }
         }
       }
     },
-    "chartTitle": { "type": "string" },
-    "chartType": { "type": "string", "enum": ["bar", "pie"] },
+    "chartTitle": {
+      "type": "string"
+    },
+    "chartType": {
+      "type": "string",
+      "enum": [
+        "bar",
+        "pie"
+      ]
+    },
     "chartData": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["label", "value"],
+        "required": [
+          "label",
+          "value"
+        ],
         "properties": {
-          "label": { "type": "string" },
-          "value": { "type": "number" },
-          "color": { "type": "string" }
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "description": "Visual polish: entrance animation, dark mode colors, responsive breakpoints",
+      "properties": {
+        "animation": {
+          "type": "object",
+          "properties": {
+            "entrance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fade",
+                "slide",
+                "scale"
+              ],
+              "default": "none"
+            },
+            "duration": {
+              "type": "number",
+              "default": 300
+            },
+            "delay": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "darkMode": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "textSecondary": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "border": {
+              "type": "string"
+            }
+          }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "padding": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "maxWidth": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string"
+                },
+                "tablet": {
+                  "type": "string"
+                },
+                "desktop": {
+                  "type": "string"
+                }
+              }
+            },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "number"
+                },
+                "tablet": {
+                  "type": "number"
+                },
+                "desktop": {
+                  "type": "number"
+                }
+              }
+            }
+          }
         }
       }
     }
