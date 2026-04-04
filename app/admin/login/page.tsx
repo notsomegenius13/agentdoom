@@ -27,10 +27,10 @@ export default function AdminLoginPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-[#050505] px-6">
       <div className="mb-8 text-center">
-        <h1 className="text-xl font-mono text-white/60 tracking-[0.15em] uppercase mb-2">
+        <h1 className="text-xl font-mono text-white/90 tracking-[0.15em] uppercase mb-2">
           Admin Access
         </h1>
-        <p className="text-xs font-mono text-white/25">Sign in with an authorized Google account</p>
+        <p className="text-xs font-mono text-white/50">Sign in with an authorized Google account</p>
       </div>
 
       <div className="w-full max-w-sm bg-[#0a0a0a] border border-white/[0.08] rounded-xl p-8 shadow-2xl">
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
         ) : (
           <button
             onClick={() => signIn('google', { callbackUrl: '/feed' })}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg border border-white/[0.08] text-white/70 hover:bg-white/[0.04] transition-colors font-mono text-sm"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg border border-white/20 bg-white/[0.05] text-white hover:bg-white/[0.1] hover:border-white/40 transition-colors font-mono text-sm"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
         )}
       </div>
 
-      <p className="mt-6 text-[10px] font-mono text-white/15">
+      <p className="mt-6 text-[10px] font-mono text-white/40">
         Only authorized accounts can access the platform
       </p>
     </main>

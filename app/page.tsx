@@ -142,12 +142,12 @@ function WaitlistForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="email"
           required
-          className="w-full px-4 py-3 bg-transparent border border-white/[0.08] text-white/80 placeholder:text-white/15 font-mono text-sm focus:outline-none focus:border-white/20 transition-all tracking-wider text-center"
+          className="w-full px-4 py-3 bg-transparent border border-white/20 text-white placeholder:text-white/30 font-mono text-sm focus:outline-none focus:border-white/40 transition-all tracking-wider text-center"
         />
         <button
           type="submit"
           disabled={submitting}
-          className="w-full px-4 py-3 font-mono text-sm tracking-[0.2em] uppercase text-white/70 border border-white/[0.08] hover:border-white/20 hover:text-white/90 transition-all duration-500 disabled:opacity-30 cursor-pointer"
+          className="w-full px-4 py-3 font-mono text-sm tracking-[0.2em] uppercase text-white bg-white/[0.05] border border-white/20 hover:border-white/40 hover:bg-white/[0.1] transition-all duration-500 disabled:opacity-30 cursor-pointer"
         >
           {submitting ? '...' : 'Request Access'}
         </button>
@@ -193,7 +193,7 @@ export default function TeaserPage() {
 
         {/* Cryptic tagline */}
         <div className="text-center" style={{ animation: 'fade-in 2s ease-out 0.8s both' }}>
-          <p className="font-mono text-xs text-white/25 tracking-[0.3em] uppercase">
+          <p className="font-mono text-xs text-white/50 tracking-[0.3em] uppercase">
             Something is being built
           </p>
         </div>
@@ -228,14 +228,20 @@ export default function TeaserPage() {
           <WaitlistForm />
         </div>
 
-        {/* Date */}
-        <div style={{ animation: 'fade-in 2s ease-out 2.2s both' }}>
+        {/* Admin login */}
+        <div
+          style={{ animation: 'fade-in 2s ease-out 2.2s both' }}
+          className="flex flex-col items-center gap-4"
+        >
           <a
             href="/admin/login"
-            className="font-mono text-[10px] text-white/10 tracking-[0.4em] uppercase hover:text-white/20 transition-colors cursor-pointer"
+            className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase hover:text-white/70 transition-colors cursor-pointer border border-white/10 px-4 py-2 hover:border-white/30"
           >
-            04.06.2026
+            Team Login
           </a>
+          <span className="font-mono text-[10px] text-white/15 tracking-[0.4em] uppercase">
+            04.06.2026
+          </span>
         </div>
       </div>
     </main>
