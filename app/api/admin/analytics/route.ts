@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getDb } from '@/lib/db'
+import { NextRequest, NextResponse } from 'next/server';
+import { getDb } from '@/lib/db';
+import { requireAdmin } from '@/lib/admin-auth';
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 /**
  * GET /api/admin/analytics — Platform-wide analytics for the admin dashboard.
@@ -13,12 +14,14 @@ export const dynamic = 'force-dynamic'
  *   period — '24h' | '7d' | '30d' (default: '7d')
  */
 export async function GET(req: NextRequest) {
-  try {
-    const period = req.nextUrl.searchParams.get('period') ?? '7d'
-    const intervalExpr =
-      period === '24h' ? "1 day" : period === '30d' ? "30 days" : "7 days"
+  const authError = await requireAdmin(req);
+  if (authError) return authError;
 
-    const sql = getDb()
+  try {
+    const period = req.nextUrl.searchParams.get('period') ?? '7d';
+    const intervalExpr = period === '24h' ? '1 day' : period === '30d' ? '30 days' : '7 days';
+
+    const sql = getDb();
 
     // Run all queries in parallel
     const [
@@ -168,23 +171,25 @@ export async function GET(req: NextRequest) {
           (SELECT COUNT(*)::integer FROM tools
             WHERE status = 'active' AND shares_count > 0 AND created_at > now() - ${intervalExpr}::interval) AS tools_with_shares
       `,
-    ])
+    ]);
 
-    const overview = overviewRows[0] ?? {}
-    const generation = generationRows[0] ?? {}
-    const remix = remixRows[0] ?? {}
-    const waitlist = waitlistRows[0] ?? {}
-    const revenue = revenueRows[0] ?? {}
-    const funnel = funnelRows[0] ?? {}
+    const overview = overviewRows[0] ?? {};
+    const generation = generationRows[0] ?? {};
+    const remix = remixRows[0] ?? {};
+    const waitlist = waitlistRows[0] ?? {};
+    const revenue = revenueRows[0] ?? {};
+    const funnel = funnelRows[0] ?? {};
 
     // Compute rates
-    const totalToolsInPeriod = funnel.tools_created ?? 0
-    const remixRate = totalToolsInPeriod > 0
-      ? ((remix.total_remixes ?? 0) / totalToolsInPeriod * 100).toFixed(1)
-      : '0.0'
-    const shareRate = totalToolsInPeriod > 0
-      ? ((funnel.tools_with_shares ?? 0) / totalToolsInPeriod * 100).toFixed(1)
-      : '0.0'
+    const totalToolsInPeriod = funnel.tools_created ?? 0;
+    const remixRate =
+      totalToolsInPeriod > 0
+        ? (((remix.total_remixes ?? 0) / totalToolsInPeriod) * 100).toFixed(1)
+        : '0.0';
+    const shareRate =
+      totalToolsInPeriod > 0
+        ? (((funnel.tools_with_shares ?? 0) / totalToolsInPeriod) * 100).toFixed(1)
+        : '0.0';
 
     return NextResponse.json({
       period,
@@ -199,9 +204,10 @@ export async function GET(req: NextRequest) {
         total: generation.total ?? 0,
         succeeded: generation.succeeded ?? 0,
         failed: generation.failed ?? 0,
-        successRate: generation.total > 0
-          ? ((generation.succeeded / generation.total) * 100).toFixed(1)
-          : '0.0',
+        successRate:
+          generation.total > 0
+            ? ((generation.succeeded / generation.total) * 100).toFixed(1)
+            : '0.0',
         avgLatencyMs: generation.avg_latency_ms ?? 0,
         totalCostCents: generation.total_cost_cents ?? 0,
       },
@@ -265,9 +271,9 @@ export async function GET(req: NextRequest) {
         category: r.category,
         count: r.count,
       })),
-    })
+    });
   } catch (error) {
-    console.error('[admin/analytics] GET error:', error)
+    console.error('[admin/analytics] GET error:', error);
     return NextResponse.json({
       period: req.nextUrl.searchParams.get('period') ?? '7d',
       overview: {
@@ -316,6 +322,6 @@ export async function GET(req: NextRequest) {
       shareRate: '0.0%',
       topTools: [],
       categories: [],
-    })
+    });
   }
 }

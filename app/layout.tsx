@@ -12,14 +12,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://agentdoom.ai'),
   title: {
-    default: 'AgentDoom — Build Software with Words',
+    default: 'AgentDoom — Build AI Tools with Plain English. No Code.',
     template: '%s — AgentDoom',
   },
   description:
-    'The TikTok of AI-built software. Describe any tool, watch it build itself, deploy in seconds.',
+    'Describe any tool in plain English. AgentDoom builds it, deploys it, and lets you monetize it — in seconds. No code required.',
   openGraph: {
-    title: 'AgentDoom — Build Software with Words',
-    description: 'Describe any tool, watch it build itself, deploy in seconds.',
+    title: 'AgentDoom — Build AI Tools with Plain English. No Code.',
+    description:
+      'Describe any tool in plain English. AgentDoom builds it, deploys it, and lets you monetize it — in seconds. No code required.',
     url: 'https://agentdoom.ai',
     siteName: 'AgentDoom',
     type: 'website',
@@ -34,8 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AgentDoom — Build Software with Words',
-    description: 'Describe any tool, watch it build itself, deploy in seconds.',
+    title: 'AgentDoom — Build AI Tools with Plain English. No Code.',
+    description:
+      'Describe any tool in plain English. AgentDoom builds it, deploys it, and lets you monetize it — in seconds. No code required.',
     images: ['https://agentdoom.ai/api/og'],
   },
   alternates: {
@@ -63,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'AgentDoom',
               url: 'https://agentdoom.ai',
               description:
-                'The TikTok of AI-built software. Describe any tool, watch it build itself, deploy in seconds.',
+                'Describe any tool in plain English. AgentDoom builds it, deploys it, and lets you monetize it — in seconds. No code required.',
             }),
           }}
         />

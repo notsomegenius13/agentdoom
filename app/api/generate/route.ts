@@ -157,6 +157,8 @@ export async function POST(req: NextRequest) {
         send({
           stage: 'done',
           url: result.url,
+          deployUrl: result.url,
+          toolId: result.deploy.toolId ?? null,
           timing: result.timing,
           validation: result.validation.overallVerdict,
           moderation: result.moderation.verdict,
@@ -176,7 +178,7 @@ export async function POST(req: NextRequest) {
               ${'sonnet'},
               ${result.timing.totalMs},
               ${result.validation.overallVerdict !== 'fail'},
-              ${null}
+              ${result.deploy.toolId ?? null}
             )
           `;
         } catch (logErr) {
@@ -187,8 +189,9 @@ export async function POST(req: NextRequest) {
         try {
           const sql = getDb();
           await sql`
-            INSERT INTO moderation_logs (verdict, risk_score, flags, model_used, duration_ms)
+            INSERT INTO moderation_logs (tool_id, verdict, risk_score, flags, model_used, duration_ms)
             VALUES (
+              ${result.deploy.toolId ?? null}::uuid,
               ${result.moderation.verdict},
               ${result.moderation.riskScore},
               ${JSON.stringify(result.moderation.flags)},

@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { FeedTool, FeedResponse, FeedSection as FeedSectionType, FeedSort } from '@/lib/feed/types';
+import type {
+  FeedTool,
+  FeedResponse,
+  FeedSection as FeedSectionType,
+  FeedSort,
+} from '@/lib/feed/types';
 import CategoryFilter from '@/components/feed/CategoryFilter';
 import SearchBar from '@/components/feed/SearchBar';
 import UserNav from '@/components/feed/UserNav';
@@ -274,11 +279,21 @@ function FeedPageInner() {
               className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-gray-300 hover:text-white transition-colors"
               aria-label="Search"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+              >
                 {searchOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
                 )}
               </svg>
             </button>
@@ -291,40 +306,42 @@ function FeedPageInner() {
           <div className="mx-auto max-w-lg px-4 pt-2 pointer-events-auto">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
             {searchTotal !== null && debouncedSearch.length >= 2 && (
-              <p className="text-[11px] text-gray-500 mt-1 px-1">{searchTotal} result{searchTotal !== 1 ? 's' : ''}</p>
+              <p className="text-[11px] text-gray-500 mt-1 px-1">
+                {searchTotal} result{searchTotal !== 1 ? 's' : ''}
+              </p>
             )}
           </div>
         )}
       </header>
 
       {/* Sort tabs + Category filter - floating */}
-      <div className={`fixed ${searchOpen ? 'top-[8.5rem]' : 'top-[5.5rem]'} left-0 right-0 z-20 pointer-events-none transition-all`}>
+      <div
+        className={`fixed ${searchOpen ? 'top-[8.5rem]' : 'top-[5.5rem]'} left-0 right-0 z-20 pointer-events-none transition-all`}
+      >
         <div className="mx-auto max-w-lg px-4 pointer-events-auto space-y-2">
           {/* Sort tabs + Building indicator */}
           {!isSearchMode && (
             <div className="flex items-center gap-2">
-            <div className="flex gap-1 bg-doom-black/60 backdrop-blur-md rounded-full p-1 w-fit">
-              {SORT_TABS.map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setSort(tab.key)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
-                    sort === tab.key
-                      ? 'bg-doom-accent text-white shadow-sm'
-                      : 'text-gray-400 hover:text-gray-200'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-            <BuildingNowIndicator />
+              <div className="flex gap-1 bg-doom-black/60 backdrop-blur-md rounded-full p-1 w-fit">
+                {SORT_TABS.map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setSort(tab.key)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                      sort === tab.key
+                        ? 'bg-doom-accent text-white shadow-sm'
+                        : 'text-gray-400 hover:text-gray-200'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              <BuildingNowIndicator />
             </div>
           )}
           {/* Featured carousel */}
-          {!isSearchMode && featuredTools.length > 0 && (
-            <FeaturedCarousel tools={featuredTools} />
-          )}
+          {!isSearchMode && featuredTools.length > 0 && <FeaturedCarousel tools={featuredTools} />}
           {/* Category filter */}
           <CategoryFilter active={category} onChange={setCategory} />
         </div>
@@ -339,8 +356,18 @@ function FeedPageInner() {
           <FeedSkeleton />
         ) : error ? (
           <div className="h-screen flex flex-col items-center justify-center gap-4">
-            <svg className="w-12 h-12 text-doom-red/60" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            <svg
+              className="w-12 h-12 text-doom-red/60"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+              />
             </svg>
             <p className="text-gray-400 text-sm">{error}</p>
             <button
@@ -354,12 +381,27 @@ function FeedPageInner() {
           <div className="h-screen flex flex-col items-center justify-center gap-4">
             {isSearchMode ? (
               <>
-                <svg className="w-12 h-12 text-gray-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                <svg
+                  className="w-12 h-12 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
                 </svg>
-                <p className="text-gray-500 text-sm">No tools found for &quot;{debouncedSearch}&quot;</p>
+                <p className="text-gray-500 text-sm">
+                  No tools found for &quot;{debouncedSearch}&quot;
+                </p>
                 <button
-                  onClick={() => { setSearchQuery(''); setSearchOpen(false); }}
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSearchOpen(false);
+                  }}
                   className="rounded-xl bg-doom-gray px-6 py-2.5 text-sm font-medium text-gray-300 hover:bg-gray-700 transition-colors"
                 >
                   Clear Search
@@ -630,7 +672,9 @@ function FeedCard({
         </div>
 
         {/* Title + description */}
-        <h2 className="text-base sm:text-lg font-bold text-white mb-1 drop-shadow-lg">{tool.title}</h2>
+        <h2 className="text-base sm:text-lg font-bold text-white mb-1 drop-shadow-lg">
+          {tool.title}
+        </h2>
         {tool.description && (
           <p className="text-sm text-gray-300 line-clamp-2 drop-shadow-md">{tool.description}</p>
         )}
@@ -716,11 +760,13 @@ function RemixOverlay({ tool, onClose }: { tool: FeedTool; onClose: () => void }
           try {
             const event = JSON.parse(raw);
             if (event.stage) {
-              setLogs((prev) => [...prev, `${event.stage}: ${event.message || ''}`]);
+              const line = event.line || event.message || '';
+              setLogs((prev) => [...prev, `${event.stage}: ${line}`]);
             }
             if (event.stage === 'deploying') setStatus('deploying');
-            if (event.deployUrl) {
-              setDeployUrl(event.deployUrl);
+            const finalUrl = event.deployUrl || event.url;
+            if (finalUrl) {
+              setDeployUrl(finalUrl);
               setStatus('done');
             }
             if (event.error) {

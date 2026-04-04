@@ -62,6 +62,8 @@ function isTeaserAllowedPath(pathname: string): boolean {
     pathname.startsWith('/marketplace/') ||
     pathname === '/create-tool' ||
     pathname.startsWith('/create-tool/') ||
+    pathname.startsWith('/t/') ||
+    pathname.startsWith('/api/og/') ||
     pathname === '/api/waitlist' ||
     pathname === '/admin/login' ||
     pathname.startsWith('/api/auth/') ||
@@ -138,12 +140,16 @@ export default async function middleware(request: NextRequest) {
     if (!token?.email) {
       return NextResponse.redirect(new URL('/', request.url));
     }
-    // If admin emails are configured, enforce admin-only access to non-teaser paths
-    const adminEmails = getAdminEmails();
-    if (adminEmails.size > 0 && !adminEmails.has((token.email as string).toLowerCase())) {
-      return NextResponse.redirect(new URL('/', request.url));
+    // Allow users who have been granted access (via waitlist grant or admin)
+    if (token.grantedAccess || token.isAdmin) {
+      return NextResponse.next();
     }
-    return NextResponse.next();
+    // Fall back to ADMIN_EMAILS env check (for users who signed in before grantedAccess claim existed)
+    const adminEmails = getAdminEmails();
+    if (adminEmails.size > 0 && adminEmails.has((token.email as string).toLowerCase())) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // Protect specific routes (require any authenticated user)

@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getDb } from '@/lib/db'
+import { NextRequest, NextResponse } from 'next/server';
+import { getDb } from '@/lib/db';
+import { requireAdmin } from '@/lib/admin-auth';
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 /**
  * GET /api/admin/revenue — Revenue-focused analytics for the launch day dashboard.
@@ -14,15 +15,21 @@ export const dynamic = 'force-dynamic'
  *   period — '1h' | '24h' | '7d' | '30d' (default: '24h')
  */
 export async function GET(req: NextRequest) {
-  try {
-    const period = req.nextUrl.searchParams.get('period') ?? '24h'
-    const intervalExpr =
-      period === '1h' ? '1 hour'
-      : period === '24h' ? '1 day'
-      : period === '30d' ? '30 days'
-      : '7 days'
+  const authError = await requireAdmin(req);
+  if (authError) return authError;
 
-    const sql = getDb()
+  try {
+    const period = req.nextUrl.searchParams.get('period') ?? '24h';
+    const intervalExpr =
+      period === '1h'
+        ? '1 hour'
+        : period === '24h'
+          ? '1 day'
+          : period === '30d'
+            ? '30 days'
+            : '7 days';
+
+    const sql = getDb();
 
     const [
       revenueRows,
@@ -162,37 +169,35 @@ export async function GET(req: NextRequest) {
           (SELECT COUNT(*)::integer FROM users
             WHERE is_pro = true AND created_at > now() - ${intervalExpr}::interval) AS new_pro
       `,
-    ])
+    ]);
 
-    const revenue = revenueRows[0] ?? {}
-    const mrr = mrrRows[0] ?? {}
-    const churn = churnRows[0] ?? {}
-    const funnel = funnelRows[0] ?? {}
-    const conversion = conversionRows[0] ?? {}
+    const revenue = revenueRows[0] ?? {};
+    const mrr = mrrRows[0] ?? {};
+    const churn = churnRows[0] ?? {};
+    const funnel = funnelRows[0] ?? {};
+    const conversion = conversionRows[0] ?? {};
 
     // Calculate MRR: Pro subscribers * $14/mo
-    const proCount = mrr.total_pro ?? 0
-    const mrrCents = proCount * 1400
+    const proCount = mrr.total_pro ?? 0;
+    const mrrCents = proCount * 1400;
 
     // Calculate ARPU: total revenue / unique buyers
-    const totalBuyers = funnel.buyers ?? 0
-    const totalRevenue = revenue.gross_revenue_cents ?? 0
-    const arpuCents = totalBuyers > 0 ? Math.round(totalRevenue / totalBuyers) : 0
+    const totalBuyers = funnel.buyers ?? 0;
+    const totalRevenue = revenue.gross_revenue_cents ?? 0;
+    const arpuCents = totalBuyers > 0 ? Math.round(totalRevenue / totalBuyers) : 0;
 
     // Churn rate: churned / (current pro + churned) over 30d
-    const churned = churn.churned_users ?? 0
-    const churnRate = (proCount + churned) > 0
-      ? ((churned / (proCount + churned)) * 100).toFixed(1)
-      : '0.0'
+    const churned = churn.churned_users ?? 0;
+    const churnRate =
+      proCount + churned > 0 ? ((churned / (proCount + churned)) * 100).toFixed(1) : '0.0';
 
     // Conversion rates
-    const newUsers = conversion.new_users ?? 0
-    const signupToCreator = newUsers > 0
-      ? ((conversion.new_creators / newUsers) * 100).toFixed(1) : '0.0'
-    const signupToBuyer = newUsers > 0
-      ? ((conversion.new_buyers / newUsers) * 100).toFixed(1) : '0.0'
-    const signupToPro = newUsers > 0
-      ? ((conversion.new_pro / newUsers) * 100).toFixed(1) : '0.0'
+    const newUsers = conversion.new_users ?? 0;
+    const signupToCreator =
+      newUsers > 0 ? ((conversion.new_creators / newUsers) * 100).toFixed(1) : '0.0';
+    const signupToBuyer =
+      newUsers > 0 ? ((conversion.new_buyers / newUsers) * 100).toFixed(1) : '0.0';
+    const signupToPro = newUsers > 0 ? ((conversion.new_pro / newUsers) * 100).toFixed(1) : '0.0';
 
     return NextResponse.json({
       period,
@@ -286,9 +291,9 @@ export async function GET(req: NextRequest) {
         buyerUsername: r.buyer_username,
         createdAt: r.created_at,
       })),
-    })
+    });
   } catch (error) {
-    console.error('[admin/revenue] GET error:', error)
+    console.error('[admin/revenue] GET error:', error);
     return NextResponse.json({
       period: req.nextUrl.searchParams.get('period') ?? '24h',
       generatedAt: new Date().toISOString(),
@@ -336,6 +341,6 @@ export async function GET(req: NextRequest) {
       hourlyRevenue: [],
       topSelling: [],
       recentPurchases: [],
-    })
+    });
   }
 }

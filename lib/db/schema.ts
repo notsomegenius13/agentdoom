@@ -237,8 +237,10 @@ CREATE INDEX IF NOT EXISTS idx_featured_tools_tool ON featured_tools(tool_id);
 CREATE TABLE IF NOT EXISTS waitlist (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email TEXT UNIQUE NOT NULL,
+  granted_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_waitlist_email ON waitlist(email);
+ALTER TABLE waitlist ADD COLUMN IF NOT EXISTS granted_at TIMESTAMPTZ;
 `;

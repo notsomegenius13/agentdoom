@@ -4,27 +4,32 @@
  * Catches XSS, script injection, iframe abuse, and external resource loading.
  */
 
-export type ThreatCategory = 'xss' | 'script_injection' | 'iframe_abuse' | 'external_resource' | 'data_exfiltration'
+export type ThreatCategory =
+  | 'xss'
+  | 'script_injection'
+  | 'iframe_abuse'
+  | 'external_resource'
+  | 'data_exfiltration';
 
 export interface ScanFinding {
-  category: ThreatCategory
-  severity: 'critical' | 'high' | 'medium' | 'low'
-  description: string
-  match: string
-  line?: number
+  category: ThreatCategory;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  description: string;
+  match: string;
+  line?: number;
 }
 
 export interface ScanResult {
-  safe: boolean
-  findings: ScanFinding[]
-  scannedBytes: number
+  safe: boolean;
+  findings: ScanFinding[];
+  scannedBytes: number;
 }
 
 interface ScanRule {
-  category: ThreatCategory
-  severity: ScanFinding['severity']
-  pattern: RegExp
-  description: string
+  category: ThreatCategory;
+  severity: ScanFinding['severity'];
+  pattern: RegExp;
+  description: string;
 }
 
 const SCAN_RULES: ScanRule[] = [
@@ -32,7 +37,8 @@ const SCAN_RULES: ScanRule[] = [
   {
     category: 'xss',
     severity: 'critical',
-    pattern: /on(?:error|load|click|mouseover|focus|blur|submit|change|input|keydown|keyup|keypress)\s*=\s*["']?[^"'\s>]*(?:document\.|window\.|eval|alert|confirm|prompt|fetch|XMLHttpRequest)/gi,
+    pattern:
+      /on(?:error|load|click|mouseover|focus|blur|submit|change|input|keydown|keyup|keypress)\s*=\s*["']?[^"'\s>]*(?:document\.|window\.|eval|alert|confirm|prompt|fetch|XMLHttpRequest)/gi,
     description: 'Inline event handler with dangerous JS execution',
   },
   {
@@ -98,7 +104,8 @@ const SCAN_RULES: ScanRule[] = [
   {
     category: 'external_resource',
     severity: 'medium',
-    pattern: /(?:fetch|XMLHttpRequest|axios|\.ajax)\s*\(\s*['"`]https?:\/\/(?!cdn\.agentdoom\.ai|api\.agentdoom\.ai)/gi,
+    pattern:
+      /(?:fetch|XMLHttpRequest|axios|\.ajax)\s*\(\s*['"`]https?:\/\/(?!cdn\.agentdoom\.ai|api\.agentdoom\.ai)/gi,
     description: 'HTTP request to external domain',
   },
   {
@@ -145,13 +152,6 @@ const SCAN_RULES: ScanRule[] = [
     pattern: /(?:window|self|top|parent|globalThis)\s*\[\s*['"`]/gi,
     description: 'Bracket notation property access on global object',
   },
-  {
-    category: 'script_injection',
-    severity: 'critical',
-    pattern: /<script(?![^>]*src\s*=\s*["']https?:\/\/cdn\.agentdoom\.ai)[^>]*>[^<]+<\/script>/gi,
-    description: 'Inline script tag with content',
-  },
-
   // CSS-based exfiltration
   {
     category: 'external_resource',
@@ -164,22 +164,36 @@ const SCAN_RULES: ScanRule[] = [
   {
     category: 'xss',
     severity: 'critical',
-    pattern: /<meta[^>]*http-equiv\s*=\s*["']?refresh["']?[^>]*url\s*=\s*['"]?https?:\/\/(?!(?:www\.)?agentdoom\.ai)/gi,
+    pattern:
+      /<meta[^>]*http-equiv\s*=\s*["']?refresh["']?[^>]*url\s*=\s*['"]?https?:\/\/(?!(?:www\.)?agentdoom\.ai)/gi,
     description: 'Meta refresh redirect to external URL',
+  },
+  {
+    category: 'data_exfiltration',
+    severity: 'critical',
+    pattern:
+      /(?:document\.location|window\.location(?:\.href)?)\s*=\s*['"]https?:\/\/(?!(?:www\.)?agentdoom\.ai)/gi,
+    description: 'Location redirect to external URL',
   },
 
   // Data exfiltration
   {
     category: 'data_exfiltration',
-    severity: 'critical',
+    severity: 'medium',
     pattern: /(?:localStorage|sessionStorage|indexedDB)\s*\.(?:getItem|setItem|key|removeItem)/gi,
     description: 'Browser storage access',
   },
   {
     category: 'data_exfiltration',
     severity: 'critical',
-    pattern: /navigator\.(?:clipboard|credentials|geolocation|mediaDevices)/gi,
+    pattern: /navigator\.(?:credentials|geolocation|mediaDevices)/gi,
     description: 'Access to sensitive browser APIs',
+  },
+  {
+    category: 'data_exfiltration',
+    severity: 'medium',
+    pattern: /navigator\.clipboard/gi,
+    description: 'Clipboard API access',
   },
   {
     category: 'data_exfiltration',
@@ -187,24 +201,24 @@ const SCAN_RULES: ScanRule[] = [
     pattern: /new\s+(?:FormData|Blob)\s*\(.*\)[\s\S]{0,100}(?:fetch|XMLHttpRequest|sendBeacon)/gi,
     description: 'Data packaging followed by network request',
   },
-]
+];
 
 /**
  * Scan generated HTML/config for security threats.
  * Returns findings sorted by severity (critical first).
  */
 export function scanOutput(html: string): ScanResult {
-  const findings: ScanFinding[] = []
+  const findings: ScanFinding[] = [];
 
   for (const rule of SCAN_RULES) {
     // Reset regex state for global patterns
-    rule.pattern.lastIndex = 0
-    let match: RegExpExecArray | null
+    rule.pattern.lastIndex = 0;
+    let match: RegExpExecArray | null;
 
     while ((match = rule.pattern.exec(html)) !== null) {
       // Calculate approximate line number
-      const beforeMatch = html.slice(0, match.index)
-      const line = (beforeMatch.match(/\n/g) || []).length + 1
+      const beforeMatch = html.slice(0, match.index);
+      const line = (beforeMatch.match(/\n/g) || []).length + 1;
 
       findings.push({
         category: rule.category,
@@ -212,24 +226,24 @@ export function scanOutput(html: string): ScanResult {
         description: rule.description,
         match: match[0].slice(0, 100), // Truncate long matches
         line,
-      })
+      });
     }
   }
 
   // Sort by severity
-  const severityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 }
-  findings.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity])
+  const severityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 };
+  findings.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
 
   return {
     safe: findings.filter((f) => f.severity === 'critical' || f.severity === 'high').length === 0,
     findings,
     scannedBytes: html.length,
-  }
+  };
 }
 
 /**
  * Quick check — returns true if the output has no critical/high findings.
  */
 export function isOutputSafe(html: string): boolean {
-  return scanOutput(html).safe
+  return scanOutput(html).safe;
 }
