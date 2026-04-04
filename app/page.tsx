@@ -93,6 +93,7 @@ function WaitlistForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [position, setPosition] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,6 +112,8 @@ function WaitlistForm() {
         const data = await res.json();
         throw new Error(data.error || 'Something went wrong');
       }
+      const data = await res.json();
+      setPosition(data.position ?? data.count ?? null);
       setSubmitted(true);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to join. Try again.';
@@ -126,6 +129,9 @@ function WaitlistForm() {
         <div className="text-sm font-mono text-white/60 tracking-wide">
           You&apos;re on the list.
         </div>
+        {position !== null && (
+          <div className="text-xs text-white/35 mt-1 font-mono tracking-widest">#{position}</div>
+        )}
         <div className="text-xs text-white/25 mt-2 font-mono">
           Check your inbox for a confirmation.
         </div>
@@ -191,10 +197,16 @@ export default function TeaserPage() {
           </h1>
         </div>
 
-        {/* Cryptic tagline */}
-        <div className="text-center" style={{ animation: 'fade-in 2s ease-out 0.8s both' }}>
-          <p className="font-mono text-xs text-white/50 tracking-[0.3em] uppercase">
-            Something is being built
+        {/* Tagline */}
+        <div
+          className="text-center flex flex-col gap-3"
+          style={{ animation: 'fade-in 2s ease-out 0.8s both' }}
+        >
+          <p className="font-mono text-xs text-white/60 tracking-[0.3em] uppercase">
+            Describe it. AI builds it. You keep the revenue.
+          </p>
+          <p className="font-mono text-[10px] text-white/25 tracking-[0.2em] uppercase">
+            No code required
           </p>
         </div>
 
