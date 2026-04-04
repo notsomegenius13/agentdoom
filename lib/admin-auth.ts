@@ -21,7 +21,7 @@ export async function requireAdmin(_req: NextRequest): Promise<NextResponse | nu
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const adminEmails = getAdminEmails();
-  if (adminEmails.size > 0 && !adminEmails.has(session.user.email.toLowerCase())) {
+  if (adminEmails.size === 0 || !adminEmails.has(session.user.email.toLowerCase())) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
   return null;
