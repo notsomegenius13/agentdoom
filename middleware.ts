@@ -50,8 +50,8 @@ function checkApiIpLimit(ip: string): { allowed: boolean; retryAfter: number } {
   return { allowed: true, retryAfter: 0 };
 }
 
-// ─── TEASER MODE ──────────────────────────────────────────────────
-const TEASER_MODE = process.env.TEASER_MODE !== 'false';
+// ─── TEASER MODE (disabled — product is public) ──────────────────
+const TEASER_MODE = false;
 
 function isTeaserAllowedPath(pathname: string): boolean {
   return (
