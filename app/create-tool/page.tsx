@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import GlobalNav from '@/components/feed/GlobalNav';
 
 const CATEGORIES = [
   { key: 'money', label: 'Finance & Money', icon: '💰' },
@@ -70,12 +71,12 @@ function StepIndicator({ current }: { current: number }) {
 }
 
 const STAGE_LABELS: Record<string, string> = {
-  classifying: 'Classifying prompt…',
-  generating: 'Generating tool…',
-  assembling: 'Assembling components…',
-  validating: 'Validating output…',
-  moderating: 'Moderating content…',
-  deploying: 'Deploying…',
+  classifying: 'Understanding your idea…',
+  generating: 'Building your tool…',
+  assembling: 'Putting it together…',
+  validating: 'Checking for errors…',
+  moderating: 'Safety check…',
+  deploying: 'Going live…',
   done: 'Done!',
   error: 'Error',
 };
@@ -243,15 +244,10 @@ export default function CreateToolPage() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight shrink-0">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
-          <Link
-            href="/dashboard"
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            Back to Dashboard
-          </Link>
+          <GlobalNav />
         </div>
       </div>
 

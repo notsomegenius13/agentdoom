@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import GlobalNav from '@/components/feed/GlobalNav';
 import type { FeedTool } from '@/lib/feed/types';
 
 interface ToolDetail extends FeedTool {
@@ -186,14 +187,10 @@ export default function ToolDetailPage() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/feed" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight shrink-0">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/feed" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Marketplace
-            </Link>
-          </div>
+          <GlobalNav />
         </div>
       </div>
 
@@ -294,7 +291,6 @@ export default function ToolDetailPage() {
           {/* Stats */}
           <div className="mt-6 flex flex-wrap items-center gap-3 sm:gap-6 text-sm text-gray-500">
             <span>{tool.viewsCount.toLocaleString()} views</span>
-            <span>{tool.usesCount.toLocaleString()} uses</span>
             <span>{tool.remixesCount.toLocaleString()} forks</span>
             <span>{tool.sharesCount.toLocaleString()} shares</span>
             <span className="text-xs px-2 py-0.5 rounded-full bg-doom-gray text-gray-400">

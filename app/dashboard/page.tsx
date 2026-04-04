@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import GlobalNav from '@/components/feed/GlobalNav';
 
 interface MyTool {
   id: string;
@@ -55,18 +56,16 @@ export default function CreatorDashboardPage() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/feed" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight shrink-0">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/create-tool"
-              className="rounded-xl bg-doom-accent px-4 py-2 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
-            >
-              + New Tool
-            </Link>
-            <span className="text-sm text-gray-400">Creator Dashboard</span>
-          </div>
+          <GlobalNav />
+          <Link
+            href="/create-tool"
+            className="rounded-xl bg-doom-accent px-4 py-2 text-sm font-semibold text-white hover:bg-doom-accent-light transition-colors"
+          >
+            + New Tool
+          </Link>
         </div>
       </div>
 
@@ -174,8 +173,15 @@ export default function CreatorDashboardPage() {
         >
           <h2 className="text-lg font-bold mb-4">Recent Sales</h2>
           <div className="text-center text-gray-500 py-12 rounded-xl border border-gray-800 border-dashed bg-doom-dark/50">
-            <p className="text-sm">No sales yet</p>
-            <p className="text-xs text-gray-600 mt-1">Publish a tool to start earning</p>
+            <div className="text-3xl mb-3 opacity-60">💰</div>
+            <p className="text-sm text-gray-400 font-medium">No earnings yet</p>
+            <p className="text-xs text-gray-600 mt-1 mb-4">Share your tools to start earning!</p>
+            <Link
+              href="/feed"
+              className="inline-block rounded-xl bg-doom-gray px-4 py-2 text-xs font-medium text-gray-300 hover:text-white transition-colors"
+            >
+              Browse the Feed
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -10,6 +10,7 @@ import type {
   FeedSort,
 } from '@/lib/feed/types';
 import UserNav from '@/components/feed/UserNav';
+import GlobalNav from '@/components/feed/GlobalNav';
 import {
   trackEvent,
   createViewObserver,
@@ -244,9 +245,11 @@ function FeedPageInner() {
       <header className="sticky top-0 z-30 bg-doom-black/80 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="flex items-center justify-between h-14">
-            <a href="/" className="text-lg font-semibold tracking-tight text-white">
+            <a href="/" className="text-lg font-semibold tracking-tight text-white shrink-0">
               AgentDoom
             </a>
+
+            <GlobalNav />
 
             {/* Search */}
             <div className="flex-1 max-w-md mx-6 hidden sm:block">

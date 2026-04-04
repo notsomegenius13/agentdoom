@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
+import GlobalNav from '@/components/feed/GlobalNav';
 
 interface ThemeConfig {
   primaryColor: string;
@@ -194,7 +195,7 @@ export default function RemixPage() {
   const tabs: { id: WizardTab; label: string; icon: string }[] = [
     { id: 'theme', label: 'Appearance', icon: '🎨' },
     { id: 'content', label: 'Text', icon: '✏️' },
-    { id: 'features', label: 'Advanced', icon: '⚙️' },
+    { id: 'features', label: 'Layout', icon: '⚙️' },
   ];
 
   return (
@@ -202,9 +203,10 @@ export default function RemixPage() {
       {/* Header */}
       <div className="border-b border-gray-800 bg-doom-dark/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/feed" className="text-xl font-bold tracking-tight">
+          <Link href="/feed" className="text-xl font-bold tracking-tight shrink-0">
             <span className="text-doom-accent">Agent</span>Doom
           </Link>
+          <GlobalNav />
           <div className="flex items-center gap-3">
             <Link
               href={`/t/${tool.slug}`}
