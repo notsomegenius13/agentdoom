@@ -1,0 +1,32 @@
+{
+  "title": "New Year 2027 Countdown",
+  "description": "Live countdown to January 1, 2027 — days, hours, minutes, seconds",
+  "category": "productivity",
+  "viralHook": "How many days until New Year? This live countdown will tell you exactly.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "timer",
+      "id": "new-year-countdown",
+      "props": {
+        "title": "Countdown to New Year 2027",
+        "mode": "countdown",
+        "targetDate": "2027-01-01T00:00:00Z",
+        "showDays": true,
+        "showHours": true,
+        "showMinutes": true,
+        "showSeconds": true,
+        "completedMessage": "Happy New Year 2027! 🎉",
+        "showProgress": false
+      },
+      "position": 0
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "520px", "padding": "40px" },
+  "theme": {
+    "primaryColor": "#818cf8",
+    "backgroundColor": "#0f0f1a",
+    "fontFamily": "system-ui, sans-serif",
+    "borderRadius": "16px"
+  }
+}

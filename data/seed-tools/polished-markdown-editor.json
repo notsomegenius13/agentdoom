@@ -1,0 +1,59 @@
+{
+  "title": "Markdown Editor",
+  "description": "Write and format markdown — headings, lists, bold, links, and more",
+  "category": "utility",
+  "viralHook": "The fastest markdown scratchpad on the internet. Write, format, copy.",
+  "shareability": 4,
+  "primitives": [
+    {
+      "type": "template",
+      "id": "markdown-editor",
+      "props": {
+        "title": "Markdown Editor",
+        "fields": [
+          {
+            "name": "content",
+            "label": "Write your markdown here",
+            "type": "textarea",
+            "placeholder": "# Hello World\n\nWrite **bold**, *italic*, `code`, or [links](https://example.com).\n\n## Features\n- Headings with #\n- **Bold** with **text**\n- *Italic* with *text*\n- `Code` with backticks\n- Lists with - or 1."
+          }
+        ],
+        "template": "{{content}}",
+        "copyButton": true
+      },
+      "position": 0
+    },
+    {
+      "type": "accordion",
+      "id": "markdown-reference",
+      "props": {
+        "title": "Markdown Quick Reference",
+        "items": [
+          { "title": "Headings", "content": "# H1  ## H2  ### H3  #### H4" },
+          {
+            "title": "Text Formatting",
+            "content": "**bold**  *italic*  ~~strikethrough~~  `inline code`"
+          },
+          { "title": "Lists", "content": "- Unordered item\n1. Ordered item\n  - Nested item" },
+          {
+            "title": "Links & Images",
+            "content": "[Link text](https://url.com)\n![Alt text](image.png)"
+          },
+          { "title": "Code Blocks", "content": "```language\ncode here\n```" },
+          {
+            "title": "Blockquote & HR",
+            "content": "> This is a blockquote\n---  (horizontal rule)"
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "640px", "padding": "28px" },
+  "theme": {
+    "primaryColor": "#f59e0b",
+    "backgroundColor": "#0c0c0e",
+    "fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
+    "borderRadius": "10px"
+  }
+}

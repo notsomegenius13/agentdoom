@@ -1,0 +1,86 @@
+{
+  "title": "QR Code Generator",
+  "description": "Turn any URL, text, or contact info into a scannable QR code instantly",
+  "category": "utility",
+  "viralHook": "Stop sending long URLs. Turn any link into a QR code in 2 seconds.",
+  "shareability": 5,
+  "primitives": [
+    {
+      "type": "form",
+      "id": "qr-input",
+      "props": {
+        "title": "Generate QR Code",
+        "submitLabel": "Generate QR Code",
+        "fields": [
+          {
+            "id": "qr_content",
+            "name": "qr_content",
+            "label": "URL or Text to Encode",
+            "type": "text",
+            "placeholder": "https://example.com",
+            "required": true
+          },
+          {
+            "id": "qr_type",
+            "name": "qr_type",
+            "label": "Content Type",
+            "type": "select",
+            "options": [
+              "Website URL",
+              "Plain Text",
+              "Email Address",
+              "Phone Number",
+              "WiFi Credentials"
+            ]
+          },
+          {
+            "id": "qr_size",
+            "name": "qr_size",
+            "label": "QR Code Size",
+            "type": "select",
+            "options": ["Small (128×128)", "Medium (256×256)", "Large (512×512)"]
+          }
+        ]
+      },
+      "position": 0
+    },
+    {
+      "type": "card-grid",
+      "id": "qr-use-cases",
+      "props": {
+        "title": "Common QR Code Uses",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Share a Link",
+            "description": "Paste any URL — perfect for sharing your website, portfolio, or social profiles without typing.",
+            "tags": ["url", "sharing"]
+          },
+          {
+            "title": "Business Card",
+            "description": "Encode your contact details as a vCard — scan to add instantly to any address book.",
+            "tags": ["contact", "networking"]
+          },
+          {
+            "title": "WiFi Login",
+            "description": "Encode SSID + password so guests can join your network with a single scan.",
+            "tags": ["wifi", "home"]
+          },
+          {
+            "title": "Event Check-in",
+            "description": "One QR code per attendee for fast, contactless event entry and attendance tracking.",
+            "tags": ["events", "business"]
+          }
+        ]
+      },
+      "position": 1
+    }
+  ],
+  "layout": { "type": "single-column", "maxWidth": "580px", "padding": "28px" },
+  "theme": {
+    "primaryColor": "#3b82f6",
+    "backgroundColor": "#f8fafc",
+    "fontFamily": "system-ui, sans-serif",
+    "borderRadius": "12px"
+  }
+}
