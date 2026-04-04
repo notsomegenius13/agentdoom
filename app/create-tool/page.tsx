@@ -432,7 +432,7 @@ export default function CreateToolPage() {
                     <iframe
                       srcDoc={previewHtml}
                       className="w-full h-full pointer-events-none"
-                      sandbox="allow-scripts"
+                      sandbox="allow-scripts allow-same-origin"
                       title="Tool Preview"
                     />
                   </div>

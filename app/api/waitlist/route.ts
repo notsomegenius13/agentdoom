@@ -19,7 +19,6 @@ function getResend() {
 async function sendConfirmationEmail(email: string, position: number) {
   const resend = getResend();
   if (!resend) {
-    console.log(`[WAITLIST_EMAIL_SKIP] No RESEND_API_KEY — skipping confirmation for ${email}`);
     return;
   }
 
@@ -52,7 +51,6 @@ async function sendConfirmationEmail(email: string, position: number) {
         </div>
       `,
     });
-    console.log(`[WAITLIST_EMAIL_SENT] ${email}`);
   } catch (err) {
     console.error(`[WAITLIST_EMAIL_ERROR] ${email}:`, err);
   }
@@ -86,10 +84,6 @@ export async function POST(req: NextRequest) {
     await sql`INSERT INTO waitlist (email) VALUES (${normalized})`;
     const [{ count: totalCount }] = await sql`SELECT COUNT(*)::int AS count FROM waitlist`;
     const position = BASE_COUNT + totalCount;
-
-    console.log(
-      `[WAITLIST_SIGNUP] ${normalized} | position=${totalCount} | ts=${new Date().toISOString()}`
-    );
 
     // Fire-and-forget confirmation email
     sendConfirmationEmail(normalized, position).catch(() => {});
