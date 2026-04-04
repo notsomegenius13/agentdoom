@@ -1,45 +1,35 @@
 import type { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
+import GoogleProvider from 'next-auth/providers/google';
 import { getDb } from '@/lib/db';
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: 'Email',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
-
-        const sql = getDb();
-        const rows = (await sql`
-          SELECT id, email, password_hash, username, display_name, avatar_url, is_pro
-          FROM users
-          WHERE email = ${credentials.email.toLowerCase()}
-          LIMIT 1
-        `) as Record<string, unknown>[];
-
-        const user = rows[0];
-        if (!user || !user.password_hash) return null;
-
-        const valid = await bcrypt.compare(credentials.password, user.password_hash as string);
-        if (!valid) return null;
-
-        return {
-          id: user.id as string,
-          email: user.email as string,
-          name: (user.display_name as string) || (user.username as string),
-          image: user.avatar_url as string | null,
-        };
-      },
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === 'google' && user.email) {
+        const sql = getDb();
+        // Upsert user on Google sign-in
+        const rows = (await sql`
+          SELECT id FROM users WHERE email = ${user.email.toLowerCase()} LIMIT 1
+        `) as Record<string, unknown>[];
+
+        if (rows.length === 0) {
+          const id = crypto.randomUUID();
+          await sql`
+            INSERT INTO users (id, email, display_name, avatar_url)
+            VALUES (${id}, ${user.email.toLowerCase()}, ${user.name || ''}, ${user.image || null})
+          `;
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
