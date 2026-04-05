@@ -128,6 +128,12 @@ export async function recordEvent(
     VALUES (${toolId}, ${userId ?? null}, ${eventType}, ${sessionId ?? null}, ${referrer ?? null})
   `;
 
+  // Unlike: decrement likes_count (floor at 0)
+  if (eventType === 'unlike') {
+    await sql`UPDATE tools SET likes_count = GREATEST(likes_count - 1, 0), updated_at = now() WHERE id = ${toolId}`;
+    return;
+  }
+
   // Bump denormalized counter on tools table
   const counterColumn = EVENT_TO_COUNTER[eventType];
   if (counterColumn === 'views_count') {
