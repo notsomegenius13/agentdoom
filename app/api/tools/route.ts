@@ -1,5 +1,7 @@
 import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { getDb } from '@/lib/db';
 import type { ToolConfig } from '@/lib/forge/generate';
 
@@ -36,25 +38,17 @@ async function ensureLocalCreator(name?: string): Promise<string> {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const {
-      title,
-      description,
-      category,
-      pricing,
-      priceCents,
-      previewHtml,
-      config,
-      creatorName,
-    } = body as {
-      title?: string;
-      description?: string;
-      category?: string;
-      pricing?: 'free' | 'paid';
-      priceCents?: number;
-      previewHtml?: string;
-      config?: ToolConfig;
-      creatorName?: string;
-    };
+    const { title, description, category, pricing, priceCents, previewHtml, config, creatorName } =
+      body as {
+        title?: string;
+        description?: string;
+        category?: string;
+        pricing?: 'free' | 'paid';
+        priceCents?: number;
+        previewHtml?: string;
+        config?: ToolConfig;
+        creatorName?: string;
+      };
 
     if (!title || !description || !category || !previewHtml || !config) {
       return NextResponse.json(
@@ -66,7 +60,18 @@ export async function POST(req: NextRequest) {
     const isPaid = pricing === 'paid';
     const normalizedPriceCents = isPaid ? Math.max(300, priceCents ?? 300) : 0;
     const sql = getDb();
-    const creatorId = await ensureLocalCreator(creatorName);
+
+    const session = await getServerSession(authOptions);
+    let creatorId: string;
+    if (session?.user?.email) {
+      const userRows = (await sql`
+        SELECT id FROM users WHERE email = ${session.user.email.toLowerCase()} LIMIT 1
+      `) as Record<string, unknown>[];
+      creatorId =
+        userRows.length > 0 ? (userRows[0].id as string) : await ensureLocalCreator(creatorName);
+    } else {
+      creatorId = await ensureLocalCreator(creatorName);
+    }
 
     const baseSlug = slugify(title);
     const slug = `${baseSlug}-${randomUUID().slice(0, 6)}`;

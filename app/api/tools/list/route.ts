@@ -1,15 +1,64 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { getDb } from '@/lib/db';
 import { getSeedFeedResponse } from '@/lib/seed-tools';
 
 /**
- * GET /api/tools/list — Legacy list endpoint used by QA checks.
+ * GET /api/tools/list — List tools. Supports ?creator=me to return only the authenticated user's tools.
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const category = searchParams.get('category') ?? undefined;
+  const creator = searchParams.get('creator') ?? undefined;
   const limitParam = searchParams.get('limit');
   const limit = Math.min(Math.max(parseInt(limitParam ?? '50', 10) || 50, 1), 100);
+
+  // Handle creator=me: return only the authenticated user's tools
+  if (creator === 'me') {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
+    try {
+      const sql = getDb();
+      const userRows = (await sql`
+        SELECT id FROM users WHERE email = ${session.user.email.toLowerCase()} LIMIT 1
+      `) as Record<string, unknown>[];
+      if (userRows.length === 0) {
+        return NextResponse.json({ tools: [] });
+      }
+      const userId = userRows[0].id as string;
+      const rows = (await sql`
+        SELECT t.id, t.slug, t.title, t.description, t.category,
+               t.preview_html, t.is_paid, t.price_cents,
+               t.views_count, t.likes_count, t.remixes_count, t.created_at
+        FROM tools t
+        WHERE t.status = 'active' AND t.creator_id = ${userId}::uuid
+        ORDER BY t.created_at DESC
+        LIMIT ${limit}
+      `) as Record<string, unknown>[];
+      return NextResponse.json({
+        tools: rows.map((row) => ({
+          id: row.id,
+          slug: row.slug,
+          title: row.title,
+          description: row.description,
+          category: row.category,
+          previewHtml: row.preview_html ?? null,
+          isPaid: row.is_paid,
+          priceCents: row.price_cents,
+          createdAt: row.created_at ? String(row.created_at) : null,
+          viewsCount: (row.views_count as number) ?? 0,
+          likesCount: (row.likes_count as number) ?? 0,
+          remixesCount: (row.remixes_count as number) ?? 0,
+        })),
+      });
+    } catch (error) {
+      console.error('[tools/list] creator=me error:', error);
+      return NextResponse.json({ error: 'Failed to fetch your tools' }, { status: 500 });
+    }
+  }
 
   try {
     const sql = getDb();

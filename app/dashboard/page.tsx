@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import GlobalNav from '@/components/feed/GlobalNav';
@@ -11,36 +12,35 @@ interface MyTool {
   title: string;
   description: string;
   category: string;
-  pricing: 'free' | 'paid';
+  isPaid: boolean;
   priceCents: number;
   previewHtml: string | null;
-  publishedAt: string;
+  createdAt: string | null;
   viewsCount: number;
   likesCount: number;
   remixesCount: number;
 }
 
 export default function CreatorDashboardPage() {
+  const { data: session } = useSession();
   const [myTools, setMyTools] = useState<MyTool[]>([]);
   const [loading, setLoading] = useState(true);
-  const [creatorName, setCreatorName] = useState<string | null>(null);
 
   useEffect(() => {
-    const creator = localStorage.getItem('agentdoom_creator');
-    if (creator) {
+    async function fetchMyTools() {
       try {
-        setCreatorName(JSON.parse(creator).name);
-      } catch {}
+        const res = await fetch('/api/tools/list?creator=me');
+        if (res.ok) {
+          const data = await res.json();
+          setMyTools(data.tools ?? []);
+        }
+      } catch {
+        // silently show empty state
+      } finally {
+        setLoading(false);
+      }
     }
-
-    const storedTools = localStorage.getItem('agentdoom_tools');
-    if (storedTools) {
-      try {
-        setMyTools(JSON.parse(storedTools));
-      } catch {}
-    }
-
-    setLoading(false);
+    fetchMyTools();
   }, []);
 
   if (loading) {
@@ -50,6 +50,8 @@ export default function CreatorDashboardPage() {
       </main>
     );
   }
+
+  const creatorName = session?.user?.name ?? null;
 
   return (
     <main className="min-h-screen bg-doom-black text-white">
@@ -121,7 +123,9 @@ export default function CreatorDashboardPage() {
                       <span className="rounded-full bg-doom-accent/20 text-doom-accent-light px-2 py-0.5 text-xs">
                         {tool.category}
                       </span>
-                      <span className="text-xs text-gray-500">Free</span>
+                      <span className="text-xs text-gray-500">
+                        {tool.isPaid ? `$${(tool.priceCents / 100).toFixed(2)}` : 'Free'}
+                      </span>
                     </div>
                     <h3 className="font-semibold text-white truncate">{tool.title}</h3>
                     <div className="mt-2 flex items-center gap-3 text-xs text-gray-600">
