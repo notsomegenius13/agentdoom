@@ -1,29 +1,28 @@
-import type { Metadata } from 'next'
-import { getToolBySlug } from '@/lib/feed'
+import type { Metadata } from 'next';
+import { getToolBySlug } from '@/lib/feed';
 
-const BASE_URL = 'https://agentdoom.ai'
+const BASE_URL = 'https://agentdoom.ai';
 
 interface Props {
-  params: { slug: string }
-  children: React.ReactNode
+  params: { slug: string };
+  children: React.ReactNode;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const tool = await getToolBySlug(params.slug)
+  const tool = await getToolBySlug(params.slug);
 
   if (!tool) {
     return {
-      title: 'Tool Not Found — AgentDoom',
+      title: 'Tool Not Found',
       description: 'This tool could not be found on AgentDoom.',
-    }
+    };
   }
 
-  const title = `${tool.title} — AgentDoom`
+  const title = tool.title;
   const description =
-    tool.description ||
-    `${tool.title} — built on AgentDoom. Tap to use, or make your own.`
-  const ogImageUrl = `${BASE_URL}/api/og/${params.slug}`
-  const toolUrl = `${BASE_URL}/t/${params.slug}`
+    tool.description || `${tool.title} — built on AgentDoom. Tap to use, or make your own.`;
+  const ogImageUrl = `${BASE_URL}/api/og/${params.slug}`;
+  const toolUrl = `${BASE_URL}/t/${params.slug}`;
 
   return {
     title,
@@ -55,13 +54,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     other: {
       'og:image:type': 'image/png',
     },
-  }
+  };
 }
 
 export default async function ToolLayout({ params, children }: Props) {
-  const tool = await getToolBySlug(params.slug)
+  const tool = await getToolBySlug(params.slug);
 
-  if (!tool) return <>{children}</>
+  if (!tool) return <>{children}</>;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -100,7 +99,7 @@ export default async function ToolLayout({ params, children }: Props) {
             worstRating: 1,
           }
         : undefined,
-  }
+  };
 
   return (
     <>
@@ -110,5 +109,5 @@ export default async function ToolLayout({ params, children }: Props) {
       />
       {children}
     </>
-  )
+  );
 }
