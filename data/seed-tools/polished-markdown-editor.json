@@ -28,19 +28,26 @@
       "id": "markdown-reference",
       "props": {
         "title": "Markdown Quick Reference",
-        "items": [
-          { "title": "Headings", "content": "# H1  ## H2  ### H3  #### H4" },
+        "sections": [
+          { "id": "headings", "title": "Headings", "content": "# H1  ## H2  ### H3  #### H4" },
           {
+            "id": "text-formatting",
             "title": "Text Formatting",
             "content": "**bold**  *italic*  ~~strikethrough~~  `inline code`"
           },
-          { "title": "Lists", "content": "- Unordered item\n1. Ordered item\n  - Nested item" },
           {
+            "id": "lists",
+            "title": "Lists",
+            "content": "- Unordered item\n1. Ordered item\n  - Nested item"
+          },
+          {
+            "id": "links-images",
             "title": "Links & Images",
             "content": "[Link text](https://url.com)\n![Alt text](image.png)"
           },
-          { "title": "Code Blocks", "content": "```language\ncode here\n```" },
+          { "id": "code-blocks", "title": "Code Blocks", "content": "```language\ncode here\n```" },
           {
+            "id": "blockquote-hr",
             "title": "Blockquote & HR",
             "content": "> This is a blockquote\n---  (horizontal rule)"
           }
