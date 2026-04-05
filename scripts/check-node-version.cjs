@@ -5,9 +5,9 @@ if (Number.isNaN(major)) {
   process.exit(1)
 }
 
-if (major < 20 || major >= 23) {
+if (major < 20) {
   console.error(
-    `Unsupported Node.js version ${process.versions.node}. Use Node 20.x or 22.x for Next.js 14 builds.`
+    `Unsupported Node.js version ${process.versions.node}. Use Node 20 or higher for Next.js 14 builds.`
   )
   process.exit(1)
 }
